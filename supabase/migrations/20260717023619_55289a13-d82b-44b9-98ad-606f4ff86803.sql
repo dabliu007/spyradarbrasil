@@ -1,0 +1,1 @@
+ALTER TABLE public.purchase_logs ADD COLUMN IF NOT EXISTS utmify_waiting_sent_at TIMESTAMPTZ;

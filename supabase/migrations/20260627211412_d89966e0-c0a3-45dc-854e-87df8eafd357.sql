@@ -1,0 +1,1 @@
+CREATE POLICY "deny_all_public_purchase_logs" ON public.purchase_logs FOR ALL TO anon, authenticated USING (false) WITH CHECK (false);

@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Disallow: /checkout
+Disallow: /pix
+Disallow: /sigilo
+Disallow: /taxa-meta
+Disallow: /conta-poupanca
+Disallow: /nota-fiscal
+Disallow: /acesso-liberado
+Disallow: /cadastro-dispositivo
+Disallow: /controle-bancario
+Disallow: /relatorio
+Disallow: /relatorio-especial
+Disallow: /painel
+Disallow: /presell
+Disallow: /investigar
+Disallow: /api/
+
+Sitemap: https://zapradar.online/sitemap.xml
