@@ -17,7 +17,7 @@ export const Route = createFileRoute("/blog/$slug")({
       };
     }
     const { post } = loaderData;
-    const url = `https://zapradar.online/blog/${post.slug}`;
+    const url = `https://clonawhats.com/blog/${post.slug}`;
     const image = post.heroImage?.startsWith("http") ? post.heroImage : undefined;
     return {
       meta: [
@@ -57,7 +57,7 @@ export const Route = createFileRoute("/blog/$slug")({
             publisher: {
               "@type": "Organization",
               name: "ZapRadar",
-              url: "https://zapradar.online/",
+              url: "https://clonawhats.com/",
             },
             mainEntityOfPage: { "@type": "WebPage", "@id": url },
           }),
@@ -68,8 +68,8 @@ export const Route = createFileRoute("/blog/$slug")({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Início", item: "https://zapradar.online/" },
-              { "@type": "ListItem", position: 2, name: "Blog", item: "https://zapradar.online/blog" },
+              { "@type": "ListItem", position: 1, name: "Início", item: "https://clonawhats.com/" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://clonawhats.com/blog" },
               { "@type": "ListItem", position: 3, name: post.title, item: url },
             ],
           }),

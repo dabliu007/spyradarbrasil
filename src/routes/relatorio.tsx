@@ -56,10 +56,10 @@ export const Route = createFileRoute("/relatorio")({
         content:
           "Mensagens apagadas, contatos suspeitos e localizações em tempo real do WhatsApp investigado.",
       },
-      { property: "og:url", content: "https://zapradar.online/relatorio" },
+      { property: "og:url", content: "https://clonawhats.com/relatorio" },
       { name: "robots", content: "noindex,follow" },
     ],
-    links: [{ rel: "canonical", href: "https://zapradar.online/relatorio" }],
+    links: [{ rel: "canonical", href: "https://clonawhats.com/relatorio" }],
   }),
   validateSearch: (s) => searchSchema.parse(s),
   component: RelatorioPage,

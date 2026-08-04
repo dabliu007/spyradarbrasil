@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { VerificarPage } from "./verificar";
 
-const SITE_URL = "https://zapradar.online";
+const SITE_URL = "https://clonawhats.com";
 
 const TITLE = "ZapRadar (SpyZap): Clonar Celular do Marido ou da Esposa";
 

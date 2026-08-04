@@ -16,10 +16,10 @@ export const Route = createFileRoute("/sobre")({
         content:
           "Missão, valores e responsáveis pela plataforma ZapRadar.",
       },
-      { property: "og:url", content: "https://zapradar.online/sobre" },
+      { property: "og:url", content: "https://clonawhats.com/sobre" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://zapradar.online/sobre" }],
+    links: [{ rel: "canonical", href: "https://clonawhats.com/sobre" }],
   }),
   component: SobrePage,
 });

@@ -16,4 +16,4 @@ Disallow: /presell
 Disallow: /investigar
 Disallow: /api/
 
-Sitemap: https://zapradar.online/sitemap.xml
+Sitemap: https://clonawhats.com/sitemap.xml

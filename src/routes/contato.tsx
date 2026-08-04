@@ -15,10 +15,10 @@ export const Route = createFileRoute("/contato")({
         property: "og:description",
         content: "Canais oficiais de contato do ZapRadar.",
       },
-      { property: "og:url", content: "https://zapradar.online/contato" },
+      { property: "og:url", content: "https://clonawhats.com/contato" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://zapradar.online/contato" }],
+    links: [{ rel: "canonical", href: "https://clonawhats.com/contato" }],
   }),
   component: ContatoPage,
 });

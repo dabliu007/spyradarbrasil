@@ -331,7 +331,7 @@ function CadastroDispositivoPage() {
                   Acesse esse link no navegador
                 </div>
                 <div className="text-[#25D366] font-bold text-lg font-['Geist_Mono',monospace] break-all select-all">
-                  https://zapradar.online/acessar-celular
+                  https://clonawhats.com/acessar-celular
                 </div>
                 <div className="text-[11px] text-slate-500 mt-2">
                   Digite a URL manualmente no seu navegador. Por segurança, o link não é clicável aqui.

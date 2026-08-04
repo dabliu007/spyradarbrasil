@@ -17,10 +17,10 @@ export const Route = createFileRoute("/blog/")({
         content:
           "Guias e artigos práticos sobre relacionamentos, traição e investigação digital.",
       },
-      { property: "og:url", content: "https://zapradar.online/blog" },
+      { property: "og:url", content: "https://clonawhats.com/blog" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://zapradar.online/blog" }],
+    links: [{ rel: "canonical", href: "https://clonawhats.com/blog" }],
   }),
   component: BlogIndex,
 });

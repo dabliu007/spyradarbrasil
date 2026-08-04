@@ -11,10 +11,10 @@ export const Route = createFileRoute("/disclaimer")({
           "Aviso legal do ZapRadar sobre a natureza informativa e de entretenimento do conteúdo, isenção de responsabilidade e ausência de vínculo com terceiros.",
       },
       { property: "og:title", content: "Disclaimer · ZapRadar" },
-      { property: "og:url", content: "https://zapradar.online/disclaimer" },
+      { property: "og:url", content: "https://clonawhats.com/disclaimer" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://zapradar.online/disclaimer" }],
+    links: [{ rel: "canonical", href: "https://clonawhats.com/disclaimer" }],
   }),
   component: DisclaimerPage,
 });

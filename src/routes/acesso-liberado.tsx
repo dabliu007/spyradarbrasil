@@ -25,7 +25,7 @@ export const Route = createFileRoute("/acesso-liberado")({
       },
       { name: "robots", content: "noindex,follow" },
     ],
-    links: [{ rel: "canonical", href: "https://zapradar.online/acesso-liberado" }],
+    links: [{ rel: "canonical", href: "https://clonawhats.com/acesso-liberado" }],
   }),
   validateSearch: (s) => searchSchema.parse(s),
   component: AcessoLiberadoPage,

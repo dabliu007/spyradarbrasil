@@ -7,10 +7,10 @@ export const Route = createFileRoute("/termos")({
       { name: "description", content: "Termos de uso do ZapRadar: regras, responsabilidades e limitações de uso da plataforma." },
       { property: "og:title", content: "Termos de Uso · ZapRadar" },
       { property: "og:description", content: "Termos de uso do ZapRadar." },
-      { property: "og:url", content: "https://zapradar.online/termos" },
+      { property: "og:url", content: "https://clonawhats.com/termos" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://zapradar.online/termos" }],
+    links: [{ rel: "canonical", href: "https://clonawhats.com/termos" }],
   }),
   component: TermosPage,
 });
@@ -20,7 +20,7 @@ function TermosPage() {
     <p>
       Estes Termos de Uso ("Termos") regulam o acesso e a utilização do site
       <strong> ZapRadar</strong> ("ZapRadar", "nós", "plataforma"), acessível em
-      https://zapradar.online. Ao acessar ou utilizar a plataforma, você declara
+      https://clonawhats.com. Ao acessar ou utilizar a plataforma, você declara
       ter lido, entendido e concordado integralmente com estes Termos. Caso não
       concorde, você não deve utilizar o serviço.
     </p>

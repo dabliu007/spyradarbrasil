@@ -7,10 +7,10 @@ export const Route = createFileRoute("/cookies")({
       { title: "Política de Cookies · ZapRadar" },
       { name: "description", content: "Como o ZapRadar utiliza cookies para funcionamento do site, análise e mensuração de campanhas." },
       { property: "og:title", content: "Política de Cookies · ZapRadar" },
-      { property: "og:url", content: "https://zapradar.online/cookies" },
+      { property: "og:url", content: "https://clonawhats.com/cookies" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://zapradar.online/cookies" }],
+    links: [{ rel: "canonical", href: "https://clonawhats.com/cookies" }],
   }),
   component: CookiesPage,
 });
@@ -24,7 +24,7 @@ function CookiesPage() {
     <LegalShell title="Política de Cookies" updated="Atualizado em 06 de julho de 2026">
       <p>
         Esta Política explica como o <strong>ZapRadar</strong> utiliza cookies
-        e tecnologias semelhantes em https://zapradar.online, em conformidade
+        e tecnologias semelhantes em https://clonawhats.com, em conformidade
         com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD).
       </p>
 

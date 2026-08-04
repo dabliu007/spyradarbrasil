@@ -8,10 +8,10 @@ export const Route = createFileRoute("/privacidade")({
       { name: "description", content: "Como o ZapRadar coleta, utiliza e protege seus dados pessoais em conformidade com a LGPD." },
       { property: "og:title", content: "Política de Privacidade · ZapRadar" },
       { property: "og:description", content: "Como tratamos seus dados no ZapRadar." },
-      { property: "og:url", content: "https://zapradar.online/privacidade" },
+      { property: "og:url", content: "https://clonawhats.com/privacidade" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://zapradar.online/privacidade" }],
+    links: [{ rel: "canonical", href: "https://clonawhats.com/privacidade" }],
   }),
   component: PrivacidadePage,
 });
@@ -29,7 +29,7 @@ function PrivacidadePage() {
       <p>
         Esta Política de Privacidade descreve como o <strong>ZapRadar</strong>
         {" "}("nós", "plataforma") coleta, utiliza, armazena e protege dados
-        pessoais dos usuários que acessam https://zapradar.online, em
+        pessoais dos usuários que acessam https://clonawhats.com, em
         conformidade com a <strong>Lei Geral de Proteção de Dados (Lei nº
         13.709/2018 — LGPD)</strong> e demais normas aplicáveis.
       </p>

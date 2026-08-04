@@ -141,7 +141,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "Organization",
           name: "ZapRadar",
           alternateName: ["Zap Radar", "SpyZap", "ZapSpy", "WhatsRadar"],
-          url: "https://zapradar.online/",
+          url: "https://clonawhats.com/",
           description:
             "Plataforma de análise digital que ajuda pessoas a investigarem suspeitas de infidelidade a partir do número de WhatsApp do parceiro(a).",
           contactPoint: [
