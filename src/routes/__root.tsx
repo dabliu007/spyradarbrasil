@@ -9,7 +9,10 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
-import appCss from "../styles.css?url";
+// Vite 8 + TanStack Start dev não serve o CSS importado via `?url`
+// (a requisição cai no handler SSR e é rejeitada), então importamos o CSS
+// compilado como string com `?inline` e o injetamos num <style> no <head>.
+import appCss from "../styles.css?inline";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 import { capturePersistedUtms, fbqTrack, FB_PIXEL_ID } from "../lib/tracking";
@@ -117,7 +120,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
     ],
     links: [
-      { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "preconnect", href: "https://connect.facebook.net" },
@@ -168,6 +170,10 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="pt-BR">
       <head>
         <HeadContent />
+        <style
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: appCss }}
+        />
       </head>
       <body>
         <noscript>
