@@ -20,7 +20,6 @@ import amanteHExtra1 from "@/assets/amante-h-extra-1.png.asset.json";
 import amanteHExtra2 from "@/assets/amante-h-extra-2.png.asset.json";
 import amanteHExtra3 from "@/assets/amante-h-extra-3.png.asset.json";
 import amanteHExtra4 from "@/assets/amante-h-extra-4.png.asset.json";
-import videoAmante from "@/assets/video-amante.mp4.asset.json";
 
 
 import phoneChat from "@/assets/phone-chat.jpg.asset.json";
@@ -453,63 +452,6 @@ function RelatorioPage() {
             </p>
           </Section>
         )}
-
-        {/* VÍDEO INTERCEPTADO — mesmo asset nos dois relatórios; textos adaptam ao sexo do amante */}
-        <Section title="🎬 Vídeo íntimo interceptado">
-          <p className="text-[12px] text-zinc-400 -mt-1 mb-2">
-            Vídeo recuperado do WhatsApp {doAlvo} — enviado {amanteIsWoman ? "pela amante" : "pelo amante"}. Reprodução censurada até o desbloqueio.
-          </p>
-          <div className="rounded-2xl border border-red-500/40 bg-gradient-to-br from-zinc-950 to-red-950/20 overflow-hidden shadow-[0_0_30px_rgba(239,68,68,0.15)]">
-            <div className="flex items-center justify-between px-3 py-2 border-b border-red-500/30 bg-zinc-950/70">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                <span className="text-[10px] font-['Geist_Mono',monospace] uppercase tracking-wider text-red-200">
-                  📥 Vídeo recebido · WhatsApp
-                </span>
-              </div>
-              <span className="text-[9px] text-zinc-500 font-['Geist_Mono',monospace]">02:14</span>
-            </div>
-            <div className="relative aspect-video bg-black overflow-hidden">
-              <video
-                src={videoAmante.url}
-                className="w-full h-full object-cover select-none pointer-events-none"
-                style={{ filter: "blur(8px) saturate(0.9)", transform: "scale(1.15)" }}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-              />
-              <div className="absolute inset-0 bg-zinc-950/30" />
-              <span className="absolute top-2 left-2 text-[8px] font-bold text-red-200 bg-zinc-950/85 border border-red-500/40 rounded px-1.5 py-0.5 font-['Geist_Mono',monospace] uppercase tracking-wider">
-                Evidência · vídeo
-              </span>
-              {locked && (
-                <>
-                  <span className="absolute top-2 right-2 text-[9px] font-bold text-red-300 bg-zinc-950/85 border border-red-500/40 rounded px-1.5 py-0.5 font-['Geist_Mono',monospace]">
-                    🔒 +18
-                  </span>
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-14 h-14 rounded-full bg-zinc-950/80 border border-red-500/60 flex items-center justify-center shadow-[0_0_20px_rgba(239,68,68,0.4)]">
-                      <span className="text-red-300 text-2xl">▶</span>
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-            <div className="px-3 py-2.5 bg-zinc-950/80 border-t border-red-500/20">
-              <div className="text-[10px] uppercase tracking-wider text-zinc-500 font-['Geist_Mono',monospace] mb-0.5">
-                Legenda enviada {amanteIsWoman ? "pela amante" : "pelo amante"}:
-              </div>
-              <div className="text-[14px] italic text-red-100 font-semibold">
-                "saudades de gravar um video fodendo com vc! 🔥"
-              </div>
-            </div>
-          </div>
-          <p className="text-[11px] text-zinc-500 text-center pt-2">
-            ⚠️ Vídeo original em alta resolução liberado após o desbloqueio.
-          </p>
-        </Section>
 
         {/* COMPROVANTE DE MOTEL + EXTRATO BANCÁRIO */}
         <Section title="💳 Rastros financeiros comprometedores">
