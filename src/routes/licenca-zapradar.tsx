@@ -295,6 +295,16 @@ function LicencaZapRadarPage() {
 
           <button
             onClick={() => {
+              // Em preview o app roda dentro de um iframe; navegar a janela de topo
+              // garante o redirecionamento para o checkout externo (com fallback).
+              try {
+                if (window.top) {
+                  window.top.location.href = CHECKOUT_URL;
+                  return;
+                }
+              } catch {
+                // cross-origin: cai no fallback abaixo
+              }
               window.location.href = CHECKOUT_URL;
             }}
             className="mt-5 flex w-full min-h-14 items-center justify-center text-center bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(16,185,129,0.8)] text-[15px] uppercase tracking-wide"
