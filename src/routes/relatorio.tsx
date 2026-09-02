@@ -389,7 +389,7 @@ function RelatorioPage() {
           </Section>
         )}
 
-        {/* VÍDEO INTERCEPTADO — ambos os gêneros */}
+        {/* VÍDEO INTERCEPTADO — mesmo asset nos dois relatórios; textos adaptam ao sexo do amante */}
         <Section title="🎬 Vídeo íntimo interceptado">
           <p className="text-[12px] text-zinc-400 -mt-1 mb-2">
             Vídeo recuperado do WhatsApp {doAlvo} — enviado {amanteIsWoman ? "pela amante" : "pelo amante"}. Reprodução censurada até o desbloqueio.
