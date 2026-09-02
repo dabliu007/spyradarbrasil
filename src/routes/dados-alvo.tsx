@@ -21,6 +21,10 @@ export const Route = createFileRoute("/dados-alvo")({
   component: DadosAlvoPage,
 });
 
+// CPF em stand-by: mantém todo o código no projeto, apenas oculta a etapa de CPF.
+// Trocar para `true` reativa a pergunta/consulta de CPF sem nenhuma outra mudança.
+const CPF_ENABLED = false;
+
 function DadosAlvoPage() {
   const { phone } = Route.useSearch();
   const navigate = useNavigate();
@@ -63,8 +67,13 @@ function DadosAlvoPage() {
     return () => { cancelled = true; };
   }, [uf]);
 
-  const cpfReady = knowsCpf === "no" || (knowsCpf === "yes" && cpfDigits.length === 11);
-  const complete = !!uf && city.trim().length >= 2 && !!knowsCpf && !!phone && cpfReady;
+  const cpfReady = !CPF_ENABLED || knowsCpf === "no" || (knowsCpf === "yes" && cpfDigits.length === 11);
+  const complete =
+    !!uf &&
+    city.trim().length >= 2 &&
+    (!CPF_ENABLED || !!knowsCpf) &&
+    !!phone &&
+    cpfReady;
 
   const fetchInstagram = useServerFn(getInstagramProfile);
   const callCpf = useServerFn(consultCpf);
@@ -255,7 +264,8 @@ function DadosAlvoPage() {
               {/* Instagram — temporariamente removido */}
 
 
-              {/* CPF conhecido? */}
+              {/* CPF conhecido? — em stand-by (CPF_ENABLED=false) */}
+              {CPF_ENABLED && (
               <div className="space-y-2">
                 <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
                   Você sabe o CPF dele(a)?
@@ -312,6 +322,7 @@ function DadosAlvoPage() {
                   </div>
                 )}
               </div>
+              )}
 
               <button
                 type="submit"
