@@ -16,10 +16,12 @@ const provaH3 = "/prova-h-3.jpg";
 const provaH4 = "/prova-h-4.jpg";
 const provaH5 = "/prova-h-5.jpg";
 const provaH6 = "/prova-h-6.jpg";
-import amanteHExtra1 from "@/assets/amante-h-extra-1.png.asset.json";
-import amanteHExtra2 from "@/assets/amante-h-extra-2.png.asset.json";
-import amanteHExtra3 from "@/assets/amante-h-extra-3.png.asset.json";
-import amanteHExtra4 from "@/assets/amante-h-extra-4.png.asset.json";
+// Evidências do amante homem (parceira mulher) — servidas de /public para
+// evitar o resolver de assets do v0 que troca imports não registrados por placeholder.
+const amanteHExtra1 = "/prova-m-1.jpg";
+const amanteHExtra2 = "/prova-m-2.jpg";
+const amanteHExtra3 = "/prova-m-3.jpg";
+const amanteHExtra4 = "/prova-m-4.jpg";
 
 
 import phoneChat from "@/assets/phone-chat.jpg.asset.json";
@@ -429,7 +431,7 @@ function RelatorioPage() {
                   className="aspect-square rounded-xl bg-zinc-900 border border-red-500/30 relative overflow-hidden"
                 >
                   <img
-                    src={a.url}
+                    src={a}
                     alt=""
                     className="w-full h-full object-cover select-none pointer-events-none"
                     style={{ filter: locked ? "blur(18px) saturate(0.85)" : "blur(4px)", transform: "scale(1.2)" }}
