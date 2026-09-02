@@ -25,7 +25,6 @@ import videoAmante from "@/assets/video-amante.mp4.asset.json";
 
 import phoneChat from "@/assets/phone-chat.jpg.asset.json";
 import messengerChat from "@/assets/messenger-chat.png.asset.json";
-import coupleTense from "@/assets/foto-cadeado.png.asset.json";
 // Áudios da amante mulher — servidos de /public (blob real), fora do resolver de assets do v0.
 const audioAmante1 = "/audio-amante-1.mp3";
 const audioAmante2 = "/audio-amante-2.mp3";
@@ -170,8 +169,6 @@ function RelatorioPage() {
   const amanteImgs = amanteIsWoman
     ? [womanFlirt1, womanFlirt2, womanFlirt3]
     : [manBeach1.url, manBeach2.url, manBeach3.url];
-  const amanteLabel = amanteIsWoman ? "a amante" : "o amante";
-  const legendaFoto = 'Legenda: "saudades de sentar assim em vc 💋"';
 
 
   // Mensagens cruas (parcialmente censuradas quando bloqueado)
@@ -713,21 +710,6 @@ function RelatorioPage() {
           </div>
 
 
-          {/* Foto comprometedora */}
-          <div className="mt-3 rounded-2xl overflow-hidden border border-red-500/30 relative aspect-video">
-            <img src={coupleTense.url} alt="" className={`w-full h-full object-cover ${locked ? (amanteIsWoman ? "blur-[4px] scale-105 select-none" : "blur-[18px] scale-110 select-none") : ""}`} draggable={false} />
-            {locked && (
-              <>
-                {!amanteIsWoman && <div className="absolute inset-0 bg-zinc-950/40" />}
-                <div className={`absolute ${amanteIsWoman ? "bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent pt-8 pb-2" : "inset-0"} flex flex-col items-center justify-center gap-1 text-center px-3`}>
-                  {!amanteIsWoman && <span className="text-3xl">🔒</span>}
-                  <span className="text-[11px] text-red-200 font-bold uppercase tracking-wider">Foto enviada por {amanteLabel} · 02:14h</span>
-                  <span className="text-[10px] text-zinc-300 italic">{legendaFoto}</span>
-                </div>
-              </>
-            )}
-
-          </div>
         </Section>
 
 
