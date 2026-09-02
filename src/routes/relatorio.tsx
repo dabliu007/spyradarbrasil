@@ -30,9 +30,10 @@ import messengerChat from "@/assets/messenger-chat.png.asset.json";
 const audioAmante1 = "/audio-amante-1.mp3";
 const audioAmante2 = "/audio-amante-2.mp3";
 const audioAmante3 = "/audio-amante-3.mp3";
-import audioAmanteH1 from "@/assets/audio-amante-h-1.mp3.asset.json";
-import audioAmanteH2 from "@/assets/audio-amante-h-2.mp3.asset.json";
-import audioAmanteH3 from "@/assets/audio-amante-h-3.mp3.asset.json";
+// Áudios do amante homem — servidos de /public (blob real), fora do resolver de assets do v0.
+const audioAmanteH1 = "/audio-amante-h-1.mp3";
+const audioAmanteH2 = "/audio-amante-h-2.mp3";
+const audioAmanteH3 = "/audio-amante-h-3.mp3";
 
 
 
@@ -634,9 +635,9 @@ function RelatorioPage() {
                 { src: audioAmante3, hora: "01:32", label: "Perguntando sobre você" },
                   ]
                 : [
-                    { src: audioAmanteH1.url, hora: "12:47", label: "Escapadinha no almoço" },
-                    { src: audioAmanteH2.url, hora: "22:14", label: "Agradecendo o presente" },
-                    { src: audioAmanteH3.url, hora: "01:32", label: "Perguntando sobre você" },
+                    { src: audioAmanteH1, hora: "12:47", label: "Escapadinha no almoço" },
+                    { src: audioAmanteH2, hora: "22:14", label: "Agradecendo o presente" },
+                    { src: audioAmanteH3, hora: "01:32", label: "Perguntando sobre você" },
                   ]
               ).map((a, i) => (
                 <div key={i} className="bg-zinc-900/80 border border-red-500/20 rounded-xl p-2.5">
