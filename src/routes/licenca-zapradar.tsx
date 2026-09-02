@@ -8,7 +8,7 @@ import depoimento1 from "@/assets/depoimento-1.mp4.asset.json";
 import depoimento2 from "@/assets/depoimento-2.mp4.asset.json";
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
-const LICENSE_AMOUNT = 147;
+const LICENSE_AMOUNT = 137;
 const LICENSE_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 
 const searchSchema = z.object({
@@ -284,7 +284,7 @@ function LicencaZapRadarPage() {
               Pagamento único · 1 ano de licença
             </div>
             <div className="mt-1">
-              <span className="text-[#128C7E] text-5xl font-extrabold tracking-tight">R$147</span>
+              <span className="text-[#128C7E] text-5xl font-extrabold tracking-tight">R$137</span>
               <span className="text-[#128C7E] text-xl font-bold">,00</span>
             </div>
             <div className="text-[11px] text-slate-500 mt-1">
@@ -311,7 +311,7 @@ function LicencaZapRadarPage() {
                 Licença ZapRadar · 1 ano
               </div>
               <div>
-                <span className="text-[#128C7E] text-4xl font-extrabold tracking-tight">R$147</span>
+                <span className="text-[#128C7E] text-4xl font-extrabold tracking-tight">R$137</span>
                 <span className="text-[#128C7E] text-lg font-bold">,00</span>
               </div>
             </div>
