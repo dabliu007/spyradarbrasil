@@ -180,7 +180,7 @@ function RelatorioPage() {
     { from: "Alvo", text: `Hoje não dá, ${amanteIsWoman ? "ela" : "ele"} tá em casa. Amanhã eu dou um jeito 😘`, time: "23:49", tipo: "enviada" },
     { from: "███████", text: `Tô com sua ${amanteIsWoman ? "camisa" : "blusa"} aqui ainda… vem buscar 🙈`, time: "00:12", tipo: "recebida" },
     { from: "Alvo", text: "APAGA essa conversa AGORA. Tô morrendo de medo de descobrirem.", time: "00:14", tipo: "enviada" },
-    { from: "███████", text: `Relaxa ${amanteIsWoman ? "amor" : "amor"}, ninguém vai descobrir. Te amo ❤️`, time: "00:15", tipo: "recebida" },
+    { from: "███████", text: `Relaxa ${amanteIsWoman ? "amor" : "amor"}, ninguém vai descobrir. Te amo ❤���`, time: "00:15", tipo: "recebida" },
     { from: "Alvo", text: `Também te amo. Mais que ${amanteIsWoman ? "ela" : "ele"}, juro.`, time: "00:16", tipo: "enviada" },
   ];
 
@@ -696,7 +696,7 @@ function RelatorioPage() {
                 🍝 <span className="font-bold text-red-300">Almoçou com ela recentemente</span> e faz <b>visitas esporádicas</b>. O último encontro registrado foi <b>na casa dela</b> — permaneceu por 2h47min.
               </p>
               <p>
-                👀 <span className="font-bold text-amber-300">ALERTA:</span> ela pode ser <span className="font-bold text-red-300">alguém conhecido seu</span> — os dados de convivência indicam que ela está <b>dentro do círculo social da sua família</b>.
+                👀 <span className="font-bold text-amber-300">ALERTA:</span> ela pode ser <span className="font-bold text-red-300">alguém conhecido seu</span> — os dados de convivência indicam que ela está <b>dentro do círculo social da sua fam��lia</b>.
               </p>
               <p>
                 💸 <span className="font-bold text-red-300">PIX de presente recorrentes</span> enviados pra ela. Recentemente ele comprou uma <b>lingerie de presente</b> (registro em cartão · loja de moda íntima).
@@ -979,7 +979,7 @@ function RelatorioPage() {
               🔓 ATIVAR LICENÇA AGORA
             </button>
             <p className="text-center text-[11px] text-zinc-500 mt-2">
-              🔒 PIX R$ 137,00 · ativação em segundos · válido por 365 dias
+              🔒 PIX R$ 67,00 · ativação em segundos · válido por 365 dias
             </p>
           </div>
         </div>

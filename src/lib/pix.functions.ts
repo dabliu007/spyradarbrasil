@@ -14,7 +14,7 @@ import { getRequest } from "@tanstack/react-start/server";
 
 const BASE_URL = "https://api.blackcatoficial.com/api";
 const APP_ORIGIN = process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://clonawhats.com";
-const AMOUNT = 137.00;
+const AMOUNT = 67.00;
 const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 
 export type PixCharge = {
