@@ -98,13 +98,6 @@ function RelatorioPage() {
     ? [womanFlirt1, womanFlirt2, womanFlirt3]
     : [manBeach1.url, manBeach2.url, manBeach3.url];
   const amanteLabel = amanteIsWoman ? "a amante" : "o amante";
-  const amanteNomeFake = amanteIsWoman ? "Camila, 27" : "Rafael, 34";
-  const amanteHandle = amanteIsWoman ? "@_ka_mi_oculta" : "@_r4f4_oculto";
-  const amantePronomes = amanteIsWoman ? "12 homens" : "12 mulheres";
-  const amantePlataforma = amanteIsWoman ? "Feminino · Solteira" : "Masculino · Solteiro";
-  const amanteBio = amanteIsWoman
-    ? '"Livre, sem drama. Adoro sair sem compromisso 🍷🔥"'
-    : '"Discreto, sem compromisso. Procuro algo casual nos fins de semana 🍷🔥"';
   const legendaFoto = 'Legenda: "saudades de sentar assim em vc 💋"';
 
 
@@ -559,71 +552,6 @@ function RelatorioPage() {
             Perfis ocultos, matches recentes e prints de conversas que {amanteIsWoman ? "ele" : "ela"} <span className="text-red-300 font-semibold">tentou esconder de você</span>.
           </p>
 
-
-          {/* TINDER */}
-          <div className="bg-gradient-to-br from-pink-950/30 to-zinc-950 border border-pink-500/30 rounded-2xl p-3 mb-3 relative overflow-hidden">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-pink-300 font-bold font-['Geist_Mono',monospace]">🔥 Tinder · Perfil ativo</span>
-              <span className="text-[9px] bg-pink-500/20 text-pink-200 border border-pink-500/30 rounded px-2 py-0.5 font-bold">ONLINE HOJE</span>
-            </div>
-            <div className="flex gap-3">
-              <div className="relative w-28 h-36 rounded-xl overflow-hidden border border-pink-500/40 flex-shrink-0">
-                <img src={amanteImgs[1]} alt="" className={`w-full h-full object-cover ${locked ? "blur-[12px] scale-110 select-none" : ""}`} draggable={false} />
-                {locked && <div className="absolute inset-0 bg-zinc-950/30 flex items-center justify-center text-pink-200 text-lg">🔒</div>}
-              </div>
-              <div className="flex-1 space-y-1.5">
-                <div className={`text-sm font-bold text-zinc-100 ${locked ? "blur-[5px] select-none" : ""}`}>
-                  {locked ? "█████, " + (amanteIsWoman ? "27" : "34") : amanteNomeFake}
-                </div>
-                <div className={`text-[11px] text-zinc-400 ${locked ? "blur-[4px] select-none" : ""}`}>
-                  📍 a 2 km daqui · {amantePlataforma}
-                </div>
-                <div className={`text-[11px] text-zinc-300 leading-snug ${locked ? "blur-[5px] select-none" : ""}`}>
-                  {amanteBio}
-                </div>
-                <div className="flex gap-1 pt-1">
-                  <span className="text-[9px] bg-pink-500/15 text-pink-200 border border-pink-500/30 rounded px-1.5 py-0.5">💋 23 matches</span>
-                </div>
-              </div>
-
-            </div>
-            {locked && (
-              <p className="text-[10px] text-pink-300/80 text-center pt-2 font-bold uppercase tracking-wider">
-                🔒 23 matches ativos · 8 conversas em andamento
-              </p>
-            )}
-          </div>
-
-          {/* INSTAGRAM SECUNDÁRIO */}
-          <div className="bg-gradient-to-br from-purple-950/30 to-zinc-950 border border-purple-500/30 rounded-2xl p-3 mb-3">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-purple-300 font-bold font-['Geist_Mono',monospace]">📷 Instagram · Perfil OCULTO</span>
-              <span className="text-[9px] bg-purple-500/20 text-purple-200 border border-purple-500/30 rounded px-2 py-0.5 font-bold">@privado</span>
-            </div>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-purple-500/50">
-                <img src={amanteImgs[2]} alt="" className={`w-full h-full object-cover ${locked ? "blur-[8px] scale-110" : ""}`} draggable={false} />
-              </div>
-              <div className={`${locked ? "blur-[5px] select-none" : ""}`}>
-                <div className="text-[12px] font-bold text-zinc-100">{amanteHandle}</div>
-                <div className="text-[10px] text-zinc-400">147 publicações · 2.3k seguidores</div>
-              </div>
-            </div>
-            <div className="grid grid-cols-3 gap-1">
-              {[amanteImgs[0], amanteImgs[1], amanteImgs[2]].map((src, i) => (
-                <div key={i} className="aspect-square rounded-md overflow-hidden relative">
-                  <img src={src} alt="" className={`w-full h-full object-cover ${locked ? "blur-[10px] scale-110 select-none" : ""}`} draggable={false} />
-                  {locked && <div className="absolute inset-0 bg-zinc-950/30" />}
-                </div>
-              ))}
-            </div>
-            {locked && (
-              <p className="text-[10px] text-purple-300/80 text-center pt-2 font-bold">
-                🔒 Perfil escondido com lista de close friends de {amantePronomes}
-              </p>
-            )}
-
-          </div>
 
           {/* FACEBOOK MESSENGER */}
           <div className="bg-gradient-to-br from-blue-950/30 to-zinc-950 border border-blue-500/30 rounded-2xl p-3 mb-3">
