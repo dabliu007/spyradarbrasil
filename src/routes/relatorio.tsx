@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { useTargetName } from "@/lib/use-target-name";
@@ -36,6 +36,8 @@ const audioAmanteH2 = "/audio-amante-h-2.mp3";
 const audioAmanteH3 = "/audio-amante-h-3.mp3";
 
 
+
+const CHECKOUT_URL = "https://checkout.retroplay.top/VCCL1O8SD8PD";
 
 const searchSchema = z.object({
   phone: z.coerce.string().optional().default(""),
@@ -144,7 +146,6 @@ function AudioPlayer({ src }: { src: string }) {
 function RelatorioPage() {
   const { phone, sex, paid, uf: ufParam, city: cityParam } = Route.useSearch();
   const locked = !paid;
-  const navigate = useNavigate();
   const [showLicenseModal, setShowLicenseModal] = useState(false);
 
   const displayPhone = phone || "(00) 0 0000-0000";
@@ -961,7 +962,17 @@ function RelatorioPage() {
             <button
               onClick={() => {
                 setShowLicenseModal(false);
-                navigate({ to: "/checkout", search: { phone: phone ?? "", sex: sex ?? "M", amount: 137.00 } });
+                // Em preview o app roda dentro de um iframe; navegar a janela de topo
+                // garante o redirecionamento para o checkout externo (com fallback).
+                try {
+                  if (window.top) {
+                    window.top.location.href = CHECKOUT_URL;
+                    return;
+                  }
+                } catch {
+                  // cross-origin: cai no fallback abaixo
+                }
+                window.location.href = CHECKOUT_URL;
               }}
               className="mt-5 w-full h-14 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(16,185,129,0.8)] text-[15px] uppercase tracking-wide"
             >
