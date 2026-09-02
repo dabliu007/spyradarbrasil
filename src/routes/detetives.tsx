@@ -3,15 +3,16 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/detetives")({
   head: () => ({
     meta: [
-      { title: "Detective Profissional · Equipamentos para Investigação Discreta" },
+      { title: "Detective Profissional · Descubra a Verdade Que Escondem de Você" },
       {
         name: "description",
         content:
-          "Empresa especialista em investigação particular com mais de 10 anos de experiência. Kits profissionais de monitoramento: clonagem de WhatsApp, câmeras escondidas, rastreadores e mais.",
+          "Cansado de viver na dúvida? Agência de investigação com +10 anos de experiência. Kits sigilosos de monitoramento: WhatsApp, câmeras, rastreador e acesso completo. Ative em minutos.",
       },
-      { name: "robots", content: "index,follow" },
-      { property: "og:title", content: "Detective Profissional · Equipamentos para Investigação" },
-      { property: "og:description", content: "Kits profissionais de investigação e monitoramento. Mais de 10 anos de experiência." },
+      { name: "robots", content: "index,follow,max-image-preview:large" },
+      { name: "theme-color", content: "#070A10" },
+      { property: "og:title", content: "Descubra a verdade que escondem de você · Detective Profissional" },
+      { property: "og:description", content: "Pare de dormir com dúvidas. Veja conversas, fotos e localização em tempo real. Sigilo absoluto." },
       { property: "og:type", content: "website" },
     ],
   }),
@@ -48,8 +49,6 @@ function goToCheckout(url: string) {
 
 function Icon({ name, className }: { name: string; className?: string }) {
   const common = {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     stroke: "currentColor",
@@ -87,23 +86,22 @@ function Icon({ name, className }: { name: string; className?: string }) {
           <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
         </svg>
       );
-    case "card":
+    case "bolt":
       return (
         <svg {...common}>
-          <rect x="3" y="5.5" width="18" height="13" rx="2" />
-          <path d="M3 9.5h18" />
+          <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" />
         </svg>
       );
-    case "refresh":
+    case "clock":
       return (
         <svg {...common}>
-          <path d="M4 12a8 8 0 0 1 14-5.3L20 9M20 12a8 8 0 0 1-14 5.3L4 15" />
-          <path d="M20 4v5h-5M4 20v-5h5" />
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 2" />
         </svg>
       );
     case "star":
       return (
-        <svg viewBox="0 0 24 24" fill="currentColor" width={18} height={18} aria-hidden className={className}>
+        <svg viewBox="0 0 24 24" fill="currentColor" width={16} height={16} aria-hidden className={className}>
           <path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z" />
         </svg>
       );
@@ -114,11 +112,26 @@ function Icon({ name, className }: { name: string; className?: string }) {
           <circle cx="12" cy="12" r="2.6" />
         </svg>
       );
-    case "cpu":
+    case "alert":
       return (
         <svg {...common}>
-          <rect x="6" y="6" width="12" height="12" rx="2" />
-          <path d="M9 1.5v3M15 1.5v3M9 19.5v3M15 19.5v3M1.5 9h3M1.5 15h3M19.5 9h3M19.5 15h3" />
+          <path d="M12 3 2 20h20L12 3z" />
+          <path d="M12 10v4" />
+          <path d="M12 17.5v.01" />
+        </svg>
+      );
+    case "phone":
+      return (
+        <svg {...common}>
+          <rect x="7" y="2.5" width="10" height="19" rx="2.5" />
+          <path d="M11 18h2" />
+        </svg>
+      );
+    case "pin":
+      return (
+        <svg {...common}>
+          <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" />
+          <circle cx="12" cy="10" r="2.4" />
         </svg>
       );
     case "headset":
@@ -128,19 +141,6 @@ function Icon({ name, className }: { name: string; className?: string }) {
           <rect x="3" y="13" width="4" height="6" rx="1.5" />
           <rect x="17" y="13" width="4" height="6" rx="1.5" />
           <path d="M20 19a4 4 0 0 1-4 3h-2" />
-        </svg>
-      );
-    case "medal":
-      return (
-        <svg {...common}>
-          <circle cx="12" cy="9" r="5" />
-          <path d="M9 13.5 7.5 22l4.5-2.5L16.5 22 15 13.5" />
-        </svg>
-      );
-    case "scale":
-      return (
-        <svg {...common}>
-          <path d="M12 3v18M6 21h12M4 8l4-3 4 3M4 8l-2 5a3 3 0 0 0 6 0zM20 8l-4-3-4 3M20 8l2 5a3 3 0 0 1-6 0z" />
         </svg>
       );
     case "search":
@@ -154,12 +154,6 @@ function Icon({ name, className }: { name: string; className?: string }) {
       return (
         <svg viewBox="0 0 24 24" fill="currentColor" width={20} height={20} aria-hidden className={className}>
           <path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.2 14.8l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 0 1 12 4zm-2.5 3.6c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 5 4.3 2.4 1 2.9.8 3.5.7.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4l-1.9-.9c-.3-.1-.5-.2-.7.2l-.9 1.2c-.2.2-.3.2-.6.1-1.7-.7-2.8-1.7-3.7-3.2-.2-.4 0-.5.2-.7l.5-.7c.1-.2.1-.4 0-.6l-.9-2c-.2-.5-.4-.4-.6-.4z" />
-        </svg>
-      );
-    case "chevronLeft":
-      return (
-        <svg {...common}>
-          <path d="m15 18-6-6 6-6" />
         </svg>
       );
     case "chevronRight":
@@ -197,7 +191,9 @@ interface Kit {
   imagem: string;
   itens: string[];
   preco: string;
+  precoAntigo: string;
   parcela: string;
+  cta: string;
   checkout: string;
   destaque?: boolean;
 }
@@ -206,226 +202,404 @@ const KITS: Kit[] = [
   {
     id: "primario",
     nome: "Kit Primário",
-    tag: "Essencial",
-    descricao: "Ideal para começar. Clonagem de WhatsApp com ativação imediata.",
+    tag: "Primeiro passo",
+    descricao: "Para quem quer tirar a dúvida do WhatsApp de uma vez por todas.",
     imagem: "/kit-primario.png",
-    itens: ["Clonagem de WhatsApp"],
-    preco: "R$ 67,00",
+    itens: ["Clonagem completa do WhatsApp", "Conversas, fotos e áudios apagados", "Ativação imediata e sigilosa"],
+    preco: "R$ 67",
+    precoAntigo: "R$ 127",
     parcela: "ou 12x de R$ 5,58",
+    cta: "Quero tirar a dúvida",
     checkout: CHECKOUT_PRIMARIO,
   },
   {
     id: "stalker",
     nome: "Kit Stalker",
-    tag: "Mais vendido",
-    descricao: "O mais escolhido. Monitoramento completo de mensagens e ambiente.",
+    tag: "Mais escolhido",
+    descricao: "A escolha de quem quer ver TUDO: mensagens, ambiente e imagem.",
     imagem: "/kit-stalker.png",
-    itens: ["Clonagem de WhatsApp", "Caneta Espiã", "Câmera Escondida via Nuvem"],
+    itens: [
+      "Tudo do Kit Primário",
+      "Caneta espiã com câmera oculta",
+      "Câmera escondida via nuvem",
+      "Monitoramento do ambiente 24h",
+    ],
     preco: "R$ 129,90",
+    precoAntigo: "R$ 249,90",
     parcela: "ou 12x de R$ 10,83",
+    cta: "Descobrir agora",
     checkout: CHECKOUT_STALKER,
     destaque: true,
   },
   {
     id: "premium",
     nome: "Kit Premium",
-    tag: "Completo",
-    descricao: "Solução profissional completa para investigação e monitoramento veicular.",
+    tag: "Prova completa",
+    descricao: "O arsenal completo do investigador. Nada passa despercebido.",
     imagem: "/kit-premium.png",
     itens: [
-      "Clonagem de WhatsApp",
-      "Caneta Espiã",
-      "Câmera Escondida via Nuvem",
-      "Gravador de Voz para Carro",
-      "Câmera Escondida para Carro",
-      "Rastreador para Carro",
-      "Acesso ao Celular Completo",
+      "Tudo dos kits anteriores",
+      "Acesso completo ao celular",
+      "Gravador de voz para o carro",
+      "Câmera escondida para o carro",
+      "Rastreador veicular em tempo real",
     ],
-    preco: "R$ 197,00",
+    preco: "R$ 197",
+    precoAntigo: "R$ 397",
     parcela: "ou 12x de R$ 16,42",
+    cta: "Quero a prova completa",
     checkout: CHECKOUT_PREMIUM,
   },
 ];
 
+const SINAIS = [
+  "Trocou a senha do celular do nada e não te conta mais",
+  "Vira a tela pra baixo e sai da sala pra atender",
+  "Vive apagando conversas e o histórico de chamadas",
+  "Passou a dormir com o celular embaixo do travesseiro",
+  "Ficou distante, frio e some por horas sem explicação",
+  "Silencia as notificações assim que chega em casa",
+];
+
 const EQUIPAMENTOS = [
-  { nome: "Caneta Espiã", imagem: "/equip-caneta.png", incluso: "Kits Stalker e Premium" },
-  { nome: "Câmera Escondida via Nuvem", imagem: "/equip-camera-nuvem.png", incluso: "Kits Stalker e Premium" },
-  { nome: "Gravador de Voz para Carro", imagem: "/equip-gravador.png", incluso: "Kit Premium" },
-  { nome: "Câmera Escondida para Carro", imagem: "/equip-camera-carro.png", incluso: "Kit Premium" },
-  { nome: "Rastreador para Carro", imagem: "/equip-rastreador.png", incluso: "Kit Premium" },
-  { nome: "Acesso ao Celular Completo", imagem: "/equip-celular.png", incluso: "Kit Premium" },
+  { nome: "Caneta Espiã", imagem: "/equip-caneta.png", incluso: "Stalker · Premium" },
+  { nome: "Câmera via Nuvem", imagem: "/equip-camera-nuvem.png", incluso: "Stalker · Premium" },
+  { nome: "Gravador de Voz", imagem: "/equip-gravador.png", incluso: "Premium" },
+  { nome: "Câmera para Carro", imagem: "/equip-camera-carro.png", incluso: "Premium" },
+  { nome: "Rastreador Veicular", imagem: "/equip-rastreador.png", incluso: "Premium" },
+  { nome: "Acesso ao Celular", imagem: "/equip-celular.png", incluso: "Premium" },
+];
+
+const PASSOS = [
+  { n: "01", icon: "cart", t: "Escolha o seu kit", s: "Pagamento único e 100% sigiloso. Sem mensalidade, sem pegadinha." },
+  { n: "02", icon: "bolt", t: "Ative em minutos", s: "Você recebe o passo a passo simples. Em poucos toques está tudo funcionando." },
+  { n: "03", icon: "eye", t: "Veja tudo em tempo real", s: "Conversas, fotos, áudios e localização no seu painel privado, quando quiser." },
 ];
 
 const DEPOIMENTOS = [
-  { nome: "Carlos M.", cidade: "São Paulo · SP", texto: "Excelente qualidade e discrição. O kit me ajudou demais. Recomendo!", estrelas: 5 },
-  { nome: "Mariana A.", cidade: "Curitiba · PR", texto: "Ativação rápida e suporte de verdade. Loja séria e confiável!", estrelas: 5 },
-  { nome: "Roberto S.", cidade: "Belo Horizonte · MG", texto: "Uso as ferramentas no dia a dia. Nunca me deixaram na mão.", estrelas: 5 },
-  { nome: "Juliana T.", cidade: "Rio de Janeiro · RJ", texto: "Discrição total e atendimento excelente. Me senti segura o tempo todo.", estrelas: 5 },
+  { nome: "Mariana A.", cidade: "Curitiba · PR", texto: "Eu suspeitava há meses. Em uma noite eu tinha todas as provas na mão. Doeu, mas me libertou.", estrelas: 5 },
+  { nome: "Carlos M.", cidade: "São Paulo · SP", texto: "Discrição total. Ativei sem ela perceber e finalmente entendi por que ela sumia à noite.", estrelas: 5 },
+  { nome: "Roberto S.", cidade: "Belo Horizonte · MG", texto: "Achei que era paranoia minha. Não era. O rastreador mostrou onde ele realmente estava.", estrelas: 5 },
+  { nome: "Juliana T.", cidade: "Rio de Janeiro · RJ", texto: "Suporte me acompanhou em cada passo. Parei de me torturar com achismos e vi a verdade.", estrelas: 5 },
 ];
 
-const FEATURES = [
-  { icon: "medal", titulo: "Qualidade Premium", texto: "Equipamentos testados e aprovados" },
-  { icon: "cpu", titulo: "Tecnologia Avançada", texto: "O que há de mais moderno em investigação" },
-  { icon: "headset", titulo: "Suporte Especializado", texto: "Equipe pronta para te ajudar" },
-  { icon: "shield", titulo: "Garantia Estendida", texto: "Cobertura em todos os produtos" },
-  { icon: "eye", titulo: "Discrição Absoluta", texto: "Sua privacidade sempre protegida" },
-  { icon: "scale", titulo: "Legalidade Total", texto: "Uso conforme a legislação vigente" },
+const FAQ = [
+  { q: "É realmente sigiloso? A pessoa vai desconfiar?", a: "Sim, é 100% discreto. A entrega chega em embalagem neutra e o seu painel de monitoramento é totalmente privado. Ninguém além de você tem acesso." },
+  { q: "Funciona em qualquer celular, Android e iPhone?", a: "Funciona nos dois sistemas. Nossos equipamentos e ferramentas são compatíveis com os aparelhos mais usados no Brasil." },
+  { q: "É pagamento único ou tem mensalidade?", a: "Pagamento único. Você paga uma vez e usa. Sem cobranças recorrentes, sem surpresas na fatura." },
+  { q: "E se eu tiver dificuldade para usar?", a: "Nossa equipe especializada te acompanha no passo a passo. E você ainda conta com 7 dias de garantia para trocas e devoluções." },
 ];
 
 const NAV = [
-  { label: "Kits Detetive", href: "#kits" },
-  { label: "Equipamentos", href: "#equipamentos" },
-  { label: "Sobre Nós", href: "#sobre" },
-  { label: "Contato", href: "#contato" },
+  { label: "Sinais", href: "#sinais" },
+  { label: "Kits", href: "#kits" },
+  { label: "Como funciona", href: "#como" },
+  { label: "Dúvidas", href: "#faq" },
 ];
+
+const GOLD = "#E4B45A";
 
 /* -------------------------------- Componente ------------------------------- */
 
 function DetetivesPage() {
   return (
-    <div className="min-h-screen bg-white font-sans text-[#14202e]">
-      {/* Barra de anúncio */}
-      <div className="bg-[#14202e] text-slate-200">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-1 px-4 py-2 text-center text-[11px] font-medium tracking-wide">
-          <span className="flex items-center gap-1.5"><Icon name="lock" className="h-3.5 w-3.5 text-[#c19a3a]" /> Site 100% seguro</span>
-          <span className="flex items-center gap-1.5"><Icon name="truck" className="h-3.5 w-3.5 text-[#c19a3a]" /> Entrega para todo Brasil</span>
-          <span className="flex items-center gap-1.5"><Icon name="card" className="h-3.5 w-3.5 text-[#c19a3a]" /> Até 12x no cartão</span>
-          <span className="flex items-center gap-1.5"><Icon name="refresh" className="h-3.5 w-3.5 text-[#c19a3a]" /> 7 dias para trocas e devoluções</span>
+    <div className="min-h-screen bg-[#070A10] font-sans text-[#F4F6FA] antialiased">
+      {/* Barra de status */}
+      <div className="border-b border-white/5 bg-black/40">
+        <div className="mx-auto flex max-w-6xl items-center justify-center gap-x-6 gap-y-1 overflow-hidden px-4 py-2 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">
+          <span className="flex items-center gap-1.5">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full" style={{ background: GOLD }} /> Sistema online
+          </span>
+          <span className="hidden sm:inline">· Sigilo garantido</span>
+          <span className="hidden xs:inline">· Ativação imediata</span>
+          <span>· Entrega nacional</span>
         </div>
       </div>
 
       {/* Cabeçalho */}
-      <header className="sticky top-0 z-30 border-b border-[#e5e3de] bg-white/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5">
+      <header className="sticky top-0 z-40 border-b border-white/8 bg-[#070A10]/85 backdrop-blur-md">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
           <a href="#topo" className="flex items-center gap-2.5">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#14202e] text-[#c19a3a]">
-              <Icon name="shield" className="h-6 w-6" />
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5" style={{ color: GOLD }}>
+              <Icon name="shield" className="h-5 w-5" />
             </span>
             <span className="leading-tight">
-              <span className="block text-base font-extrabold tracking-tight">DETECTIVE</span>
-              <span className="block text-[10px] font-semibold uppercase tracking-[0.35em] text-[#c19a3a]">Profissional</span>
+              <span className="block text-sm font-extrabold tracking-tight">DETECTIVE</span>
+              <span className="block font-mono text-[9px] font-semibold uppercase tracking-[0.35em]" style={{ color: GOLD }}>Profissional</span>
             </span>
           </a>
 
           <nav className="hidden items-center gap-7 lg:flex">
             {NAV.map((item) => (
-              <a key={item.href} href={item.href} className="text-[13px] font-bold uppercase tracking-wide text-[#14202e] transition-colors hover:text-[#c19a3a]">
+              <a key={item.href} href={item.href} className="text-[13px] font-semibold text-slate-300 transition-colors hover:text-white">
                 {item.label}
               </a>
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
-            <div className="hidden items-center gap-2 rounded-full border border-[#e5e3de] px-4 py-2 text-sm text-slate-400 md:flex">
-              <Icon name="search" className="h-4 w-4" />
-              <span>Buscar produtos...</span>
-            </div>
-            <a href="#kits" className="relative flex h-10 w-10 items-center justify-center rounded-full bg-[#f5f4f1] text-[#14202e] transition-colors hover:bg-[#eceae4]">
-              <Icon name="cart" className="h-5 w-5" />
-            </a>
-          </div>
+          <a
+            href="#kits"
+            className="inline-flex min-h-9 items-center gap-2 rounded-lg px-4 text-[12px] font-extrabold uppercase tracking-wide text-[#070A10] transition-transform active:scale-95"
+            style={{ background: GOLD }}
+          >
+            <Icon name="lock" className="h-4 w-4" /> Descobrir
+          </a>
         </div>
       </header>
 
       <main id="topo">
         {/* Hero */}
-        <section className="border-b border-[#e5e3de]">
-          <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 md:py-16 lg:grid-cols-2">
+        <section
+          className="relative overflow-hidden border-b border-white/8"
+          style={{
+            backgroundImage:
+              "radial-gradient(120% 80% at 80% 0%, rgba(228,180,90,0.10), transparent 55%), linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+            backgroundSize: "auto, 44px 44px, 44px 44px",
+          }}
+        >
+          <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 md:py-20 lg:grid-cols-[1.05fr_0.95fr]">
             <div>
-              <span className="inline-flex items-center rounded-sm border-l-2 border-[#c19a3a] bg-[#f5f4f1] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.25em] text-[#c19a3a]">
-                Loja Oficial
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-300">
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: GOLD }} /> Agência de investigação · +10 anos
               </span>
-              <h1 className="mt-5 text-balance text-4xl font-extrabold uppercase leading-[1.05] tracking-tight md:text-5xl">
-                Equipamentos profissionais
-                <span className="mt-1 block text-[#c19a3a]">para investigação discreta</span>
+
+              <h1 className="mt-5 text-balance text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-5xl">
+                A dúvida está te
+                <span className="block">consumindo. A verdade</span>
+                <span style={{ color: GOLD }}>está no celular dele(a).</span>
               </h1>
-              <p className="mt-5 max-w-lg text-pretty text-base leading-relaxed text-slate-600">
-                Kits completos e ferramentas de alta performance para investigação, segurança e
-                coleta de evidências. Empresa especialista em detetives particulares há mais de 10 anos.
+
+              <p className="mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-slate-300 sm:text-base">
+                Mensagens que somem, celular sempre virado pra baixo, senha trocada e o
+                {" "}“trabalhando até tarde” virou rotina. Enquanto você se pergunta o que
+                está acontecendo, a resposta está a um clique de distância.
               </p>
 
-              <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4">
-                {[
-                  { icon: "eye", t: "Discrição total", s: "Sua privacidade em 1º lugar" },
-                  { icon: "medal", t: "Equipamentos testados", s: "Qualidade comprovada" },
-                  { icon: "truck", t: "Entrega rápida", s: "Para todo o Brasil" },
-                  { icon: "lock", t: "Compra segura", s: "Seus dados protegidos" },
-                ].map((b) => (
-                  <div key={b.t}>
-                    <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#e5e3de] text-[#c19a3a]">
-                      <Icon name={b.icon} className="h-5 w-5" />
-                    </span>
-                    <div className="mt-2 text-[13px] font-bold leading-tight">{b.t}</div>
-                    <div className="text-[11px] leading-tight text-slate-500">{b.s}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 flex flex-wrap items-center gap-3">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
                   href="#kits"
-                  className="inline-flex min-h-12 items-center gap-2 rounded-lg bg-[#14202e] px-6 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-[#1e2d40]"
+                  className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-extrabold uppercase tracking-wide text-[#070A10] shadow-[0_10px_40px_-10px_rgba(228,180,90,0.6)] transition-transform active:scale-[0.98]"
+                  style={{ background: GOLD }}
                 >
-                  Ver kits detetive <Icon name="chevronRight" className="h-4 w-4" />
+                  Quero descobrir a verdade <Icon name="chevronRight" className="h-4 w-4" />
                 </a>
                 <a
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-12 items-center gap-2 rounded-lg border border-[#14202e]/20 px-6 text-sm font-bold uppercase tracking-wide text-[#14202e] transition-colors hover:bg-[#f5f4f1]"
+                  className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl border border-white/15 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/5"
                 >
-                  <Icon name="whatsapp" className="h-4 w-4" /> Falar no WhatsApp
+                  <Icon name="whatsapp" className="h-4 w-4" style={{ color: GOLD }} /> Falar com um investigador
                 </a>
               </div>
 
-              <div className="mt-6 flex items-center gap-2 text-sm">
-                <span className="flex text-[#c19a3a]">
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <Icon key={i} name="star" />
-                  ))}
+              <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+                <span className="flex items-center gap-1.5">
+                  <span className="flex" style={{ color: GOLD }}>
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <Icon key={i} name="star" />
+                    ))}
+                  </span>
+                  <span className="font-bold">4,9/5</span>
                 </span>
-                <span className="font-semibold">4,9/5</span>
-                <span className="text-slate-500">com base em 1.842 avaliações</span>
+                <span className="text-slate-400">1.842 investigações concluídas</span>
+                <span className="flex items-center gap-1.5 text-slate-400">
+                  <Icon name="lock" className="h-4 w-4" style={{ color: GOLD }} /> Sigilo absoluto
+                </span>
               </div>
             </div>
 
-            {/* Imagem do hero */}
-            <div className="relative">
-              <div className="overflow-hidden rounded-2xl border border-[#e5e3de] bg-[#f5f4f1]">
+            {/* Imagem do hero com moldura HUD */}
+            <div className="relative mx-auto w-full max-w-md">
+              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5">
                 <img
                   src="/detetive-hero.png"
                   alt="Maleta profissional com equipamentos de investigação e monitoramento"
                   className="h-full w-full object-cover"
                 />
+                {/* Cantos HUD */}
+                <span className="pointer-events-none absolute left-3 top-3 h-6 w-6 border-l-2 border-t-2" style={{ borderColor: GOLD }} />
+                <span className="pointer-events-none absolute right-3 top-3 h-6 w-6 border-r-2 border-t-2" style={{ borderColor: GOLD }} />
+                <span className="pointer-events-none absolute bottom-3 left-3 h-6 w-6 border-b-2 border-l-2" style={{ borderColor: GOLD }} />
+                <span className="pointer-events-none absolute bottom-3 right-3 h-6 w-6 border-b-2 border-r-2" style={{ borderColor: GOLD }} />
+                <span className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-black/70 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.2em] text-slate-300 backdrop-blur">
+                  <span className="mr-1.5 inline-block h-1.5 w-1.5 animate-pulse rounded-full align-middle" style={{ background: GOLD }} /> Monitorando
+                </span>
               </div>
-              <div className="absolute right-4 top-4 rounded-xl bg-[#c19a3a] px-5 py-3 text-center text-[#14202e] shadow-lg">
-                <div className="text-xl font-extrabold leading-none">+10.000</div>
-                <div className="text-[10px] font-bold uppercase tracking-wide">Clientes atendidos</div>
-              </div>
-              <div className="mt-3 text-right text-xs font-semibold uppercase tracking-wide text-slate-500">
-                Loja especializada · referência nacional em equipamentos
+              <div className="absolute -right-2 -top-3 rounded-xl px-4 py-2.5 text-center text-[#070A10] shadow-lg" style={{ background: GOLD }}>
+                <div className="text-lg font-extrabold leading-none">+10.000</div>
+                <div className="font-mono text-[9px] font-bold uppercase tracking-wide">casos atendidos</div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Faixa de estatísticas */}
-        <section className="bg-[#f5f4f1]">
-          <div className="mx-auto max-w-6xl px-4 py-10">
-            <div className="grid grid-cols-2 gap-6 rounded-2xl border border-[#e5e3de] bg-white p-8 md:grid-cols-4">
-              {[
-                { icon: "medal", v: "+10.000", l: "Clientes", s: "Em todo o Brasil" },
-                { icon: "star", v: "4,9/5", l: "Avaliação", s: "Clientes satisfeitos" },
-                { icon: "shield", v: "+10 anos", l: "De mercado", s: "Referência no segmento" },
-                { icon: "lock", v: "100%", l: "Compra segura", s: "Seus dados protegidos" },
-              ].map((st) => (
-                <div key={st.l} className="flex flex-col items-center text-center md:flex-row md:items-start md:gap-3 md:text-left">
-                  <span className="mb-2 text-[#c19a3a] md:mb-0"><Icon name={st.icon} className="h-8 w-8" /></span>
-                  <div>
-                    <div className="text-2xl font-extrabold leading-none">{st.v}</div>
-                    <div className="text-xs font-bold uppercase tracking-wide text-[#c19a3a]">{st.l}</div>
-                    <div className="text-[11px] text-slate-500">{st.s}</div>
+        {/* Agitação — sinais de traição */}
+        <section id="sinais" className="mx-auto max-w-6xl px-4 py-14 md:py-20">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: "#FF5B52" }}>
+              Reconhece algum destes sinais?
+            </span>
+            <h2 className="mt-3 text-balance text-2xl font-extrabold leading-tight sm:text-4xl">
+              Seu instinto vem gritando. Só falta a prova.
+            </h2>
+            <p className="mt-3 text-[15px] leading-relaxed text-slate-400">
+              Quem não deve, não muda o comportamento do nada. Veja os sinais que apareceram
+              em mais de 10.000 investigações reais.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-3 sm:grid-cols-2">
+            {SINAIS.map((s) => (
+              <div
+                key={s}
+                className="flex items-start gap-3 rounded-xl border border-white/8 bg-white/[0.03] p-4"
+              >
+                <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md" style={{ background: "rgba(255,91,82,0.12)", color: "#FF5B52" }}>
+                  <Icon name="alert" className="h-4 w-4" />
+                </span>
+                <span className="text-[14px] leading-snug text-slate-200">{s}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="mx-auto mt-8 max-w-2xl rounded-xl border border-white/8 bg-white/[0.03] p-5 text-center">
+            <p className="text-[15px] leading-relaxed text-slate-200">
+              <span className="font-bold text-white">Marcou 2 ou mais?</span> Então você já sabe a resposta.
+              Continuar na dúvida só machuca mais. Chegou a hora de ter a{" "}
+              <span className="font-bold" style={{ color: GOLD }}>certeza</span>.
+            </p>
+            <a
+              href="#kits"
+              className="mt-4 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-6 text-sm font-extrabold uppercase tracking-wide text-[#070A10] transition-transform active:scale-[0.98]"
+              style={{ background: GOLD }}
+            >
+              Ver como descobrir <Icon name="chevronRight" className="h-4 w-4" />
+            </a>
+          </div>
+        </section>
+
+        {/* Kits */}
+        <section id="kits" className="border-y border-white/8 bg-white/[0.02]">
+          <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
+            <div className="mx-auto max-w-2xl text-center">
+              <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: GOLD }}>
+                Escolha o seu nível de investigação
+              </span>
+              <h2 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">Kits de investigação</h2>
+              <p className="mt-3 text-[15px] leading-relaxed text-slate-400">
+                Pagamento único. Ativação imediata. Sigilo absoluto do começo ao fim.
+              </p>
+            </div>
+
+            <div className="mt-10 grid items-start gap-5 lg:grid-cols-3">
+              {KITS.map((kit) => (
+                <article
+                  key={kit.id}
+                  className={`relative flex flex-col overflow-hidden rounded-2xl border bg-[#0C111A] ${
+                    kit.destaque ? "shadow-[0_24px_70px_-30px_rgba(228,180,90,0.8)] lg:-mt-3 lg:mb-3" : "border-white/8"
+                  }`}
+                  style={kit.destaque ? { borderColor: GOLD } : undefined}
+                >
+                  {kit.destaque && (
+                    <div className="py-1.5 text-center font-mono text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#070A10]" style={{ background: GOLD }}>
+                      ★ Escolha de 7 em cada 10 clientes
+                    </div>
+                  )}
+
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-black/30">
+                    <img src={kit.imagem || "/placeholder.svg"} alt={`${kit.nome} - equipamentos de investigação`} className="h-full w-full object-cover" />
+                    <span className="absolute left-3 top-3 rounded-md border border-white/10 bg-black/60 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wide text-slate-200 backdrop-blur">
+                      {kit.tag}
+                    </span>
                   </div>
+
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="text-lg font-extrabold tracking-tight">{kit.nome}</h3>
+                    <p className="mt-1.5 text-[13px] leading-relaxed text-slate-400">{kit.descricao}</p>
+
+                    <ul className="mt-4 space-y-2 text-[13px]">
+                      {kit.itens.map((item) => (
+                        <li key={item} className="flex items-start gap-2 text-slate-200">
+                          <span className="mt-0.5" style={{ color: GOLD }}><Icon name="check" className="h-4 w-4" /></span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="mt-auto pt-6">
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-mono text-sm text-slate-500 line-through">{kit.precoAntigo}</span>
+                        <span className="rounded px-1.5 py-0.5 font-mono text-[10px] font-bold" style={{ background: "rgba(228,180,90,0.15)", color: GOLD }}>
+                          Oferta de hoje
+                        </span>
+                      </div>
+                      <div className="mt-0.5 text-3xl font-extrabold tracking-tight">{kit.preco}</div>
+                      <div className="text-xs text-slate-500">{kit.parcela}</div>
+                      <button
+                        onClick={() => goToCheckout(kit.checkout)}
+                        className={`mt-4 flex w-full min-h-13 items-center justify-center gap-2 rounded-xl text-sm font-extrabold uppercase tracking-wide transition-all active:scale-[0.98] ${
+                          kit.destaque ? "text-[#070A10]" : "border border-white/15 text-white hover:bg-white/5"
+                        }`}
+                        style={kit.destaque ? { background: GOLD } : undefined}
+                      >
+                        {kit.cta} <Icon name="chevronRight" className="h-4 w-4" />
+                      </button>
+                      <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[11px] text-slate-500">
+                        <Icon name="lock" className="h-3.5 w-3.5" /> Compra sigilosa e protegida
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Como funciona */}
+        <section id="como" className="mx-auto max-w-6xl px-4 py-14 md:py-20">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: GOLD }}>
+              Simples como deveria ser
+            </span>
+            <h2 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">Da dúvida à prova em 3 passos</h2>
+          </div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {PASSOS.map((p) => (
+              <div key={p.n} className="relative rounded-2xl border border-white/8 bg-white/[0.03] p-6">
+                <span className="absolute right-5 top-4 font-mono text-3xl font-extrabold text-white/8">{p.n}</span>
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5" style={{ color: GOLD }}>
+                  <Icon name={p.icon} className="h-6 w-6" />
+                </span>
+                <h3 className="mt-4 text-base font-extrabold">{p.t}</h3>
+                <p className="mt-1.5 text-[13px] leading-relaxed text-slate-400">{p.s}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Equipamentos */}
+        <section id="equipamentos" className="border-y border-white/8 bg-white/[0.02]">
+          <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
+            <div className="mx-auto max-w-2xl text-center">
+              <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: GOLD }}>
+                Arsenal profissional
+              </span>
+              <h2 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">Equipamentos que compõem os kits</h2>
+              <p className="mt-3 text-[15px] leading-relaxed text-slate-400">
+                As mesmas ferramentas usadas por investigadores particulares — agora na sua mão.
+              </p>
+            </div>
+
+            <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+              {EQUIPAMENTOS.map((eq) => (
+                <div key={eq.nome} className="group rounded-xl border border-white/8 bg-[#0C111A] p-3 text-center transition-colors hover:border-white/20">
+                  <div className="aspect-square w-full overflow-hidden rounded-lg bg-black/30">
+                    <img src={eq.imagem || "/placeholder.svg"} alt={eq.nome} className="h-full w-full object-contain p-2 transition-transform group-hover:scale-105" />
+                  </div>
+                  <div className="mt-2.5 text-[12px] font-bold leading-tight">{eq.nome}</div>
+                  <div className="mt-1 font-mono text-[9px] font-semibold uppercase tracking-wide" style={{ color: GOLD }}>{eq.incluso}</div>
                 </div>
               ))}
             </div>
@@ -433,227 +607,189 @@ function DetetivesPage() {
         </section>
 
         {/* Depoimentos */}
-        <section className="mx-auto max-w-6xl px-4 py-6">
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <section className="mx-auto max-w-6xl px-4 py-14 md:py-20">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: GOLD }}>
+              Histórias reais
+            </span>
+            <h2 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">Eles pararam de viver na dúvida</h2>
+          </div>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {DEPOIMENTOS.map((d) => (
-              <figure key={d.nome} className="rounded-xl border border-[#e5e3de] bg-white p-5">
-                <figcaption className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#14202e] text-sm font-bold text-[#c19a3a]">
-                    {d.nome.charAt(0)}
-                  </span>
-                  <span>
-                    <span className="block text-sm font-bold">{d.nome}</span>
-                    <span className="block text-[11px] text-slate-500">{d.cidade}</span>
-                  </span>
-                </figcaption>
-                <p className="mt-3 text-[13px] leading-relaxed text-slate-600">{d.texto}</p>
-                <div className="mt-3 flex text-[#c19a3a]">
+              <figure key={d.nome} className="flex flex-col rounded-2xl border border-white/8 bg-white/[0.03] p-5">
+                <div className="flex" style={{ color: GOLD }}>
                   {Array.from({ length: d.estrelas }).map((_, i) => (
                     <Icon key={i} name="star" />
                   ))}
                 </div>
+                <blockquote className="mt-3 flex-1 text-[13px] leading-relaxed text-slate-200">{`“${d.texto}”`}</blockquote>
+                <figcaption className="mt-4 flex items-center gap-3 border-t border-white/8 pt-4">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-sm font-bold" style={{ color: GOLD }}>
+                    {d.nome.charAt(0)}
+                  </span>
+                  <span>
+                    <span className="block text-[13px] font-bold">{d.nome}</span>
+                    <span className="block font-mono text-[10px] uppercase tracking-wide text-slate-500">{d.cidade}</span>
+                  </span>
+                </figcaption>
               </figure>
             ))}
           </div>
         </section>
 
-        {/* Kits */}
-        <section id="kits" className="mx-auto max-w-6xl px-4 py-14">
-          <div className="mb-10 text-center">
-            <h2 className="text-3xl font-extrabold uppercase tracking-tight md:text-4xl">Kits Detetive em destaque</h2>
-            <p className="mt-3 text-slate-500">Kits completos com tudo que você precisa para investigações profissionais.</p>
-          </div>
-
-          <div className="grid items-start gap-6 md:grid-cols-3">
-            {KITS.map((kit) => (
-              <article
-                key={kit.id}
-                className={`relative flex flex-col overflow-hidden rounded-2xl border bg-white transition-transform hover:-translate-y-1 ${
-                  kit.destaque ? "border-[#c19a3a] shadow-[0_20px_50px_-24px_rgba(193,154,58,0.7)] md:-mt-2" : "border-[#e5e3de]"
-                }`}
-              >
-                <div className="absolute left-4 top-4 z-10 rounded-md bg-[#c19a3a] px-3 py-1 text-[10px] font-extrabold uppercase tracking-wide text-[#14202e]">
-                  {kit.tag}
-                </div>
-
-                <div className="aspect-[4/3] w-full overflow-hidden bg-[#f5f4f1]">
-                  <img src={kit.imagem || "/placeholder.svg"} alt={`${kit.nome} - equipamentos de investigação`} className="h-full w-full object-cover" />
-                </div>
-
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="text-xl font-extrabold uppercase tracking-tight">{kit.nome}</h3>
-                  <p className="mt-2 text-[13px] leading-relaxed text-slate-500">{kit.descricao}</p>
-
-                  <ul className="mt-4 space-y-2 text-[13px]">
-                    {kit.itens.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-slate-700">
-                        <span className="mt-0.5 text-[#c19a3a]"><Icon name="check" className="h-4 w-4" /></span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-auto pt-6">
-                    <div className="text-3xl font-extrabold tracking-tight">{kit.preco}</div>
-                    <div className="text-xs text-slate-500">{kit.parcela}</div>
-                    <button
-                      onClick={() => goToCheckout(kit.checkout)}
-                      className={`mt-4 flex w-full min-h-12 items-center justify-center gap-2 rounded-lg text-sm font-extrabold uppercase tracking-wide transition-all active:scale-[0.98] ${
-                        kit.destaque
-                          ? "bg-[#c19a3a] text-[#14202e] hover:bg-[#d4ac48]"
-                          : "bg-[#14202e] text-white hover:bg-[#1e2d40]"
-                      }`}
-                    >
-                      Comprar agora <Icon name="cart" className="h-4 w-4" />
-                    </button>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* Equipamentos */}
-        <section id="equipamentos" className="bg-[#f5f4f1]">
-          <div className="mx-auto max-w-6xl px-4 py-14">
-            <div className="mb-10 text-center">
-              <h2 className="text-3xl font-extrabold uppercase tracking-tight md:text-4xl">Equipamentos em destaque</h2>
-              <p className="mt-3 text-slate-500">Ferramentas que compõem os nossos kits profissionais.</p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
-              {EQUIPAMENTOS.map((eq) => (
-                <div key={eq.nome} className="rounded-xl border border-[#e5e3de] bg-white p-4 text-center">
-                  <div className="aspect-square w-full overflow-hidden rounded-lg bg-[#f5f4f1]">
-                    <img src={eq.imagem || "/placeholder.svg"} alt={eq.nome} className="h-full w-full object-contain p-2" />
-                  </div>
-                  <div className="mt-3 text-[13px] font-bold leading-tight">{eq.nome}</div>
-                  <div className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-[#c19a3a]">{eq.incluso}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Diferenciais */}
-        <section id="sobre" className="mx-auto max-w-6xl px-4 py-14">
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
-            {FEATURES.map((f) => (
-              <div key={f.titulo} className="text-center">
-                <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-[#f5f4f1] text-[#c19a3a]">
-                  <Icon name={f.icon} className="h-7 w-7" />
-                </span>
-                <div className="mt-3 text-[13px] font-extrabold uppercase tracking-wide">{f.titulo}</div>
-                <div className="mt-1 text-[11px] leading-tight text-slate-500">{f.texto}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Depoimentos em destaque */}
-        <section className="bg-[#f5f4f1]">
-          <div className="mx-auto max-w-6xl px-4 py-14">
-            <h2 className="mb-10 text-center text-3xl font-extrabold uppercase tracking-tight md:text-4xl">
-              Depoimentos de quem confia
-            </h2>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {DEPOIMENTOS.map((d) => (
-                <figure key={d.nome} className="overflow-hidden rounded-xl border border-[#e5e3de] bg-white">
-                  <div className="relative flex aspect-video items-center justify-center bg-[#14202e]">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur">
-                      <Icon name="play" className="ml-0.5" />
-                    </span>
-                    <span className="absolute bottom-2 left-1/2 flex -translate-x-1/2 text-[#c19a3a]">
-                      {Array.from({ length: d.estrelas }).map((_, i) => (
-                        <Icon key={i} name="star" />
-                      ))}
-                    </span>
-                  </div>
-                  <figcaption className="p-4">
-                    <p className="text-[13px] italic leading-relaxed text-slate-600">{`"${d.texto}"`}</p>
-                    <p className="mt-2 text-[12px] font-bold">{`${d.nome} · ${d.cidade}`}</p>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Garantias */}
-        <section className="bg-[#14202e] text-white">
-          <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3">
+        {/* Garantia */}
+        <section className="border-y border-white/8 bg-white/[0.02]">
+          <div className="mx-auto grid max-w-6xl gap-4 px-4 py-12 md:grid-cols-3">
             {[
-              { icon: "shield", t: "Garantia incondicional", s: "7 dias para trocas e devoluções sem burocracia" },
-              { icon: "lock", t: "Compra 100% segura", s: "Seus dados protegidos com criptografia" },
-              { icon: "truck", t: "Ativação segura", s: "Entrega e ativação discretas para todo o Brasil" },
+              { icon: "shield", t: "Garantia de 7 dias", s: "Não gostou? Devolvemos. Sem burocracia, sem perguntas." },
+              { icon: "lock", t: "Sigilo absoluto", s: "Entrega neutra e painel privado. Ninguém fica sabendo." },
+              { icon: "bolt", t: "Ativação imediata", s: "Comprou, ativou. Você começa a ver hoje mesmo." },
             ].map((g) => (
-              <div key={g.t} className="flex items-center gap-4">
-                <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-[#c19a3a]">
-                  <Icon name={g.icon} className="h-6 w-6" />
+              <div key={g.t} className="flex items-start gap-4 rounded-2xl border border-white/8 bg-[#0C111A] p-5">
+                <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5" style={{ color: GOLD }}>
+                  <Icon name={g.icon} className="h-5 w-5" />
                 </span>
                 <div>
-                  <div className="text-sm font-extrabold uppercase tracking-wide">{g.t}</div>
-                  <div className="text-[12px] text-slate-400">{g.s}</div>
+                  <div className="text-sm font-extrabold">{g.t}</div>
+                  <div className="mt-0.5 text-[12px] leading-relaxed text-slate-400">{g.s}</div>
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section id="faq" className="mx-auto max-w-3xl px-4 py-14 md:py-20">
+          <div className="text-center">
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: GOLD }}>
+              Antes de você perguntar
+            </span>
+            <h2 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">Dúvidas frequentes</h2>
+          </div>
+
+          <div className="mt-8 space-y-3">
+            {FAQ.map((f) => (
+              <details key={f.q} className="group rounded-xl border border-white/8 bg-white/[0.03] p-4 [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer items-center justify-between gap-3 text-[14px] font-bold text-white">
+                  {f.q}
+                  <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-white/10 text-slate-400 transition-transform group-open:rotate-45" style={{ color: GOLD }}>
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 text-[13px] leading-relaxed text-slate-400">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {/* CTA final */}
+        <section className="px-4 pb-20 pt-2">
+          <div
+            className="mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/10 p-8 text-center md:p-12"
+            style={{
+              backgroundImage: "radial-gradient(100% 120% at 50% 0%, rgba(228,180,90,0.14), transparent 60%)",
+              backgroundColor: "#0C111A",
+            }}
+          >
+            <h2 className="text-balance text-2xl font-extrabold leading-tight sm:text-4xl">
+              A verdade não vai chegar sozinha.
+              <span className="block" style={{ color: GOLD }}>Você precisa ir atrás dela.</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-slate-300">
+              Cada dia na dúvida é mais uma noite de sono perdida. Escolha o seu kit e tenha,
+              ainda hoje, a resposta que você tanto procura.
+            </p>
+            <a
+              href="#kits"
+              className="mt-7 inline-flex min-h-13 items-center justify-center gap-2 rounded-xl px-8 py-3.5 text-sm font-extrabold uppercase tracking-wide text-[#070A10] shadow-[0_10px_40px_-10px_rgba(228,180,90,0.7)] transition-transform active:scale-[0.98]"
+              style={{ background: GOLD }}
+            >
+              Quero descobrir agora <Icon name="chevronRight" className="h-4 w-4" />
+            </a>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-1 font-mono text-[10px] uppercase tracking-wide text-slate-500">
+              <span>Pagamento único</span>
+              <span>· Garantia 7 dias</span>
+              <span>· Sigilo absoluto</span>
+            </div>
           </div>
         </section>
       </main>
 
       {/* Rodapé */}
-      <footer id="contato" className="bg-[#0f1822] text-slate-300">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-4">
-          <div>
+      <footer id="contato" className="border-t border-white/8 bg-black/40">
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-4">
+          <div className="md:col-span-2">
             <div className="flex items-center gap-2.5">
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-[#c19a3a]">
-                <Icon name="shield" className="h-6 w-6" />
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5" style={{ color: GOLD }}>
+                <Icon name="shield" className="h-5 w-5" />
               </span>
               <span className="leading-tight">
-                <span className="block text-base font-extrabold text-white">DETECTIVE</span>
-                <span className="block text-[10px] font-semibold uppercase tracking-[0.35em] text-[#c19a3a]">Profissional</span>
+                <span className="block text-sm font-extrabold text-white">DETECTIVE</span>
+                <span className="block font-mono text-[9px] font-semibold uppercase tracking-[0.35em]" style={{ color: GOLD }}>Profissional</span>
               </span>
             </div>
-            <p className="mt-4 text-[13px] leading-relaxed text-slate-400">
-              Referência nacional em equipamentos para investigação particular. Mais de 10 anos de experiência e sigilo absoluto.
+            <p className="mt-4 max-w-sm text-[13px] leading-relaxed text-slate-400">
+              Referência nacional em investigação particular há mais de 10 anos. Discrição,
+              tecnologia e resultado para quem precisa da verdade.
             </p>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 rounded-lg border border-white/15 px-4 py-2 text-[13px] font-bold text-white transition-colors hover:bg-white/5"
+            >
+              <Icon name="whatsapp" className="h-4 w-4" style={{ color: GOLD }} /> (11) 99999-9999
+            </a>
           </div>
 
           <div>
-            <div className="text-xs font-bold uppercase tracking-widest text-white">Institucional</div>
-            <ul className="mt-4 space-y-2 text-[13px]">
-              {["Sobre nós", "Como comprar", "Formas de pagamento", "Prazo de entrega", "Trocas e devoluções"].map((l) => (
-                <li key={l}><a href="#sobre" className="transition-colors hover:text-[#c19a3a]">{l}</a></li>
+            <div className="font-mono text-[11px] font-bold uppercase tracking-widest text-white">Navegação</div>
+            <ul className="mt-4 space-y-2 text-[13px] text-slate-400">
+              {NAV.map((l) => (
+                <li key={l.href}><a href={l.href} className="transition-colors hover:text-white">{l.label}</a></li>
               ))}
             </ul>
           </div>
 
           <div>
-            <div className="text-xs font-bold uppercase tracking-widest text-white">Atendimento</div>
-            <ul className="mt-4 space-y-2 text-[13px] text-slate-400">
-              <li className="flex items-center gap-2"><Icon name="whatsapp" className="h-4 w-4 text-[#c19a3a]" /> WhatsApp: (11) 99999-9999</li>
-              <li>E-mail: contato@detectiveprofissional.com.br</li>
-              <li>Seg. a Sex.: 8h às 18h</li>
-              <li>Sábado: 8h às 12h</li>
-            </ul>
-          </div>
-
-          <div>
-            <div className="text-xs font-bold uppercase tracking-widest text-white">Formas de pagamento</div>
+            <div className="font-mono text-[11px] font-bold uppercase tracking-widest text-white">Pagamento</div>
             <div className="mt-4 flex flex-wrap gap-2">
-              {["Visa", "Master", "Elo", "Hipercard", "Pix", "Boleto"].map((p) => (
-                <span key={p} className="rounded-md border border-white/15 bg-white/5 px-3 py-1.5 text-[11px] font-bold">{p}</span>
+              {["Pix", "Visa", "Master", "Elo", "Boleto"].map((p) => (
+                <span key={p} className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[10px] font-bold text-slate-300">{p}</span>
               ))}
             </div>
           </div>
         </div>
-        <div className="border-t border-white/10">
-          <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-5 text-[11px] text-slate-500 md:flex-row">
-            <span>© {new Date().getFullYear()} Detective Profissional. Todos os direitos reservados.</span>
+        <div className="border-t border-white/8">
+          <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-5 text-center font-mono text-[10px] uppercase tracking-wide text-slate-600 md:flex-row md:text-left">
+            <span>© {new Date().getFullYear()} Detective Profissional</span>
             <span>Uso das ferramentas sob responsabilidade do contratante, conforme a legislação vigente.</span>
           </div>
         </div>
       </footer>
+
+      {/* CTA fixo no mobile */}
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#070A10]/95 px-4 py-3 backdrop-blur-md lg:hidden">
+        <div className="flex items-center gap-3">
+          <div className="leading-tight">
+            <div className="font-mono text-[9px] uppercase tracking-wide text-slate-500">Kit Stalker · mais escolhido</div>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-lg font-extrabold text-white">R$ 129,90</span>
+              <span className="font-mono text-[11px] text-slate-500 line-through">R$ 249,90</span>
+            </div>
+          </div>
+          <button
+            onClick={() => goToCheckout(CHECKOUT_STALKER)}
+            className="ml-auto flex min-h-12 flex-1 items-center justify-center gap-2 rounded-xl px-4 text-[13px] font-extrabold uppercase tracking-wide text-[#070A10] transition-transform active:scale-[0.98]"
+            style={{ background: GOLD }}
+          >
+            Descobrir agora
+          </button>
+        </div>
+      </div>
+      {/* Espaçador para o CTA fixo não cobrir o rodapé */}
+      <div className="h-20 lg:hidden" aria-hidden />
     </div>
   );
 }
