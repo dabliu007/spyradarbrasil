@@ -961,14 +961,14 @@ function RelatorioPage() {
             <button
               onClick={() => {
                 setShowLicenseModal(false);
-                navigate({ to: "/checkout", search: { phone: phone ?? "", sex: sex ?? "M", amount: 137.00 } });
+                navigate({ to: "/checkout", search: { phone: phone ?? "", sex: sex ?? "M", amount: 68.13 } });
               }}
               className="mt-5 w-full h-14 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(16,185,129,0.8)] text-[15px] uppercase tracking-wide"
             >
               🔓 ATIVAR LICENÇA AGORA
             </button>
             <p className="text-center text-[11px] text-zinc-500 mt-2">
-              🔒 PIX R$ 137,00 · ativação em segundos · válido por 365 dias
+              🔒 PIX R$ 68,13 · ativação em segundos · válido por 365 dias
             </p>
           </div>
         </div>
