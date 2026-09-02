@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { useTargetName } from "@/lib/use-target-name";
 import manBeach1 from "@/assets/man-beach-1.jpg.asset.json";
@@ -67,6 +67,78 @@ export const Route = createFileRoute("/relatorio")({
   validateSearch: (s) => searchSchema.parse(s),
   component: RelatorioPage,
 });
+
+function AudioPlayer({ src }: { src: string }) {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [current, setCurrent] = useState(0);
+
+  const fmt = (t: number) => {
+    if (!Number.isFinite(t)) return "0:00";
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60);
+    return `${m}:${s.toString().padStart(2, "0")}`;
+  };
+
+  const toggle = () => {
+    const el = audioRef.current;
+    if (!el) return;
+    if (el.paused) {
+      void el.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+    } else {
+      el.pause();
+      setPlaying(false);
+    }
+  };
+
+  return (
+    <div className="flex items-center gap-2.5">
+      <audio
+        ref={audioRef}
+        src={src}
+        preload="metadata"
+        onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+        onTimeUpdate={(e) => {
+          const el = e.currentTarget;
+          setCurrent(el.currentTime);
+          setProgress(el.duration ? (el.currentTime / el.duration) * 100 : 0);
+        }}
+        onEnded={() => {
+          setPlaying(false);
+          setProgress(0);
+          setCurrent(0);
+        }}
+      />
+      <button
+        type="button"
+        onClick={toggle}
+        aria-label={playing ? "Pausar áudio" : "Reproduzir áudio"}
+        className="flex-shrink-0 w-9 h-9 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-400 transition-colors"
+      >
+        {playing ? (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <rect x="6" y="5" width="4" height="14" rx="1" />
+            <rect x="14" y="5" width="4" height="14" rx="1" />
+          </svg>
+        ) : (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        )}
+      </button>
+      <div className="flex-1 min-w-0">
+        <div className="h-1.5 rounded-full bg-zinc-700 overflow-hidden">
+          <div className="h-full bg-red-500 transition-[width] duration-150" style={{ width: `${progress}%` }} />
+        </div>
+      </div>
+      <span className="flex-shrink-0 text-[9px] text-zinc-400 font-['Geist_Mono',monospace] tabular-nums">
+        {fmt(current)} / {fmt(duration)}
+      </span>
+    </div>
+  );
+}
 
 function RelatorioPage() {
   const { phone, sex, paid, uf: ufParam, city: cityParam } = Route.useSearch();
@@ -631,9 +703,7 @@ function RelatorioPage() {
                     <span className="text-[10px] text-red-300 font-bold">🎙️ Áudio {i + 1} · {a.label}</span>
                     <span className="text-[9px] text-zinc-500 font-['Geist_Mono',monospace]">{a.hora}</span>
                   </div>
-                  <audio controls preload="none" className="w-full h-8" style={{ colorScheme: "dark" }}>
-                    <source src={a.src} type="audio/mpeg" />
-                  </audio>
+                  <AudioPlayer src={a.src} />
                 </div>
               ))}
             </div>
