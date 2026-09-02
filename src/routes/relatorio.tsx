@@ -434,7 +434,7 @@ function RelatorioPage() {
                     src={a}
                     alt=""
                     className="w-full h-full object-cover select-none pointer-events-none"
-                    style={{ filter: locked ? "blur(18px) saturate(0.85)" : "blur(4px)", transform: "scale(1.2)" }}
+                    style={{ filter: locked ? "blur(7px) saturate(0.85)" : "blur(3px)", transform: "scale(1.15)" }}
                     draggable={false}
                   />
                   <div className="absolute inset-0 bg-zinc-950/40" />
