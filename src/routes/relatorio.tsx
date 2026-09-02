@@ -26,9 +26,10 @@ import videoAmante from "@/assets/video-amante.mp4.asset.json";
 import phoneChat from "@/assets/phone-chat.jpg.asset.json";
 import messengerChat from "@/assets/messenger-chat.png.asset.json";
 import coupleTense from "@/assets/foto-cadeado.png.asset.json";
-import audioAmante1 from "@/assets/audio-amante-1.mp3.asset.json";
-import audioAmante2 from "@/assets/audio-amante-2.mp3.asset.json";
-import audioAmante3 from "@/assets/audio-amante-3.mp3.asset.json";
+// Áudios da amante mulher — servidos de /public (blob real), fora do resolver de assets do v0.
+const audioAmante1 = "/audio-amante-1.mp3";
+const audioAmante2 = "/audio-amante-2.mp3";
+const audioAmante3 = "/audio-amante-3.mp3";
 import audioAmanteH1 from "@/assets/audio-amante-h-1.mp3.asset.json";
 import audioAmanteH2 from "@/assets/audio-amante-h-2.mp3.asset.json";
 import audioAmanteH3 from "@/assets/audio-amante-h-3.mp3.asset.json";
@@ -615,9 +616,9 @@ function RelatorioPage() {
             <div className="space-y-2.5">
               {(amanteIsWoman
                 ? [
-                    { src: audioAmante1.url, hora: "12:47", label: "Escapadinha no almoço" },
-                    { src: audioAmante2.url, hora: "22:14", label: "Agradecendo o presente" },
-                    { src: audioAmante3.url, hora: "01:32", label: "Perguntando sobre você" },
+                { src: audioAmante1, hora: "12:47", label: "Escapadinha no almoço" },
+                { src: audioAmante2, hora: "22:14", label: "Agradecendo o presente" },
+                { src: audioAmante3, hora: "01:32", label: "Perguntando sobre você" },
                   ]
                 : [
                     { src: audioAmanteH1.url, hora: "12:47", label: "Escapadinha no almoço" },
