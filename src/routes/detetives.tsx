@@ -1,48 +1,50 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 export const Route = createFileRoute("/detetives")({
   head: () => ({
     meta: [
-      { title: "Detective Profissional · Descubra a Verdade Que Escondem de Você" },
+      { title: "Kit Investigação Completo · Descubra a Verdade em 24h" },
       {
         name: "description",
         content:
-          "Cansado de viver na dúvida? Agência de investigação com +10 anos de experiência. Kits sigilosos de monitoramento: WhatsApp, câmeras, rastreador e acesso completo. Ative em minutos.",
+          "O kit definitivo para acabar com a dúvida: clonagem de celular, caneta espiã com 30 dias de bateria e rastreador veicular em tempo real. Sigilo absoluto. Ative hoje.",
       },
       { name: "robots", content: "index,follow,max-image-preview:large" },
-      { name: "theme-color", content: "#070A10" },
-      { property: "og:title", content: "Descubra a verdade que escondem de você · Detective Profissional" },
-      { property: "og:description", content: "Pare de dormir com dúvidas. Veja conversas, fotos e localização em tempo real. Sigilo absoluto." },
+      { name: "theme-color", content: "#ffffff" },
+      { property: "og:title", content: "Kit Investigação Completo · Descubra a verdade que escondem de você" },
+      { property: "og:description", content: "Clonagem de celular, caneta espiã e rastreador em tempo real. Pare de viver na dúvida." },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "/kit-completo-hero.png" },
     ],
   }),
   component: DetetivesPage,
 });
 
-/**
- * LINKS DE CHECKOUT DE CADA KIT
- * ⚠️ Provisórios: todos apontam para o checkout atual.
- * Troque cada URL abaixo pelo link definitivo de cada kit quando disponível.
- */
-const CHECKOUT_PRIMARIO = "https://checkout.retroplay.top/VCCL1O8SD8PD";
-const CHECKOUT_STALKER = "https://checkout.retroplay.top/VCCL1O8SD8PD";
-const CHECKOUT_PREMIUM = "https://checkout.retroplay.top/VCCL1O8SD8PD";
+/* -------------------------------------------------------------------------- */
+/*  CONFIGURAÇÃO — troque estes valores quando tiver os definitivos           */
+/* -------------------------------------------------------------------------- */
 
-/** Link do WhatsApp (provisório) */
+/** ⚠️ Link de checkout (provisório) — troque pelo link definitivo do Kit Completo */
+const CHECKOUT_URL = "https://checkout.retroplay.top/VCCL1O8SD8PD";
+/** ⚠️ WhatsApp (provisório) */
 const WHATSAPP_URL = "https://wa.me/5511999999999";
 
-function goToCheckout(url: string) {
-  // Em preview o app roda dentro de um iframe; navegar a janela de topo
-  // garante o redirecionamento para o checkout externo (com fallback).
+/** ⚠️ Preço do Kit Completo — confirme/ajuste */
+const PRICE_FROM = "R$ 397,00";
+const PRICE_NOW = "R$ 197,00";
+const PRICE_INSTALLMENT = "12x de R$ 19,90";
+
+function goToCheckout() {
   try {
     if (window.top) {
-      window.top.location.href = url;
+      window.top.location.href = CHECKOUT_URL;
       return;
     }
   } catch {
-    // cross-origin: cai no fallback abaixo
+    /* cross-origin: fallback abaixo */
   }
-  window.location.href = url;
+  window.location.href = CHECKOUT_URL;
 }
 
 /* ---------------------------------- Ícones --------------------------------- */
@@ -52,7 +54,7 @@ function Icon({ name, className }: { name: string; className?: string }) {
     viewBox: "0 0 24 24",
     fill: "none",
     stroke: "currentColor",
-    strokeWidth: 1.8,
+    strokeWidth: 1.7,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
     "aria-hidden": true,
@@ -62,118 +64,83 @@ function Icon({ name, className }: { name: string; className?: string }) {
     case "shield":
       return (
         <svg {...common}>
-          <path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
-        </svg>
-      );
-    case "check":
-      return (
-        <svg {...common} strokeWidth={3}>
-          <path d="M20 6 9 17l-5-5" />
-        </svg>
-      );
-    case "truck":
-      return (
-        <svg {...common}>
-          <path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" />
-          <circle cx="7" cy="18" r="1.6" />
-          <circle cx="17" cy="18" r="1.6" />
+          <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
+          <path d="M9 12l2 2 4-4" />
         </svg>
       );
     case "lock":
       return (
         <svg {...common}>
-          <rect x="4.5" y="10.5" width="15" height="10" rx="2" />
-          <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+          <rect x="4" y="10" width="16" height="10" rx="2" />
+          <path d="M8 10V7a4 4 0 0 1 8 0v3" />
         </svg>
       );
-    case "bolt":
+    case "chat":
       return (
         <svg {...common}>
-          <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" />
+          <path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z" />
         </svg>
       );
-    case "clock":
+    case "pen":
       return (
         <svg {...common}>
-          <circle cx="12" cy="12" r="9" />
-          <path d="M12 7v5l3 2" />
-        </svg>
-      );
-    case "star":
-      return (
-        <svg viewBox="0 0 24 24" fill="currentColor" width={16} height={16} aria-hidden className={className}>
-          <path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z" />
-        </svg>
-      );
-    case "eye":
-      return (
-        <svg {...common}>
-          <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
-          <circle cx="12" cy="12" r="2.6" />
-        </svg>
-      );
-    case "alert":
-      return (
-        <svg {...common}>
-          <path d="M12 3 2 20h20L12 3z" />
-          <path d="M12 10v4" />
-          <path d="M12 17.5v.01" />
-        </svg>
-      );
-    case "phone":
-      return (
-        <svg {...common}>
-          <rect x="7" y="2.5" width="10" height="19" rx="2.5" />
-          <path d="M11 18h2" />
+          <path d="M12 19l7-7 3 3-7 7-4 1 1-4z" />
+          <path d="M18 13l-1.5-1.5" />
+          <path d="M2 2l7.5 7.5" />
+          <path d="M9.5 9.5L12 12" />
         </svg>
       );
     case "pin":
       return (
         <svg {...common}>
-          <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" />
-          <circle cx="12" cy="10" r="2.4" />
+          <path d="M12 21s-6-5.3-6-10a6 6 0 1 1 12 0c0 4.7-6 10-6 10z" />
+          <circle cx="12" cy="11" r="2.2" />
         </svg>
       );
-    case "headset":
+    case "bolt":
       return (
         <svg {...common}>
-          <path d="M4 13v-1a8 8 0 0 1 16 0v1" />
-          <rect x="3" y="13" width="4" height="6" rx="1.5" />
-          <rect x="17" y="13" width="4" height="6" rx="1.5" />
-          <path d="M20 19a4 4 0 0 1-4 3h-2" />
+          <path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" />
         </svg>
       );
-    case "search":
+    case "battery":
       return (
         <svg {...common}>
-          <circle cx="11" cy="11" r="7" />
-          <path d="m21 21-4.3-4.3" />
+          <rect x="3" y="8" width="15" height="8" rx="2" />
+          <path d="M21 11v2" />
+          <path d="M6 11v2M9 11v2M12 11v2" />
         </svg>
       );
-    case "whatsapp":
-      return (
-        <svg viewBox="0 0 24 24" fill="currentColor" width={20} height={20} aria-hidden className={className}>
-          <path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.2 14.8l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 0 1 12 4zm-2.5 3.6c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 5 4.3 2.4 1 2.9.8 3.5.7.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4l-1.9-.9c-.3-.1-.5-.2-.7.2l-.9 1.2c-.2.2-.3.2-.6.1-1.7-.7-2.8-1.7-3.7-3.2-.2-.4 0-.5.2-.7l.5-.7c.1-.2.1-.4 0-.6l-.9-2c-.2-.5-.4-.4-.6-.4z" />
-        </svg>
-      );
-    case "chevronRight":
+    case "eye":
       return (
         <svg {...common}>
-          <path d="m9 18 6-6-6-6" />
+          <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
+          <circle cx="12" cy="12" r="3" />
         </svg>
       );
-    case "cart":
+    case "check":
       return (
         <svg {...common}>
-          <circle cx="9" cy="20" r="1.4" />
-          <circle cx="18" cy="20" r="1.4" />
-          <path d="M2 3h3l2.4 12.4a1.5 1.5 0 0 0 1.5 1.2h8.2a1.5 1.5 0 0 0 1.5-1.2L21 7H6" />
+          <path d="M20 6L9 17l-5-5" />
         </svg>
       );
-    case "play":
+    case "star":
       return (
-        <svg viewBox="0 0 24 24" fill="currentColor" width={22} height={22} aria-hidden className={className}>
-          <path d="M8 5v14l11-7z" />
+        <svg {...common} fill="currentColor" stroke="none">
+          <path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 21.4l1.4-6.8L2.2 9.9l6.9-.8L12 2z" />
+        </svg>
+      );
+    case "arrow":
+      return (
+        <svg {...common}>
+          <path d="M5 12h14" />
+          <path d="M13 6l6 6-6 6" />
+        </svg>
+      );
+    case "plus":
+      return (
+        <svg {...common}>
+          <path d="M12 5v14M5 12h14" />
         </svg>
       );
     default:
@@ -181,615 +148,509 @@ function Icon({ name, className }: { name: string; className?: string }) {
   }
 }
 
-/* ---------------------------------- Dados ---------------------------------- */
+/* ------------------------------ Reveal on scroll --------------------------- */
 
-interface Kit {
-  id: string;
-  nome: string;
-  tag: string;
-  descricao: string;
-  imagem: string;
-  itens: string[];
-  preco: string;
-  precoAntigo: string;
-  parcela: string;
-  cta: string;
-  checkout: string;
-  destaque?: boolean;
+function Reveal({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setShown(true);
+            io.disconnect();
+          }
+        });
+      },
+      { threshold: 0.15 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: shown ? 1 : 0,
+        transform: shown ? "translateY(0)" : "translateY(28px)",
+        transition: `opacity 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
+      }}
+    >
+      {children}
+    </div>
+  );
 }
 
-const KITS: Kit[] = [
+/* --------------------------------- Página ---------------------------------- */
+
+const KIT_ITEMS = [
   {
-    id: "primario",
-    nome: "Kit Primário",
-    tag: "Primeiro passo",
-    descricao: "Para quem quer tirar a dúvida do WhatsApp de uma vez por todas.",
-    imagem: "/kit-primario.png",
-    itens: ["Clonagem completa do WhatsApp", "Conversas, fotos e áudios apagados", "Ativação imediata e sigilosa"],
-    preco: "R$ 67",
-    precoAntigo: "R$ 127",
-    parcela: "ou 12x de R$ 5,58",
-    cta: "Quero tirar a dúvida",
-    checkout: CHECKOUT_PRIMARIO,
+    tag: "Módulo 01",
+    icon: "chat",
+    title: "Clonagem de Celular",
+    sub: "WhatsApp e redes sociais",
+    desc: "Espelhe as conversas do WhatsApp, Instagram e Facebook em tempo real. Mensagens, áudios e fotos — inclusive o que ele(a) apagou achando que ninguém veria.",
+    img: "/equip-celular.png",
+    bullets: ["Mensagens apagadas recuperadas", "Áudios e fotos ocultas", "Espelhamento em tempo real"],
   },
   {
-    id: "stalker",
-    nome: "Kit Stalker",
-    tag: "Mais escolhido",
-    descricao: "A escolha de quem quer ver TUDO: mensagens, ambiente e imagem.",
-    imagem: "/kit-stalker.png",
-    itens: [
-      "Tudo do Kit Primário",
-      "Caneta espiã com câmera oculta",
-      "Câmera escondida via nuvem",
-      "Monitoramento do ambiente 24h",
-    ],
-    preco: "R$ 129,90",
-    precoAntigo: "R$ 249,90",
-    parcela: "ou 12x de R$ 10,83",
-    cta: "Descobrir agora",
-    checkout: CHECKOUT_STALKER,
-    destaque: true,
+    tag: "Módulo 02",
+    icon: "pen",
+    title: "Caneta Espiã 4K",
+    sub: "Grava áudio e vídeo · 30 dias de bateria",
+    desc: "Discreta, idêntica a uma caneta comum. Grava tudo em alta definição por onde passa e a bateria dura até 30 dias. A prova que faltava, no seu bolso.",
+    img: "/equip-caneta.png",
+    bullets: ["Vídeo em alta definição", "Bateria de até 30 dias", "100% discreta e portátil"],
   },
   {
-    id: "premium",
-    nome: "Kit Premium",
-    tag: "Prova completa",
-    descricao: "O arsenal completo do investigador. Nada passa despercebido.",
-    imagem: "/kit-premium.png",
-    itens: [
-      "Tudo dos kits anteriores",
-      "Acesso completo ao celular",
-      "Gravador de voz para o carro",
-      "Câmera escondida para o carro",
-      "Rastreador veicular em tempo real",
-    ],
-    preco: "R$ 197",
-    precoAntigo: "R$ 397",
-    parcela: "ou 12x de R$ 16,42",
-    cta: "Quero a prova completa",
-    checkout: CHECKOUT_PREMIUM,
+    tag: "Módulo 03",
+    icon: "pin",
+    title: "Rastreador Veicular",
+    sub: "Localização em tempo real",
+    desc: "Instale no carro em segundos e acompanhe cada trajeto pelo celular. Descubra para onde ele(a) realmente vai — e quando as histórias não batem.",
+    img: "/equip-rastreador.png",
+    bullets: ["GPS em tempo real", "Histórico de trajetos", "Instalação em segundos"],
   },
 ];
 
-const SINAIS = [
-  "Trocou a senha do celular do nada e não te conta mais",
-  "Vira a tela pra baixo e sai da sala pra atender",
-  "Vive apagando conversas e o histórico de chamadas",
-  "Passou a dormir com o celular embaixo do travesseiro",
+const SIGNS = [
+  "Esconde a tela e leva o celular até pro banheiro",
   "Ficou distante, frio e some por horas sem explicação",
-  "Silencia as notificações assim que chega em casa",
-];
-
-const EQUIPAMENTOS = [
-  { nome: "Caneta Espiã", imagem: "/equip-caneta.png", incluso: "Stalker · Premium" },
-  { nome: "Câmera via Nuvem", imagem: "/equip-camera-nuvem.png", incluso: "Stalker · Premium" },
-  { nome: "Gravador de Voz", imagem: "/equip-gravador.png", incluso: "Premium" },
-  { nome: "Câmera para Carro", imagem: "/equip-camera-carro.png", incluso: "Premium" },
-  { nome: "Rastreador Veicular", imagem: "/equip-rastreador.png", incluso: "Premium" },
-  { nome: "Acesso ao Celular", imagem: "/equip-celular.png", incluso: "Premium" },
-];
-
-const PASSOS = [
-  { n: "01", icon: "cart", t: "Escolha o seu kit", s: "Pagamento único e 100% sigiloso. Sem mensalidade, sem pegadinha." },
-  { n: "02", icon: "bolt", t: "Ative em minutos", s: "Você recebe o passo a passo simples. Em poucos toques está tudo funcionando." },
-  { n: "03", icon: "eye", t: "Veja tudo em tempo real", s: "Conversas, fotos, áudios e localização no seu painel privado, quando quiser." },
-];
-
-const DEPOIMENTOS = [
-  { nome: "Mariana A.", cidade: "Curitiba · PR", texto: "Eu suspeitava há meses. Em uma noite eu tinha todas as provas na mão. Doeu, mas me libertou.", estrelas: 5 },
-  { nome: "Carlos M.", cidade: "São Paulo · SP", texto: "Discrição total. Ativei sem ela perceber e finalmente entendi por que ela sumia à noite.", estrelas: 5 },
-  { nome: "Roberto S.", cidade: "Belo Horizonte · MG", texto: "Achei que era paranoia minha. Não era. O rastreador mostrou onde ele realmente estava.", estrelas: 5 },
-  { nome: "Juliana T.", cidade: "Rio de Janeiro · RJ", texto: "Suporte me acompanhou em cada passo. Parei de me torturar com achismos e vi a verdade.", estrelas: 5 },
+  "Senhas novas e notificações sempre no silencioso",
+  "Chega tarde com desculpas que nunca fecham",
 ];
 
 const FAQ = [
-  { q: "É realmente sigiloso? A pessoa vai desconfiar?", a: "Sim, é 100% discreto. A entrega chega em embalagem neutra e o seu painel de monitoramento é totalmente privado. Ninguém além de você tem acesso." },
-  { q: "Funciona em qualquer celular, Android e iPhone?", a: "Funciona nos dois sistemas. Nossos equipamentos e ferramentas são compatíveis com os aparelhos mais usados no Brasil." },
-  { q: "É pagamento único ou tem mensalidade?", a: "Pagamento único. Você paga uma vez e usa. Sem cobranças recorrentes, sem surpresas na fatura." },
-  { q: "E se eu tiver dificuldade para usar?", a: "Nossa equipe especializada te acompanha no passo a passo. E você ainda conta com 7 dias de garantia para trocas e devoluções." },
+  {
+    q: "É realmente sigiloso? Ele(a) vai descobrir?",
+    a: "Sim, é 100% sigiloso. Todo o processo é discreto e nenhuma notificação é enviada ao aparelho monitorado. Seu anonimato é a nossa prioridade absoluta.",
+  },
+  {
+    q: "Quanto tempo para começar a usar?",
+    a: "A clonagem é ativada em minutos após a confirmação. Os equipamentos físicos são enviados com envio expresso e sigiloso para todo o Brasil.",
+  },
+  {
+    q: "Preciso de conhecimento técnico?",
+    a: "Não. O passo a passo é simples e guiado. Se precisar, nossa equipe te acompanha pelo WhatsApp em cada etapa.",
+  },
+  {
+    q: "E se eu não ficar satisfeito?",
+    a: "Você tem 7 dias de garantia incondicional. Se não for para você, devolvemos 100% do valor, sem burocracia.",
+  },
 ];
-
-const NAV = [
-  { label: "Sinais", href: "#sinais" },
-  { label: "Kits", href: "#kits" },
-  { label: "Como funciona", href: "#como" },
-  { label: "Dúvidas", href: "#faq" },
-];
-
-const GOLD = "#E4B45A";
-
-/* -------------------------------- Componente ------------------------------- */
 
 function DetetivesPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
   return (
-    <div className="min-h-screen bg-[#070A10] font-sans text-[#F4F6FA] antialiased">
-      {/* Barra de status */}
-      <div className="border-b border-white/5 bg-black/40">
-        <div className="mx-auto flex max-w-6xl items-center justify-center gap-x-6 gap-y-1 overflow-hidden px-4 py-2 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">
-          <span className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full" style={{ background: GOLD }} /> Sistema online
-          </span>
-          <span className="hidden sm:inline">· Sigilo garantido</span>
-          <span className="hidden xs:inline">· Ativação imediata</span>
-          <span>· Entrega nacional</span>
-        </div>
-      </div>
-
-      {/* Cabeçalho */}
-      <header className="sticky top-0 z-40 border-b border-white/8 bg-[#070A10]/85 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-          <a href="#topo" className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5" style={{ color: GOLD }}>
-              <Icon name="shield" className="h-5 w-5" />
+    <div className="min-h-screen bg-white font-sans text-[#1d1d1f] antialiased selection:bg-[#0071e3] selection:text-white">
+      {/* ------------------------------- Header ------------------------------ */}
+      <header className="sticky top-0 z-40 border-b border-black/5 bg-white/80 backdrop-blur-xl">
+        <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
+          <div className="flex items-center gap-2">
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#1d1d1f] text-white">
+              <Icon name="shield" className="h-4 w-4" />
             </span>
-            <span className="leading-tight">
-              <span className="block text-sm font-extrabold tracking-tight">DETECTIVE</span>
-              <span className="block font-mono text-[9px] font-semibold uppercase tracking-[0.35em]" style={{ color: GOLD }}>Profissional</span>
-            </span>
-          </a>
-
-          <nav className="hidden items-center gap-7 lg:flex">
-            {NAV.map((item) => (
-              <a key={item.href} href={item.href} className="text-[13px] font-semibold text-slate-300 transition-colors hover:text-white">
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          <a
-            href="#kits"
-            className="inline-flex min-h-9 items-center gap-2 rounded-lg px-4 text-[12px] font-extrabold uppercase tracking-wide text-[#070A10] transition-transform active:scale-95"
-            style={{ background: GOLD }}
+            <span className="font-display text-[15px] font-extrabold tracking-tight">Verdade</span>
+          </div>
+          <button
+            onClick={goToCheckout}
+            className="rounded-full bg-[#0071e3] px-4 py-2 text-[13px] font-semibold text-white transition-all hover:bg-[#0060c0] active:scale-95"
           >
-            <Icon name="lock" className="h-4 w-4" /> Descobrir
-          </a>
+            Quero o Kit
+          </button>
         </div>
       </header>
 
-      <main id="topo">
-        {/* Hero */}
-        <section
-          className="relative overflow-hidden border-b border-white/8"
-          style={{
-            backgroundImage:
-              "radial-gradient(120% 80% at 80% 0%, rgba(228,180,90,0.10), transparent 55%), linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
-            backgroundSize: "auto, 44px 44px, 44px 44px",
-          }}
-        >
-          <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 md:py-20 lg:grid-cols-[1.05fr_0.95fr]">
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-300">
-                <span className="h-1.5 w-1.5 rounded-full" style={{ background: GOLD }} /> Agência de investigação · +10 anos
-              </span>
-
-              <h1 className="mt-5 text-balance text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-5xl">
-                A dúvida está te
-                <span className="block">consumindo. A verdade</span>
-                <span style={{ color: GOLD }}>está no celular dele(a).</span>
-              </h1>
-
-              <p className="mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-slate-300 sm:text-base">
-                Mensagens que somem, celular sempre virado pra baixo, senha trocada e o
-                {" "}“trabalhando até tarde” virou rotina. Enquanto você se pergunta o que
-                está acontecendo, a resposta está a um clique de distância.
-              </p>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="#kits"
-                  className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-extrabold uppercase tracking-wide text-[#070A10] shadow-[0_10px_40px_-10px_rgba(228,180,90,0.6)] transition-transform active:scale-[0.98]"
-                  style={{ background: GOLD }}
-                >
-                  Quero descobrir a verdade <Icon name="chevronRight" className="h-4 w-4" />
-                </a>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-13 items-center justify-center gap-2 rounded-xl border border-white/15 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/5"
-                >
-                  <Icon name="whatsapp" className="h-4 w-4" style={{ color: GOLD }} /> Falar com um investigador
-                </a>
-              </div>
-
-              <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-                <span className="flex items-center gap-1.5">
-                  <span className="flex" style={{ color: GOLD }}>
-                    {[0, 1, 2, 3, 4].map((i) => (
-                      <Icon key={i} name="star" />
-                    ))}
-                  </span>
-                  <span className="font-bold">4,9/5</span>
-                </span>
-                <span className="text-slate-400">1.842 investigações concluídas</span>
-                <span className="flex items-center gap-1.5 text-slate-400">
-                  <Icon name="lock" className="h-4 w-4" style={{ color: GOLD }} /> Sigilo absoluto
-                </span>
-              </div>
-            </div>
-
-            {/* Imagem do hero com moldura HUD */}
-            <div className="relative mx-auto w-full max-w-md">
-              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-                <img
-                  src="/detetive-hero.png"
-                  alt="Maleta profissional com equipamentos de investigação e monitoramento"
-                  className="h-full w-full object-cover"
-                />
-                {/* Cantos HUD */}
-                <span className="pointer-events-none absolute left-3 top-3 h-6 w-6 border-l-2 border-t-2" style={{ borderColor: GOLD }} />
-                <span className="pointer-events-none absolute right-3 top-3 h-6 w-6 border-r-2 border-t-2" style={{ borderColor: GOLD }} />
-                <span className="pointer-events-none absolute bottom-3 left-3 h-6 w-6 border-b-2 border-l-2" style={{ borderColor: GOLD }} />
-                <span className="pointer-events-none absolute bottom-3 right-3 h-6 w-6 border-b-2 border-r-2" style={{ borderColor: GOLD }} />
-                <span className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-black/70 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.2em] text-slate-300 backdrop-blur">
-                  <span className="mr-1.5 inline-block h-1.5 w-1.5 animate-pulse rounded-full align-middle" style={{ background: GOLD }} /> Monitorando
-                </span>
-              </div>
-              <div className="absolute -right-2 -top-3 rounded-xl px-4 py-2.5 text-center text-[#070A10] shadow-lg" style={{ background: GOLD }}>
-                <div className="text-lg font-extrabold leading-none">+10.000</div>
-                <div className="font-mono text-[9px] font-bold uppercase tracking-wide">casos atendidos</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Agitação — sinais de traição */}
-        <section id="sinais" className="mx-auto max-w-6xl px-4 py-14 md:py-20">
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: "#FF5B52" }}>
-              Reconhece algum destes sinais?
+      {/* -------------------------------- Hero ------------------------------- */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-white via-[#f5f5f7] to-white">
+        <div className="mx-auto max-w-5xl px-5 pb-4 pt-12 text-center">
+          <Reveal>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6e6e73]">
+              <Icon name="lock" className="h-3 w-3" /> Sigilo absoluto
             </span>
-            <h2 className="mt-3 text-balance text-2xl font-extrabold leading-tight sm:text-4xl">
-              Seu instinto vem gritando. Só falta a prova.
-            </h2>
-            <p className="mt-3 text-[15px] leading-relaxed text-slate-400">
-              Quem não deve, não muda o comportamento do nada. Veja os sinais que apareceram
-              em mais de 10.000 investigações reais.
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-3 sm:grid-cols-2">
-            {SINAIS.map((s) => (
-              <div
-                key={s}
-                className="flex items-start gap-3 rounded-xl border border-white/8 bg-white/[0.03] p-4"
-              >
-                <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md" style={{ background: "rgba(255,91,82,0.12)", color: "#FF5B52" }}>
-                  <Icon name="alert" className="h-4 w-4" />
-                </span>
-                <span className="text-[14px] leading-snug text-slate-200">{s}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="mx-auto mt-8 max-w-2xl rounded-xl border border-white/8 bg-white/[0.03] p-5 text-center">
-            <p className="text-[15px] leading-relaxed text-slate-200">
-              <span className="font-bold text-white">Marcou 2 ou mais?</span> Então você já sabe a resposta.
-              Continuar na dúvida só machuca mais. Chegou a hora de ter a{" "}
-              <span className="font-bold" style={{ color: GOLD }}>certeza</span>.
-            </p>
-            <a
-              href="#kits"
-              className="mt-4 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-6 text-sm font-extrabold uppercase tracking-wide text-[#070A10] transition-transform active:scale-[0.98]"
-              style={{ background: GOLD }}
-            >
-              Ver como descobrir <Icon name="chevronRight" className="h-4 w-4" />
-            </a>
-          </div>
-        </section>
-
-        {/* Kits */}
-        <section id="kits" className="border-y border-white/8 bg-white/[0.02]">
-          <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
-            <div className="mx-auto max-w-2xl text-center">
-              <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: GOLD }}>
-                Escolha o seu nível de investigação
+          </Reveal>
+          <Reveal delay={80}>
+            <h1 className="mx-auto mt-5 max-w-[15ch] font-display text-[34px] font-extrabold leading-[1.03] tracking-[-0.03em] text-balance sm:text-6xl">
+              Pare de viver{" "}
+              <span className="bg-gradient-to-r from-[#0071e3] to-[#42a5ff] bg-clip-text text-transparent">
+                na dúvida.
               </span>
-              <h2 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">Kits de investigação</h2>
-              <p className="mt-3 text-[15px] leading-relaxed text-slate-400">
-                Pagamento único. Ativação imediata. Sigilo absoluto do começo ao fim.
+            </h1>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="mx-auto mt-4 max-w-[34ch] text-[16px] leading-relaxed text-[#6e6e73] text-pretty sm:text-xl sm:max-w-lg">
+              A incerteza dói mais que a verdade. O Kit Investigação Completo te dá as respostas que
+              ele(a) esconde — com total discrição.
+            </p>
+          </Reveal>
+
+          <Reveal delay={240}>
+            <div className="mt-7 flex flex-col items-center gap-3">
+              <button
+                onClick={goToCheckout}
+                className="group inline-flex w-full max-w-xs items-center justify-center gap-2 rounded-full bg-[#0071e3] px-8 py-4 text-[16px] font-semibold text-white shadow-[0_10px_30px_-8px_rgba(0,113,227,0.6)] transition-all hover:bg-[#0060c0] active:scale-[0.97]"
+              >
+                Descobrir a verdade agora
+                <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </button>
+              <p className="text-[13px] text-[#6e6e73]">
+                <span className="text-[#86868b] line-through">{PRICE_FROM}</span>{" "}
+                <span className="font-semibold text-[#1d1d1f]">{PRICE_NOW}</span> · {PRICE_INSTALLMENT}
               </p>
             </div>
+          </Reveal>
 
-            <div className="mt-10 grid items-start gap-5 lg:grid-cols-3">
-              {KITS.map((kit) => (
-                <article
-                  key={kit.id}
-                  className={`relative flex flex-col overflow-hidden rounded-2xl border bg-[#0C111A] ${
-                    kit.destaque ? "shadow-[0_24px_70px_-30px_rgba(228,180,90,0.8)] lg:-mt-3 lg:mb-3" : "border-white/8"
+          <Reveal delay={320}>
+            <div className="relative mx-auto mt-8 max-w-2xl">
+              <div className="pointer-events-none absolute inset-0 -z-10 mx-auto h-3/4 w-3/4 rounded-full bg-[#0071e3]/10 blur-3xl" />
+              <img
+                src="/kit-completo-hero.png"
+                alt="Kit Investigação Completo: celular com clonagem, caneta espiã e rastreador veicular"
+                className="mx-auto w-full drop-shadow-2xl"
+              />
+            </div>
+          </Reveal>
+
+          <Reveal delay={120}>
+            <div className="mx-auto -mt-2 flex max-w-md flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[12px] font-medium text-[#6e6e73]">
+              <span className="inline-flex items-center gap-1.5"><Icon name="bolt" className="h-3.5 w-3.5 text-[#0071e3]" /> Ativação em minutos</span>
+              <span className="inline-flex items-center gap-1.5"><Icon name="shield" className="h-3.5 w-3.5 text-[#0071e3]" /> 7 dias de garantia</span>
+              <span className="inline-flex items-center gap-1.5"><Icon name="lock" className="h-3.5 w-3.5 text-[#0071e3]" /> Envio discreto</span>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ------------------------------ Sinais ------------------------------- */}
+      <section className="mx-auto max-w-5xl px-5 py-16 sm:py-24">
+        <Reveal className="text-center">
+          <span className="text-[12px] font-semibold uppercase tracking-[0.16em] text-[#0071e3]">
+            Você reconhece isto?
+          </span>
+          <h2 className="mx-auto mt-3 max-w-[18ch] font-display text-[26px] font-extrabold leading-tight tracking-[-0.02em] text-balance sm:text-4xl">
+            O seu instinto já sabe. Falta a prova.
+          </h2>
+        </Reveal>
+        <div className="mx-auto mt-8 grid max-w-2xl gap-3 sm:grid-cols-2">
+          {SIGNS.map((s, i) => (
+            <Reveal key={s} delay={i * 80}>
+              <div className="flex items-start gap-3 rounded-2xl border border-black/5 bg-[#f5f5f7] p-4">
+                <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[#0071e3]/10 text-[#0071e3]">
+                  <Icon name="eye" className="h-3.5 w-3.5" />
+                </span>
+                <p className="text-[14px] leading-snug text-[#1d1d1f]">{s}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <Reveal delay={160} className="mt-6 text-center">
+          <p className="mx-auto max-w-md text-[15px] leading-relaxed text-[#6e6e73] text-pretty">
+            Se você marcou <span className="font-semibold text-[#1d1d1f]">um só</span> desses sinais, você
+            merece parar de sofrer por antecipação. A verdade liberta — e ela cabe neste kit.
+          </p>
+        </Reveal>
+      </section>
+
+      {/* ----------------------------- O que vem ----------------------------- */}
+      <section className="bg-[#f5f5f7] py-16 sm:py-24">
+        <div className="mx-auto max-w-5xl px-5">
+          <Reveal className="text-center">
+            <span className="text-[12px] font-semibold uppercase tracking-[0.16em] text-[#0071e3]">
+              Tudo em um só kit
+            </span>
+            <h2 className="mx-auto mt-3 max-w-[16ch] font-display text-[28px] font-extrabold leading-tight tracking-[-0.02em] text-balance sm:text-5xl">
+              Três ferramentas. Uma verdade.
+            </h2>
+          </Reveal>
+
+          <div className="mt-12 space-y-6">
+            {KIT_ITEMS.map((item, i) => (
+              <Reveal key={item.title} delay={i * 60}>
+                <div
+                  className={`flex flex-col overflow-hidden rounded-[28px] border border-black/5 bg-white ${
+                    i % 2 === 1 ? "sm:flex-row-reverse" : "sm:flex-row"
                   }`}
-                  style={kit.destaque ? { borderColor: GOLD } : undefined}
                 >
-                  {kit.destaque && (
-                    <div className="py-1.5 text-center font-mono text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#070A10]" style={{ background: GOLD }}>
-                      ★ Escolha de 7 em cada 10 clientes
-                    </div>
-                  )}
-
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-black/30">
-                    <img src={kit.imagem || "/placeholder.svg"} alt={`${kit.nome} - equipamentos de investigação`} className="h-full w-full object-cover" />
-                    <span className="absolute left-3 top-3 rounded-md border border-white/10 bg-black/60 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wide text-slate-200 backdrop-blur">
-                      {kit.tag}
-                    </span>
+                  <div className="flex items-center justify-center bg-gradient-to-b from-[#fafafa] to-[#eef0f3] p-8 sm:w-1/2">
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      className="h-44 w-auto object-contain drop-shadow-xl sm:h-56"
+                    />
                   </div>
-
-                  <div className="flex flex-1 flex-col p-5">
-                    <h3 className="text-lg font-extrabold tracking-tight">{kit.nome}</h3>
-                    <p className="mt-1.5 text-[13px] leading-relaxed text-slate-400">{kit.descricao}</p>
-
-                    <ul className="mt-4 space-y-2 text-[13px]">
-                      {kit.itens.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-slate-200">
-                          <span className="mt-0.5" style={{ color: GOLD }}><Icon name="check" className="h-4 w-4" /></span>
-                          <span>{item}</span>
+                  <div className="flex flex-col justify-center gap-3 p-7 sm:w-1/2 sm:p-9">
+                    <span className="inline-flex w-fit items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0071e3]">
+                      <Icon name={item.icon} className="h-3.5 w-3.5" /> {item.tag}
+                    </span>
+                    <h3 className="font-display text-[22px] font-extrabold leading-tight tracking-[-0.02em] sm:text-3xl">
+                      {item.title}
+                    </h3>
+                    <p className="text-[13px] font-medium text-[#86868b]">{item.sub}</p>
+                    <p className="text-[15px] leading-relaxed text-[#6e6e73] text-pretty">{item.desc}</p>
+                    <ul className="mt-1 flex flex-col gap-2">
+                      {item.bullets.map((b) => (
+                        <li key={b} className="flex items-center gap-2 text-[14px] font-medium text-[#1d1d1f]">
+                          <Icon name="check" className="h-4 w-4 flex-shrink-0 text-[#0071e3]" /> {b}
                         </li>
                       ))}
                     </ul>
-
-                    <div className="mt-auto pt-6">
-                      <div className="flex items-baseline gap-2">
-                        <span className="font-mono text-sm text-slate-500 line-through">{kit.precoAntigo}</span>
-                        <span className="rounded px-1.5 py-0.5 font-mono text-[10px] font-bold" style={{ background: "rgba(228,180,90,0.15)", color: GOLD }}>
-                          Oferta de hoje
-                        </span>
-                      </div>
-                      <div className="mt-0.5 text-3xl font-extrabold tracking-tight">{kit.preco}</div>
-                      <div className="text-xs text-slate-500">{kit.parcela}</div>
-                      <button
-                        onClick={() => goToCheckout(kit.checkout)}
-                        className={`mt-4 flex w-full min-h-13 items-center justify-center gap-2 rounded-xl text-sm font-extrabold uppercase tracking-wide transition-all active:scale-[0.98] ${
-                          kit.destaque ? "text-[#070A10]" : "border border-white/15 text-white hover:bg-white/5"
-                        }`}
-                        style={kit.destaque ? { background: GOLD } : undefined}
-                      >
-                        {kit.cta} <Icon name="chevronRight" className="h-4 w-4" />
-                      </button>
-                      <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[11px] text-slate-500">
-                        <Icon name="lock" className="h-3.5 w-3.5" /> Compra sigilosa e protegida
-                      </div>
-                    </div>
                   </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Como funciona */}
-        <section id="como" className="mx-auto max-w-6xl px-4 py-14 md:py-20">
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: GOLD }}>
-              Simples como deveria ser
-            </span>
-            <h2 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">Da dúvida à prova em 3 passos</h2>
-          </div>
-
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {PASSOS.map((p) => (
-              <div key={p.n} className="relative rounded-2xl border border-white/8 bg-white/[0.03] p-6">
-                <span className="absolute right-5 top-4 font-mono text-3xl font-extrabold text-white/8">{p.n}</span>
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5" style={{ color: GOLD }}>
-                  <Icon name={p.icon} className="h-6 w-6" />
-                </span>
-                <h3 className="mt-4 text-base font-extrabold">{p.t}</h3>
-                <p className="mt-1.5 text-[13px] leading-relaxed text-slate-400">{p.s}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Equipamentos */}
-        <section id="equipamentos" className="border-y border-white/8 bg-white/[0.02]">
-          <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
-            <div className="mx-auto max-w-2xl text-center">
-              <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: GOLD }}>
-                Arsenal profissional
-              </span>
-              <h2 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">Equipamentos que compõem os kits</h2>
-              <p className="mt-3 text-[15px] leading-relaxed text-slate-400">
-                As mesmas ferramentas usadas por investigadores particulares — agora na sua mão.
-              </p>
-            </div>
-
-            <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-              {EQUIPAMENTOS.map((eq) => (
-                <div key={eq.nome} className="group rounded-xl border border-white/8 bg-[#0C111A] p-3 text-center transition-colors hover:border-white/20">
-                  <div className="aspect-square w-full overflow-hidden rounded-lg bg-black/30">
-                    <img src={eq.imagem || "/placeholder.svg"} alt={eq.nome} className="h-full w-full object-contain p-2 transition-transform group-hover:scale-105" />
-                  </div>
-                  <div className="mt-2.5 text-[12px] font-bold leading-tight">{eq.nome}</div>
-                  <div className="mt-1 font-mono text-[9px] font-semibold uppercase tracking-wide" style={{ color: GOLD }}>{eq.incluso}</div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Depoimentos */}
-        <section className="mx-auto max-w-6xl px-4 py-14 md:py-20">
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: GOLD }}>
-              Histórias reais
-            </span>
-            <h2 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">Eles pararam de viver na dúvida</h2>
-          </div>
-
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {DEPOIMENTOS.map((d) => (
-              <figure key={d.nome} className="flex flex-col rounded-2xl border border-white/8 bg-white/[0.03] p-5">
-                <div className="flex" style={{ color: GOLD }}>
-                  {Array.from({ length: d.estrelas }).map((_, i) => (
-                    <Icon key={i} name="star" />
-                  ))}
-                </div>
-                <blockquote className="mt-3 flex-1 text-[13px] leading-relaxed text-slate-200">{`“${d.texto}”`}</blockquote>
-                <figcaption className="mt-4 flex items-center gap-3 border-t border-white/8 pt-4">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-sm font-bold" style={{ color: GOLD }}>
-                    {d.nome.charAt(0)}
-                  </span>
-                  <span>
-                    <span className="block text-[13px] font-bold">{d.nome}</span>
-                    <span className="block font-mono text-[10px] uppercase tracking-wide text-slate-500">{d.cidade}</span>
-                  </span>
-                </figcaption>
-              </figure>
+              </Reveal>
             ))}
-          </div>
-        </section>
-
-        {/* Garantia */}
-        <section className="border-y border-white/8 bg-white/[0.02]">
-          <div className="mx-auto grid max-w-6xl gap-4 px-4 py-12 md:grid-cols-3">
-            {[
-              { icon: "shield", t: "Garantia de 7 dias", s: "Não gostou? Devolvemos. Sem burocracia, sem perguntas." },
-              { icon: "lock", t: "Sigilo absoluto", s: "Entrega neutra e painel privado. Ninguém fica sabendo." },
-              { icon: "bolt", t: "Ativação imediata", s: "Comprou, ativou. Você começa a ver hoje mesmo." },
-            ].map((g) => (
-              <div key={g.t} className="flex items-start gap-4 rounded-2xl border border-white/8 bg-[#0C111A] p-5">
-                <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5" style={{ color: GOLD }}>
-                  <Icon name={g.icon} className="h-5 w-5" />
-                </span>
-                <div>
-                  <div className="text-sm font-extrabold">{g.t}</div>
-                  <div className="mt-0.5 text-[12px] leading-relaxed text-slate-400">{g.s}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section id="faq" className="mx-auto max-w-3xl px-4 py-14 md:py-20">
-          <div className="text-center">
-            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: GOLD }}>
-              Antes de você perguntar
-            </span>
-            <h2 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">Dúvidas frequentes</h2>
-          </div>
-
-          <div className="mt-8 space-y-3">
-            {FAQ.map((f) => (
-              <details key={f.q} className="group rounded-xl border border-white/8 bg-white/[0.03] p-4 [&_summary::-webkit-details-marker]:hidden">
-                <summary className="flex cursor-pointer items-center justify-between gap-3 text-[14px] font-bold text-white">
-                  {f.q}
-                  <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-white/10 text-slate-400 transition-transform group-open:rotate-45" style={{ color: GOLD }}>
-                    +
-                  </span>
-                </summary>
-                <p className="mt-3 text-[13px] leading-relaxed text-slate-400">{f.a}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-
-        {/* CTA final */}
-        <section className="px-4 pb-20 pt-2">
-          <div
-            className="mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/10 p-8 text-center md:p-12"
-            style={{
-              backgroundImage: "radial-gradient(100% 120% at 50% 0%, rgba(228,180,90,0.14), transparent 60%)",
-              backgroundColor: "#0C111A",
-            }}
-          >
-            <h2 className="text-balance text-2xl font-extrabold leading-tight sm:text-4xl">
-              A verdade não vai chegar sozinha.
-              <span className="block" style={{ color: GOLD }}>Você precisa ir atrás dela.</span>
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-slate-300">
-              Cada dia na dúvida é mais uma noite de sono perdida. Escolha o seu kit e tenha,
-              ainda hoje, a resposta que você tanto procura.
-            </p>
-            <a
-              href="#kits"
-              className="mt-7 inline-flex min-h-13 items-center justify-center gap-2 rounded-xl px-8 py-3.5 text-sm font-extrabold uppercase tracking-wide text-[#070A10] shadow-[0_10px_40px_-10px_rgba(228,180,90,0.7)] transition-transform active:scale-[0.98]"
-              style={{ background: GOLD }}
-            >
-              Quero descobrir agora <Icon name="chevronRight" className="h-4 w-4" />
-            </a>
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-1 font-mono text-[10px] uppercase tracking-wide text-slate-500">
-              <span>Pagamento único</span>
-              <span>· Garantia 7 dias</span>
-              <span>· Sigilo absoluto</span>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      {/* Rodapé */}
-      <footer id="contato" className="border-t border-white/8 bg-black/40">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-4">
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-2.5">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5" style={{ color: GOLD }}>
-                <Icon name="shield" className="h-5 w-5" />
-              </span>
-              <span className="leading-tight">
-                <span className="block text-sm font-extrabold text-white">DETECTIVE</span>
-                <span className="block font-mono text-[9px] font-semibold uppercase tracking-[0.35em]" style={{ color: GOLD }}>Profissional</span>
-              </span>
-            </div>
-            <p className="mt-4 max-w-sm text-[13px] leading-relaxed text-slate-400">
-              Referência nacional em investigação particular há mais de 10 anos. Discrição,
-              tecnologia e resultado para quem precisa da verdade.
-            </p>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-2 rounded-lg border border-white/15 px-4 py-2 text-[13px] font-bold text-white transition-colors hover:bg-white/5"
-            >
-              <Icon name="whatsapp" className="h-4 w-4" style={{ color: GOLD }} /> (11) 99999-9999
-            </a>
-          </div>
-
-          <div>
-            <div className="font-mono text-[11px] font-bold uppercase tracking-widest text-white">Navegação</div>
-            <ul className="mt-4 space-y-2 text-[13px] text-slate-400">
-              {NAV.map((l) => (
-                <li key={l.href}><a href={l.href} className="transition-colors hover:text-white">{l.label}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <div className="font-mono text-[11px] font-bold uppercase tracking-widest text-white">Pagamento</div>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {["Pix", "Visa", "Master", "Elo", "Boleto"].map((p) => (
-                <span key={p} className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[10px] font-bold text-slate-300">{p}</span>
-              ))}
-            </div>
           </div>
         </div>
-        <div className="border-t border-white/8">
-          <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-5 text-center font-mono text-[10px] uppercase tracking-wide text-slate-600 md:flex-row md:text-left">
-            <span>© {new Date().getFullYear()} Detective Profissional</span>
-            <span>Uso das ferramentas sob responsabilidade do contratante, conforme a legislação vigente.</span>
+      </section>
+
+      {/* ------------------------------ Oferta ------------------------------- */}
+      <section className="mx-auto max-w-5xl px-5 py-16 sm:py-24">
+        <Reveal>
+          <div className="relative mx-auto max-w-md overflow-hidden rounded-[32px] border border-black/10 bg-white p-1 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.3)]">
+            <div className="rounded-[28px] bg-gradient-to-b from-[#f5f5f7] to-white p-7 text-center">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1d1d1f] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white">
+                <Icon name="star" className="h-3 w-3 text-[#ffd60a]" /> Kit Investigação Completo
+              </span>
+              <div className="mt-5 flex items-center justify-center gap-2">
+                <img src="/equip-celular.png" alt="" className="h-16 w-auto object-contain" />
+                <img src="/equip-caneta.png" alt="" className="h-16 w-auto object-contain" />
+                <img src="/equip-rastreador.png" alt="" className="h-16 w-auto object-contain" />
+              </div>
+
+              <ul className="mx-auto mt-6 flex max-w-[16rem] flex-col gap-2.5 text-left">
+                {["Clonagem de celular (WhatsApp + redes)", "Caneta espiã 4K · 30 dias de bateria", "Rastreador veicular em tempo real"].map((b) => (
+                  <li key={b} className="flex items-start gap-2.5 text-[14px] font-medium text-[#1d1d1f]">
+                    <Icon name="check" className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#0071e3]" /> {b}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-7">
+                <p className="text-[14px] text-[#86868b] line-through">{PRICE_FROM}</p>
+                <p className="font-display text-[44px] font-extrabold leading-none tracking-[-0.03em] text-[#1d1d1f]">
+                  {PRICE_NOW}
+                </p>
+                <p className="mt-1 text-[13px] text-[#6e6e73]">ou {PRICE_INSTALLMENT} no cartão</p>
+              </div>
+
+              <button
+                onClick={goToCheckout}
+                className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0071e3] px-6 py-4 text-[16px] font-semibold text-white shadow-[0_10px_30px_-8px_rgba(0,113,227,0.6)] transition-all hover:bg-[#0060c0] active:scale-[0.97]"
+              >
+                Garantir meu kit agora
+                <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </button>
+              <p className="mt-3 flex items-center justify-center gap-1.5 text-[12px] text-[#6e6e73]">
+                <Icon name="lock" className="h-3.5 w-3.5" /> Pagamento seguro · Envio sigiloso
+              </p>
+            </div>
           </div>
+        </Reveal>
+      </section>
+
+      {/* --------------------------- Como funciona --------------------------- */}
+      <section className="bg-[#f5f5f7] py-16 sm:py-24">
+        <div className="mx-auto max-w-5xl px-5">
+          <Reveal className="text-center">
+            <h2 className="mx-auto max-w-[16ch] font-display text-[26px] font-extrabold leading-tight tracking-[-0.02em] text-balance sm:text-4xl">
+              Simples como deve ser.
+            </h2>
+          </Reveal>
+          <div className="mt-10 grid gap-5 sm:grid-cols-3">
+            {[
+              { n: "1", t: "Garanta o kit", d: "Finalize em minutos com pagamento 100% seguro." },
+              { n: "2", t: "Ative e instale", d: "Clonagem em minutos e equipamentos com envio discreto." },
+              { n: "3", t: "Veja a verdade", d: "Acompanhe tudo pelo celular, de onde estiver." },
+            ].map((s, i) => (
+              <Reveal key={s.n} delay={i * 80}>
+                <div className="rounded-3xl border border-black/5 bg-white p-6 text-center">
+                  <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-[#0071e3] font-display text-[18px] font-extrabold text-white">
+                    {s.n}
+                  </span>
+                  <h3 className="mt-4 font-display text-[17px] font-bold tracking-tight">{s.t}</h3>
+                  <p className="mt-1.5 text-[14px] leading-relaxed text-[#6e6e73] text-pretty">{s.d}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------------------- Depoimentos ---------------------------- */}
+      <section className="mx-auto max-w-5xl px-5 py-16 sm:py-24">
+        <Reveal className="text-center">
+          <div className="flex items-center justify-center gap-1 text-[#ffb300]">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Icon key={i} name="star" className="h-4 w-4" />
+            ))}
+          </div>
+          <h2 className="mx-auto mt-3 max-w-[18ch] font-display text-[26px] font-extrabold leading-tight tracking-[-0.02em] text-balance sm:text-4xl">
+            Quem descobriu, respira aliviado.
+          </h2>
+        </Reveal>
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          {[
+            { n: "Marina S.", c: "São Paulo · SP", t: "Passei meses achando que era loucura minha. O kit me mostrou tudo em 2 dias. Doeu, mas hoje tenho paz." },
+            { n: "Rafael T.", c: "Curitiba · PR", t: "O rastreador foi o que abriu meus olhos. As histórias nunca batiam. Agora eu sei — e decidi por mim." },
+            { n: "Juliana P.", c: "Rio de Janeiro · RJ", t: "Discreto de verdade. Ninguém desconfiou de nada. Suporte no WhatsApp me acompanhou o tempo todo." },
+          ].map((d, i) => (
+            <Reveal key={d.n} delay={i * 80}>
+              <figure className="flex h-full flex-col rounded-3xl border border-black/5 bg-[#f5f5f7] p-6">
+                <div className="flex gap-0.5 text-[#ffb300]">
+                  {Array.from({ length: 5 }).map((_, j) => (
+                    <Icon key={j} name="star" className="h-3.5 w-3.5" />
+                  ))}
+                </div>
+                <blockquote className="mt-3 flex-1 text-[14px] leading-relaxed text-[#1d1d1f] text-pretty">
+                  “{d.t}”
+                </blockquote>
+                <figcaption className="mt-4 text-[13px]">
+                  <span className="font-semibold text-[#1d1d1f]">{d.n}</span>
+                  <span className="block text-[#86868b]">{d.c}</span>
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ------------------------------ Garantia ----------------------------- */}
+      <section className="mx-auto max-w-5xl px-5 pb-16 sm:pb-24">
+        <Reveal>
+          <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 rounded-[28px] border border-black/5 bg-gradient-to-b from-[#f5f5f7] to-white p-8 text-center sm:flex-row sm:text-left">
+            <span className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-[#0071e3]/10 text-[#0071e3]">
+              <Icon name="shield" className="h-7 w-7" />
+            </span>
+            <div>
+              <h3 className="font-display text-[19px] font-extrabold tracking-tight">Garantia incondicional de 7 dias</h3>
+              <p className="mt-1 text-[14px] leading-relaxed text-[#6e6e73] text-pretty">
+                Se por qualquer motivo não for para você, devolvemos 100% do valor. Sem perguntas, sem
+                burocracia. O risco é todo nosso.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* -------------------------------- FAQ -------------------------------- */}
+      <section className="bg-[#f5f5f7] py-16 sm:py-24">
+        <div className="mx-auto max-w-2xl px-5">
+          <Reveal className="text-center">
+            <h2 className="font-display text-[26px] font-extrabold leading-tight tracking-[-0.02em] sm:text-4xl">
+              Perguntas frequentes
+            </h2>
+          </Reveal>
+          <div className="mt-8 flex flex-col gap-3">
+            {FAQ.map((f, i) => (
+              <Reveal key={f.q} delay={i * 50}>
+                <div className="overflow-hidden rounded-2xl border border-black/5 bg-white">
+                  <button
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left"
+                    aria-expanded={openFaq === i}
+                  >
+                    <span className="text-[15px] font-semibold text-[#1d1d1f]">{f.q}</span>
+                    <span
+                      className="flex-shrink-0 text-[#0071e3] transition-transform duration-300"
+                      style={{ transform: openFaq === i ? "rotate(45deg)" : "none" }}
+                    >
+                      <Icon name="plus" className="h-4 w-4" />
+                    </span>
+                  </button>
+                  <div
+                    className="grid transition-all duration-300 ease-out"
+                    style={{ gridTemplateRows: openFaq === i ? "1fr" : "0fr" }}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="px-5 pb-4 text-[14px] leading-relaxed text-[#6e6e73] text-pretty">{f.a}</p>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------ CTA final ---------------------------- */}
+      <section className="relative overflow-hidden bg-[#1d1d1f] py-20 text-center text-white sm:py-28">
+        <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-[#0071e3]/30 blur-3xl" />
+        <div className="relative mx-auto max-w-2xl px-5">
+          <Reveal>
+            <h2 className="mx-auto max-w-[16ch] font-display text-[30px] font-extrabold leading-[1.05] tracking-[-0.03em] text-balance sm:text-5xl">
+              A verdade custa menos que mais uma noite sem dormir.
+            </h2>
+            <p className="mx-auto mt-4 max-w-md text-[16px] leading-relaxed text-white/70 text-pretty">
+              Pare de imaginar o pior. Tenha as respostas nas suas mãos — hoje, com sigilo total.
+            </p>
+            <button
+              onClick={goToCheckout}
+              className="group mt-8 inline-flex w-full max-w-xs items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[16px] font-semibold text-[#1d1d1f] transition-all hover:bg-[#f5f5f7] active:scale-[0.97]"
+            >
+              Quero descobrir a verdade
+              <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </button>
+            <p className="mt-4 text-[13px] text-white/60">
+              <span className="line-through">{PRICE_FROM}</span> · <span className="font-semibold text-white">{PRICE_NOW}</span> · {PRICE_INSTALLMENT}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ------------------------------ Rodapé ------------------------------- */}
+      <footer className="bg-white py-10">
+        <div className="mx-auto max-w-5xl px-5 text-center">
+          <div className="flex items-center justify-center gap-2">
+            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#1d1d1f] text-white">
+              <Icon name="shield" className="h-3.5 w-3.5" />
+            </span>
+            <span className="font-display text-[14px] font-extrabold tracking-tight">Verdade</span>
+          </div>
+          <p className="mx-auto mt-4 max-w-md text-[12px] leading-relaxed text-[#86868b] text-pretty">
+            Equipamentos de investigação para uso pessoal e legal. Use com responsabilidade e de acordo
+            com a legislação vigente.
+          </p>
+          <a
+            href={WHATSAPP_URL}
+            className="mt-4 inline-block text-[13px] font-semibold text-[#0071e3]"
+          >
+            Falar com um especialista no WhatsApp
+          </a>
+          <p className="mt-6 text-[11px] text-[#c7c7cc]">© {new Date().getFullYear()} Verdade. Todos os direitos reservados.</p>
         </div>
       </footer>
 
-      {/* CTA fixo no mobile */}
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#070A10]/95 px-4 py-3 backdrop-blur-md lg:hidden">
-        <div className="flex items-center gap-3">
+      {/* ------------------------ Barra de compra fixa ----------------------- */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white/90 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
           <div className="leading-tight">
-            <div className="font-mono text-[9px] uppercase tracking-wide text-slate-500">Kit Stalker · mais escolhido</div>
-            <div className="flex items-baseline gap-1.5">
-              <span className="text-lg font-extrabold text-white">R$ 129,90</span>
-              <span className="font-mono text-[11px] text-slate-500 line-through">R$ 249,90</span>
-            </div>
+            <p className="text-[11px] text-[#86868b] line-through">{PRICE_FROM}</p>
+            <p className="font-display text-[18px] font-extrabold tracking-tight">{PRICE_NOW}</p>
           </div>
           <button
-            onClick={() => goToCheckout(CHECKOUT_STALKER)}
-            className="ml-auto flex min-h-12 flex-1 items-center justify-center gap-2 rounded-xl px-4 text-[13px] font-extrabold uppercase tracking-wide text-[#070A10] transition-transform active:scale-[0.98]"
-            style={{ background: GOLD }}
+            onClick={goToCheckout}
+            className="flex flex-1 items-center justify-center gap-2 rounded-full bg-[#0071e3] px-5 py-3 text-[15px] font-semibold text-white transition-all hover:bg-[#0060c0] active:scale-[0.97]"
           >
-            Descobrir agora
+            Quero o Kit <Icon name="arrow" className="h-4 w-4" />
           </button>
         </div>
       </div>
-      {/* Espaçador para o CTA fixo não cobrir o rodapé */}
-      <div className="h-20 lg:hidden" aria-hidden />
+      {/* espaçador para a barra fixa não cobrir o rodapé */}
+      <div className="h-20" aria-hidden />
     </div>
   );
 }
