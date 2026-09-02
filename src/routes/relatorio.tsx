@@ -8,12 +8,14 @@ import manBeach3 from "@/assets/man-beach-3.jpg.asset.json";
 import womanFlirt1 from "@/assets/woman-flirt-1.jpg";
 import womanFlirt2 from "@/assets/woman-flirt-2.jpg";
 import womanFlirt3 from "@/assets/woman-flirt-3.jpg";
-import amanteExtra1 from "@/assets/amante-extra-1.png.asset.json";
-import amanteExtra2 from "@/assets/amante-extra-2.png.asset.json";
-import amanteExtra3 from "@/assets/amante-extra-3.png.asset.json";
-import amanteExtra4 from "@/assets/amante-extra-4.png.asset.json";
-import amanteExtra5 from "@/assets/amante-extra-5.png.asset.json";
-import amanteExtra6 from "@/assets/amante-extra-6.png.asset.json";
+// Evidências do parceiro homem (amante mulher) — servidas de /public para
+// evitar o resolver de assets do v0 que troca imports não registrados por placeholder.
+const provaH1 = "/prova-h-1.jpg";
+const provaH2 = "/prova-h-2.jpg";
+const provaH3 = "/prova-h-3.jpg";
+const provaH4 = "/prova-h-4.jpg";
+const provaH5 = "/prova-h-5.jpg";
+const provaH6 = "/prova-h-6.jpg";
 import amanteHExtra1 from "@/assets/amante-h-extra-1.png.asset.json";
 import amanteHExtra2 from "@/assets/amante-h-extra-2.png.asset.json";
 import amanteHExtra3 from "@/assets/amante-h-extra-3.png.asset.json";
@@ -280,13 +282,13 @@ function RelatorioPage() {
                 : "Evidências fotográficas cruzadas com o número investigado."}
             </p>
             <div className="grid grid-cols-2 gap-2">
-              {[amanteExtra1, amanteExtra2, amanteExtra3, amanteExtra4, amanteExtra5].map((a, i) => (
+              {[provaH1, provaH2, provaH3, provaH4, provaH5].map((a, i) => (
                 <div
                   key={i}
                   className={`${i === 4 ? "col-span-2 aspect-video" : "aspect-square"} rounded-xl bg-zinc-900 border border-red-500/30 relative overflow-hidden`}
                 >
                   <img
-                    src={a.url}
+                    src={a}
                     alt=""
                     className="w-full h-full object-cover select-none pointer-events-none"
                     style={{ filter: "blur(6px) saturate(0.9)", transform: "scale(1.15)" }}
@@ -318,7 +320,7 @@ function RelatorioPage() {
               </div>
               <div className="relative aspect-[4/5] bg-zinc-900 overflow-hidden">
                 <img
-                  src={amanteExtra6.url}
+                  src={provaH6}
                   alt=""
                   className="w-full h-full object-cover select-none pointer-events-none"
                   style={{ filter: "blur(6px) saturate(0.9)", transform: "scale(1.15)" }}
