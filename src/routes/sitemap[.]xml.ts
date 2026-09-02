@@ -8,26 +8,29 @@ interface SitemapEntry {
   path: string;
   changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
   priority?: string;
+  lastmod?: string;
 }
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
+        const today = new Date().toISOString().slice(0, 10);
         const entries: SitemapEntry[] = [
-          { path: "/", changefreq: "weekly", priority: "1.0" },
+          { path: "/", changefreq: "weekly", priority: "1.0", lastmod: today },
           
-          { path: "/blog", changefreq: "weekly", priority: "0.8" },
-          { path: "/sobre", changefreq: "monthly", priority: "0.6" },
-          { path: "/contato", changefreq: "monthly", priority: "0.6" },
-          { path: "/termos", changefreq: "monthly", priority: "0.4" },
-          { path: "/privacidade", changefreq: "monthly", priority: "0.4" },
-          { path: "/cookies", changefreq: "monthly", priority: "0.4" },
-          { path: "/disclaimer", changefreq: "monthly", priority: "0.4" },
+          { path: "/blog", changefreq: "weekly", priority: "0.8", lastmod: today },
+          { path: "/sobre", changefreq: "monthly", priority: "0.6", lastmod: today },
+          { path: "/contato", changefreq: "monthly", priority: "0.6", lastmod: today },
+          { path: "/termos", changefreq: "monthly", priority: "0.4", lastmod: today },
+          { path: "/privacidade", changefreq: "monthly", priority: "0.4", lastmod: today },
+          { path: "/cookies", changefreq: "monthly", priority: "0.4", lastmod: today },
+          { path: "/disclaimer", changefreq: "monthly", priority: "0.4", lastmod: today },
           ...BLOG_POSTS.map((p) => ({
             path: `/blog/${p.slug}`,
             changefreq: "monthly" as const,
             priority: "0.7",
+            lastmod: p.date,
           })),
         ];
 
@@ -35,6 +38,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           [
             `  <url>`,
             `    <loc>${BASE_URL}${e.path}</loc>`,
+            e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
             e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
             e.priority ? `    <priority>${e.priority}</priority>` : null,
             `  </url>`,

@@ -42,9 +42,14 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
       { property: "og:site_name", content: "ZapRadar · SpyZap" },
+      { property: "og:image", content: `${SITE_URL}/og-image.png` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "ZapRadar - Descubra a verdade pelo WhatsApp" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.png` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/` }],
     scripts: [
@@ -78,7 +83,7 @@ export const Route = createFileRoute("/")({
           description: DESCRIPTION,
           offers: {
             "@type": "Offer",
-            price: "197.00",
+            price: "137.00",
             priceCurrency: "BRL",
             availability: "https://schema.org/InStock",
             url: `${SITE_URL}/checkout`,

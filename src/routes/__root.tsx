@@ -101,6 +101,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "theme-color", content: "#0f172a" },
       { title: "ZapRadar (SpyZap) - Clonar Celular e WhatsApp do Parceiro(a)" },
       {
         name: "description",
@@ -109,14 +110,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "keywords", content: "zap radar, zapradar, spyzap, zapspy, como clonar celular do marido, como clonar celular da esposa, clonar whatsapp, descobrir traição" },
       { name: "author", content: "ZapRadar" },
+      { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" },
       { property: "og:site_name", content: "ZapRadar" },
       { property: "og:locale", content: "pt_BR" },
       { property: "og:title", content: "ZapRadar (SpyZap) - Clonar Celular e WhatsApp do Parceiro(a)" },
       { property: "og:description", content: "Descubra se ele(a) está te traindo sem ele(a) descobrir. Clone o WhatsApp e veja conversas apagadas, fotos e áudios secretos em minutos." },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://clonawhats.com/og-image.png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "ZapRadar - Descubra a verdade pelo WhatsApp" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "ZapRadar (SpyZap) - Clonar Celular do Parceiro(a)" },
       { name: "twitter:description", content: "Descubra se ele(a) está te traindo sem ele(a) descobrir. Clone o WhatsApp em minutos." },
+      { name: "twitter:image", content: "https://clonawhats.com/og-image.png" },
 
     ],
     links: [
