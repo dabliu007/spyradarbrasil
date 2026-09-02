@@ -10,6 +10,7 @@ import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
 const LICENSE_AMOUNT = 137;
 const LICENSE_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
+const CHECKOUT_URL = "https://checkout.retroplay.top/VCCL1O8SD8PD";
 
 const searchSchema = z.object({
   phone: z.coerce.string().optional().default(""),
@@ -52,6 +53,7 @@ function LicencaZapRadarPage() {
   const [copied, setCopied] = useState(false);
   const [statusLabel, setStatusLabel] = useState("Aguardando confirmação…");
   const [showPix, setShowPix] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
   const createdRef = useRef(false);
 
   useEffect(() => {
@@ -293,7 +295,7 @@ function LicencaZapRadarPage() {
           </div>
 
           <button
-            onClick={() => setShowPix(true)}
+            onClick={() => setShowCheckout(true)}
             className="mt-5 flex w-full min-h-14 items-center justify-center text-center bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(16,185,129,0.8)] text-[15px] uppercase tracking-wide"
           >
             🪪 Ativar minha licença agora
@@ -365,6 +367,48 @@ function LicencaZapRadarPage() {
           </div>
         )}
       </div>
+
+      {/* Checkout externo em iframe (mantém o usuário no fluxo do site) */}
+      {showCheckout && (
+        <div className="fixed inset-0 z-50 flex flex-col bg-slate-900/80 backdrop-blur-sm">
+          <div className="flex items-center justify-between gap-3 px-4 py-3 bg-white border-b border-slate-200">
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="text-lg">🔒</span>
+              <div className="min-w-0">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace] font-bold">
+                  Pagamento seguro
+                </div>
+                <div className="text-sm font-bold text-slate-800 truncate">
+                  Ativação da Licença ZapRadar
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => setShowCheckout(false)}
+              aria-label="Fechar checkout"
+              className="flex-shrink-0 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors text-lg font-bold"
+            >
+              ✕
+            </button>
+          </div>
+          <iframe
+            src={CHECKOUT_URL}
+            title="Checkout Licença ZapRadar"
+            className="flex-1 w-full border-0 bg-white"
+            allow="payment; clipboard-write"
+          />
+          <div className="bg-white border-t border-slate-200 px-4 py-2 text-center">
+            <a
+              href={CHECKOUT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[12px] text-[#128C7E] font-semibold underline"
+            >
+              Não carregou? Abrir o checkout em uma nova aba
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
