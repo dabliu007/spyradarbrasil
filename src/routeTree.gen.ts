@@ -22,6 +22,7 @@ import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as CpfAlvoRouteImport } from './routes/cpf-alvo'
 import { Route as CpfInputRouteImport } from './routes/cpf-input'
 import { Route as DadosAlvoRouteImport } from './routes/dados-alvo'
+import { Route as DetetivesRouteImport } from './routes/detetives'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
 import { Route as InvestigarRouteImport } from './routes/investigar'
 import { Route as LicencaZapradarRouteImport } from './routes/licenca-zapradar'
@@ -116,6 +117,11 @@ const CpfInputRoute = CpfInputRouteImport.update({
 const DadosAlvoRoute = DadosAlvoRouteImport.update({
   id: '/dados-alvo',
   path: '/dados-alvo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DetetivesRoute = DetetivesRouteImport.update({
+  id: '/detetives',
+  path: '/detetives',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DisclaimerRoute = DisclaimerRouteImport.update({
@@ -289,6 +295,7 @@ export interface FileRoutesByFullPath {
   '/cpf-alvo': typeof CpfAlvoRoute
   '/cpf-input': typeof CpfInputRoute
   '/dados-alvo': typeof DadosAlvoRoute
+  '/detetives': typeof DetetivesRoute
   '/disclaimer': typeof DisclaimerRoute
   '/investigar': typeof InvestigarRoute
   '/licenca-zapradar': typeof LicencaZapradarRoute
@@ -334,6 +341,7 @@ export interface FileRoutesByTo {
   '/cpf-alvo': typeof CpfAlvoRoute
   '/cpf-input': typeof CpfInputRoute
   '/dados-alvo': typeof DadosAlvoRoute
+  '/detetives': typeof DetetivesRoute
   '/disclaimer': typeof DisclaimerRoute
   '/investigar': typeof InvestigarRoute
   '/licenca-zapradar': typeof LicencaZapradarRoute
@@ -380,6 +388,7 @@ export interface FileRoutesById {
   '/cpf-alvo': typeof CpfAlvoRoute
   '/cpf-input': typeof CpfInputRoute
   '/dados-alvo': typeof DadosAlvoRoute
+  '/detetives': typeof DetetivesRoute
   '/disclaimer': typeof DisclaimerRoute
   '/investigar': typeof InvestigarRoute
   '/licenca-zapradar': typeof LicencaZapradarRoute
@@ -427,6 +436,7 @@ export interface FileRouteTypes {
     | '/cpf-alvo'
     | '/cpf-input'
     | '/dados-alvo'
+    | '/detetives'
     | '/disclaimer'
     | '/investigar'
     | '/licenca-zapradar'
@@ -472,6 +482,7 @@ export interface FileRouteTypes {
     | '/cpf-alvo'
     | '/cpf-input'
     | '/dados-alvo'
+    | '/detetives'
     | '/disclaimer'
     | '/investigar'
     | '/licenca-zapradar'
@@ -517,6 +528,7 @@ export interface FileRouteTypes {
     | '/cpf-alvo'
     | '/cpf-input'
     | '/dados-alvo'
+    | '/detetives'
     | '/disclaimer'
     | '/investigar'
     | '/licenca-zapradar'
@@ -563,6 +575,7 @@ export interface RootRouteChildren {
   CpfAlvoRoute: typeof CpfAlvoRoute
   CpfInputRoute: typeof CpfInputRoute
   DadosAlvoRoute: typeof DadosAlvoRoute
+  DetetivesRoute: typeof DetetivesRoute
   DisclaimerRoute: typeof DisclaimerRoute
   InvestigarRoute: typeof InvestigarRoute
   LicencaZapradarRoute: typeof LicencaZapradarRoute
@@ -686,6 +699,13 @@ declare module '@tanstack/react-router' {
       path: '/dados-alvo'
       fullPath: '/dados-alvo'
       preLoaderRoute: typeof DadosAlvoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/detetives': {
+      id: '/detetives'
+      path: '/detetives'
+      fullPath: '/detetives'
+      preLoaderRoute: typeof DetetivesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/disclaimer': {
@@ -915,6 +935,7 @@ const rootRouteChildren: RootRouteChildren = {
   CpfAlvoRoute: CpfAlvoRoute,
   CpfInputRoute: CpfInputRoute,
   DadosAlvoRoute: DadosAlvoRoute,
+  DetetivesRoute: DetetivesRoute,
   DisclaimerRoute: DisclaimerRoute,
   InvestigarRoute: InvestigarRoute,
   LicencaZapradarRoute: LicencaZapradarRoute,
