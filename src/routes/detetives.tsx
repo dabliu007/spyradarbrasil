@@ -234,7 +234,7 @@ const KIT_ITEMS = [
     title: "Caneta Espiã 4K",
     sub: "Grava áudio e vídeo · 30 dias de bateria",
     desc: "Discreta, idêntica a uma caneta comum. Grava tudo em alta definição por onde passa e a bateria dura até 30 dias. A prova que faltava, no seu bolso.",
-    img: "/equip-caneta.png",
+    img: "/caneta-espia-spyradar.png",
     bullets: ["Vídeo em alta definição", "Bateria de até 30 dias", "100% discreta e portátil"],
   },
   {
