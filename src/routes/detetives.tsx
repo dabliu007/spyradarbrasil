@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 export const Route = createFileRoute("/detetives")({
   head: () => ({
     meta: [
-      { title: "Kit Investigação Completo · Descubra a Verdade em 24h" },
+      { title: "SpyTech Brasil · Kit Investigação Completo · Descubra a Verdade em 24h" },
       {
         name: "description",
         content:
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/detetives")({
       },
       { name: "robots", content: "index,follow,max-image-preview:large" },
       { name: "theme-color", content: "#ffffff" },
-      { property: "og:title", content: "Kit Investigação Completo · Descubra a verdade que escondem de você" },
+      { property: "og:title", content: "SpyTech Brasil · Kit Investigação Completo · Descubra a verdade que escondem de você" },
       { property: "og:description", content: "Clonagem de celular, caneta espiã e rastreador em tempo real. Pare de viver na dúvida." },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "/kit-completo-hero.png" },
@@ -265,7 +265,7 @@ function DetetivesPage() {
             <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#1d1d1f] text-white">
               <Icon name="shield" className="h-4 w-4" />
             </span>
-            <span className="font-display text-[15px] font-extrabold tracking-tight">Verdade</span>
+            <span className="font-display text-[15px] font-extrabold tracking-tight">SpyTech Brasil</span>
           </div>
           <button
             onClick={goToCheckout}
@@ -618,7 +618,7 @@ function DetetivesPage() {
             <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#1d1d1f] text-white">
               <Icon name="shield" className="h-3.5 w-3.5" />
             </span>
-            <span className="font-display text-[14px] font-extrabold tracking-tight">Verdade</span>
+            <span className="font-display text-[14px] font-extrabold tracking-tight">SpyTech Brasil</span>
           </div>
           <p className="mx-auto mt-4 max-w-md text-[12px] leading-relaxed text-[#86868b] text-pretty">
             Equipamentos de investigação para uso pessoal e legal. Use com responsabilidade e de acordo
@@ -630,7 +630,7 @@ function DetetivesPage() {
           >
             Falar com um especialista no WhatsApp
           </a>
-          <p className="mt-6 text-[11px] text-[#c7c7cc]">© {new Date().getFullYear()} Verdade. Todos os direitos reservados.</p>
+          <p className="mt-6 text-[11px] text-[#c7c7cc]">© {new Date().getFullYear()} SpyTech Brasil. Todos os direitos reservados.</p>
         </div>
       </footer>
 
