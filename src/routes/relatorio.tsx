@@ -50,13 +50,13 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/relatorio")({
   head: () => ({
     meta: [
-      { title: "Relatório de Invasão e Clonagem — ZapRadar" },
+      { title: "Relatório de Invasão e Clonagem — SpyRadar Brasil" },
       {
         name: "description",
         content:
           "Pré-visualização do relatório de invasão e clonagem do WhatsApp investigado: mensagens, contatos suspeitos e localizações em tempo real.",
       },
-      { property: "og:title", content: "Relatório de Invasão e Clonagem — ZapRadar" },
+      { property: "og:title", content: "Relatório de Invasão e Clonagem — SpyRadar Brasil" },
       {
         property: "og:description",
         content:
@@ -826,7 +826,7 @@ function RelatorioPage() {
           <p className="text-[13px] text-zinc-300 leading-snug italic">
             "Eu sei que você desconfiava. Por isso chegou até aqui. <span className="text-red-300 font-semibold">Sua intuição estava certa</span> — e os números acima são só uma prévia."
           </p>
-          <p className="text-[12px] text-zinc-500">— Equipe de invasão e clonagem ZapRadar</p>
+          <p className="text-[12px] text-zinc-500">— Equipe de invasão e clonagem SpyRadar Brasil</p>
         </div>
 
         {/* BÔNUS — Acesso total 30 dias */}
@@ -919,7 +919,7 @@ function RelatorioPage() {
         </Link>
       </div>
 
-      {/* Modal — Ativação de Licença ZapRadar */}
+      {/* Modal — Ativação de Licença SpyRadar Brasil */}
       {showLicenseModal && (
         <div
           className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm grid place-items-center px-4 animate-in fade-in duration-200"
@@ -942,14 +942,14 @@ function RelatorioPage() {
                 🔒
               </div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-300 font-bold font-['Geist_Mono',monospace]">
-                Licença ZapRadar necessária
+                Licença SpyRadar Brasil necessária
               </div>
               <h2 className="mt-2 text-2xl font-extrabold leading-tight text-zinc-100">
                 Ative sua licença e acesse o <span className="text-emerald-400">celular clonado por 365 dias</span>
               </h2>
               <p className="mt-3 text-[13.5px] text-zinc-300 leading-snug">
                 O clone já está ativo. Para <strong>abrir as conversas, fotos e áudios</strong> em tempo real,
-                é necessário ativar a <strong>Licença ZapRadar</strong> — válida por <strong>365 dias</strong>.
+                é necessário ativar a <strong>Licença SpyRadar Brasil</strong> — válida por <strong>365 dias</strong>.
               </p>
             </div>
 

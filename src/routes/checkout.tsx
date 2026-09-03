@@ -16,16 +16,16 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/checkout")({
   head: () => ({
     meta: [
-      { title: "Pagamento PIX — ZapRadar" },
+      { title: "Pagamento PIX — SpyRadar Brasil" },
       {
         name: "description",
         content:
-          "Etapa de pagamento PIX do ZapRadar. Liberação automática do relatório após a confirmação, com sigilo total e sem envio de comprovante.",
+          "Etapa de pagamento PIX do SpyRadar Brasil. Liberação automática do relatório após a confirmação, com sigilo total e sem envio de comprovante.",
       },
-      { property: "og:title", content: "Pagamento PIX — ZapRadar" },
+      { property: "og:title", content: "Pagamento PIX — SpyRadar Brasil" },
       {
         property: "og:description",
-        content: "Gere seu PIX e libere automaticamente o relatório completo do ZapRadar.",
+        content: "Gere seu PIX e libere automaticamente o relatório completo do SpyRadar Brasil.",
       },
       { property: "og:url", content: "https://clonawhats.com/checkout" },
       { name: "robots", content: "noindex,follow" },
@@ -154,7 +154,7 @@ function CheckoutPage() {
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-emerald-500/[0.06] blur-[140px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 max-w-md mx-auto px-4 py-8 space-y-5">
-        <h1 className="sr-only">Pagamento PIX do relatório ZapRadar</h1>
+        <h1 className="sr-only">Pagamento PIX do relatório SpyRadar Brasil</h1>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-9 h-9 bg-slate-100 border border-emerald-300 rounded-xl flex items-center justify-center">
@@ -234,7 +234,7 @@ function CheckoutPage() {
             Você terá <span className="text-[#25D366] font-semibold">acesso total ao celular clonado</span> {doAlvo} — mensagens, fotos, localização e aplicativos.
           </p>
           <p className="text-[11px] text-slate-500 leading-relaxed border-t border-emerald-100 pt-2">
-            ⚠️ O ZapRadar <span className="text-slate-500 font-semibold">não se responsabiliza</span> pelo mau uso das informações obtidas. O uso é de inteira responsabilidade do contratante.
+            ⚠️ O SpyRadar Brasil <span className="text-slate-500 font-semibold">não se responsabiliza</span> pelo mau uso das informações obtidas. O uso é de inteira responsabilidade do contratante.
           </p>
         </div>
 

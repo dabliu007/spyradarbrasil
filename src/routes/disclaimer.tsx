@@ -4,13 +4,13 @@ import { LegalShell } from "./termos";
 export const Route = createFileRoute("/disclaimer")({
   head: () => ({
     meta: [
-      { title: "Disclaimer · ZapRadar" },
+      { title: "Disclaimer · SpyRadar Brasil" },
       {
         name: "description",
         content:
-          "Aviso legal do ZapRadar sobre a natureza informativa e de entretenimento do conteúdo, isenção de responsabilidade e ausência de vínculo com terceiros.",
+          "Aviso legal do SpyRadar Brasil sobre a natureza informativa e de entretenimento do conteúdo, isenção de responsabilidade e ausência de vínculo com terceiros.",
       },
-      { property: "og:title", content: "Disclaimer · ZapRadar" },
+      { property: "og:title", content: "Disclaimer · SpyRadar Brasil" },
       { property: "og:url", content: "https://clonawhats.com/disclaimer" },
       { property: "og:type", content: "website" },
     ],
@@ -30,7 +30,7 @@ function DisclaimerPage() {
     <LegalShell title="Disclaimer / Aviso Legal" updated="Atualizado em 06 de julho de 2026">
       <H2>Natureza do conteúdo</H2>
       <p>
-        Todo o conteúdo publicado no <strong>ZapRadar</strong> tem caráter
+        Todo o conteúdo publicado no <strong>SpyRadar Brasil</strong> tem caráter
         exclusivamente <strong>informativo, ilustrativo e de entretenimento</strong>,
         destinado a pessoas maiores de 18 anos. Prints, imagens, áudios,
         vídeos, relatórios e demonstrações apresentados na plataforma são de
@@ -42,7 +42,7 @@ function DisclaimerPage() {
       <p>
         As informações aqui disponibilizadas não substituem aconselhamento
         jurídico, psicológico, médico ou profissional de qualquer natureza. O
-        ZapRadar não se responsabiliza por decisões pessoais, familiares ou
+        SpyRadar Brasil não se responsabiliza por decisões pessoais, familiares ou
         profissionais tomadas com base no conteúdo do site.
       </p>
 
@@ -55,7 +55,7 @@ function DisclaimerPage() {
 
       <H2>Sem vínculo com plataformas de terceiros</H2>
       <p>
-        O ZapRadar é uma plataforma independente e <strong>não possui vínculo,
+        O SpyRadar Brasil é uma plataforma independente e <strong>não possui vínculo,
         parceria ou autorização</strong> do WhatsApp, Meta Platforms, Inc.,
         Instagram, Facebook, Google LLC, YouTube, TikTok, ByteDance Ltd. ou de
         qualquer uma de suas subsidiárias ou afiliadas. Todas as marcas

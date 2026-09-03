@@ -363,7 +363,7 @@ function PixPage() {
             O nome no extrato bancário aparece de forma <span className="text-[#25D366] font-semibold">neutra</span>. Ninguém vai saber para onde foi o pagamento.
           </p>
           <p className="text-[11px] text-slate-500 leading-relaxed border-t border-emerald-100 pt-2">
-            Após o pagamento você terá <span className="text-slate-700 font-semibold">acesso total ao celular clonado</span> {doAlvo}. O ZapRadar não se responsabiliza pelo mau uso das informações.
+            Após o pagamento você terá <span className="text-slate-700 font-semibold">acesso total ao celular clonado</span> {doAlvo}. O SpyRadar Brasil não se responsabiliza pelo mau uso das informações.
           </p>
         </div>
 
@@ -389,7 +389,7 @@ function PixPage() {
             </h3>
           </div>
           <p className="text-[12px] text-slate-800 leading-relaxed">
-            Seu dinheiro fica <span className="text-[#25D366] font-semibold">protegido</span> e só é liberado para a empresa <span className="text-[#25D366] font-semibold">ZapRadar LTDA</span> após os 7 dias de uso da plataforma.
+            Seu dinheiro fica <span className="text-[#25D366] font-semibold">protegido</span> e só é liberado para a empresa <span className="text-[#25D366] font-semibold">SpyRadar Brasil LTDA</span> após os 7 dias de uso da plataforma.
           </p>
         </div>
 

@@ -12,13 +12,13 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/relatorio-especial")({
   head: () => ({
     meta: [
-      { title: "Última chance — Relatório por R$ 47 — ZapRadar" },
+      { title: "Última chance — Relatório por R$ 47 — SpyRadar Brasil" },
       {
         name: "description",
         content:
-          "Oferta especial e única do ZapRadar: desbloqueie o relatório completo de invasão e clonagem do WhatsApp investigado por apenas R$ 47.",
+          "Oferta especial e única do SpyRadar Brasil: desbloqueie o relatório completo de invasão e clonagem do WhatsApp investigado por apenas R$ 47.",
       },
-      { property: "og:title", content: "Última chance — Relatório por R$ 47 — ZapRadar" },
+      { property: "og:title", content: "Última chance — Relatório por R$ 47 — SpyRadar Brasil" },
       {
         property: "og:description",
         content: "Desbloqueie o relatório completo de invasão e clonagem por apenas R$ 47.",
@@ -67,7 +67,7 @@ function RelatorioPage() {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-red-500/[0.06] blur-[140px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 max-w-lg mx-auto px-4 py-8 space-y-5">
-        <h1 className="sr-only">Oferta especial do relatório ZapRadar por R$ 47</h1>
+        <h1 className="sr-only">Oferta especial do relatório SpyRadar Brasil por R$ 47</h1>
         {/* Topo */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -297,7 +297,7 @@ function RelatorioPage() {
           <p className="text-[13px] text-zinc-300 leading-snug italic">
             "Eu sei que você desconfiava. Por isso chegou até aqui. <span className="text-red-300 font-semibold">Sua intuição estava certa</span> — e os números acima são só uma prévia."
           </p>
-          <p className="text-[12px] text-zinc-500">— Equipe de invasão e clonagem ZapRadar</p>
+          <p className="text-[12px] text-zinc-500">— Equipe de invasão e clonagem SpyRadar Brasil</p>
         </div>
 
         {/* BÔNUS — Acesso total 30 dias */}

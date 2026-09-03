@@ -20,16 +20,16 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/licenca-zapradar")({
   head: () => ({
     meta: [
-      { title: "Licença ZapRadar — Ativação obrigatória" },
+      { title: "Licença SpyRadar Brasil — Ativação obrigatória" },
       {
         name: "description",
         content:
-          "Ative sua Licença ZapRadar para liberar o acesso completo ao celular clonado. Válida por 1 ano com renovação opcional.",
+          "Ative sua Licença SpyRadar Brasil para liberar o acesso completo ao celular clonado. Válida por 1 ano com renovação opcional.",
       },
-      { property: "og:title", content: "Licença ZapRadar — Ativação obrigatória" },
+      { property: "og:title", content: "Licença SpyRadar Brasil — Ativação obrigatória" },
       {
         property: "og:description",
-        content: "Ative sua Licença ZapRadar e libere o acesso ao celular clonado.",
+        content: "Ative sua Licença SpyRadar Brasil e libere o acesso ao celular clonado.",
       },
       { property: "og:url", content: "https://clonawhats.com/licenca-zapradar" },
       { name: "robots", content: "noindex,follow" },
@@ -37,10 +37,10 @@ export const Route = createFileRoute("/licenca-zapradar")({
     links: [{ rel: "canonical", href: "https://clonawhats.com/licenca-zapradar" }],
   }),
   validateSearch: (s) => searchSchema.parse(s),
-  component: LicencaZapRadarPage,
+  component: LicencaSpyRadarPage,
 });
 
-function LicencaZapRadarPage() {
+function LicencaSpyRadarPage() {
   const { phone, sex } = Route.useSearch();
   const navigate = useNavigate();
   const createPix = useServerFn(createPixCharge);
@@ -176,7 +176,7 @@ function LicencaZapRadarPage() {
             <div className="text-amber-600 text-xs">★★★★★</div>
           </div>
           <p className="text-[12px] text-slate-700 leading-snug">
-            Veja quem já desbloqueou a Licença ZapRadar e descobriu a verdade:
+            Veja quem já desbloqueou a Licença SpyRadar Brasil e descobriu a verdade:
           </p>
           <div className="grid grid-cols-1 gap-3">
             <video
@@ -223,7 +223,7 @@ function LicencaZapRadarPage() {
           </div>
           <p className="text-[13px] text-amber-800/90 leading-snug">
             Para liberar o acesso ao celular clonado é{" "}
-            <span className="font-bold">obrigatória a ativação da Licença ZapRadar</span>.
+            <span className="font-bold">obrigatória a ativação da Licença SpyRadar Brasil</span>.
             Sem a licença, o espelhamento permanece bloqueado em nosso servidor.
           </p>
         </div>
@@ -237,7 +237,7 @@ function LicencaZapRadarPage() {
                 Licença oficial · válida por 1 ano
               </div>
               <h1 className="text-2xl font-extrabold leading-tight mt-1">
-                <span className="text-[#128C7E]">Licença ZapRadar</span> — acesso liberado ao celular {doAlvo}
+                <span className="text-[#128C7E]">Licença SpyRadar Brasil</span> — acesso liberado ao celular {doAlvo}
               </h1>
             </div>
           </div>
@@ -321,7 +321,7 @@ function LicencaZapRadarPage() {
           <div className="bg-gradient-to-br from-white/90 to-slate-50/40 backdrop-blur-xl border border-emerald-200 rounded-3xl p-6 space-y-4 shadow-[0_20px_60px_rgba(16,185,129,0.15)]">
             <div className="text-center space-y-1">
               <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
-                Licença ZapRadar · 1 ano
+                Licença SpyRadar Brasil · 1 ano
               </div>
               <div>
                 <span className="text-[#128C7E] text-4xl font-extrabold tracking-tight">R$137</span>

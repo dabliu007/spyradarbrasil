@@ -5,13 +5,13 @@ import { BLOG_POSTS, formatDate } from "@/lib/blog-posts";
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: "Blog ZapRadar · Relacionamentos, Traição e Investigação Digital" },
+      { title: "Blog SpyRadar Brasil · Relacionamentos, Traição e Investigação Digital" },
       {
         name: "description",
         content:
           "Artigos sobre sinais de traição, WhatsApp clonado, mensagens apagadas e como investigar a fidelidade do seu parceiro(a) com discrição.",
       },
-      { property: "og:title", content: "Blog ZapRadar" },
+      { property: "og:title", content: "Blog SpyRadar Brasil" },
       {
         property: "og:description",
         content:
@@ -58,7 +58,7 @@ function BlogIndex() {
               Z
             </div>
             <span className="font-extrabold text-slate-900 tracking-tight">
-              ZapRadar<span className="text-emerald-600">.</span>Blog
+              SpyRadar Brasil<span className="text-emerald-600">.</span>Blog
             </span>
           </Link>
           <Link

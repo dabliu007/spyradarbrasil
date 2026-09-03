@@ -47,7 +47,7 @@ export function PresellPage() {
         <div className="bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-emerald-300 rounded-3xl p-6 space-y-5 shadow-[0_25px_70px_rgba(16,185,129,0.18)]">
           {/* logo */}
           <div className="flex flex-col items-center gap-3">
-            <img src={logoAsset.url} alt="ZapRadar" className="h-10 w-auto" />
+            <img src={logoAsset.url} alt="SpyRadar Brasil" className="h-10 w-auto" />
             <StepDots step={step} />
           </div>
 

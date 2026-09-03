@@ -11,7 +11,7 @@ export const Route = createFileRoute("/blog/$slug")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Artigo não encontrado · Blog ZapRadar" },
+          { title: "Artigo não encontrado · Blog SpyRadar Brasil" },
           { name: "robots", content: "noindex" },
         ],
       };
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/blog/$slug")({
     const image = post.heroImage?.startsWith("http") ? post.heroImage : undefined;
     return {
       meta: [
-        { title: `${post.title} · Blog ZapRadar` },
+        { title: `${post.title} · Blog SpyRadar Brasil` },
         { name: "description", content: post.description },
         { property: "og:title", content: post.title },
         { property: "og:description", content: post.description },
@@ -56,7 +56,7 @@ export const Route = createFileRoute("/blog/$slug")({
             author: { "@type": "Organization", name: post.author },
             publisher: {
               "@type": "Organization",
-              name: "ZapRadar",
+              name: "SpyRadar Brasil",
               url: "https://clonawhats.com/",
             },
             mainEntityOfPage: { "@type": "WebPage", "@id": url },
@@ -127,7 +127,7 @@ function BlogPostPage() {
               Z
             </div>
             <span className="font-extrabold tracking-tight">
-              ZapRadar<span className="text-emerald-600">.</span>Blog
+              SpyRadar Brasil<span className="text-emerald-600">.</span>Blog
             </span>
           </Link>
           <Link

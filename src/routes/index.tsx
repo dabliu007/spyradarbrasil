@@ -3,14 +3,13 @@ import { VerificarPage } from "./verificar";
 
 const SITE_URL = "https://clonawhats.com";
 
-const TITLE = "ZapRadar (SpyZap): Clonar Celular do Marido ou da Esposa";
+const TITLE = "SpyRadar Brasil (SpyZap): Clonar Celular do Marido ou da Esposa";
 
 const DESCRIPTION =
-  "Zap Radar e SpyZap: veja como clonar o celular do marido ou da esposa e descobrir traição pelo WhatsApp. Conversas apagadas, fotos ocultas, áudios e localização em tempo real, 100% sigiloso.";
+  "SpyRadar Brasil e SpyZap: veja como clonar o celular do marido ou da esposa e descobrir traição pelo WhatsApp. Conversas apagadas, fotos ocultas, áudios e localização em tempo real, 100% sigiloso.";
 
 const KEYWORDS = [
-  "Zap Radar",
-  "ZapRadar",
+  "SpyRadar Brasil",
   "SpyZap",
   "ZapSpy",
   "WhatsRadar",
@@ -41,11 +40,11 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
-      { property: "og:site_name", content: "ZapRadar · SpyZap" },
+      { property: "og:site_name", content: "SpyRadar Brasil · SpyZap" },
       { property: "og:image", content: `${SITE_URL}/og-image.png` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "ZapRadar - Descubra a verdade pelo WhatsApp" },
+      { property: "og:image:alt", content: "SpyRadar Brasil - Descubra a verdade pelo WhatsApp" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
@@ -58,8 +57,8 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          name: "ZapRadar",
-          alternateName: ["Zap Radar", "SpyZap", "ZapSpy", "WhatsRadar"],
+          name: "SpyRadar Brasil",
+          alternateName: ["SpyRadar Brasil", "SpyZap", "ZapSpy", "WhatsRadar"],
           url: `${SITE_URL}/`,
           inLanguage: "pt-BR",
           description: DESCRIPTION,
@@ -75,8 +74,8 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
-          name: "ZapRadar",
-          alternateName: ["Zap Radar", "SpyZap"],
+          name: "SpyRadar Brasil",
+          alternateName: ["SpyRadar Brasil", "SpyZap"],
           applicationCategory: "UtilitiesApplication",
           operatingSystem: "Android, iOS, Web",
           url: `${SITE_URL}/`,
@@ -106,7 +105,7 @@ export const Route = createFileRoute("/")({
               name: "Como clonar o celular do marido?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "No ZapRadar (também conhecido como Zap Radar e SpyZap) você informa o número do WhatsApp do seu marido e recebe o espelhamento com conversas apagadas, fotos ocultas, áudios e localização em tempo real em poucos minutos, sem que ele receba qualquer notificação.",
+                text: "No SpyRadar Brasil (também conhecido como SpyZap) você informa o número do WhatsApp do seu marido e recebe o espelhamento com conversas apagadas, fotos ocultas, áudios e localização em tempo real em poucos minutos, sem que ele receba qualquer notificação.",
               },
             },
             {
@@ -114,15 +113,15 @@ export const Route = createFileRoute("/")({
               name: "Como clonar o celular da esposa?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Basta digitar o número do WhatsApp da sua esposa no ZapRadar. O sistema faz a verificação e libera o painel com mensagens apagadas, mídias escondidas e histórico de localização, com sigilo total.",
+                text: "Basta digitar o número do WhatsApp da sua esposa no SpyRadar Brasil. O sistema faz a verificação e libera o painel com mensagens apagadas, mídias escondidas e histórico de localização, com sigilo total.",
               },
             },
             {
               "@type": "Question",
-              name: "O que é o SpyZap / Zap Radar?",
+              name: "O que é o SpyZap / SpyRadar Brasil?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "SpyZap, ZapSpy, WhatsRadar e Zap Radar são nomes populares usados para o ZapRadar, a plataforma que espelha o WhatsApp do parceiro(a) e mostra conversas, fotos, áudios e localização em um painel único.",
+                text: "SpyZap, ZapSpy, WhatsRadar e SpyRadar Brasil são nomes populares usados para o SpyRadar Brasil, a plataforma que espelha o WhatsApp do parceiro(a) e mostra conversas, fotos, áudios e localização em um painel único.",
               },
             },
             {
@@ -130,7 +129,7 @@ export const Route = createFileRoute("/")({
               name: "A pessoa descobre que o celular foi clonado?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Não. O processo do ZapRadar é 100% sigiloso: nenhuma notificação, mensagem ou aviso aparece no aparelho do alvo durante ou depois da verificação.",
+                text: "Não. O processo do SpyRadar Brasil é 100% sigiloso: nenhuma notificação, mensagem ou aviso aparece no aparelho do alvo durante ou depois da verificação.",
               },
             },
             {
@@ -146,7 +145,7 @@ export const Route = createFileRoute("/")({
               name: "Dá para ver conversas já apagadas?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Sim. O ZapRadar recupera mensagens apagadas, fotos e vídeos que somem uma única vez e áudios enviados nas últimas semanas.",
+                text: "Sim. O SpyRadar Brasil recupera mensagens apagadas, fotos e vídeos que somem uma única vez e áudios enviados nas últimas semanas.",
               },
             },
           ],

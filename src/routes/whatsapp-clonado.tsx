@@ -10,13 +10,13 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/whatsapp-clonado")({
   head: () => ({
     meta: [
-      { title: "WhatsApp Clonado — ZapRadar" },
+      { title: "WhatsApp Clonado — SpyRadar Brasil" },
       {
         name: "description",
         content:
-          "Visualização do WhatsApp clonado do alvo investigado pelo ZapRadar.",
+          "Visualização do WhatsApp clonado do alvo investigado pelo SpyRadar Brasil.",
       },
-      { property: "og:title", content: "WhatsApp Clonado — ZapRadar" },
+      { property: "og:title", content: "WhatsApp Clonado — SpyRadar Brasil" },
       { property: "og:url", content: "https://clonawhats.com/whatsapp-clonado" },
       { name: "robots", content: "noindex,follow" },
     ],
@@ -301,14 +301,14 @@ function WhatsAppClonadoPage() {
                 🔒
               </div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-700 font-bold">
-                Licença ZapRadar necessária
+                Licença SpyRadar Brasil necessária
               </div>
               <h2 className="mt-2 text-2xl font-extrabold leading-tight text-slate-900">
                 Ative sua licença e acesse o <span className="text-emerald-600">celular clonado por 365 dias</span>
               </h2>
               <p className="mt-3 text-[13.5px] text-slate-700 leading-snug">
                 O clone já está ativo. Para <strong>abrir as conversas, fotos e áudios</strong> em tempo real,
-                é necessário ativar a <strong>Licença ZapRadar</strong> — válida por <strong>365 dias</strong>.
+                é necessário ativar a <strong>Licença SpyRadar Brasil</strong> — válida por <strong>365 dias</strong>.
               </p>
             </div>
 

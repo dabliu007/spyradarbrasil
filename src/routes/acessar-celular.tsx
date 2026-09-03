@@ -12,7 +12,7 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/acessar-celular")({
   head: () => ({
     meta: [
-      { title: "Acessar Celular Clonado · ZapRadar" },
+      { title: "Acessar Celular Clonado · SpyRadar Brasil" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),
@@ -84,7 +84,7 @@ function AcessarCelularPage() {
           </div>
           <div>
             <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
-              ZapRadar · Painel Espelhamento
+              SpyRadar Brasil · Painel Espelhamento
             </div>
             <div className="text-base font-extrabold">Acessar Celular Clonado</div>
           </div>
@@ -166,7 +166,7 @@ function AcessarCelularPage() {
         </div>
 
         <div className="bg-white border border-slate-200 rounded-2xl p-4 text-[12px] text-slate-500 leading-relaxed">
-          Esqueceu sua senha? Por segurança, a recuperação só é feita pelo painel ZapRadar com confirmação da licença ativa.
+          Esqueceu sua senha? Por segurança, a recuperação só é feita pelo painel SpyRadar Brasil com confirmação da licença ativa.
         </div>
       </div>
     </div>

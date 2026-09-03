@@ -25,7 +25,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2026-07-15",
     readTime: "11 min",
     category: "Relacionamentos",
-    author: "Equipe ZapRadar",
+    author: "Equipe SpyRadar Brasil",
     cover: "🌙",
     heroImage: blogMarina.url,
     content: `> "Eu preferia estar errada. Juro por Deus que preferia. Mas o silêncio dele às 23h com o celular virado pra baixo era mais alto que qualquer verdade."
@@ -130,7 +130,7 @@ Existe uma forma discreta, rápida e segura de descobrir a verdade sobre o núme
     date: "2026-07-10",
     readTime: "10 min",
     category: "Relacionamentos",
-    author: "Equipe ZapRadar",
+    author: "Equipe SpyRadar Brasil",
     cover: "🧠",
     heroImage: blogHomem.url,
     content: `> "Ele tinha tudo. Uma esposa linda, dois filhos, uma casa quitada. Por que ele traiu?"
@@ -259,7 +259,7 @@ Você merece dormir hoje à noite sabendo a verdade.`,
     date: "2026-07-04",
     readTime: "8 min",
     category: "Investigação",
-    author: "Equipe ZapRadar",
+    author: "Equipe SpyRadar Brasil",
     cover: "🔇",
     heroImage: blogSilencio.url,
     content: `Existe um tipo de silêncio que grita.
@@ -379,7 +379,7 @@ Se você chegou até aqui, é porque o silêncio dele já está gritando muito a
     date: "2026-06-28",
     readTime: "9 min",
     category: "Relacionamentos",
-    author: "Equipe ZapRadar",
+    author: "Equipe SpyRadar Brasil",
     cover: "🌅",
     heroImage: blogDignidade.url,
     content: `Você descobriu.
@@ -513,7 +513,7 @@ Você merece a verdade. E você merece hoje.`,
     date: "2025-11-14",
     readTime: "6 min",
     category: "Relacionamentos",
-    author: "Equipe ZapRadar",
+    author: "Equipe SpyRadar Brasil",
     cover: "🕵️",
     content: `## 1. Ele(a) apaga conversas com frequência
 
@@ -555,7 +555,7 @@ Se você identificou 3 ou mais desses sinais, não ignore. A verdade dói menos 
     date: "2025-11-08",
     readTime: "5 min",
     category: "Investigação",
-    author: "Equipe ZapRadar",
+    author: "Equipe SpyRadar Brasil",
     cover: "🔍",
     content: `## O erro mais comum: confrontar cedo demais
 
@@ -571,7 +571,7 @@ Continue agindo naturalmente. Mudanças bruscas no seu comportamento alertam o o
 
 ## Estratégia 3: use ferramentas discretas
 
-Hoje existem soluções tecnológicas que permitem monitorar mensagens, fotos e localização de forma silenciosa. O ZapRadar, por exemplo, funciona em segundo plano sem instalar nada no celular do alvo.
+Hoje existem soluções tecnológicas que permitem monitorar mensagens, fotos e localização de forma silenciosa. O SpyRadar Brasil, por exemplo, funciona em segundo plano sem instalar nada no celular do alvo.
 
 ## Estratégia 4: reúna evidências antes de conversar
 
@@ -589,7 +589,7 @@ Descobrir uma traição é doloroso, mas viver na dúvida é pior. Vá com calma
     date: "2025-10-30",
     readTime: "7 min",
     category: "Tecnologia",
-    author: "Equipe ZapRadar",
+    author: "Equipe SpyRadar Brasil",
     cover: "📱",
     content: `## O que é "clonar" o WhatsApp
 
@@ -629,7 +629,7 @@ O primeiro passo é fazer uma verificação inicial com o número do WhatsApp do
     date: "2025-10-22",
     readTime: "4 min",
     category: "Tecnologia",
-    author: "Equipe ZapRadar",
+    author: "Equipe SpyRadar Brasil",
     cover: "💬",
     content: `## Por que mensagens apagadas ainda existem
 
@@ -659,7 +659,7 @@ Depende do seu objetivo. Se quer investigar padrões contínuos, o espelhamento 
     date: "2025-10-15",
     readTime: "5 min",
     category: "Relacionamentos",
-    author: "Equipe ZapRadar",
+    author: "Equipe SpyRadar Brasil",
     cover: "💔",
     content: `## A diferença fundamental
 

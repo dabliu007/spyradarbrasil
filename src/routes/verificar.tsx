@@ -21,13 +21,13 @@ const VIDEO_START_SECONDS = 0; // VSL toca desde o início
 export const Route = createFileRoute("/verificar")({
   head: () => ({
     meta: [
-      { title: "Verificar Número · ZapRadar (SpyZap) - Clonar Celular" },
+      { title: "Verificar Número · SpyRadar Brasil (SpyZap) - Clonar Celular" },
       {
         name: "description",
         content:
-          "Verifique o número do WhatsApp do seu marido, esposa, namorado ou namorada no ZapRadar (SpyZap) e descubra conversas apagadas, fotos ocultas e áudios secretos em minutos.",
+          "Verifique o número do WhatsApp do seu marido, esposa, namorado ou namorada no SpyRadar Brasil (SpyZap) e descubra conversas apagadas, fotos ocultas e áudios secretos em minutos.",
       },
-      { property: "og:title", content: "Verificar Número · ZapRadar (SpyZap)" },
+      { property: "og:title", content: "Verificar Número · SpyRadar Brasil (SpyZap)" },
       {
         property: "og:description",
         content: "Descubra se ele(a) está te traindo sem ele(a) descobrir. Clone o WhatsApp em minutos, 100% sigiloso.",
@@ -35,7 +35,7 @@ export const Route = createFileRoute("/verificar")({
       { property: "og:url", content: "https://clonawhats.com/verificar" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Verificar Número · ZapRadar (SpyZap)" },
+      { name: "twitter:title", content: "Verificar Número · SpyRadar Brasil (SpyZap)" },
       {
         name: "twitter:description",
         content: "Clone o WhatsApp do seu parceiro(a) e veja conversas apagadas, fotos e áudios em minutos.",
@@ -194,23 +194,23 @@ export function VerificarPage() {
 const FAQ_ITEMS = [
   {
     q: "Como clonar o celular e WhatsApp do marido?",
-    a: "Informe o número do WhatsApp do seu marido no ZapRadar. Em minutos você recebe acesso a conversas apagadas, fotos ocultas, áudios e localização em tempo real — 100% sigiloso, ele não recebe nenhuma notificação.",
+    a: "Informe o número do WhatsApp do seu marido no SpyRadar Brasil. Em minutos você recebe acesso a conversas apagadas, fotos ocultas, áudios e localização em tempo real — 100% sigiloso, ele não recebe nenhuma notificação.",
   },
   {
     q: "Como clonar o celular e WhatsApp da esposa?",
-    a: "Basta digitar o número do WhatsApp da sua esposa. O ZapRadar (também conhecido como WhatsRadar, ZapSpy e SpyZap) faz o espelhamento do aparelho e você acessa mensagens, mídia e localização sem que ela desconfie.",
+    a: "Basta digitar o número do WhatsApp da sua esposa. O SpyRadar Brasil (também conhecido como WhatsRadar, ZapSpy e SpyZap) faz o espelhamento do aparelho e você acessa mensagens, mídia e localização sem que ela desconfie.",
   },
   {
     q: "Como descobrir a traição do meu namorado clonando o celular dele?",
-    a: "Ao clonar o WhatsApp do seu namorado pelo ZapRadar, você visualiza conversas apagadas, fotos e vídeos escondidos, áudios enviados e recebidos e a localização em tempo real — provas concretas de uma possível traição.",
+    a: "Ao clonar o WhatsApp do seu namorado pelo SpyRadar Brasil, você visualiza conversas apagadas, fotos e vídeos escondidos, áudios enviados e recebidos e a localização em tempo real — provas concretas de uma possível traição.",
   },
   {
     q: "Como descobrir a traição da minha namorada clonando o celular dela?",
-    a: "O ZapRadar permite clonar o celular da sua namorada em poucos minutos. Você acompanha as conversas do WhatsApp, mídia oculta e por onde ela está passando em tempo real, tudo com total discrição.",
+    a: "O SpyRadar Brasil permite clonar o celular da sua namorada em poucos minutos. Você acompanha as conversas do WhatsApp, mídia oculta e por onde ela está passando em tempo real, tudo com total discrição.",
   },
   {
     q: "A pessoa clonada é notificada?",
-    a: "Não. O processo do ZapRadar é totalmente sigiloso — a pessoa alvo não recebe nenhum alerta, notificação ou aviso de que o WhatsApp dela foi espelhado.",
+    a: "Não. O processo do SpyRadar Brasil é totalmente sigiloso — a pessoa alvo não recebe nenhum alerta, notificação ou aviso de que o WhatsApp dela foi espelhado.",
   },
   {
     q: "Quanto tempo demora para clonar o WhatsApp?",
@@ -221,7 +221,7 @@ const FAQ_ITEMS = [
     a: "Não. Você precisa apenas do número de WhatsApp da pessoa. Todo o processo é feito remotamente, sem instalar nada no celular dela.",
   },
   {
-    q: "É seguro usar o ZapRadar / WhatsRadar / ZapSpy / SpyZap?",
+    q: "É seguro usar o SpyRadar Brasil / WhatsRadar / ZapSpy / SpyZap?",
     a: "Sim. Utilizamos conexão criptografada e pagamento 100% seguro. Os dados coletados ficam disponíveis apenas para você, no seu painel privado.",
   },
 ];
@@ -240,7 +240,7 @@ function FAQ() {
         </h2>
         <p className="text-[13px] text-zinc-400 leading-relaxed">
           Tire as principais dúvidas sobre como descobrir uma traição usando
-          o ZapRadar.
+          o SpyRadar Brasil.
         </p>
       </div>
 
@@ -296,7 +296,7 @@ function Header() {
         </div>
       </div>
       <span className="text-xl font-bold tracking-tight text-white">
-        Zap<span className="text-emerald-500">Radar</span>
+        SpyRadar <span className="text-emerald-500">Brasil</span>
       </span>
     </div>
   );
@@ -1576,11 +1576,11 @@ function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targ
               </svg>
             </div>
             <span className="text-lg font-bold tracking-tight text-white">
-              Zap<span className="text-emerald-500">Radar</span>
+              SpyRadar <span className="text-emerald-500">Brasil</span>
             </span>
           </div>
           <p className="text-[14px] text-zinc-300 leading-snug pt-2">
-            Com o <span className="text-emerald-400 font-semibold">ZapRadar</span> você
+            Com o <span className="text-emerald-400 font-semibold">SpyRadar Brasil</span> você
             terá acesso completo ao WhatsApp clonado por apenas:
           </p>
         </div>

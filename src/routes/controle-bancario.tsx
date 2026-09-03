@@ -17,13 +17,13 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/controle-bancario")({
   head: () => ({
     meta: [
-      { title: "Controle Bancário Total — ZapRadar" },
+      { title: "Controle Bancário Total — SpyRadar Brasil" },
       {
         name: "description",
         content:
-          "Ative o Controle Bancário Total do ZapRadar e acompanhe em tempo real todos os aplicativos bancários instalados no celular investigado.",
+          "Ative o Controle Bancário Total do SpyRadar Brasil e acompanhe em tempo real todos os aplicativos bancários instalados no celular investigado.",
       },
-      { property: "og:title", content: "Controle Bancário Total — ZapRadar" },
+      { property: "og:title", content: "Controle Bancário Total — SpyRadar Brasil" },
       {
         property: "og:description",
         content: "Acompanhe em tempo real os aplicativos bancários do celular investigado.",

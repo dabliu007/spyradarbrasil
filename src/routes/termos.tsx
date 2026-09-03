@@ -3,10 +3,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/termos")({
   head: () => ({
     meta: [
-      { title: "Termos de Uso · ZapRadar" },
-      { name: "description", content: "Termos de uso do ZapRadar: regras, responsabilidades e limitações de uso da plataforma." },
-      { property: "og:title", content: "Termos de Uso · ZapRadar" },
-      { property: "og:description", content: "Termos de uso do ZapRadar." },
+      { title: "Termos de Uso · SpyRadar Brasil" },
+      { name: "description", content: "Termos de uso do SpyRadar Brasil: regras, responsabilidades e limitações de uso da plataforma." },
+      { property: "og:title", content: "Termos de Uso · SpyRadar Brasil" },
+      { property: "og:description", content: "Termos de uso do SpyRadar Brasil." },
       { property: "og:url", content: "https://clonawhats.com/termos" },
       { property: "og:type", content: "website" },
     ],
@@ -19,7 +19,7 @@ function TermosPage() {
   return <LegalShell title="Termos de Uso" updated="Atualizado em 06 de julho de 2026">
     <p>
       Estes Termos de Uso ("Termos") regulam o acesso e a utilização do site
-      <strong> ZapRadar</strong> ("ZapRadar", "nós", "plataforma"), acessível em
+      <strong> SpyRadar Brasil</strong> ("SpyRadar Brasil", "nós", "plataforma"), acessível em
       https://clonawhats.com. Ao acessar ou utilizar a plataforma, você declara
       ter lido, entendido e concordado integralmente com estes Termos. Caso não
       concorde, você não deve utilizar o serviço.
@@ -27,7 +27,7 @@ function TermosPage() {
 
     <H2>1. Natureza do serviço</H2>
     <p>
-      O ZapRadar é um serviço digital de <strong>entretenimento e conteúdo
+      O SpyRadar Brasil é um serviço digital de <strong>entretenimento e conteúdo
       informativo</strong> destinado exclusivamente a pessoas maiores de 18
       (dezoito) anos. As demonstrações, prints, áudios, vídeos e relatórios
       exibidos na plataforma têm caráter <strong>ilustrativo e ficcional</strong>,
@@ -35,7 +35,7 @@ function TermosPage() {
       comportamental e reflexão sobre relacionamentos.
     </p>
     <p>
-      O ZapRadar <strong>não</strong> intercepta, clona, invade, monitora ou
+      O SpyRadar Brasil <strong>não</strong> intercepta, clona, invade, monitora ou
       acessa dispositivos, contas, mensagens, chamadas ou dados pessoais de
       terceiros. Nenhuma comunicação privada é obtida sem consentimento.
     </p>
@@ -63,16 +63,16 @@ function TermosPage() {
 
     <H2>4. Propriedade intelectual</H2>
     <p>
-      Todo o conteúdo do ZapRadar — incluindo marca, layout, textos, imagens,
+      Todo o conteúdo do SpyRadar Brasil — incluindo marca, layout, textos, imagens,
       código-fonte, ícones e materiais audiovisuais — é protegido pela
-      legislação de propriedade intelectual e pertence ao ZapRadar ou é
+      legislação de propriedade intelectual e pertence ao SpyRadar Brasil ou é
       utilizado sob licença. É proibida a reprodução, distribuição ou uso
       comercial sem autorização por escrito.
     </p>
 
     <H2>5. Limitação de responsabilidade</H2>
     <p>
-      O ZapRadar oferece a plataforma "no estado em que se encontra". Não
+      O SpyRadar Brasil oferece a plataforma "no estado em que se encontra". Não
       garantimos que o serviço estará livre de interrupções, indisponibilidades
       ou erros. Não somos responsáveis por decisões pessoais, familiares,
       profissionais ou emocionais tomadas pelo usuário com base no conteúdo
@@ -144,7 +144,7 @@ export function LegalShell({
 
         <div className="mt-4 bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-emerald-200 rounded-3xl p-6 sm:p-8 shadow-[0_25px_70px_rgba(16,185,129,0.12)]">
           <div className="text-[10px] uppercase tracking-[0.3em] text-emerald-700 font-['Geist_Mono',monospace] font-bold">
-            ZapRadar · Legal
+            SpyRadar Brasil · Legal
           </div>
           <h1 className="mt-1 text-2xl sm:text-3xl font-extrabold text-slate-900">
             {title}

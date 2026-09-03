@@ -18,13 +18,13 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/conta-poupanca")({
   head: () => ({
     meta: [
-      { title: "Conta Poupança Oculta Encontrada — ZapRadar" },
+      { title: "Conta Poupança Oculta Encontrada — SpyRadar Brasil" },
       {
         name: "description",
         content:
           "Uma conta poupança oculta com saldo escondido foi detectada no dispositivo investigado. Libere o acesso agora.",
       },
-      { property: "og:title", content: "Conta Poupança Oculta — ZapRadar" },
+      { property: "og:title", content: "Conta Poupança Oculta — SpyRadar Brasil" },
       {
         property: "og:description",
         content: "Conta poupança escondida com saldo detectado. Libere o acesso.",

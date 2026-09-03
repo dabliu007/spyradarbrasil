@@ -336,7 +336,7 @@ function NotaFiscalPage() {
               <span className="text-amber-600 font-bold shrink-0">03.</span>
               <span>
                 <b>Sigilo garantido:</b> a cobrança aparece no seu extrato como
-                serviço genérico — sem qualquer referência ao ZapRadar ou ao alvo.
+                serviço genérico — sem qualquer referência ao SpyRadar Brasil ou ao alvo.
               </span>
             </li>
             <li className="flex gap-2">

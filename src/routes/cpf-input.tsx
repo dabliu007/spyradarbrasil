@@ -11,7 +11,7 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/cpf-input")({
   head: () => ({
     meta: [
-      { title: "Digite o CPF do alvo · ZapRadar" },
+      { title: "Digite o CPF do alvo · SpyRadar Brasil" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),

@@ -35,7 +35,7 @@ const STEPS: Step[] = [
 
 const FAKE_LOGS: string[] = [
   "[boot] zr-mirror-agent v4.7.2 iniciando…",
-  "[net] conectado em mirror-br-03.zapradar.internal :8443",
+  "[net] conectado em mirror-br-03.spyradar.internal :8443",
   "[tls] handshake OK · cipher=TLS_AES_256_GCM_SHA384",
   "[fp] device=Chrome/124 · os=Android 14 · gpu=Adreno 730",
   "[probe] alvo localizado · last_seen=online · device_count=2",
@@ -343,7 +343,7 @@ function CadastroDispositivoPage() {
                   <span className="shrink-0 w-7 h-7 rounded-full bg-emerald-100 border border-emerald-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">1</span>
                   <div>
                     <div className="font-semibold text-slate-900 text-[14px]">Abra o navegador do seu celular ou computador</div>
-                    <div className="text-[12px] text-slate-500">Pode ser Chrome, Safari, Edge ou qualquer outro. Use uma aba anônima se quiser sigilo máximo — o ZapRadar não deixa rastros no histórico.</div>
+                    <div className="text-[12px] text-slate-500">Pode ser Chrome, Safari, Edge ou qualquer outro. Use uma aba anônima se quiser sigilo máximo — o SpyRadar Brasil não deixa rastros no histórico.</div>
                   </div>
                 </li>
                 <li className="flex gap-3">

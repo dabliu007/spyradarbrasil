@@ -28,7 +28,7 @@ export default function FooterCredibilidade() {
       <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Coluna 1 — Empresa */}
         <div>
-          <h3 className="text-white font-semibold mb-3">ZapRadar</h3>
+          <h3 className="text-white font-semibold mb-3">SpyRadar Brasil</h3>
           <p className="text-sm leading-relaxed">
             TechBiz Forense Digital Ltda
             <br />
@@ -119,7 +119,7 @@ export default function FooterCredibilidade() {
             não é endossado pela Meta de nenhuma forma.
           </p>
           <p>
-            O ZapRadar é uma ferramenta independente e não possui qualquer vínculo, parceria ou
+            O SpyRadar Brasil é uma ferramenta independente e não possui qualquer vínculo, parceria ou
             autorização do WhatsApp ou da Meta Platforms, Inc. WhatsApp é uma marca registrada
             da Meta Platforms, Inc.
           </p>
@@ -139,7 +139,7 @@ export default function FooterCredibilidade() {
       {/* Copyright */}
       <div className="border-t border-slate-800">
         <div className="max-w-6xl mx-auto px-6 py-4 text-center text-xs text-slate-500">
-          © {anoAtual} ZapRadar — TechBiz Forense Digital Ltda — CNPJ 05.757.597/0001-37.
+          © {anoAtual} SpyRadar Brasil — TechBiz Forense Digital Ltda — CNPJ 05.757.597/0001-37.
           Todos os direitos reservados.
         </div>
       </div>

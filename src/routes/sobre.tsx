@@ -4,17 +4,17 @@ import { LegalShell } from "./termos";
 export const Route = createFileRoute("/sobre")({
   head: () => ({
     meta: [
-      { title: "Sobre o ZapRadar · Quem somos" },
+      { title: "Sobre o SpyRadar Brasil · Quem somos" },
       {
         name: "description",
         content:
-          "Conheça o ZapRadar: uma plataforma independente de análise digital e conteúdo informativo, operada pela TechBiz Forense Digital Ltda.",
+          "Conheça o SpyRadar Brasil: uma plataforma independente de análise digital e conteúdo informativo, operada pela TechBiz Forense Digital Ltda.",
       },
-      { property: "og:title", content: "Sobre o ZapRadar · Quem somos" },
+      { property: "og:title", content: "Sobre o SpyRadar Brasil · Quem somos" },
       {
         property: "og:description",
         content:
-          "Missão, valores e responsáveis pela plataforma ZapRadar.",
+          "Missão, valores e responsáveis pela plataforma SpyRadar Brasil.",
       },
       { property: "og:url", content: "https://clonawhats.com/sobre" },
       { property: "og:type", content: "website" },
@@ -32,15 +32,15 @@ function H2({ children }: { children: React.ReactNode }) {
 
 function SobrePage() {
   return (
-    <LegalShell title="Sobre o ZapRadar" updated="Atualizado em 06 de julho de 2026">
+    <LegalShell title="Sobre o SpyRadar Brasil" updated="Atualizado em 06 de julho de 2026">
       <p>
-        O <strong>ZapRadar</strong> é uma plataforma digital independente
+        O <strong>SpyRadar Brasil</strong> é uma plataforma digital independente
         voltada à <strong>análise de conteúdo e comportamento em
         relacionamentos</strong>, com foco em oferecer material informativo,
         reflexivo e de entretenimento para pessoas maiores de 18 anos.
       </p>
 
-      <H2>Quem opera o ZapRadar</H2>
+      <H2>Quem opera o SpyRadar Brasil</H2>
       <p>
         A plataforma é mantida por <strong>TechBiz Forense Digital Ltda</strong>,
         pessoa jurídica de direito privado inscrita no CNPJ sob o nº{" "}

@@ -11,13 +11,13 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/acesso-liberado")({
   head: () => ({
     meta: [
-      { title: "Acesso Liberado — Relatório ZapRadar" },
+      { title: "Acesso Liberado — Relatório SpyRadar Brasil" },
       {
         name: "description",
         content:
-          "Acesso total ao relatório de invasão e clonagem ZapRadar liberado. Conversas, fotos, localização e contas bancárias disponíveis.",
+          "Acesso total ao relatório de invasão e clonagem SpyRadar Brasil liberado. Conversas, fotos, localização e contas bancárias disponíveis.",
       },
-      { property: "og:title", content: "Acesso Liberado — Relatório ZapRadar" },
+      { property: "og:title", content: "Acesso Liberado — Relatório SpyRadar Brasil" },
       {
         property: "og:description",
         content:
@@ -88,7 +88,7 @@ function AcessoLiberadoPage() {
       <div className="relative z-10 max-w-3xl mx-auto px-4 py-8 space-y-6">
         <header className="border border-emerald-300 bg-white/70 rounded-md p-4">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-[#128C7E]">zapradar_core.exe</span>
+            <span className="text-[#128C7E]">spyradar_core.exe</span>
             <span className="text-[#25D366]">{now}</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-[#25D366] mt-3 tracking-tight">
@@ -117,7 +117,7 @@ function AcessoLiberadoPage() {
             <li>✓ Relatório de invasão</li>
             <li>✓ Taxa de sigilo</li>
             <li>✓ Taxa de serviços Meta</li>
-            <li>✓ Licença ZapRadar ativa</li>
+            <li>✓ Licença SpyRadar Brasil ativa</li>
             <li>✓ Controle bancário total</li>
             <li>✓ Espelhamento 30 dias</li>
           </ul>
@@ -194,7 +194,7 @@ function AcessoLiberadoPage() {
         </section>
 
         <footer className="text-center text-[10px] text-emerald-700 pt-6 border-t border-emerald-900/50">
-          zapradar_core v3.7 · sessão protegida · uso restrito ao contratante
+          spyradar_core v3.7 · sessão protegida · uso restrito ao contratante
         </footer>
       </div>
     </div>

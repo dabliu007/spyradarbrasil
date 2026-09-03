@@ -4,7 +4,7 @@ import { PresellPage } from "@/components/PresellPage";
 export const Route = createFileRoute("/presell")({
   head: () => ({
     meta: [
-      { title: "Análise Social · ZapRadar" },
+      { title: "Análise Social · SpyRadar Brasil" },
       {
         name: "description",
         content:

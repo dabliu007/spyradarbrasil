@@ -13,7 +13,7 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/dados-alvo")({
   head: () => ({
     meta: [
-      { title: "Dados do alvo · ZapRadar" },
+      { title: "Dados do alvo · SpyRadar Brasil" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),
@@ -175,7 +175,7 @@ function DadosAlvoPage() {
             </div>
           </div>
           <span className="text-xl font-bold tracking-tight text-slate-900">
-            Zap<span className="text-[#128C7E]">Radar</span>
+            SpyRadar <span className="text-[#128C7E]">Brasil</span>
           </span>
         </div>
 

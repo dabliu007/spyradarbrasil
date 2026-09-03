@@ -21,7 +21,7 @@ export const Route = createFileRoute("/sigilo")({
       {
         name: "description",
         content:
-          "Etapa de sigilo do ZapRadar: garanta o anonimato total da sua investigação e a liberação confidencial do relatório completo.",
+          "Etapa de sigilo do SpyRadar Brasil: garanta o anonimato total da sua investigação e a liberação confidencial do relatório completo.",
       },
       { property: "og:title", content: "Acesso: Método da Traição" },
       {
@@ -223,7 +223,7 @@ function SigiloPage() {
               </li>
               <li className="flex gap-2">
                 <span className="text-red-600">✗</span>
-                <span>Cobrança aparece no seu extrato como "ZapRadar" (identificável)</span>
+                <span>Cobrança aparece no seu extrato como "SpyRadar Brasil" (identificável)</span>
               </li>
             </ul>
           </div>

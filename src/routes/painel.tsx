@@ -21,13 +21,13 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/painel")({
   head: () => ({
     meta: [
-      { title: "Painel de Controle — ZapRadar" },
+      { title: "Painel de Controle — SpyRadar Brasil" },
       {
         name: "description",
         content:
-          "Painel do ZapRadar com localização em tempo real, fotos, mensagens apagadas, WhatsApp, Instagram e apps bancários do alvo investigado.",
+          "Painel do SpyRadar Brasil com localização em tempo real, fotos, mensagens apagadas, WhatsApp, Instagram e apps bancários do alvo investigado.",
       },
-      { property: "og:title", content: "Painel de Controle — ZapRadar" },
+      { property: "og:title", content: "Painel de Controle — SpyRadar Brasil" },
       { property: "og:url", content: "https://clonawhats.com/painel" },
       { name: "robots", content: "noindex,follow" },
     ],
@@ -213,7 +213,7 @@ function PainelPage() {
             Z
           </div>
           <span className="font-extrabold text-[15px] tracking-tight hidden sm:block">
-            ZapRadar
+            SpyRadar Brasil
           </span>
         </div>
 
@@ -258,7 +258,7 @@ function PainelPage() {
               <div className="w-7 h-7 rounded-md bg-emerald-500 flex items-center justify-center font-black text-white text-xs">
                 Z
               </div>
-              <span className="font-extrabold text-[14px]">ZapRadar</span>
+              <span className="font-extrabold text-[14px]">SpyRadar Brasil</span>
             </div>
             <button onClick={() => setSidebarOpen(false)} className="p-1">
               {I.close}
@@ -616,7 +616,7 @@ function PainelPage() {
           </div>
 
           <footer className="text-center text-[10px] text-slate-400 py-4">
-            zapradar_core v4.2 · sessão protegida · uso restrito ao contratante ·{" "}
+            spyradar_core v4.2 · sessão protegida · uso restrito ao contratante ·{" "}
             <span className="font-mono">{now.toLocaleTimeString("pt-BR")}</span>
           </footer>
         </main>

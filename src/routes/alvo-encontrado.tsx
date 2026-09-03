@@ -10,7 +10,7 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/alvo-encontrado")({
   head: () => ({
     meta: [
-      { title: "Alvo localizado · ZapRadar" },
+      { title: "Alvo localizado · SpyRadar Brasil" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),

@@ -1,6 +1,6 @@
-# ZapRadar (Zap Radar / SpyZap)
+# SpyRadar Brasil (SpyRadar Brasil / SpyZap)
 
-> ZapRadar — também conhecido como Zap Radar, SpyZap, ZapSpy e WhatsRadar — ajuda pessoas a investigarem suspeitas de infidelidade verificando o WhatsApp do parceiro(a), com sigilo total.
+> SpyRadar Brasil — também conhecido como SpyRadar Brasil, SpyZap, ZapSpy e WhatsRadar — ajuda pessoas a investigarem suspeitas de infidelidade verificando o WhatsApp do parceiro(a), com sigilo total.
 
 ## Tópicos principais
 

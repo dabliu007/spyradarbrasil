@@ -4,10 +4,10 @@ import { LegalShell } from "./termos";
 export const Route = createFileRoute("/privacidade")({
   head: () => ({
     meta: [
-      { title: "Política de Privacidade · ZapRadar" },
-      { name: "description", content: "Como o ZapRadar coleta, utiliza e protege seus dados pessoais em conformidade com a LGPD." },
-      { property: "og:title", content: "Política de Privacidade · ZapRadar" },
-      { property: "og:description", content: "Como tratamos seus dados no ZapRadar." },
+      { title: "Política de Privacidade · SpyRadar Brasil" },
+      { name: "description", content: "Como o SpyRadar Brasil coleta, utiliza e protege seus dados pessoais em conformidade com a LGPD." },
+      { property: "og:title", content: "Política de Privacidade · SpyRadar Brasil" },
+      { property: "og:description", content: "Como tratamos seus dados no SpyRadar Brasil." },
       { property: "og:url", content: "https://clonawhats.com/privacidade" },
       { property: "og:type", content: "website" },
     ],
@@ -27,7 +27,7 @@ function PrivacidadePage() {
       updated="Atualizado em 06 de julho de 2026"
     >
       <p>
-        Esta Política de Privacidade descreve como o <strong>ZapRadar</strong>
+        Esta Política de Privacidade descreve como o <strong>SpyRadar Brasil</strong>
         {" "}("nós", "plataforma") coleta, utiliza, armazena e protege dados
         pessoais dos usuários que acessam https://clonawhats.com, em
         conformidade com a <strong>Lei Geral de Proteção de Dados (Lei nº
@@ -36,7 +36,7 @@ function PrivacidadePage() {
 
       <H2>1. Controlador dos dados</H2>
       <p>
-        O ZapRadar é o controlador dos dados pessoais tratados no âmbito da
+        O SpyRadar Brasil é o controlador dos dados pessoais tratados no âmbito da
         plataforma. Solicitações relacionadas a dados pessoais podem ser
         enviadas para <strong>privacidade@whatsradar.com</strong>.
       </p>
