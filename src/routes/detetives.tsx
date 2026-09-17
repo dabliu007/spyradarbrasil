@@ -160,24 +160,25 @@ function Reveal({
   delay?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  // `armed` só fica true DEPOIS que o JS montou no cliente. Enquanto false
+  // (SSR e primeira pintura), o conteúdo é renderizado 100% visível — assim,
+  // se a hidratação falhar/atrasar, nada fica preso invisível.
+  const [armed, setArmed] = useState(false);
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    // Se o navegador não suportar IntersectionObserver, mostra imediatamente.
-    if (typeof IntersectionObserver === "undefined") {
-      setShown(true);
-      return;
-    }
+    // Sem IntersectionObserver: mantém visível (nunca esconde).
+    if (typeof IntersectionObserver === "undefined") return;
 
-    // Se o elemento já está visível no carregamento, revela na hora (sem esperar scroll).
+    // Se já está na viewport ao montar, mantém visível (sem flash, sem animar).
     const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      setShown(true);
-      return;
-    }
+    if (rect.top < window.innerHeight && rect.bottom > 0) return;
+
+    // Abaixo da dobra: arma a animação de entrada (esconde e revela no scroll).
+    setArmed(true);
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -201,14 +202,18 @@ function Reveal({
     };
   }, []);
 
+  const hidden = armed && !shown;
+
   return (
     <div
       ref={ref}
       className={className}
       style={{
-        opacity: shown ? 1 : 0,
-        transform: shown ? "translateY(0)" : "translateY(28px)",
-        transition: `opacity 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
+        opacity: hidden ? 0 : 1,
+        transform: hidden ? "translateY(28px)" : "translateY(0)",
+        transition: armed
+          ? `opacity 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms`
+          : "none",
       }}
     >
       {children}
@@ -234,7 +239,7 @@ const KIT_ITEMS = [
     title: "Caneta Espiã 4K",
     sub: "Grava áudio e vídeo · 30 dias de bateria",
     desc: "Discreta, idêntica a uma caneta comum. Grava tudo em alta definição por onde passa e a bateria dura até 30 dias. A prova que faltava, no seu bolso.",
-    img: "/caneta-espia-spyradar.png",
+      img: "/equip-caneta.png",
     bullets: ["Vídeo em alta definição", "Bateria de até 30 dias", "100% discreta e portátil"],
   },
   {
