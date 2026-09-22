@@ -968,7 +968,7 @@ function RelatorioPage() {
               🔓 ATIVAR LICENÇA AGORA
             </button>
             <p className="text-center text-[11px] text-zinc-500 mt-2">
-              🔒 PIX R$ 67,00 · ativação em segundos · válido por 365 dias
+              🔒 PIX R$ 137,00 · ativação em segundos · válido por 365 dias
             </p>
           </div>
         </div>
