@@ -69,6 +69,13 @@ export const Route = createFileRoute("/relatorio")({
   component: RelatorioPage,
 });
 
+const KIT_ITEMS = [
+  { name: "App Clonador", image: "/kit/app.png", desc: "Espelha o WhatsApp e apps do alvo" },
+  { name: "Caneta com Câmera", image: "/kit/caneta.png", desc: "Grava vídeo e áudio escondido" },
+  { name: "Mini Câmera Wi-Fi", image: "/kit/camera.png", desc: "Monitoramento remoto ao vivo" },
+  { name: "Localizador", image: "/kit/rastreador.png", desc: "Rastreio de localização pelo celular" },
+];
+
 function AudioPlayer({ src }: { src: string }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -868,6 +875,53 @@ function RelatorioPage() {
           </div>
         )}
 
+        {/* KIT DETETIVE — obrigatório para liberar o acesso */}
+        {locked && (
+          <div className="bg-gradient-to-br from-yellow-950/40 to-zinc-900/80 backdrop-blur-xl border-2 border-yellow-500/40 rounded-3xl p-5 shadow-[0_20px_60px_rgba(217,169,40,0.18)] relative overflow-hidden space-y-4">
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-400/60 to-transparent" />
+
+            <div className="text-center space-y-2">
+              <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-yellow-300 font-['Geist_Mono',monospace] font-bold bg-yellow-500/15 border border-yellow-500/40 rounded-full px-3 py-1">
+                🕵️ Kit Detetive · necessário para liberar
+              </div>
+              <h2 className="text-[21px] font-extrabold leading-tight text-zinc-100">
+                Adquira o <span className="text-yellow-400">Kit Detetive</span> e desbloqueie o celular clonado
+              </h2>
+              <p className="text-[13px] text-zinc-300 leading-snug">
+                O acesso ao celular clonado {doAlvo} é liberado junto com o <span className="text-yellow-300 font-semibold">Kit Detetive completo</span> — o app clonador mais as ferramentas físicas para pegar em flagrante.
+              </p>
+            </div>
+
+            {/* Itens do kit */}
+            <div className="grid grid-cols-2 gap-2.5">
+              {KIT_ITEMS.map((item) => (
+                <div
+                  key={item.name}
+                  className="bg-zinc-950/70 border border-yellow-500/20 rounded-2xl p-3 flex flex-col items-center text-center gap-2"
+                >
+                  <div className="w-full aspect-square rounded-xl bg-zinc-900 border border-zinc-800 overflow-hidden relative">
+                    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,169,40,0.12),transparent_65%)]" />
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="relative w-full h-full object-cover"
+                      draggable={false}
+                    />
+                  </div>
+                  <div className="text-[12px] font-bold text-zinc-100 leading-tight">{item.name}</div>
+                  <div className="text-[10px] text-zinc-400 leading-snug">{item.desc}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-gradient-to-br from-yellow-500/15 to-yellow-900/10 border border-yellow-500/40 rounded-xl p-3">
+              <p className="text-[12px] text-yellow-100 leading-snug">
+                📱 <span className="font-bold text-yellow-300">Inclui o acesso total ao celular clonado</span> por 365 dias — conversas, fotos, áudios e localização em tempo real, tudo pelo seu próprio celular.
+              </p>
+            </div>
+          </div>
+        )}
+
         {/* CTA — acessar WhatsApp clonado */}
         {locked && (
           <div className="bg-gradient-to-br from-yellow-950/40 to-zinc-900/80 backdrop-blur-xl border-2 border-yellow-500/50 rounded-3xl p-6 shadow-[0_20px_60px_rgba(217,169,40,0.25)] relative overflow-hidden">
@@ -883,7 +937,7 @@ function RelatorioPage() {
               </h2>
 
               <p className="text-[13px] text-zinc-300 leading-snug">
-                Entre direto nas conversas, mídias, áudios e contatos ocultos {doAlvo}.
+                Adquira o <span className="text-yellow-300 font-semibold">Kit Detetive</span> e entre direto nas conversas, mídias, áudios e contatos ocultos {doAlvo}.
                 <br />
                 <span className="text-yellow-300 font-semibold">Tudo o que ele(a) achou que tinha apagado — está lá.</span>
               </p>
@@ -938,24 +992,25 @@ function RelatorioPage() {
 
             <div className="text-center">
               <div className="w-16 h-16 mx-auto rounded-full bg-yellow-500/15 border border-yellow-500/40 grid place-items-center text-3xl mb-3">
-                🔒
+                🕵️
               </div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-yellow-300 font-bold font-['Geist_Mono',monospace]">
-                Licença SpyRadar Brasil necessária
+                Kit Detetive necessário
               </div>
               <h2 className="mt-2 text-2xl font-extrabold leading-tight text-zinc-100">
-                Ative sua licença e acesse o <span className="text-yellow-400">celular clonado por 365 dias</span>
+                Adquira o <span className="text-yellow-400">Kit Detetive</span> e acesse o celular clonado por 365 dias
               </h2>
               <p className="mt-3 text-[13.5px] text-zinc-300 leading-snug">
                 O clone já está ativo. Para <strong>abrir as conversas, fotos e áudios</strong> em tempo real,
-                é necessário ativar a <strong>Licença SpyRadar Brasil</strong> — válida por <strong>365 dias</strong>.
+                é necessário adquirir o <strong>Kit Detetive</strong> — que libera o acesso ao celular clonado por <strong>365 dias</strong> e ainda inclui as ferramentas físicas.
               </p>
             </div>
 
             <ul className="mt-4 space-y-1.5 text-[13px] text-zinc-200">
               <li className="flex gap-2"><span className="text-yellow-400 font-bold">✓</span> <span>Acesso completo ao celular clonado por <strong>365 dias</strong></span></li>
-              <li className="flex gap-2"><span className="text-yellow-400 font-bold">✓</span> <span>Mensagens, fotos e áudios — inclusive os apagados</span></li>
-              <li className="flex gap-2"><span className="text-yellow-400 font-bold">✓</span> <span>Espelhamento ao vivo 24h por dia</span></li>
+              <li className="flex gap-2"><span className="text-yellow-400 font-bold">✓</span> <span>App Clonador — mensagens, fotos e áudios (inclusive apagados)</span></li>
+              <li className="flex gap-2"><span className="text-yellow-400 font-bold">✓</span> <span>Caneta com câmera + Mini câmera Wi-Fi escondidas</span></li>
+              <li className="flex gap-2"><span className="text-yellow-400 font-bold">✓</span> <span>Localizador GPS para rastrear em tempo real</span></li>
             </ul>
 
             <button
@@ -965,7 +1020,7 @@ function RelatorioPage() {
               }}
               className="mt-5 w-full h-14 bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.8)] text-[15px] uppercase tracking-wide"
             >
-              🔓 ATIVAR LICENÇA AGORA
+              🔓 ADQUIRIR KIT DETETIVE
             </button>
             <p className="text-center text-[11px] text-zinc-500 mt-2">
               🔒 PIX R$ 137,00 · ativação em segundos · válido por 365 dias
