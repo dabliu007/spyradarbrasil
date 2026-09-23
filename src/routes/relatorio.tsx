@@ -185,7 +185,7 @@ function RelatorioPage() {
 
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-zinc-100 font-['Inter',sans-serif] relative overflow-hidden">
+    <div className="min-h-screen bg-[#080808] text-zinc-100 font-['Inter',sans-serif] relative overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -213,7 +213,7 @@ function RelatorioPage() {
               </div>
             </div>
           </div>
-          <span className={`text-[10px] uppercase tracking-wider px-2 py-1 rounded-md font-bold ${locked ? "bg-red-500/15 text-red-300 border border-red-500/30 animate-pulse" : "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30"}`}>
+          <span className={`text-[10px] uppercase tracking-wider px-2 py-1 rounded-md font-bold ${locked ? "bg-red-500/15 text-red-300 border border-red-500/30 animate-pulse" : "bg-yellow-500/15 text-yellow-300 border border-yellow-500/30"}`}>
             {locked ? "🔒 BLOQUEADO" : "✅ LIBERADO"}
           </span>
         </div>
@@ -269,12 +269,12 @@ function RelatorioPage() {
                 key={i}
                 className={`rounded-2xl p-3 border ${
                   m.tipo === "enviada"
-                    ? "bg-emerald-900/20 border-emerald-700/30 ml-8"
+                    ? "bg-yellow-900/20 border-yellow-700/30 ml-8"
                     : "bg-zinc-900 border-zinc-800 mr-8"
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
-                  <span className={`text-[11px] font-bold ${m.tipo === "enviada" ? "text-emerald-300" : "text-red-300"}`}>
+                  <span className={`text-[11px] font-bold ${m.tipo === "enviada" ? "text-yellow-300" : "text-red-300"}`}>
                     {locked ? "████████" : m.from}
                   </span>
                   <span className="text-[10px] text-zinc-500 font-['Geist_Mono',monospace]">
@@ -287,7 +287,7 @@ function RelatorioPage() {
               </div>
             ))}
             {locked && (
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#09090b] via-[#09090b]/80 to-transparent pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#080808] via-[#080808]/80 to-transparent pointer-events-none" />
             )}
           </div>
           {locked && (
@@ -376,7 +376,7 @@ function RelatorioPage() {
             <div className="mt-3 rounded-2xl border border-red-500/40 bg-gradient-to-br from-zinc-950 to-red-950/20 overflow-hidden shadow-[0_0_30px_rgba(239,68,68,0.15)]">
               <div className="flex items-center justify-between px-3 py-2 border-b border-red-500/30 bg-zinc-950/70">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
                   <span className="text-[10px] font-['Geist_Mono',monospace] uppercase tracking-wider text-red-200">
                     📥 Foto recebida · WhatsApp
                   </span>
@@ -588,10 +588,10 @@ function RelatorioPage() {
           </div>
 
           {/* WHATSAPP - print de áudio */}
-          <div className="bg-gradient-to-br from-emerald-950/30 to-zinc-950 border border-emerald-500/30 rounded-2xl p-3">
+          <div className="bg-gradient-to-br from-yellow-950/30 to-zinc-950 border border-yellow-500/30 rounded-2xl p-3">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-emerald-300 font-bold font-['Geist_Mono',monospace]">🎙️ WhatsApp · Áudios apagados</span>
-              <span className="text-[9px] bg-emerald-500/20 text-emerald-200 border border-emerald-500/30 rounded px-2 py-0.5 font-bold">17 áudios</span>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-yellow-300 font-bold font-['Geist_Mono',monospace]">🎙️ WhatsApp · Áudios apagados</span>
+              <span className="text-[9px] bg-yellow-500/20 text-yellow-200 border border-yellow-500/30 rounded px-2 py-0.5 font-bold">17 áudios</span>
             </div>
             <div className="space-y-2">
               {[
@@ -599,10 +599,10 @@ function RelatorioPage() {
                 { dur: "1:12", time: "01:24", lado: "env" },
                 { dur: "0:23", time: "01:26", lado: "rec" },
               ].map((a, i) => (
-                <div key={i} className={`flex items-center gap-2 rounded-xl p-2 ${a.lado === "env" ? "bg-emerald-900/30 border border-emerald-700/30 ml-6" : "bg-zinc-900 border border-zinc-800 mr-6"}`}>
-                  <button className="w-8 h-8 rounded-full bg-emerald-500/80 flex items-center justify-center text-zinc-950 text-xs">▶</button>
+                <div key={i} className={`flex items-center gap-2 rounded-xl p-2 ${a.lado === "env" ? "bg-yellow-900/30 border border-yellow-700/30 ml-6" : "bg-zinc-900 border border-zinc-800 mr-6"}`}>
+                  <button className="w-8 h-8 rounded-full bg-yellow-500/80 flex items-center justify-center text-zinc-950 text-xs">▶</button>
                   <div className={`flex-1 h-1 bg-zinc-700 rounded-full overflow-hidden ${locked ? "blur-[3px]" : ""}`}>
-                    <div className="h-full bg-emerald-400/60 w-1/3" />
+                    <div className="h-full bg-yellow-400/60 w-1/3" />
                   </div>
                   <span className={`text-[10px] text-zinc-400 font-['Geist_Mono',monospace] ${locked ? "blur-[3px]" : ""}`}>{a.dur}</span>
                   <span className={`text-[10px] text-zinc-500 ${locked ? "blur-[4px]" : ""}`}>{a.time}</span>
@@ -610,7 +610,7 @@ function RelatorioPage() {
               ))}
             </div>
             {locked && (
-              <p className="text-[10px] text-emerald-300/80 text-center pt-2 font-bold">
+              <p className="text-[10px] text-yellow-300/80 text-center pt-2 font-bold">
                 🔒 14 áudios íntimos restantes — apagados após ouvir
               </p>
             )}
@@ -830,23 +830,23 @@ function RelatorioPage() {
 
         {/* BÔNUS — Acesso total 30 dias */}
         {locked && (
-          <div className="bg-gradient-to-br from-emerald-950/40 to-zinc-900/80 backdrop-blur-xl border-2 border-emerald-500/40 rounded-3xl p-5 shadow-[0_20px_60px_rgba(16,185,129,0.18)] relative overflow-hidden space-y-3">
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-400/60 to-transparent" />
+          <div className="bg-gradient-to-br from-yellow-950/40 to-zinc-900/80 backdrop-blur-xl border-2 border-yellow-500/40 rounded-3xl p-5 shadow-[0_20px_60px_rgba(217,169,40,0.18)] relative overflow-hidden space-y-3">
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-400/60 to-transparent" />
             <div className="flex items-center gap-2">
-              <span className="inline-block text-[10px] uppercase tracking-[0.2em] text-emerald-300 font-['Geist_Mono',monospace] font-bold bg-emerald-500/15 border border-emerald-500/40 rounded-full px-3 py-1">
+              <span className="inline-block text-[10px] uppercase tracking-[0.2em] text-yellow-300 font-['Geist_Mono',monospace] font-bold bg-yellow-500/15 border border-yellow-500/40 rounded-full px-3 py-1">
                 🎁 Bônus incluso · grátis
               </span>
-              <span className="text-[10px] uppercase tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 rounded-md px-2 py-0.5 font-bold font-['Geist_Mono',monospace]">
+              <span className="text-[10px] uppercase tracking-wider bg-yellow-500/15 text-yellow-300 border border-yellow-500/30 rounded-md px-2 py-0.5 font-bold font-['Geist_Mono',monospace]">
                 30 dias
               </span>
             </div>
 
             <h2 className="text-[20px] font-extrabold leading-tight text-zinc-100">
-              Acesso <span className="text-emerald-400">total e ao vivo</span> ao celular clonado por 30 dias
+              Acesso <span className="text-yellow-400">total e ao vivo</span> ao celular clonado por 30 dias
             </h2>
 
             <p className="text-[13px] text-zinc-300 leading-snug">
-              Direto do <span className="font-semibold text-zinc-100">seu próprio celular</span>, você entra nas contas dele(a) e acompanha <span className="text-emerald-300 font-semibold">cada mensagem em tempo real</span> — sem que ele(a) saiba.
+              Direto do <span className="font-semibold text-zinc-100">seu próprio celular</span>, você entra nas contas dele(a) e acompanha <span className="text-yellow-300 font-semibold">cada mensagem em tempo real</span> — sem que ele(a) saiba.
             </p>
 
             <div className="bg-zinc-950/60 border border-zinc-800 rounded-xl p-3 space-y-1.5">
@@ -856,13 +856,13 @@ function RelatorioPage() {
               <p className="text-[12px] text-zinc-300">✅ Facebook & Messenger — chats e atividade</p>
             </div>
 
-            <div className="bg-gradient-to-br from-emerald-500/15 to-emerald-900/10 border border-emerald-500/40 rounded-xl p-3">
-              <p className="text-[12px] text-emerald-100 leading-snug">
-                🏦 <span className="font-bold text-emerald-300">Acesso TOTAL às contas bancárias dele(a):</span> você terá total acesso às contas bancárias dele, podendo fazer <span className="font-bold">consulta de saldo, extrato e movimentações com saldo real</span>.
+            <div className="bg-gradient-to-br from-yellow-500/15 to-yellow-900/10 border border-yellow-500/40 rounded-xl p-3">
+              <p className="text-[12px] text-yellow-100 leading-snug">
+                🏦 <span className="font-bold text-yellow-300">Acesso TOTAL às contas bancárias dele(a):</span> você terá total acesso às contas bancárias dele, podendo fazer <span className="font-bold">consulta de saldo, extrato e movimentações com saldo real</span>.
               </p>
             </div>
 
-            <p className="text-[11px] text-emerald-300/90 font-['Geist_Mono',monospace] uppercase tracking-wider">
+            <p className="text-[11px] text-yellow-300/90 font-['Geist_Mono',monospace] uppercase tracking-wider">
               Ativado automaticamente após o desbloqueio do relatório
             </p>
           </div>
@@ -870,29 +870,29 @@ function RelatorioPage() {
 
         {/* CTA — acessar WhatsApp clonado */}
         {locked && (
-          <div className="bg-gradient-to-br from-emerald-950/40 to-zinc-900/80 backdrop-blur-xl border-2 border-emerald-500/50 rounded-3xl p-6 shadow-[0_20px_60px_rgba(16,185,129,0.25)] relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-400/60 to-transparent" />
+          <div className="bg-gradient-to-br from-yellow-950/40 to-zinc-900/80 backdrop-blur-xl border-2 border-yellow-500/50 rounded-3xl p-6 shadow-[0_20px_60px_rgba(217,169,40,0.25)] relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-400/60 to-transparent" />
 
             <div className="text-center space-y-3">
-              <div className="inline-block text-[10px] uppercase tracking-[0.2em] text-emerald-300 font-['Geist_Mono',monospace] font-bold bg-emerald-500/15 border border-emerald-500/40 rounded-full px-3 py-1">
+              <div className="inline-block text-[10px] uppercase tracking-[0.2em] text-yellow-300 font-['Geist_Mono',monospace] font-bold bg-yellow-500/15 border border-yellow-500/40 rounded-full px-3 py-1">
                 💬 Clone pronto · acesso liberado
               </div>
 
               <h2 className="text-2xl font-extrabold leading-tight">
-                O Celular {doAlvo} está <span className="text-emerald-400">espelhado</span> agora
+                O Celular {doAlvo} está <span className="text-yellow-400">espelhado</span> agora
               </h2>
 
               <p className="text-[13px] text-zinc-300 leading-snug">
                 Entre direto nas conversas, mídias, áudios e contatos ocultos {doAlvo}.
                 <br />
-                <span className="text-emerald-300 font-semibold">Tudo o que ele(a) achou que tinha apagado — está lá.</span>
+                <span className="text-yellow-300 font-semibold">Tudo o que ele(a) achou que tinha apagado — está lá.</span>
               </p>
             </div>
 
             <button
               type="button"
               onClick={() => setShowLicenseModal(true)}
-              className="mt-5 flex w-full min-h-14 items-center justify-center text-center bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(16,185,129,0.8)] uppercase tracking-wide px-4 py-3 text-[14px] leading-tight sm:text-[16px]"
+              className="mt-5 flex w-full min-h-14 items-center justify-center text-center bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.8)] uppercase tracking-wide px-4 py-3 text-[14px] leading-tight sm:text-[16px]"
             >
               📱 Acessar Celular Clonado
             </button>
@@ -904,7 +904,7 @@ function RelatorioPage() {
         )}
 
         {paid ? (
-          <div className="bg-emerald-600/15 border border-emerald-500/40 rounded-2xl p-4 text-center text-emerald-200 text-sm font-semibold">
+          <div className="bg-yellow-600/15 border border-yellow-500/40 rounded-2xl p-4 text-center text-yellow-200 text-sm font-semibold">
             ✅ Pagamento confirmado — todas as informações foram liberadas.
           </div>
         ) : null}
@@ -925,7 +925,7 @@ function RelatorioPage() {
           onClick={() => setShowLicenseModal(false)}
         >
           <div
-            className="w-full max-w-sm bg-zinc-950 border border-emerald-500/40 rounded-3xl p-6 shadow-[0_0_60px_-10px_rgba(16,185,129,0.5)] relative"
+            className="w-full max-w-sm bg-zinc-950 border border-yellow-500/40 rounded-3xl p-6 shadow-[0_0_60px_-10px_rgba(217,169,40,0.5)] relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -937,14 +937,14 @@ function RelatorioPage() {
             </button>
 
             <div className="text-center">
-              <div className="w-16 h-16 mx-auto rounded-full bg-emerald-500/15 border border-emerald-500/40 grid place-items-center text-3xl mb-3">
+              <div className="w-16 h-16 mx-auto rounded-full bg-yellow-500/15 border border-yellow-500/40 grid place-items-center text-3xl mb-3">
                 🔒
               </div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-300 font-bold font-['Geist_Mono',monospace]">
+              <div className="text-[10px] uppercase tracking-[0.2em] text-yellow-300 font-bold font-['Geist_Mono',monospace]">
                 Licença SpyRadar Brasil necessária
               </div>
               <h2 className="mt-2 text-2xl font-extrabold leading-tight text-zinc-100">
-                Ative sua licença e acesse o <span className="text-emerald-400">celular clonado por 365 dias</span>
+                Ative sua licença e acesse o <span className="text-yellow-400">celular clonado por 365 dias</span>
               </h2>
               <p className="mt-3 text-[13.5px] text-zinc-300 leading-snug">
                 O clone já está ativo. Para <strong>abrir as conversas, fotos e áudios</strong> em tempo real,
@@ -953,9 +953,9 @@ function RelatorioPage() {
             </div>
 
             <ul className="mt-4 space-y-1.5 text-[13px] text-zinc-200">
-              <li className="flex gap-2"><span className="text-emerald-400 font-bold">✓</span> <span>Acesso completo ao celular clonado por <strong>365 dias</strong></span></li>
-              <li className="flex gap-2"><span className="text-emerald-400 font-bold">✓</span> <span>Mensagens, fotos e áudios — inclusive os apagados</span></li>
-              <li className="flex gap-2"><span className="text-emerald-400 font-bold">✓</span> <span>Espelhamento ao vivo 24h por dia</span></li>
+              <li className="flex gap-2"><span className="text-yellow-400 font-bold">✓</span> <span>Acesso completo ao celular clonado por <strong>365 dias</strong></span></li>
+              <li className="flex gap-2"><span className="text-yellow-400 font-bold">✓</span> <span>Mensagens, fotos e áudios — inclusive os apagados</span></li>
+              <li className="flex gap-2"><span className="text-yellow-400 font-bold">✓</span> <span>Espelhamento ao vivo 24h por dia</span></li>
             </ul>
 
             <button
@@ -963,7 +963,7 @@ function RelatorioPage() {
                 setShowLicenseModal(false);
                 navigate({ to: "/checkout", search: { phone, sex } });
               }}
-              className="mt-5 w-full h-14 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(16,185,129,0.8)] text-[15px] uppercase tracking-wide"
+              className="mt-5 w-full h-14 bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.8)] text-[15px] uppercase tracking-wide"
             >
               🔓 ATIVAR LICENÇA AGORA
             </button>
@@ -1008,7 +1008,7 @@ function SummaryRow({
       <span className="text-[13px] text-zinc-300">{label}</span>
       <span
         className={`text-sm font-extrabold font-['Geist_Mono',monospace] ${
-          highlight ? "text-red-300" : "text-emerald-300"
+          highlight ? "text-red-300" : "text-yellow-300"
         } ${locked ? "blur-[7px] select-none" : ""}`}
       >
         {locked ? "███" : value}

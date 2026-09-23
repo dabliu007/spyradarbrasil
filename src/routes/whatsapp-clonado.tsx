@@ -122,7 +122,7 @@ function WhatsAppClonadoPage() {
               WhatsApp
             </h1>
             <div className="text-[11px] text-[#128C7E] leading-tight flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
               clone ativo · {displayPhone}
             </div>
           </div>
@@ -139,9 +139,9 @@ function WhatsAppClonadoPage() {
         </div>
 
         {/* Aviso clone ativo */}
-        <div className="bg-emerald-600/15 border-t border-emerald-100">
-          <div className="max-w-md mx-auto px-4 py-1.5 flex items-center gap-2 text-[11px] text-emerald-200">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+        <div className="bg-yellow-600/15 border-t border-yellow-100">
+          <div className="max-w-md mx-auto px-4 py-1.5 flex items-center gap-2 text-[11px] text-yellow-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
             <span className="font-medium tracking-wide">
               espelhamento ativo · {totalUnread} mensagens não lidas
             </span>
@@ -170,7 +170,7 @@ function WhatsAppClonadoPage() {
               onClick={() => setFilter(t)}
               className={`text-[13px] px-3 py-1 rounded-full whitespace-nowrap font-medium transition-colors ${
                 active
-                  ? "bg-emerald-600/25 text-[#25D366] border border-emerald-300"
+                  ? "bg-yellow-600/25 text-[#25D366] border border-yellow-300"
                   : "bg-[#202c33] text-slate-500 border border-transparent hover:bg-[#2a3942]"
               }`}
             >
@@ -259,7 +259,7 @@ function WhatsAppClonadoPage() {
                     </svg>
                   )}
                   {chat.unread ? (
-                    <span className="bg-emerald-500 text-slate-900 text-[11px] font-bold rounded-full min-w-5 h-5 px-1.5 grid place-items-center">
+                    <span className="bg-yellow-500 text-slate-900 text-[11px] font-bold rounded-full min-w-5 h-5 px-1.5 grid place-items-center">
                       {chat.unread}
                     </span>
                   ) : null}
@@ -297,14 +297,14 @@ function WhatsAppClonadoPage() {
             </button>
 
             <div className="text-center">
-              <div className="w-16 h-16 mx-auto rounded-full bg-emerald-50 border border-emerald-200 grid place-items-center text-3xl mb-3">
+              <div className="w-16 h-16 mx-auto rounded-full bg-yellow-50 border border-yellow-200 grid place-items-center text-3xl mb-3">
                 🔒
               </div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-700 font-bold">
+              <div className="text-[10px] uppercase tracking-[0.2em] text-yellow-700 font-bold">
                 Licença SpyRadar Brasil necessária
               </div>
               <h2 className="mt-2 text-2xl font-extrabold leading-tight text-slate-900">
-                Ative sua licença e acesse o <span className="text-emerald-600">celular clonado por 365 dias</span>
+                Ative sua licença e acesse o <span className="text-yellow-600">celular clonado por 365 dias</span>
               </h2>
               <p className="mt-3 text-[13.5px] text-slate-700 leading-snug">
                 O clone já está ativo. Para <strong>abrir as conversas, fotos e áudios</strong> em tempo real,
@@ -324,7 +324,7 @@ function WhatsAppClonadoPage() {
                 navigate({ to: "/checkout", search: { phone, sex, amount: 137.00 } });
 
               }}
-              className="mt-5 w-full h-14 bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(16,185,129,0.8)] text-[15px] uppercase tracking-wide"
+              className="mt-5 w-full h-14 bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.8)] text-[15px] uppercase tracking-wide"
             >
               🔓 ATIVAR LICENÇA AGORA
             </button>

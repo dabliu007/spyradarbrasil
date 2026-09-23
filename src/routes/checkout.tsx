@@ -151,13 +151,13 @@ function CheckoutPage() {
           backgroundSize: "32px 32px",
         }}
       />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-emerald-500/[0.06] blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/[0.06] blur-[140px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 max-w-md mx-auto px-4 py-8 space-y-5">
         <h1 className="sr-only">Pagamento PIX do relatório SpyRadar Brasil</h1>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 bg-slate-100 border border-emerald-300 rounded-xl flex items-center justify-center">
+            <div className="w-9 h-9 bg-slate-100 border border-yellow-300 rounded-xl flex items-center justify-center">
               <span className="text-[#128C7E] text-lg">🔒</span>
             </div>
             <div>
@@ -167,13 +167,13 @@ function CheckoutPage() {
               <div className="text-sm font-bold">Pagamento via PIX</div>
             </div>
           </div>
-          <span className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-md font-bold bg-emerald-100 text-[#25D366] border border-emerald-200">
+          <span className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-md font-bold bg-yellow-100 text-[#25D366] border border-yellow-200">
             {formatBRL(displayAmount)}
           </span>
         </div>
 
 
-        <div className="bg-gradient-to-br from-white/90 to-slate-50/40 backdrop-blur-xl border border-emerald-200 rounded-3xl p-6 space-y-4 shadow-[0_20px_60px_rgba(16,185,129,0.15)]">
+        <div className="bg-gradient-to-br from-white/90 to-slate-50/40 backdrop-blur-xl border border-yellow-200 rounded-3xl p-6 space-y-4 shadow-[0_20px_60px_rgba(217,169,40,0.15)]">
           <div className="text-center space-y-1">
             <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
               Total a pagar
@@ -193,7 +193,7 @@ function CheckoutPage() {
 
           {!error && (
             <form onSubmit={handleGenerate} className="space-y-3 py-2">
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-[12px] text-slate-700 leading-relaxed">
+              <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 text-[12px] text-slate-700 leading-relaxed">
                 <div className="font-bold text-[#128C7E] mb-1">🔐 Sigilo absoluto</div>
                 Será gerado um <span className="font-semibold text-slate-900">nome e CPF aleatórios</span> como identificador do PIX para manter seu <span className="font-semibold text-slate-900">sigilo absoluto</span>. Nenhum dado seu aparece na cobrança.
               </div>
@@ -225,7 +225,7 @@ function CheckoutPage() {
         </div>
 
         {/* Aviso pós-pagamento */}
-        <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 space-y-2">
+        <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-4 space-y-2">
           <div className="flex items-center gap-2">
             <span className="text-[#128C7E] text-lg">✅</span>
             <h3 className="text-sm font-bold text-[#25D366]">Após o pagamento</h3>
@@ -233,7 +233,7 @@ function CheckoutPage() {
           <p className="text-[12px] text-slate-700 leading-relaxed">
             Você terá <span className="text-[#25D366] font-semibold">acesso total ao celular clonado</span> {doAlvo} — mensagens, fotos, localização e aplicativos.
           </p>
-          <p className="text-[11px] text-slate-500 leading-relaxed border-t border-emerald-100 pt-2">
+          <p className="text-[11px] text-slate-500 leading-relaxed border-t border-yellow-100 pt-2">
             ⚠️ O SpyRadar Brasil <span className="text-slate-500 font-semibold">não se responsabiliza</span> pelo mau uso das informações obtidas. O uso é de inteira responsabilidade do contratante.
           </p>
         </div>
@@ -251,9 +251,9 @@ function CheckoutPage() {
 
       {downsellOffer != null && (
         <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm grid place-items-center px-4 animate-in fade-in duration-200">
-          <div className="w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl border border-emerald-200 relative">
+          <div className="w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl border border-yellow-200 relative">
             <div className="text-center space-y-2">
-              <div className="w-16 h-16 mx-auto rounded-full bg-emerald-50 border border-emerald-200 grid place-items-center text-3xl">
+              <div className="w-16 h-16 mx-auto rounded-full bg-yellow-50 border border-yellow-200 grid place-items-center text-3xl">
                 🎁
               </div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E] font-bold">
@@ -280,7 +280,7 @@ function CheckoutPage() {
 
             <button
               onClick={acceptDownsell}
-              className="w-full h-14 bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(16,185,129,0.8)] text-[15px] uppercase tracking-wide"
+              className="w-full h-14 bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.8)] text-[15px] uppercase tracking-wide"
             >
               🔓 Aceitar por {formatBRL(downsellOffer)}
             </button>
@@ -325,7 +325,7 @@ function Testimonial({
   return (
     <div className="bg-white border border-slate-200 rounded-2xl p-4 space-y-2">
       <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500/30 to-emerald-700/30 border border-emerald-200 grid place-items-center text-emerald-700 text-xs font-bold">
+        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-yellow-500/30 to-yellow-700/30 border border-yellow-200 grid place-items-center text-yellow-700 text-xs font-bold">
           {initials}
         </div>
         <div className="flex-1 min-w-0">

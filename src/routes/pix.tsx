@@ -200,11 +200,11 @@ function PixPage() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(16,185,129,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(16,185,129,0.06) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(217,169,40,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(217,169,40,0.06) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-emerald-500/[0.10] blur-[160px] rounded-full pointer-events-none" />
+      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-yellow-500/[0.10] blur-[160px] rounded-full pointer-events-none" />
 
       {/* faixa de urgência */}
       <div className="relative z-10 bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-slate-900 text-center text-[12px] font-bold py-2 px-3 uppercase tracking-wider">
@@ -214,7 +214,7 @@ function PixPage() {
       <div className="relative z-10 max-w-md mx-auto px-4 py-6 space-y-5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 bg-slate-100 border border-emerald-300 rounded-xl flex items-center justify-center">
+            <div className="w-9 h-9 bg-slate-100 border border-yellow-300 rounded-xl flex items-center justify-center">
               <span className="text-[#128C7E] text-lg">🔒</span>
             </div>
             <div>
@@ -224,8 +224,8 @@ function PixPage() {
               <div className="text-sm font-bold">Conexão segura · Banco Central</div>
             </div>
           </div>
-          <div className="flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 rounded-full px-2 py-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="flex items-center gap-1.5 bg-yellow-50 border border-yellow-200 rounded-full px-2 py-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
             <span className="text-[10px] text-[#25D366] font-bold uppercase tracking-wider">{viewers} pessoas pagando agora</span>
           </div>
         </div>
@@ -246,7 +246,7 @@ function PixPage() {
         </div>
 
         {/* Card principal */}
-        <div className="bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-emerald-300 rounded-3xl p-5 space-y-4 shadow-[0_25px_70px_rgba(16,185,129,0.18)]">
+        <div className="bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-yellow-300 rounded-3xl p-5 space-y-4 shadow-[0_25px_70px_rgba(217,169,40,0.18)]">
           <div className="text-center space-y-1">
             <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
               Pague para desbloquear
@@ -267,7 +267,7 @@ function PixPage() {
           ) : (
             <>
               {/* QR */}
-              <div className="bg-white p-3 rounded-2xl mx-auto w-fit shadow-[0_0_40px_rgba(16,185,129,0.25)]">
+              <div className="bg-white p-3 rounded-2xl mx-auto w-fit shadow-[0_0_40px_rgba(217,169,40,0.25)]">
                 {qrImgSrc ? (
                   <img src={qrImgSrc} alt="QR Code PIX" className="w-56 h-56 block" />
                 ) : (
@@ -277,7 +277,7 @@ function PixPage() {
 
               <button
                 onClick={copy}
-                className="w-full h-14 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-900 font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[15px] shadow-[0_10px_30px_-8px_rgba(16,185,129,0.6)]"
+                className="w-full h-14 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-slate-900 font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[15px] shadow-[0_10px_30px_-8px_rgba(217,169,40,0.6)]"
               >
                 {copied ? "✅ Código copiado!" : "📋 Copiar código PIX"}
               </button>
@@ -291,15 +291,15 @@ function PixPage() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-center gap-2 text-[12px] text-slate-700 bg-emerald-50 border border-emerald-200 rounded-xl py-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="flex items-center justify-center gap-2 text-[12px] text-slate-700 bg-yellow-50 border border-yellow-200 rounded-xl py-2">
+                <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
                 <span className="font-semibold">{statusLabel}</span>
               </div>
 
               <button
                 onClick={handleAlreadyPaid}
                 disabled={checking}
-                className="w-full h-12 bg-slate-100 border-2 border-emerald-500/60 hover:border-emerald-400 hover:bg-emerald-50 text-[#25D366] font-bold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[13px] disabled:opacity-60 disabled:cursor-wait"
+                className="w-full h-12 bg-slate-100 border-2 border-yellow-500/60 hover:border-yellow-400 hover:bg-yellow-50 text-[#25D366] font-bold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[13px] disabled:opacity-60 disabled:cursor-wait"
               >
                 {checking ? "🔎 Verificando…" : "✅ Já efetuei o pagamento"}
               </button>
@@ -320,14 +320,14 @@ function PixPage() {
           </p>
           <ol className="text-[13px] text-slate-700 space-y-3">
             <li className="flex gap-3">
-              <span className="shrink-0 w-7 h-7 rounded-full bg-emerald-100 border border-emerald-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">1</span>
+              <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">1</span>
               <div>
                 <div className="font-semibold text-slate-900">Abra o aplicativo do seu banco</div>
                 <div className="text-[12px] text-slate-500">Use qualquer banco ou carteira digital (Nubank, Itaú, Bradesco, Caixa, Inter, PicPay, Mercado Pago, etc.) e entre no menu <span className="text-[#25D366]">Área PIX</span>.</div>
               </div>
             </li>
             <li className="flex gap-3">
-              <span className="shrink-0 w-7 h-7 rounded-full bg-emerald-100 border border-emerald-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">2</span>
+              <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">2</span>
               <div>
                 <div className="font-semibold text-slate-900">Escolha "PIX Copia e Cola" ou "Ler QR Code"</div>
                 <div className="text-[12px] text-slate-500">
@@ -337,14 +337,14 @@ function PixPage() {
               </div>
             </li>
             <li className="flex gap-3">
-              <span className="shrink-0 w-7 h-7 rounded-full bg-emerald-100 border border-emerald-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">3</span>
+              <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">3</span>
               <div>
                 <div className="font-semibold text-slate-900">Confira os dados e confirme o pagamento de <span className="text-[#25D366]">{formatBRL(amount)}</span></div>
                 <div className="text-[12px] text-slate-500">O nome do recebedor aparece de forma neutra para preservar o seu sigilo. Confirme com a sua senha do banco normalmente.</div>
               </div>
             </li>
             <li className="flex gap-3">
-              <span className="shrink-0 w-7 h-7 rounded-full bg-emerald-100 border border-emerald-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">4</span>
+              <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">4</span>
               <div>
                 <div className="font-semibold text-slate-900">Pronto! Aguarde nessa tela</div>
                 <div className="text-[12px] text-slate-500">Em poucos segundos o pagamento é identificado automaticamente e o <span className="text-[#25D366] font-semibold">acesso ao celular clonado é liberado</span> sem você precisar fazer mais nada. Não feche essa página.</div>
@@ -354,7 +354,7 @@ function PixPage() {
         </div>
 
         {/* Aviso de sigilo */}
-        <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 space-y-2">
+        <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-4 space-y-2">
           <div className="flex items-center gap-2">
             <span className="text-[#128C7E] text-lg">🛡️</span>
             <h3 className="text-sm font-bold text-[#25D366]">100% sigiloso</h3>
@@ -362,7 +362,7 @@ function PixPage() {
           <p className="text-[12px] text-slate-700 leading-relaxed">
             O nome no extrato bancário aparece de forma <span className="text-[#25D366] font-semibold">neutra</span>. Ninguém vai saber para onde foi o pagamento.
           </p>
-          <p className="text-[11px] text-slate-500 leading-relaxed border-t border-emerald-100 pt-2">
+          <p className="text-[11px] text-slate-500 leading-relaxed border-t border-yellow-100 pt-2">
             Após o pagamento você terá <span className="text-slate-700 font-semibold">acesso total ao celular clonado</span> {doAlvo}. O SpyRadar Brasil não se responsabiliza pelo mau uso das informações.
           </p>
         </div>
@@ -381,7 +381,7 @@ function PixPage() {
         </div>
 
         {/* Garantia 7 dias */}
-        <div className="bg-gradient-to-br from-emerald-500/15 to-slate-50/40 border border-emerald-300 rounded-2xl p-4 space-y-2">
+        <div className="bg-gradient-to-br from-yellow-500/15 to-slate-50/40 border border-yellow-300 rounded-2xl p-4 space-y-2">
           <div className="flex items-center gap-2">
             <span className="text-[#128C7E] text-lg">🛡️</span>
             <h3 className="text-sm font-bold text-[#25D366] uppercase tracking-wider font-['Geist_Mono',monospace]">

@@ -68,7 +68,7 @@ function SobrePage() {
         <li>
           <strong>Privacidade:</strong> tratamos dados pessoais em conformidade
           com a LGPD (Lei nº 13.709/2018). Detalhes na nossa{" "}
-          <a href="/privacidade" className="text-emerald-700 hover:underline">
+          <a href="/privacidade" className="text-yellow-700 hover:underline">
             Política de Privacidade
           </a>
           .
@@ -87,12 +87,12 @@ function SobrePage() {
       <H2>Falar conosco</H2>
       <p>
         Para dúvidas, sugestões ou solicitações, acesse a página de{" "}
-        <a href="/contato" className="text-emerald-700 hover:underline">
+        <a href="/contato" className="text-yellow-700 hover:underline">
           Contato
         </a>{" "}
         ou envie um e-mail para{" "}
         <strong>
-          <a href="mailto:sac@whatsradar.com" className="text-emerald-700 hover:underline">
+          <a href="mailto:sac@whatsradar.com" className="text-yellow-700 hover:underline">
             sac@whatsradar.com
           </a>
         </strong>

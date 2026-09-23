@@ -85,7 +85,7 @@ export const Route = createFileRoute("/blog/$slug")({
 const CATEGORY_STYLES: Record<string, string> = {
   Relacionamentos: "bg-rose-50 text-rose-700 border-rose-200",
   Investigação: "bg-indigo-50 text-indigo-700 border-indigo-200",
-  Tecnologia: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  Tecnologia: "bg-yellow-50 text-yellow-700 border-yellow-200",
 };
 
 function categoryClass(cat: string) {
@@ -103,7 +103,7 @@ function PostNotFound() {
         </p>
         <Link
           to="/blog"
-          className="mt-5 inline-flex items-center justify-center rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 text-sm"
+          className="mt-5 inline-flex items-center justify-center rounded-full bg-yellow-600 hover:bg-yellow-700 text-[#080808] font-bold px-5 py-2.5 text-sm"
         >
           Ver todos os artigos
         </Link>
@@ -123,16 +123,16 @@ function BlogPostPage() {
       <div className="border-b border-slate-200 bg-white/80 backdrop-blur sticky top-0 z-20">
         <div className="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
           <Link to="/blog" className="flex items-center gap-2 text-slate-900">
-            <div className="w-7 h-7 rounded-lg bg-emerald-600 grid place-items-center text-white text-xs font-black">
+            <div className="w-7 h-7 rounded-lg bg-yellow-600 grid place-items-center text-[#080808] text-xs font-black">
               Z
             </div>
             <span className="font-extrabold tracking-tight">
-              SpyRadar Brasil<span className="text-emerald-600">.</span>Blog
+              SpyRadar Brasil<span className="text-yellow-600">.</span>Blog
             </span>
           </Link>
           <Link
             to="/blog"
-            className="text-[12px] text-slate-600 hover:text-emerald-700 font-semibold"
+            className="text-[12px] text-slate-600 hover:text-yellow-700 font-semibold"
           >
             ← Todos os artigos
           </Link>
@@ -140,7 +140,7 @@ function BlogPostPage() {
       </div>
 
       {/* Hero */}
-      <header className="relative border-b border-slate-200 bg-gradient-to-br from-slate-50 via-white to-emerald-50/50">
+      <header className="relative border-b border-slate-200 bg-gradient-to-br from-slate-50 via-white to-yellow-50/50">
         <div className="max-w-3xl mx-auto px-5 pt-14 pb-12">
           <div className="flex flex-wrap items-center gap-2">
             <span
@@ -161,7 +161,7 @@ function BlogPostPage() {
           </p>
 
           <div className="mt-6 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-emerald-600 grid place-items-center text-white font-black text-sm">
+            <div className="w-10 h-10 rounded-full bg-yellow-600 grid place-items-center text-[#080808] font-black text-sm">
               {post.author.charAt(0)}
             </div>
             <div>
@@ -175,7 +175,7 @@ function BlogPostPage() {
 
         {/* Cover strip */}
         <div className="max-w-3xl mx-auto px-5 pb-8">
-          <div className="relative h-56 sm:h-80 rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700">
+          <div className="relative h-56 sm:h-80 rounded-2xl overflow-hidden bg-gradient-to-br from-yellow-500 via-yellow-600 to-amber-700">
             {post.heroImage ? (
               <>
                 <img
@@ -238,7 +238,7 @@ function BlogPostPage() {
                 return (
                   <blockquote
                     key={i}
-                    className="my-6 border-l-4 border-emerald-500 bg-emerald-50/60 pl-5 pr-4 py-4 rounded-r-xl italic text-slate-800 text-[17px] leading-relaxed whitespace-pre-wrap"
+                    className="my-6 border-l-4 border-yellow-500 bg-yellow-50/60 pl-5 pr-4 py-4 rounded-r-xl italic text-slate-800 text-[17px] leading-relaxed whitespace-pre-wrap"
                   >
                     {b.text}
                   </blockquote>
@@ -273,16 +273,16 @@ function BlogPostPage() {
         </article>
 
         {/* Inline CTA */}
-        <div className="mt-12 relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 to-emerald-950 p-8 text-white">
+        <div className="mt-12 relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 to-yellow-950 p-8 text-white">
           <div
             className="absolute inset-0 opacity-30"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 80% 20%, rgba(16,185,129,0.4), transparent 50%)",
+                "radial-gradient(circle at 80% 20%, rgba(217,169,40,0.4), transparent 50%)",
             }}
           />
           <div className="relative z-10 text-center">
-            <div className="text-[11px] uppercase tracking-[0.3em] text-emerald-300 font-['Geist_Mono',monospace] font-bold">
+            <div className="text-[11px] uppercase tracking-[0.3em] text-yellow-300 font-['Geist_Mono',monospace] font-bold">
               Chega de dúvida
             </div>
             <h3 className="mt-2 text-xl sm:text-2xl font-black leading-tight">
@@ -290,7 +290,7 @@ function BlogPostPage() {
             </h3>
             <Link
               to="/verificar"
-              className="mt-5 inline-flex items-center justify-center rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-black px-7 py-3.5 text-[14px] shadow-lg shadow-emerald-500/30 transition"
+              className="mt-5 inline-flex items-center justify-center rounded-full bg-yellow-500 hover:bg-yellow-400 text-slate-900 font-black px-7 py-3.5 text-[14px] shadow-lg shadow-yellow-500/30 transition"
             >
               Verificar um número →
             </Link>
@@ -309,9 +309,9 @@ function BlogPostPage() {
                   key={r.slug}
                   to="/blog/$slug"
                   params={{ slug: r.slug }}
-                  className="group flex flex-col bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-emerald-400 hover:-translate-y-1 transition-all duration-300"
+                  className="group flex flex-col bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-yellow-400 hover:-translate-y-1 transition-all duration-300"
                 >
-                  <div className="relative h-28 bg-gradient-to-br from-slate-50 to-emerald-50 border-b border-slate-100 flex items-center justify-center text-4xl">
+                  <div className="relative h-28 bg-gradient-to-br from-slate-50 to-yellow-50 border-b border-slate-100 flex items-center justify-center text-4xl">
                     {r.cover}
                   </div>
                   <div className="p-4 flex-1">
@@ -320,7 +320,7 @@ function BlogPostPage() {
                     >
                       {r.category}
                     </div>
-                    <div className="mt-2 text-[14px] font-extrabold text-slate-900 leading-snug group-hover:text-emerald-700 transition-colors">
+                    <div className="mt-2 text-[14px] font-extrabold text-slate-900 leading-snug group-hover:text-yellow-700 transition-colors">
                       {r.title}
                     </div>
                   </div>

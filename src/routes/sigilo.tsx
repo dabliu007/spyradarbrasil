@@ -154,15 +154,15 @@ function SigiloPage() {
 
       <div className="relative z-10 max-w-md mx-auto px-4 py-8 space-y-5">
         {/* Header — pagamento aprovado */}
-        <div className="bg-emerald-600/15 border border-emerald-300 rounded-2xl p-4 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-emerald-100 border border-emerald-500/50 flex items-center justify-center text-[#25D366] text-xl">
+        <div className="bg-yellow-600/15 border border-yellow-300 rounded-2xl p-4 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-yellow-100 border border-yellow-500/50 flex items-center justify-center text-[#25D366] text-xl">
             ✓
           </div>
           <div>
             <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace] font-bold">
               Invasão concluída · 100%
             </div>
-            <div className="text-sm font-bold text-emerald-800">
+            <div className="text-sm font-bold text-yellow-800">
               Espelhamento pronto — travado por sigilo
             </div>
           </div>
@@ -274,7 +274,7 @@ function SigiloPage() {
           <div className="mt-4 bg-white/70 border border-amber-200 rounded-xl p-3">
             <div className="flex items-center gap-2 text-[11px] text-amber-700/90">
               <div className="flex -space-x-2">
-                <div className="w-6 h-6 rounded-full bg-emerald-500/70 border-2 border-slate-200" />
+                <div className="w-6 h-6 rounded-full bg-yellow-500/70 border-2 border-slate-200" />
                 <div className="w-6 h-6 rounded-full bg-amber-500/70 border-2 border-slate-200" />
                 <div className="w-6 h-6 rounded-full bg-rose-500/70 border-2 border-slate-200" />
               </div>
@@ -311,9 +311,9 @@ function SigiloPage() {
           </p>
 
           {/* Garantia */}
-          <div className="mt-4 bg-emerald-50 border border-emerald-300 rounded-xl p-3 flex items-start gap-2">
+          <div className="mt-4 bg-yellow-50 border border-yellow-300 rounded-xl p-3 flex items-start gap-2">
             <span className="text-[#128C7E] text-lg">🛡️</span>
-            <p className="text-[12px] text-emerald-800 leading-snug">
+            <p className="text-[12px] text-yellow-800 leading-snug">
               <span className="font-bold">Garantia de sigilo:</span> se qualquer rastro da
               investigação for identificado, devolvemos <span className="font-bold">100% do valor</span>{" "}
               + R$500 de indenização.

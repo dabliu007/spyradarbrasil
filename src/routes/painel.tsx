@@ -209,7 +209,7 @@ function PainelPage() {
         </button>
 
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center font-black text-white text-sm">
+          <div className="w-8 h-8 rounded-lg bg-yellow-500 flex items-center justify-center font-black text-[#080808] text-sm">
             Z
           </div>
           <span className="font-extrabold text-[15px] tracking-tight hidden sm:block">
@@ -227,7 +227,7 @@ function PainelPage() {
         <div className="ml-auto flex items-center gap-2 sm:gap-3">
           <button
             onClick={goUpsell}
-            className="bg-emerald-500 hover:bg-emerald-400 text-white text-[11px] sm:text-[12px] font-bold px-3 sm:px-4 h-9 rounded-md flex items-center gap-1.5 shadow-sm"
+            className="bg-yellow-500 hover:bg-yellow-400 text-[#080808] text-[11px] sm:text-[12px] font-bold px-3 sm:px-4 h-9 rounded-md flex items-center gap-1.5 shadow-sm"
           >
             {I.crown}
             <span className="hidden xs:inline sm:inline">DESBLOQUEAR TUDO</span>
@@ -255,7 +255,7 @@ function PainelPage() {
           {/* mobile close */}
           <div className="lg:hidden flex items-center justify-between h-14 px-4 border-b border-slate-200">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-md bg-emerald-500 flex items-center justify-center font-black text-white text-xs">
+              <div className="w-7 h-7 rounded-md bg-yellow-500 flex items-center justify-center font-black text-[#080808] text-xs">
                 Z
               </div>
               <span className="font-extrabold text-[14px]">SpyRadar Brasil</span>
@@ -284,7 +284,7 @@ function PainelPage() {
                     {sex === "F" ? "👩" : "👨"}
                   </div>
                 )}
-                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white" />
+                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-yellow-500 border-2 border-white" />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="text-[13px] font-bold text-slate-800 truncate">
@@ -294,7 +294,7 @@ function PainelPage() {
                   +55 {formattedPhone}
                 </div>
               </div>
-              <span className="text-[9px] font-bold uppercase bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded">
+              <span className="text-[9px] font-bold uppercase bg-yellow-100 text-yellow-700 px-1.5 py-0.5 rounded">
                 on
               </span>
             </div>
@@ -321,11 +321,11 @@ function PainelPage() {
                   className={
                     "w-full flex items-center gap-3 px-4 py-2.5 text-[13px] transition-colors relative " +
                     (active
-                      ? "text-emerald-600 bg-emerald-50 font-semibold border-l-[3px] border-emerald-500 pl-[13px]"
+                      ? "text-yellow-600 bg-yellow-50 font-semibold border-l-[3px] border-yellow-500 pl-[13px]"
                       : "text-slate-600 hover:bg-slate-50 hover:text-slate-900")
                   }
                 >
-                  <span className={active ? "text-emerald-600" : "text-slate-500"}>
+                  <span className={active ? "text-yellow-600" : "text-slate-500"}>
                     {item.icon}
                   </span>
                   <span className="flex-1 text-left">{item.label}</span>
@@ -343,7 +343,7 @@ function PainelPage() {
           <div className="p-3 border-t border-slate-100">
             <button
               onClick={goUpsell}
-              className="w-full rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white p-3 text-left shadow-sm hover:shadow-md transition"
+              className="w-full rounded-xl bg-gradient-to-br from-yellow-500 to-yellow-600 text-white p-3 text-left shadow-sm hover:shadow-md transition"
             >
               <div className="flex items-center gap-2 mb-1">
                 {I.crown}
@@ -351,7 +351,7 @@ function PainelPage() {
                   Upgrade Premium
                 </span>
               </div>
-              <p className="text-[11px] leading-snug text-emerald-50">
+              <p className="text-[11px] leading-snug text-yellow-50">
                 Desbloqueie todos os módulos e monitore em tempo real.
               </p>
             </button>
@@ -373,7 +373,7 @@ function PainelPage() {
             action={
               <button
                 onClick={() => setOpenModule("location")}
-                className="text-emerald-600 hover:text-emerald-700 text-[11px] font-bold uppercase tracking-wider"
+                className="text-yellow-600 hover:text-yellow-700 text-[11px] font-bold uppercase tracking-wider"
               >
                 Ver tudo
               </button>
@@ -381,7 +381,7 @@ function PainelPage() {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <ul className="space-y-3">
-                <li className="text-[11px] font-bold text-emerald-600 uppercase tracking-wider flex items-center gap-1.5">
+                <li className="text-[11px] font-bold text-yellow-600 uppercase tracking-wider flex items-center gap-1.5">
                   {I.pin} Localização atual
                 </li>
                 {[
@@ -458,7 +458,7 @@ function PainelPage() {
                 </div>
                 <button
                   onClick={goUpsell}
-                  className="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold text-[12px] uppercase tracking-wider h-11 rounded-md mt-2 shadow-sm"
+                  className="w-full bg-yellow-500 hover:bg-yellow-400 text-[#080808] font-extrabold text-[12px] uppercase tracking-wider h-11 rounded-md mt-2 shadow-sm"
                 >
                   Renovar / Fazer upgrade
                 </button>
@@ -472,7 +472,7 @@ function PainelPage() {
               action={
                 <button
                   onClick={() => setOpenModule("calls")}
-                  className="text-emerald-600 hover:text-emerald-700 text-[11px] font-bold uppercase tracking-wider"
+                  className="text-yellow-600 hover:text-yellow-700 text-[11px] font-bold uppercase tracking-wider"
                 >
                   Ver tudo
                 </button>
@@ -480,9 +480,9 @@ function PainelPage() {
             >
               <TopList
                 items={[
-                  { name: "Amor ❤️", meta: "9 chamadas", pct: 100, color: "bg-emerald-500", hot: true, blur: true },
-                  { name: "Contato sem nome", meta: "5 chamadas", pct: 60, color: "bg-emerald-400", hot: true, blur: true },
-                  { name: "Personal", meta: "2 chamadas", pct: 25, color: "bg-emerald-300", blur: true },
+                  { name: "Amor ❤️", meta: "9 chamadas", pct: 100, color: "bg-yellow-500", hot: true, blur: true },
+                  { name: "Contato sem nome", meta: "5 chamadas", pct: 60, color: "bg-yellow-400", hot: true, blur: true },
+                  { name: "Personal", meta: "2 chamadas", pct: 25, color: "bg-yellow-300", blur: true },
                 ]}
               />
             </Card>
@@ -491,7 +491,7 @@ function PainelPage() {
               action={
                 <button
                   onClick={() => setOpenModule("deleted")}
-                  className="text-emerald-600 hover:text-emerald-700 text-[11px] font-bold uppercase tracking-wider"
+                  className="text-yellow-600 hover:text-yellow-700 text-[11px] font-bold uppercase tracking-wider"
                 >
                   Ver tudo
                 </button>
@@ -513,20 +513,20 @@ function PainelPage() {
             action={
               <button
                 onClick={() => setOpenModule("photos")}
-                className="text-emerald-600 hover:text-emerald-700 text-[11px] font-bold uppercase tracking-wider"
+                className="text-yellow-600 hover:text-yellow-700 text-[11px] font-bold uppercase tracking-wider"
               >
                 Ver tudo
               </button>
             }
           >
             <div className="text-[12px] text-slate-600 mb-3">
-              <span className="text-emerald-600 font-bold">184 arquivos</span> na pasta protegida ·{" "}
+              <span className="text-yellow-600 font-bold">184 arquivos</span> na pasta protegida ·{" "}
               <span className="text-amber-600 font-semibold">12 novos hoje</span>
             </div>
             <BlurredGallery sex={sex} />
             <button
               onClick={() => setOpenModule("photos")}
-              className="mt-3 w-full text-[11px] font-bold uppercase tracking-wider text-emerald-600 hover:text-emerald-700 border border-emerald-200 hover:border-emerald-300 bg-emerald-50/40 rounded-md py-2.5"
+              className="mt-3 w-full text-[11px] font-bold uppercase tracking-wider text-yellow-600 hover:text-yellow-700 border border-yellow-200 hover:border-yellow-300 bg-yellow-50/40 rounded-md py-2.5"
             >
               🔓 Ver galeria completa
             </button>
@@ -538,7 +538,7 @@ function PainelPage() {
               <div className="flex items-center gap-5">
                 <DonutChart
                   segments={[
-                    { v: 42, c: "#10b981" }, // WhatsApp
+                    { v: 42, c: "#D9A928" }, // WhatsApp
                     { v: 22, c: "#ec4899" }, // Instagram
                     { v: 18, c: "#f59e0b" }, // Tinder
                     { v: 10, c: "#0ea5e9" }, // Banks
@@ -549,7 +549,7 @@ function PainelPage() {
                 />
                 <ul className="flex-1 space-y-2 text-[12px]">
                   {[
-                    { l: "WhatsApp", v: "42%", c: "#10b981" },
+                    { l: "WhatsApp", v: "42%", c: "#D9A928" },
                     { l: "Instagram", v: "22%", c: "#ec4899" },
                     { l: "Tinder / Match", v: "18%", c: "#f59e0b" },
                     { l: "Apps bancários", v: "10%", c: "#0ea5e9" },
@@ -576,7 +576,7 @@ function PainelPage() {
               action={
                 <button
                   onClick={() => setOpenModule("instagram")}
-                  className="text-emerald-600 hover:text-emerald-700 text-[11px] font-bold uppercase tracking-wider"
+                  className="text-yellow-600 hover:text-yellow-700 text-[11px] font-bold uppercase tracking-wider"
                 >
                   Ver tudo
                 </button>
@@ -594,7 +594,7 @@ function PainelPage() {
                   <li key={it.l}>
                     <button
                       onClick={() => setOpenModule(it.k)}
-                      className="w-full flex items-center gap-2.5 border border-slate-100 rounded-lg px-2.5 py-2 hover:border-emerald-300 hover:bg-emerald-50/30 transition"
+                      className="w-full flex items-center gap-2.5 border border-slate-100 rounded-lg px-2.5 py-2 hover:border-yellow-300 hover:bg-yellow-50/30 transition"
                     >
                       <span
                         className="w-8 h-8 rounded-lg shrink-0 flex items-center justify-center text-white"
@@ -636,12 +636,12 @@ function PainelPage() {
           <div className="shrink-0 border-t border-slate-100 bg-white p-4 space-y-2">
             <div className="text-center text-[12px] text-slate-600">
               🔒 Ative a{" "}
-              <span className="text-emerald-600 font-bold">Licença Premium</span>{" "}
+              <span className="text-yellow-600 font-bold">Licença Premium</span>{" "}
               para ver todo o conteúdo em tempo real.
             </div>
             <button
               onClick={goUpsell}
-              className="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold py-3.5 rounded-md text-[13px] uppercase tracking-wider shadow-sm"
+              className="w-full bg-yellow-500 hover:bg-yellow-400 text-[#080808] font-extrabold py-3.5 rounded-md text-[13px] uppercase tracking-wider shadow-sm"
             >
               Desbloquear agora
             </button>
@@ -657,14 +657,14 @@ function PainelPage() {
           onPointerDownOutside={(e) => e.preventDefault()}
           onInteractOutside={(e) => e.preventDefault()}
         >
-          <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white px-6 pt-6 pb-5 text-center">
+          <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white px-6 pt-6 pb-5 text-center">
             <div className="mx-auto w-14 h-14 rounded-full bg-white/15 border border-white/30 flex items-center justify-center mb-3 text-2xl">
               💚
             </div>
             <DialogTitle className="text-[18px] font-extrabold">
               Você merece saber a verdade
             </DialogTitle>
-            <p className="text-[13px] text-emerald-50 mt-2 leading-snug">
+            <p className="text-[13px] text-yellow-50 mt-2 leading-snug">
               Noites sem dormir, o coração apertado, aquela sensação de que algo está errado… você não está louco(a). Sua intuição está te avisando por um motivo.
             </p>
           </div>
@@ -697,7 +697,7 @@ function PainelPage() {
                 "Instagram, Tinder, TikTok e Facebook em tempo real",
               ].map((f) => (
                 <li key={f} className="flex items-start gap-2">
-                  <span className="text-emerald-500 mt-0.5">✓</span>
+                  <span className="text-yellow-500 mt-0.5">✓</span>
                   <span>{f}</span>
                 </li>
               ))}
@@ -710,7 +710,7 @@ function PainelPage() {
 
             <button
               onClick={goUpsell}
-              className="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold py-3.5 rounded-md text-[13px] uppercase tracking-wider shadow-sm"
+              className="w-full bg-yellow-500 hover:bg-yellow-400 text-[#080808] font-extrabold py-3.5 rounded-md text-[13px] uppercase tracking-wider shadow-sm"
             >
               🪪 Ativar minha licença agora
             </button>
@@ -811,14 +811,14 @@ function MiniMap() {
         <rect x="30" y="170" width="70" height="35" fill="#e2e8f0" rx="4" />
         {/* pin */}
         <g transform="translate(200 120)">
-          <circle r="24" fill="#10b981" opacity="0.15" />
-          <circle r="12" fill="#10b981" opacity="0.3" />
-          <path d="M0 -18 C -10 -18 -14 -8 -6 4 L 0 14 L 6 4 C 14 -8 10 -18 0 -18 Z" fill="#10b981" />
+          <circle r="24" fill="#D9A928" opacity="0.15" />
+          <circle r="12" fill="#D9A928" opacity="0.3" />
+          <path d="M0 -18 C -10 -18 -14 -8 -6 4 L 0 14 L 6 4 C 14 -8 10 -18 0 -18 Z" fill="#D9A928" />
           <circle r="4" cy="-8" fill="#ffffff" />
         </g>
       </svg>
-      <div className="absolute top-2 left-2 bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] font-bold text-emerald-600 flex items-center gap-1.5">
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+      <div className="absolute top-2 left-2 bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] font-bold text-yellow-600 flex items-center gap-1.5">
+        <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
         GPS ao vivo
       </div>
       <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] font-mono text-slate-600">
@@ -936,7 +936,7 @@ function PhotosPreview({ sex }: { sex: "M" | "F" }) {
   return (
     <div className="p-4 space-y-3">
       <div className="text-[12px] text-slate-600">
-        <span className="text-emerald-600 font-bold">184 arquivos</span> na pasta protegida ·{" "}
+        <span className="text-yellow-600 font-bold">184 arquivos</span> na pasta protegida ·{" "}
         <span className="text-amber-600">12 novos hoje</span>
       </div>
       <div className="grid grid-cols-3 gap-1.5">
@@ -997,7 +997,7 @@ function DeletedPreview({ sex }: { sex: "M" | "F" }) {
               <span
                 className={
                   m.from === pron
-                    ? "text-emerald-600 font-bold"
+                    ? "text-yellow-600 font-bold"
                     : "text-amber-600 font-bold"
                 }
               >
@@ -1030,7 +1030,7 @@ function WhatsAppPreview({ sex: _sex }: { sex: "M" | "F" }) {
   return (
     <div className="p-4 space-y-2">
       <div className="text-[12px] text-slate-600">
-        <span className="text-emerald-600 font-bold">28 conversas</span> ativas · última há 2 min
+        <span className="text-yellow-600 font-bold">28 conversas</span> ativas · última há 2 min
       </div>
       <div className="divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white overflow-hidden">
         {chats.map((c, i) => (
@@ -1060,7 +1060,7 @@ function WhatsAppPreview({ sex: _sex }: { sex: "M" | "F" }) {
               </div>
             </div>
             {c.unread && (
-              <span className="text-[10px] font-bold bg-emerald-500 text-white rounded-full px-1.5 py-0.5 min-w-5 text-center">
+              <span className="text-[10px] font-bold bg-yellow-500 text-[#080808] rounded-full px-1.5 py-0.5 min-w-5 text-center">
                 {c.unread}
               </span>
             )}
@@ -1204,12 +1204,12 @@ function CallsPreview({ sex: _sex }: { sex: "M" | "F" }) {
   return (
     <div className="p-4 space-y-2">
       <div className="text-[12px] text-slate-600">
-        <span className="text-emerald-600 font-bold">18 chamadas</span> nas últimas 24h
+        <span className="text-yellow-600 font-bold">18 chamadas</span> nas últimas 24h
       </div>
       <div className="divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white overflow-hidden">
         {calls.map((c, i) => (
           <div key={i} className="flex items-center gap-3 px-3 py-2.5 text-[12px]">
-            <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+            <div className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
               {I.phone}
             </div>
             <div className="flex-1 min-w-0">
@@ -1244,7 +1244,7 @@ function ContactsPreview() {
   return (
     <div className="p-4 space-y-2">
       <div className="text-[12px] text-slate-600">
-        <span className="text-emerald-600 font-bold">184 contatos</span> · 12 marcados como suspeitos
+        <span className="text-yellow-600 font-bold">184 contatos</span> · 12 marcados como suspeitos
       </div>
       <ul className="divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white overflow-hidden">
         {items.map((c, i) => (

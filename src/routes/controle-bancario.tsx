@@ -149,7 +149,7 @@ function ControleBancarioPage() {
           backgroundSize: "32px 32px",
         }}
       />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-emerald-500/[0.08] blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/[0.08] blur-[140px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 max-w-md mx-auto px-4 py-6 space-y-5">
         {/* Barra de urgência topo */}
@@ -158,15 +158,15 @@ function ControleBancarioPage() {
         </div>
 
         {/* Header — meta aprovado */}
-        <div className="bg-emerald-600/15 border border-emerald-300 rounded-2xl p-4 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-emerald-100 border border-emerald-500/50 flex items-center justify-center text-[#25D366] text-xl">
+        <div className="bg-yellow-600/15 border border-yellow-300 rounded-2xl p-4 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-yellow-100 border border-yellow-500/50 flex items-center justify-center text-[#25D366] text-xl">
             ✓
           </div>
           <div>
             <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace] font-bold">
               Invasão 100% concluída
             </div>
-            <div className="text-sm font-bold text-emerald-800">
+            <div className="text-sm font-bold text-yellow-800">
               Falta apenas 1 passo para liberar o acesso {doAlvo}
             </div>
           </div>
@@ -191,7 +191,7 @@ function ControleBancarioPage() {
         </div>
 
         {/* Extrato "preview" borrado - chamativo */}
-        <div className="bg-white border border-emerald-200 rounded-2xl p-4 space-y-2 shadow-[0_0_30px_-10px_rgba(16,185,129,0.4)]">
+        <div className="bg-white border border-yellow-200 rounded-2xl p-4 space-y-2 shadow-[0_0_30px_-10px_rgba(217,169,40,0.4)]">
           <div className="flex items-center justify-between">
             <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E] font-['Geist_Mono',monospace] font-bold">
               📊 Prévia · Extrato interceptado
@@ -225,7 +225,7 @@ function ControleBancarioPage() {
         </div>
 
         {/* Oferta principal */}
-        <div className="bg-gradient-to-br from-emerald-600/20 to-emerald-900/10 border-2 border-emerald-500/60 rounded-3xl p-6 shadow-[0_0_50px_-10px_rgba(16,185,129,0.5)]">
+        <div className="bg-gradient-to-br from-yellow-600/20 to-yellow-900/10 border-2 border-yellow-500/60 rounded-3xl p-6 shadow-[0_0_50px_-10px_rgba(217,169,40,0.5)]">
           <div className="flex items-start gap-3 mb-3">
             <span className="text-3xl">🏦</span>
             <div>
@@ -239,7 +239,7 @@ function ControleBancarioPage() {
             </div>
           </div>
 
-          <div className="bg-emerald-50 border border-emerald-300 rounded-xl p-3 text-[12px] text-emerald-800 leading-snug">
+          <div className="bg-yellow-50 border border-yellow-300 rounded-xl p-3 text-[12px] text-yellow-800 leading-snug">
             ⚡ <span className="font-bold">Não é apenas visualizar.</span> Você opera:
             envia PIX, faz transferências, paga boletos, cancela compras e movimenta
             o saldo como se fosse o dono do celular.
@@ -273,7 +273,7 @@ function ControleBancarioPage() {
           </ul>
 
           {/* Ancoragem de valor */}
-          <div className="mt-5 bg-white/60 border border-emerald-200 rounded-2xl p-4">
+          <div className="mt-5 bg-white/60 border border-yellow-200 rounded-2xl p-4">
             <div className="text-center space-y-1">
               <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-['Geist_Mono',monospace]">
                 Investigador particular cobra ~R$ 2.400
@@ -299,7 +299,7 @@ function ControleBancarioPage() {
               setShowPix(true);
               setTimeout(() => document.getElementById("pix-box")?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
             }}
-            className="mt-5 flex w-full min-h-14 items-center justify-center text-center bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-4px_rgba(16,185,129,0.9)] text-[15px] uppercase tracking-wide animate-[pulse_2s_ease-in-out_infinite]"
+            className="mt-5 flex w-full min-h-14 items-center justify-center text-center bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-4px_rgba(217,169,40,0.9)] text-[15px] uppercase tracking-wide animate-[pulse_2s_ease-in-out_infinite]"
           >
             🏦 Liberar controle bancário agora
           </button>
@@ -321,7 +321,7 @@ function ControleBancarioPage() {
         </div>
 
         {/* Garantia */}
-        <div className="bg-white border border-emerald-200 rounded-2xl p-4 flex gap-3 items-start">
+        <div className="bg-white border border-yellow-200 rounded-2xl p-4 flex gap-3 items-start">
           <span className="text-3xl">🛡️</span>
           <div>
             <div className="text-sm font-extrabold text-[#25D366]">Garantia blindada de 7 dias</div>
@@ -365,7 +365,7 @@ function ControleBancarioPage() {
         {!showPix && (
           <button
             onClick={() => setShowPix(true)}
-            className="flex w-full min-h-14 items-center justify-center text-center bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-4px_rgba(16,185,129,0.9)] text-[15px] uppercase tracking-wide"
+            className="flex w-full min-h-14 items-center justify-center text-center bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-4px_rgba(217,169,40,0.9)] text-[15px] uppercase tracking-wide"
           >
             🔓 Quero ver tudo agora · R$ 197
           </button>
@@ -373,7 +373,7 @@ function ControleBancarioPage() {
 
         {/* PIX */}
         {showPix && (
-          <div id="pix-box" className="bg-gradient-to-br from-white/90 to-slate-50/40 backdrop-blur-xl border-2 border-emerald-500/50 rounded-3xl p-6 space-y-4 shadow-[0_20px_60px_rgba(16,185,129,0.25)]">
+          <div id="pix-box" className="bg-gradient-to-br from-white/90 to-slate-50/40 backdrop-blur-xl border-2 border-yellow-500/50 rounded-3xl p-6 space-y-4 shadow-[0_20px_60px_rgba(217,169,40,0.25)]">
             <div className="text-center space-y-1">
               <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
                 Controle Bancário Total
@@ -392,7 +392,7 @@ function ControleBancarioPage() {
 
             {!charge && !error && (
               <div className="flex flex-col items-center gap-3 py-6">
-                <div className="w-10 h-10 border-2 border-emerald-200 border-t-emerald-400 rounded-full animate-spin" />
+                <div className="w-10 h-10 border-2 border-yellow-200 border-t-yellow-400 rounded-full animate-spin" />
                 <p className="text-sm text-slate-500">Gerando seu código PIX…</p>
               </div>
             )}
@@ -425,7 +425,7 @@ function ControleBancarioPage() {
                 </div>
 
                 <div className="flex items-center justify-center gap-2 text-[12px] text-slate-500">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
                   {statusLabel}
                 </div>
               </>

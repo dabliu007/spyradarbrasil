@@ -128,22 +128,22 @@ export function LegalShell({
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(16,185,129,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(16,185,129,0.05) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(217,169,40,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(217,169,40,0.05) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-emerald-500/[0.08] blur-[160px] rounded-full pointer-events-none" />
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-yellow-500/[0.08] blur-[160px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 max-w-2xl mx-auto px-5 py-10">
         <Link
           to="/"
-          className="inline-flex items-center gap-1 text-[12px] text-emerald-700 font-semibold hover:underline"
+          className="inline-flex items-center gap-1 text-[12px] text-yellow-700 font-semibold hover:underline"
         >
           ← Voltar
         </Link>
 
-        <div className="mt-4 bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-emerald-200 rounded-3xl p-6 sm:p-8 shadow-[0_25px_70px_rgba(16,185,129,0.12)]">
-          <div className="text-[10px] uppercase tracking-[0.3em] text-emerald-700 font-['Geist_Mono',monospace] font-bold">
+        <div className="mt-4 bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-yellow-200 rounded-3xl p-6 sm:p-8 shadow-[0_25px_70px_rgba(217,169,40,0.12)]">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-yellow-700 font-['Geist_Mono',monospace] font-bold">
             SpyRadar Brasil · Legal
           </div>
           <h1 className="mt-1 text-2xl sm:text-3xl font-extrabold text-slate-900">
@@ -158,9 +158,9 @@ export function LegalShell({
           </div>
 
           <div className="mt-8 pt-5 border-t border-slate-200 text-[12px] text-slate-500 flex gap-4 justify-center">
-            <Link to="/termos" className="hover:text-emerald-700">Termos de Uso</Link>
+            <Link to="/termos" className="hover:text-yellow-700">Termos de Uso</Link>
             <span>•</span>
-            <Link to="/privacidade" className="hover:text-emerald-700">Política de Privacidade</Link>
+            <Link to="/privacidade" className="hover:text-yellow-700">Política de Privacidade</Link>
           </div>
         </div>
       </div>

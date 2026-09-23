@@ -80,13 +80,13 @@ function AcessoLiberadoPage() {
         className="pointer-events-none fixed inset-0 z-0 opacity-[0.08]"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(to bottom, transparent 0, transparent 2px, #10b981 2px, #10b981 3px)",
+            "repeating-linear-gradient(to bottom, transparent 0, transparent 2px, #D9A928 2px, #D9A928 3px)",
         }}
       />
-      <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_center,_rgba(16,185,129,0.18)_0%,_transparent_60%)]" />
+      <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_center,_rgba(217,169,40,0.18)_0%,_transparent_60%)]" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 py-8 space-y-6">
-        <header className="border border-emerald-300 bg-white/70 rounded-md p-4">
+        <header className="border border-yellow-300 bg-white/70 rounded-md p-4">
           <div className="flex items-center justify-between text-xs">
             <span className="text-[#128C7E]">spyradar_core.exe</span>
             <span className="text-[#25D366]">{now}</span>
@@ -97,19 +97,19 @@ function AcessoLiberadoPage() {
           <p className="text-[#128C7E]/80 text-sm mt-2">
             Todas as etapas de verificação, sigilo e licenciamento foram
             concluídas. Você agora tem permissão integral sobre {alvoLabel === "alvo" ? "o alvo " : `${alvoLabel} `}
-            <span className="text-emerald-700 font-bold">{alvo}</span>.
+            <span className="text-yellow-700 font-bold">{alvo}</span>.
           </p>
         </header>
 
         {/* status bar */}
-        <section className="border border-emerald-300 bg-white/70 rounded-md p-4">
+        <section className="border border-yellow-300 bg-white/70 rounded-md p-4">
           <div className="flex items-center justify-between text-xs mb-2">
             <span>SINCRONIZANDO PAINEL...</span>
             <span className="text-[#25D366]">{progress}%</span>
           </div>
-          <div className="h-2 w-full bg-emerald-900/40 rounded-full overflow-hidden">
+          <div className="h-2 w-full bg-yellow-900/40 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-emerald-500 to-emerald-300 transition-all"
+              className="h-full bg-gradient-to-r from-yellow-500 to-yellow-300 transition-all"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -166,12 +166,12 @@ function AcessoLiberadoPage() {
         </section>
 
         {/* dados do alvo */}
-        <section className="border border-emerald-300 bg-white/70 rounded-md p-4 text-sm">
+        <section className="border border-yellow-300 bg-white/70 rounded-md p-4 text-sm">
           <div className="text-[#128C7E] text-xs mb-2">[ DADOS DO ALVO ]</div>
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-y-1 gap-x-6 text-[#25D366]">
             <div className="flex justify-between"><dt className="text-[#128C7E]">Número</dt><dd>{alvo}</dd></div>
             <div className="flex justify-between"><dt className="text-[#128C7E]">Sexo</dt><dd>{sex === "F" ? "Feminino" : "Masculino"}</dd></div>
-            <div className="flex justify-between"><dt className="text-[#128C7E]">Status</dt><dd className="text-emerald-700">ATIVO</dd></div>
+            <div className="flex justify-between"><dt className="text-[#128C7E]">Status</dt><dd className="text-yellow-700">ATIVO</dd></div>
             <div className="flex justify-between"><dt className="text-[#128C7E]">Sessões</dt><dd>4 dispositivos</dd></div>
             <div className="flex justify-between"><dt className="text-[#128C7E]">Última atividade</dt><dd>há 2 min</dd></div>
             <div className="flex justify-between"><dt className="text-[#128C7E]">Validade</dt><dd>30 dias</dd></div>
@@ -183,7 +183,7 @@ function AcessoLiberadoPage() {
           <Link
             to="/painel"
             search={{ phone, sex }}
-            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-6 py-4 bg-[#25D366] text-white font-bold rounded-md shadow-[0_0_20px_rgba(16,185,129,0.5)] hover:bg-emerald-400 transition"
+            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-6 py-4 bg-[#25D366] text-[#080808] font-bold rounded-md shadow-[0_0_20px_rgba(217,169,40,0.5)] hover:bg-yellow-400 transition"
           >
             💬 ABRIR WHATSAPP CLONADO AGORA
           </Link>
@@ -193,7 +193,7 @@ function AcessoLiberadoPage() {
           </p>
         </section>
 
-        <footer className="text-center text-[10px] text-emerald-700 pt-6 border-t border-emerald-900/50">
+        <footer className="text-center text-[10px] text-yellow-700 pt-6 border-t border-yellow-900/50">
           spyradar_core v3.7 · sessão protegida · uso restrito ao contratante
         </footer>
       </div>
@@ -219,14 +219,14 @@ function ModuleCard({
   unlocked?: boolean;
 }) {
   const inner = (
-    <div className="h-full border border-emerald-300 bg-white/70 rounded-md p-4 hover:border-emerald-400 hover:bg-emerald-950/30 transition">
+    <div className="h-full border border-yellow-300 bg-white/70 rounded-md p-4 hover:border-yellow-400 hover:bg-yellow-950/30 transition">
       <div className="flex items-center justify-between">
         <span className="text-2xl">{icon}</span>
-        <span className="text-[10px] px-2 py-0.5 bg-emerald-100 text-[#25D366] rounded-full border border-emerald-300">
+        <span className="text-[10px] px-2 py-0.5 bg-yellow-100 text-[#25D366] rounded-full border border-yellow-300">
           LIBERADO
         </span>
       </div>
-      <div className="mt-2 text-emerald-700 font-bold text-sm">{title}</div>
+      <div className="mt-2 text-yellow-700 font-bold text-sm">{title}</div>
       <div className="text-[#128C7E]/70 text-xs mt-1">{desc}</div>
     </div>
   );

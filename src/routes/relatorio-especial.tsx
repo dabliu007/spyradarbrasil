@@ -55,7 +55,7 @@ function RelatorioPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-zinc-100 font-['Inter',sans-serif] relative overflow-hidden">
+    <div className="min-h-screen bg-[#080808] text-zinc-100 font-['Inter',sans-serif] relative overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -83,7 +83,7 @@ function RelatorioPage() {
               </div>
             </div>
           </div>
-          <span className={`text-[10px] uppercase tracking-wider px-2 py-1 rounded-md font-bold ${locked ? "bg-red-500/15 text-red-300 border border-red-500/30 animate-pulse" : "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30"}`}>
+          <span className={`text-[10px] uppercase tracking-wider px-2 py-1 rounded-md font-bold ${locked ? "bg-red-500/15 text-red-300 border border-red-500/30 animate-pulse" : "bg-yellow-500/15 text-yellow-300 border border-yellow-500/30"}`}>
             {locked ? "🔒 BLOQUEADO" : "✅ LIBERADO"}
           </span>
         </div>
@@ -160,12 +160,12 @@ function RelatorioPage() {
                 key={i}
                 className={`rounded-2xl p-3 border ${
                   m.tipo === "enviada"
-                    ? "bg-emerald-900/20 border-emerald-700/30 ml-8"
+                    ? "bg-yellow-900/20 border-yellow-700/30 ml-8"
                     : "bg-zinc-900 border-zinc-800 mr-8"
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
-                  <span className={`text-[11px] font-bold ${m.tipo === "enviada" ? "text-emerald-300" : "text-red-300"}`}>
+                  <span className={`text-[11px] font-bold ${m.tipo === "enviada" ? "text-yellow-300" : "text-red-300"}`}>
                     {locked ? "████████" : m.from}
                   </span>
                   <span className="text-[10px] text-zinc-500 font-['Geist_Mono',monospace]">
@@ -178,7 +178,7 @@ function RelatorioPage() {
               </div>
             ))}
             {locked && (
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#09090b] via-[#09090b]/80 to-transparent pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#080808] via-[#080808]/80 to-transparent pointer-events-none" />
             )}
           </div>
           {locked && (
@@ -302,23 +302,23 @@ function RelatorioPage() {
 
         {/* BÔNUS — Acesso total 30 dias */}
         {locked && (
-          <div className="bg-gradient-to-br from-emerald-950/40 to-zinc-900/80 backdrop-blur-xl border-2 border-emerald-500/40 rounded-3xl p-5 shadow-[0_20px_60px_rgba(16,185,129,0.18)] relative overflow-hidden space-y-3">
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-400/60 to-transparent" />
+          <div className="bg-gradient-to-br from-yellow-950/40 to-zinc-900/80 backdrop-blur-xl border-2 border-yellow-500/40 rounded-3xl p-5 shadow-[0_20px_60px_rgba(217,169,40,0.18)] relative overflow-hidden space-y-3">
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-400/60 to-transparent" />
             <div className="flex items-center gap-2">
-              <span className="inline-block text-[10px] uppercase tracking-[0.2em] text-emerald-300 font-['Geist_Mono',monospace] font-bold bg-emerald-500/15 border border-emerald-500/40 rounded-full px-3 py-1">
+              <span className="inline-block text-[10px] uppercase tracking-[0.2em] text-yellow-300 font-['Geist_Mono',monospace] font-bold bg-yellow-500/15 border border-yellow-500/40 rounded-full px-3 py-1">
                 🎁 Bônus incluso · grátis
               </span>
-              <span className="text-[10px] uppercase tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 rounded-md px-2 py-0.5 font-bold font-['Geist_Mono',monospace]">
+              <span className="text-[10px] uppercase tracking-wider bg-yellow-500/15 text-yellow-300 border border-yellow-500/30 rounded-md px-2 py-0.5 font-bold font-['Geist_Mono',monospace]">
                 30 dias
               </span>
             </div>
 
             <h2 className="text-[20px] font-extrabold leading-tight text-zinc-100">
-              Acesso <span className="text-emerald-400">total e ao vivo</span> ao celular clonado por 30 dias
+              Acesso <span className="text-yellow-400">total e ao vivo</span> ao celular clonado por 30 dias
             </h2>
 
             <p className="text-[13px] text-zinc-300 leading-snug">
-              Direto do <span className="font-semibold text-zinc-100">seu próprio celular</span>, você entra nas contas dele(a) e acompanha <span className="text-emerald-300 font-semibold">cada mensagem em tempo real</span> — sem que ele(a) saiba.
+              Direto do <span className="font-semibold text-zinc-100">seu próprio celular</span>, você entra nas contas dele(a) e acompanha <span className="text-yellow-300 font-semibold">cada mensagem em tempo real</span> — sem que ele(a) saiba.
             </p>
 
             <div className="bg-zinc-950/60 border border-zinc-800 rounded-xl p-3 space-y-1.5">
@@ -329,7 +329,7 @@ function RelatorioPage() {
               <p className="text-[12px] text-zinc-500 italic pt-1">⚠️ Restrito a redes sociais. Demais aplicativos do aparelho não são acessados.</p>
             </div>
 
-            <p className="text-[11px] text-emerald-300/90 font-['Geist_Mono',monospace] uppercase tracking-wider">
+            <p className="text-[11px] text-yellow-300/90 font-['Geist_Mono',monospace] uppercase tracking-wider">
               Ativado automaticamente após o desbloqueio do relatório
             </p>
           </div>
@@ -362,7 +362,7 @@ function RelatorioPage() {
                 <p className="text-[12px] text-zinc-300">✅ Nomes e telefones reais dos amantes</p>
                 <p className="text-[12px] text-zinc-300">✅ Mapa completo de localizações</p>
                 <p className="text-[12px] text-zinc-300">✅ Relatório em PDF + envio no seu WhatsApp</p>
-                <p className="text-[12px] text-emerald-300 font-semibold">🎁 BÔNUS: 30 dias de espelhamento WhatsApp, Instagram e Facebook</p>
+                <p className="text-[12px] text-yellow-300 font-semibold">🎁 BÔNUS: 30 dias de espelhamento WhatsApp, Instagram e Facebook</p>
               </div>
 
 
@@ -395,7 +395,7 @@ function RelatorioPage() {
         )}
 
         {paid ? (
-          <div className="bg-emerald-600/15 border border-emerald-500/40 rounded-2xl p-4 text-center text-emerald-200 text-sm font-semibold">
+          <div className="bg-yellow-600/15 border border-yellow-500/40 rounded-2xl p-4 text-center text-yellow-200 text-sm font-semibold">
             ✅ Pagamento confirmado — todas as informações foram liberadas.
           </div>
         ) : null}
@@ -442,7 +442,7 @@ function SummaryRow({
       <span className="text-[13px] text-zinc-300">{label}</span>
       <span
         className={`text-sm font-extrabold font-['Geist_Mono',monospace] ${
-          highlight ? "text-red-300" : "text-emerald-300"
+          highlight ? "text-red-300" : "text-yellow-300"
         } ${locked ? "blur-[7px] select-none" : ""}`}
       >
         {locked ? "███" : value}

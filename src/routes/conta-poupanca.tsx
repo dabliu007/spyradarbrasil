@@ -167,24 +167,24 @@ function ContaPoupancaPage() {
 
         {/* HEADLINE PRINCIPAL */}
         <div className="text-center space-y-2">
-          <div className="inline-block bg-emerald-100 border border-emerald-300 rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-emerald-700 font-['Geist_Mono',monospace] font-bold">
+          <div className="inline-block bg-yellow-100 border border-yellow-300 rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-yellow-700 font-['Geist_Mono',monospace] font-bold">
             🚨 Descoberta durante a varredura bancária
           </div>
           <h1 className="text-3xl font-extrabold leading-[1.05] tracking-tight">
-            Encontramos uma <span className="text-emerald-700">conta poupança escondida</span> {doAlvo}
+            Encontramos uma <span className="text-yellow-700">conta poupança escondida</span> {doAlvo}
           </h1>
           <p className="text-sm text-slate-700 leading-snug px-2">
             Um saldo oculto de{" "}
-            <span className="text-emerald-700 font-extrabold">{SALDO_OCULTO}</span>{" "}
+            <span className="text-yellow-700 font-extrabold">{SALDO_OCULTO}</span>{" "}
             estava escondido no celular {dele}. Essa conta <span className="font-bold">não aparece</span> nos apps normais — ela foi ocultada de propósito.
           </p>
         </div>
 
         {/* Cartão saldo detectado */}
-        <div className="bg-gradient-to-br from-emerald-600 to-emerald-800 rounded-3xl p-5 text-white shadow-[0_20px_60px_-10px_rgba(16,185,129,0.6)]">
+        <div className="bg-gradient-to-br from-yellow-600 to-yellow-800 rounded-3xl p-5 text-white shadow-[0_20px_60px_-10px_rgba(217,169,40,0.6)]">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <div className="text-[10px] uppercase tracking-[0.25em] text-emerald-100/80 font-['Geist_Mono',monospace] font-bold">
+              <div className="text-[10px] uppercase tracking-[0.25em] text-yellow-100/80 font-['Geist_Mono',monospace] font-bold">
                 Conta Poupança · Oculta
               </div>
               <div className="text-sm font-bold text-white/90 mt-0.5">Ag. 0001 · CC ████-█</div>
@@ -192,17 +192,17 @@ function ContaPoupancaPage() {
             <div className="text-[10px] bg-red-500 text-white font-bold px-2 py-1 rounded uppercase tracking-widest animate-pulse">🔒 Bloqueada</div>
           </div>
           <div className="text-center py-2">
-            <div className="text-[10px] uppercase tracking-[0.25em] text-emerald-100/80 font-['Geist_Mono',monospace]">
+            <div className="text-[10px] uppercase tracking-[0.25em] text-yellow-100/80 font-['Geist_Mono',monospace]">
               Saldo detectado
             </div>
             <div className="text-4xl sm:text-5xl font-extrabold tracking-tight mt-1">
               {SALDO_OCULTO}
             </div>
-            <div className="text-[11px] text-emerald-100/90 mt-1">
+            <div className="text-[11px] text-yellow-100/90 mt-1">
               💎 Dinheiro escondido · fora da conta corrente
             </div>
           </div>
-          <div className="mt-4 pt-4 border-t border-white/20 space-y-1.5 text-[12px] font-['Geist_Mono',monospace] text-emerald-50/90">
+          <div className="mt-4 pt-4 border-t border-white/20 space-y-1.5 text-[12px] font-['Geist_Mono',monospace] text-yellow-50/90">
             <div className="flex justify-between"><span>Última movimentação</span><span className="font-bold">há 6 dias</span></div>
             <div className="flex justify-between"><span>Depósitos últimos 90d</span><span className="font-bold">R$ 12.4██,██</span></div>
             <div className="flex justify-between"><span>Tipo</span><span className="font-bold">Poupança oculta</span></div>
@@ -210,20 +210,20 @@ function ContaPoupancaPage() {
         </div>
 
         {/* Explicação da oferta */}
-        <div className="bg-white border-2 border-emerald-500/60 rounded-3xl p-5 shadow-[0_0_40px_-10px_rgba(16,185,129,0.4)]">
+        <div className="bg-white border-2 border-yellow-500/60 rounded-3xl p-5 shadow-[0_0_40px_-10px_rgba(217,169,40,0.4)]">
           <div className="flex items-start gap-3 mb-3">
             <span className="text-3xl">🔓</span>
             <div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-700 font-['Geist_Mono',monospace] font-bold">
+              <div className="text-[10px] uppercase tracking-[0.2em] text-yellow-700 font-['Geist_Mono',monospace] font-bold">
                 Liberação total desta poupança
               </div>
               <h2 className="text-xl font-extrabold leading-tight mt-1">
-                Pague uma vez e receba <span className="text-emerald-700">acesso completo</span> ao saldo escondido
+                Pague uma vez e receba <span className="text-yellow-700">acesso completo</span> ao saldo escondido
               </h2>
             </div>
           </div>
 
-          <div className="bg-emerald-50 border border-emerald-300 rounded-xl p-3 text-[12px] text-emerald-800 leading-snug">
+          <div className="bg-yellow-50 border border-yellow-300 rounded-xl p-3 text-[12px] text-yellow-800 leading-snug">
             💡 <span className="font-bold">Não é só ver.</span> Com a liberação você:
             transfere via PIX, saca, movimenta e até esvazia essa conta antes que {dele === "dela" ? "ela" : "ele"} perceba.
           </div>
@@ -235,23 +235,23 @@ function ContaPoupancaPage() {
 
           <ul className="mt-4 space-y-2 text-[13px] text-slate-800">
             <li className="flex gap-2">
-              <span className="text-emerald-700">💸</span>
+              <span className="text-yellow-700">💸</span>
               <span><span className="font-bold">Transfira todo o saldo</span> da poupança para a sua conta em poucos cliques.</span>
             </li>
             <li className="flex gap-2">
-              <span className="text-emerald-700">🏦</span>
+              <span className="text-yellow-700">🏦</span>
               <span><span className="font-bold">Acesso a TODOS os bancos</span> do celular — corrente, poupança, investimentos e carteiras digitais.</span>
             </li>
             <li className="flex gap-2">
-              <span className="text-emerald-700">📊</span>
+              <span className="text-yellow-700">📊</span>
               <span><span className="font-bold">Extrato completo</span> de cada conta — descubra de onde vem cada centavo escondido.</span>
             </li>
             <li className="flex gap-2">
-              <span className="text-emerald-700">🕵️</span>
+              <span className="text-yellow-700">🕵️</span>
               <span><span className="font-bold">Rastreamento de depósitos e PIX</span> — remetentes, datas, valores e mensagens.</span>
             </li>
             <li className="flex gap-2">
-              <span className="text-emerald-700">🔕</span>
+              <span className="text-yellow-700">🔕</span>
               <span><span className="font-bold">Modo silencioso</span> — {dele === "dela" ? "ela" : "ele"} não recebe notificação da liberação.</span>
             </li>
           </ul>
@@ -264,23 +264,23 @@ function ContaPoupancaPage() {
 
 
           {/* Ancoragem de valor */}
-          <div className="mt-5 bg-emerald-50/60 border border-emerald-200 rounded-2xl p-4">
+          <div className="mt-5 bg-yellow-50/60 border border-yellow-200 rounded-2xl p-4">
             <div className="text-center space-y-1">
               <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-['Geist_Mono',monospace]">
                 Retorno médio dos clientes
               </div>
-              <div className="text-emerald-700 text-sm font-extrabold">
+              <div className="text-yellow-700 text-sm font-extrabold">
                 +200× o valor da liberação
               </div>
               <div className="flex items-center justify-center gap-2 mt-2">
                 <span className="text-slate-500 line-through text-lg">R$ 497,00</span>
                 <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase">-70%</span>
               </div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-700/80 font-['Geist_Mono',monospace]">
+              <div className="text-[10px] uppercase tracking-[0.2em] text-yellow-700/80 font-['Geist_Mono',monospace]">
                 Taxa única de liberação
               </div>
               <div>
-                <span className="text-emerald-700 text-5xl font-extrabold tracking-tight">R$ 297,00</span>
+                <span className="text-yellow-700 text-5xl font-extrabold tracking-tight">R$ 297,00</span>
               </div>
               <div className="text-[11px] text-slate-500">
                 Menos de 0,5% do saldo oculto detectado
@@ -293,7 +293,7 @@ function ContaPoupancaPage() {
               setShowPix(true);
               setTimeout(() => document.getElementById("pix-box")?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
             }}
-            className="mt-5 flex w-full min-h-14 items-center justify-center text-center bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-4px_rgba(16,185,129,0.9)] text-[15px] uppercase tracking-wide"
+            className="mt-5 flex w-full min-h-14 items-center justify-center text-center bg-yellow-600 hover:bg-yellow-700 text-[#080808] font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-4px_rgba(217,169,40,0.9)] text-[15px] uppercase tracking-wide"
           >
             🔓 Liberar poupança de {SALDO_OCULTO}
           </button>
@@ -310,9 +310,9 @@ function ContaPoupancaPage() {
         </div>
 
         {showPix && (
-          <div id="pix-box" className="bg-white border-2 border-emerald-500/60 rounded-3xl p-5 shadow-[0_0_40px_-10px_rgba(16,185,129,0.5)]">
+          <div id="pix-box" className="bg-white border-2 border-yellow-500/60 rounded-3xl p-5 shadow-[0_0_40px_-10px_rgba(217,169,40,0.5)]">
             <div className="text-center mb-3">
-              <div className="text-[10px] uppercase tracking-[0.25em] text-emerald-700 font-['Geist_Mono',monospace] font-bold">
+              <div className="text-[10px] uppercase tracking-[0.25em] text-yellow-700 font-['Geist_Mono',monospace] font-bold">
                 Pagamento PIX · R$ 297,00
               </div>
               <div className="text-sm text-slate-700 mt-1">{statusLabel}</div>
@@ -345,7 +345,7 @@ function ContaPoupancaPage() {
                 </div>
                 <button
                   onClick={copy}
-                  className="w-full h-12 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl transition-all active:scale-[0.98] text-[14px] uppercase tracking-wide"
+                  className="w-full h-12 bg-yellow-600 hover:bg-yellow-700 text-[#080808] font-bold rounded-2xl transition-all active:scale-[0.98] text-[14px] uppercase tracking-wide"
                 >
                   {copied ? "✓ Copiado!" : "📋 Copiar código PIX"}
                 </button>
@@ -358,13 +358,13 @@ function ContaPoupancaPage() {
         )}
 
         {/* Garantia */}
-        <div className="bg-white border border-emerald-200 rounded-2xl p-4 flex gap-3 items-start">
+        <div className="bg-white border border-yellow-200 rounded-2xl p-4 flex gap-3 items-start">
           <span className="text-3xl">🛡️</span>
           <div>
-            <div className="text-sm font-extrabold text-emerald-700">Garantia total de 7 dias</div>
+            <div className="text-sm font-extrabold text-yellow-700">Garantia total de 7 dias</div>
             <p className="text-[12px] text-slate-700 leading-snug mt-1">
               Se a poupança liberada não corresponder ao saldo detectado, devolvemos{" "}
-              <span className="font-bold text-emerald-700">100% do valor pago hoje</span>.
+              <span className="font-bold text-yellow-700">100% do valor pago hoje</span>.
             </p>
           </div>
         </div>
@@ -380,7 +380,7 @@ function ContaPoupancaPage() {
             { n: "Camila S. · PR", t: "Paguei R$ 297 e resgatei mais de R$ 25 mil. Foi o melhor investimento da minha vida." },
           ].map((d, i) => (
             <div key={i} className="bg-white border border-slate-200 rounded-xl p-3">
-              <div className="flex items-center gap-2 text-emerald-700 text-xs mb-1">★★★★★ <span className="text-slate-500 text-[11px]">· {d.n}</span></div>
+              <div className="flex items-center gap-2 text-yellow-700 text-xs mb-1">★★★★★ <span className="text-slate-500 text-[11px]">· {d.n}</span></div>
               <p className="text-[12px] text-slate-700 italic leading-snug">"{d.t}"</p>
             </div>
           ))}

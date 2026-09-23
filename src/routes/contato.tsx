@@ -44,7 +44,7 @@ function ContatoPage() {
       <p>
         Dúvidas sobre o serviço, pagamentos, acesso ou suporte técnico:{" "}
         <strong>
-          <a href="mailto:sac@whatsradar.com" className="text-emerald-700 hover:underline">
+          <a href="mailto:sac@whatsradar.com" className="text-yellow-700 hover:underline">
             sac@whatsradar.com
           </a>
         </strong>
@@ -55,7 +55,7 @@ function ContatoPage() {
         Solicitações de titulares de dados, encarregado (DPO) e assuntos
         relacionados à LGPD:{" "}
         <strong>
-          <a href="mailto:privacidade@whatsradar.com" className="text-emerald-700 hover:underline">
+          <a href="mailto:privacidade@whatsradar.com" className="text-yellow-700 hover:underline">
             privacidade@whatsradar.com
           </a>
         </strong>
@@ -65,7 +65,7 @@ function ContatoPage() {
       <p>
         Notificações extrajudiciais, imprensa, parcerias e questões contratuais:{" "}
         <strong>
-          <a href="mailto:contato@whatsradar.com" className="text-emerald-700 hover:underline">
+          <a href="mailto:contato@whatsradar.com" className="text-yellow-700 hover:underline">
             contato@whatsradar.com
           </a>
         </strong>

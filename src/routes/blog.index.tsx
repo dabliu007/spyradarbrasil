@@ -28,7 +28,7 @@ export const Route = createFileRoute("/blog/")({
 const CATEGORY_STYLES: Record<string, string> = {
   Relacionamentos: "bg-rose-50 text-rose-700 border-rose-200",
   Investigação: "bg-indigo-50 text-indigo-700 border-indigo-200",
-  Tecnologia: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  Tecnologia: "bg-yellow-50 text-yellow-700 border-yellow-200",
 };
 
 function categoryClass(cat: string) {
@@ -54,11 +54,11 @@ function BlogIndex() {
       <div className="border-b border-slate-200 bg-white/80 backdrop-blur sticky top-0 z-20">
         <div className="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-emerald-600 grid place-items-center text-white text-xs font-black">
+            <div className="w-7 h-7 rounded-lg bg-yellow-600 grid place-items-center text-[#080808] text-xs font-black">
               Z
             </div>
             <span className="font-extrabold text-slate-900 tracking-tight">
-              SpyRadar Brasil<span className="text-emerald-600">.</span>Blog
+              SpyRadar Brasil<span className="text-yellow-600">.</span>Blog
             </span>
           </Link>
           <Link
@@ -73,12 +73,12 @@ function BlogIndex() {
       {/* Hero header */}
       <header className="border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-5 pt-14 pb-10">
-          <div className="text-[11px] uppercase tracking-[0.3em] text-emerald-700 font-['Geist_Mono',monospace] font-bold">
+          <div className="text-[11px] uppercase tracking-[0.3em] text-yellow-700 font-['Geist_Mono',monospace] font-bold">
             Diário da investigação digital
           </div>
           <h1 className="mt-3 text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-[1.05] tracking-tight max-w-3xl">
             A verdade sobre o que acontece{" "}
-            <span className="italic font-serif text-emerald-700">na tela dele.</span>
+            <span className="italic font-serif text-yellow-700">na tela dele.</span>
           </h1>
           <p className="mt-5 text-[15px] sm:text-base text-slate-600 leading-relaxed max-w-2xl">
             Guias, análises e histórias reais sobre sinais de traição, WhatsApp
@@ -110,7 +110,7 @@ function BlogIndex() {
               params={{ slug: featured.slug }}
               className="group grid md:grid-cols-2 gap-0 bg-slate-900 rounded-3xl overflow-hidden shadow-[0_30px_80px_-30px_rgba(15,23,42,0.35)]"
             >
-              <div className="relative h-64 md:h-auto bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700 overflow-hidden">
+              <div className="relative h-64 md:h-auto bg-gradient-to-br from-yellow-500 via-yellow-600 to-amber-700 overflow-hidden">
                 <div
                   className="absolute inset-0 opacity-20"
                   style={{
@@ -129,12 +129,12 @@ function BlogIndex() {
                 </div>
               </div>
               <div className="p-8 md:p-10 flex flex-col justify-center text-white">
-                <div className="flex items-center gap-2 text-[11px] uppercase tracking-wider font-['Geist_Mono',monospace] font-bold text-emerald-300">
+                <div className="flex items-center gap-2 text-[11px] uppercase tracking-wider font-['Geist_Mono',monospace] font-bold text-yellow-300">
                   <span>{featured.category}</span>
                   <span className="text-slate-500">·</span>
                   <span className="text-slate-300">{featured.readTime}</span>
                 </div>
-                <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-black leading-tight tracking-tight group-hover:text-emerald-200 transition-colors">
+                <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-black leading-tight tracking-tight group-hover:text-yellow-200 transition-colors">
                   {featured.title}
                 </h2>
                 <p className="mt-4 text-[15px] text-slate-300 leading-relaxed">
@@ -144,7 +144,7 @@ function BlogIndex() {
                   <div className="text-[12px] text-slate-400 font-['Geist_Mono',monospace]">
                     {formatDate(featured.date)} · {featured.author}
                   </div>
-                  <span className="inline-flex items-center gap-1 text-[13px] font-bold text-emerald-300 group-hover:gap-2 transition-all">
+                  <span className="inline-flex items-center gap-1 text-[13px] font-bold text-yellow-300 group-hover:gap-2 transition-all">
                     Ler artigo →
                   </span>
                 </div>
@@ -176,14 +176,14 @@ function BlogIndex() {
                   key={post.slug}
                   to="/blog/$slug"
                   params={{ slug: post.slug }}
-                  className="group flex flex-col bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-emerald-400 hover:shadow-[0_20px_50px_-20px_rgba(16,185,129,0.35)] hover:-translate-y-1 transition-all duration-300"
+                  className="group flex flex-col bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-yellow-400 hover:shadow-[0_20px_50px_-20px_rgba(217,169,40,0.35)] hover:-translate-y-1 transition-all duration-300"
                 >
-                  <div className="relative h-40 bg-gradient-to-br from-slate-50 to-emerald-50 border-b border-slate-100 overflow-hidden">
+                  <div className="relative h-40 bg-gradient-to-br from-slate-50 to-yellow-50 border-b border-slate-100 overflow-hidden">
                     <div
                       className="absolute inset-0 opacity-40"
                       style={{
                         backgroundImage:
-                          "linear-gradient(to right, rgba(16,185,129,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(16,185,129,0.08) 1px, transparent 1px)",
+                          "linear-gradient(to right, rgba(217,169,40,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(217,169,40,0.08) 1px, transparent 1px)",
                         backgroundSize: "20px 20px",
                       }}
                     />
@@ -199,7 +199,7 @@ function BlogIndex() {
                     </div>
                   </div>
                   <div className="p-5 flex-1 flex flex-col">
-                    <h4 className="text-[16px] font-extrabold text-slate-900 leading-snug group-hover:text-emerald-700 transition-colors">
+                    <h4 className="text-[16px] font-extrabold text-slate-900 leading-snug group-hover:text-yellow-700 transition-colors">
                       {post.title}
                     </h4>
                     <p className="mt-2 text-[13.5px] text-slate-600 leading-relaxed line-clamp-3">
@@ -217,17 +217,17 @@ function BlogIndex() {
         )}
 
         {/* CTA banner */}
-        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950 p-8 sm:p-12 text-white">
+        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-yellow-950 p-8 sm:p-12 text-white">
           <div
             className="absolute inset-0 opacity-30"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 80% 20%, rgba(16,185,129,0.4), transparent 50%)",
+                "radial-gradient(circle at 80% 20%, rgba(217,169,40,0.4), transparent 50%)",
             }}
           />
           <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
             <div className="flex-1">
-              <div className="text-[11px] uppercase tracking-[0.3em] text-emerald-300 font-['Geist_Mono',monospace] font-bold">
+              <div className="text-[11px] uppercase tracking-[0.3em] text-yellow-300 font-['Geist_Mono',monospace] font-bold">
                 Chega de dúvida
               </div>
               <h3 className="mt-2 text-2xl sm:text-3xl font-black leading-tight tracking-tight">
@@ -239,7 +239,7 @@ function BlogIndex() {
             </div>
             <Link
               to="/verificar"
-              className="shrink-0 inline-flex items-center justify-center rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-black px-7 py-4 text-[14px] shadow-lg shadow-emerald-500/30 transition"
+              className="shrink-0 inline-flex items-center justify-center rounded-full bg-yellow-500 hover:bg-yellow-400 text-slate-900 font-black px-7 py-4 text-[14px] shadow-lg shadow-yellow-500/30 transition"
             >
               Verificar agora →
             </Link>

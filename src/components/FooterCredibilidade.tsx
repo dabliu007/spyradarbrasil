@@ -10,15 +10,15 @@ export default function FooterCredibilidade() {
       <div className="border-b border-slate-800">
         <div className="max-w-6xl mx-auto px-6 py-6 flex flex-wrap items-center justify-center gap-8 text-sm">
           <div className="flex items-center gap-2">
-            <Lock className="w-5 h-5 text-emerald-400" />
+            <Lock className="w-5 h-5 text-yellow-400" />
             <span>Site protegido por criptografia SSL</span>
           </div>
           <div className="flex items-center gap-2">
-            <Shield className="w-5 h-5 text-emerald-400" />
+            <Shield className="w-5 h-5 text-yellow-400" />
             <span>Pagamento 100% seguro</span>
           </div>
           <div className="flex items-center gap-2">
-            <Shield className="w-5 h-5 text-emerald-400" />
+            <Shield className="w-5 h-5 text-yellow-400" />
             <span>Dados protegidos conforme a LGPD</span>
           </div>
         </div>

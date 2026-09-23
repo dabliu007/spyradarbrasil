@@ -116,7 +116,7 @@ export function VerificarPage() {
   );
 
   return (
-    <div className="min-h-screen w-full bg-[#09090b] text-zinc-100 font-['Inter',sans-serif] selection:bg-emerald-500/30 relative overflow-hidden">
+    <div className="min-h-screen w-full bg-[#080808] text-zinc-100 font-['Inter',sans-serif] selection:bg-yellow-500/30 relative overflow-hidden">
       {/* Grid background */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -127,7 +127,7 @@ export function VerificarPage() {
         }}
       />
       {/* Emerald radial glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/[0.06] blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-yellow-500/[0.06] blur-[140px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 flex flex-col items-center px-4 py-8 min-h-screen">
         <Header />
@@ -231,12 +231,12 @@ function FAQ() {
   return (
     <section className="w-full max-w-lg mt-10 px-2 space-y-4">
       <div className="text-center space-y-2">
-        <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold px-3 py-1.5 rounded-full font-['Geist_Mono',monospace] uppercase tracking-[0.18em]">
+        <div className="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold px-3 py-1.5 rounded-full font-['Geist_Mono',monospace] uppercase tracking-[0.18em]">
           FAQ · Perguntas frequentes
         </div>
         <h2 className="text-2xl font-extrabold tracking-tight text-white">
           Como clonar o celular e o{" "}
-          <span className="text-emerald-400">WhatsApp</span>
+          <span className="text-yellow-400">WhatsApp</span>
         </h2>
         <p className="text-[13px] text-zinc-400 leading-relaxed">
           Tire as principais dúvidas sobre como descobrir uma traição usando
@@ -261,7 +261,7 @@ function FAQ() {
                   {item.q}
                 </span>
                 <span
-                  className={`shrink-0 w-6 h-6 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 flex items-center justify-center text-sm transition-transform ${
+                  className={`shrink-0 w-6 h-6 rounded-full border border-yellow-500/40 bg-yellow-500/10 text-yellow-300 flex items-center justify-center text-sm transition-transform ${
                     isOpen ? "rotate-45" : ""
                   }`}
                   aria-hidden
@@ -288,15 +288,15 @@ function Header() {
   return (
     <div className="flex items-center justify-center gap-3 group cursor-default">
       <div className="relative">
-        <div className="absolute inset-0 bg-emerald-500/30 blur-md rounded-full" />
+        <div className="absolute inset-0 bg-yellow-500/30 blur-md rounded-full" />
         <div className="relative w-10 h-10 bg-zinc-900 border border-zinc-700 rounded-xl flex items-center justify-center shadow-2xl">
-          <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </div>
       </div>
       <span className="text-xl font-bold tracking-tight text-white">
-        SpyRadar <span className="text-emerald-500">Brasil</span>
+        SpyRadar <span className="text-yellow-500">Brasil</span>
       </span>
     </div>
   );
@@ -316,7 +316,7 @@ function TerminalFooter() {
         </p>
       </div>
       <div className="bg-zinc-900/40 backdrop-blur border border-zinc-800 rounded-xl p-4 text-center space-y-1">
-        <div className="text-[11px] font-['Geist_Mono',monospace] text-emerald-400 uppercase tracking-[0.18em] font-bold">
+        <div className="text-[11px] font-['Geist_Mono',monospace] text-yellow-400 uppercase tracking-[0.18em] font-bold">
           TechBiz Forense Digital
         </div>
         <div className="text-[11px] text-zinc-400">
@@ -352,31 +352,31 @@ function InputStep({
     <div className="space-y-6">
       {/* PROMESSA — compacta para caber input na 1ª dobra */}
       <div className="text-center space-y-3 pt-1">
-        <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold px-3 py-1.5 rounded-full font-['Geist_Mono',monospace] uppercase tracking-[0.18em]">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+        <div className="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold px-3 py-1.5 rounded-full font-['Geist_Mono',monospace] uppercase tracking-[0.18em]">
+          <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
           Resultado em até 5 minutos · 100% sigiloso
         </div>
 
         {/* HEADLINE */}
         <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-[1.1]">
           Descubra HOJE se ele está{" "}
-          <span className="text-emerald-400">te traindo pelo WhatsApp</span>
+          <span className="text-yellow-400">te traindo pelo WhatsApp</span>
         </h1>
       </div>
 
       {/* INPUT — primeira dobra no mobile */}
       <div className="bg-zinc-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent" />
 
         <div className="space-y-5">
           <div className="space-y-1.5">
             <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-zinc-100 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" />
               Comece a investigação agora
             </h2>
             <p className="text-[13px] sm:text-sm text-zinc-400 leading-relaxed">
               Informe o número do WhatsApp do alvo.{" "}
-              <span className="text-emerald-400/80 italic">Ele não receberá nenhuma notificação.</span>
+              <span className="text-yellow-400/80 italic">Ele não receberá nenhuma notificação.</span>
             </p>
           </div>
 
@@ -392,7 +392,7 @@ function InputStep({
                 placeholder="(11) 90000-0000"
                 value={formatted}
                 onChange={(e) => setPhoneDigits(e.target.value.replace(/\D/g, "").slice(0, 11))}
-                className="w-full h-14 bg-zinc-950 border border-zinc-800 rounded-xl px-4 font-['Geist_Mono',monospace] text-white text-lg focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/30 transition-all placeholder:text-zinc-700 tracking-wider"
+                className="w-full h-14 bg-zinc-950 border border-zinc-800 rounded-xl px-4 font-['Geist_Mono',monospace] text-white text-lg focus:outline-none focus:border-yellow-500/50 focus:ring-1 focus:ring-yellow-500/30 transition-all placeholder:text-zinc-700 tracking-wider"
               />
               <p className="text-[11px] text-zinc-500 leading-relaxed pt-1">
                 Digite apenas os números — DDD + celular com 9 dígitos.
@@ -402,7 +402,7 @@ function InputStep({
             <button
               type="submit"
               disabled={!complete}
-              className="w-full h-14 bg-emerald-600 hover:bg-emerald-500 disabled:bg-zinc-800 disabled:text-zinc-500 disabled:cursor-not-allowed text-white font-bold rounded-2xl transition-all active:scale-[0.98] relative overflow-hidden group shadow-[0_0_30px_-5px_rgba(16,185,129,0.4)] disabled:shadow-none"
+              className="w-full h-14 bg-yellow-600 hover:bg-yellow-500 disabled:bg-zinc-800 disabled:text-zinc-500 disabled:cursor-not-allowed text-[#080808] font-bold rounded-2xl transition-all active:scale-[0.98] relative overflow-hidden group shadow-[0_0_30px_-5px_rgba(217,169,40,0.4)] disabled:shadow-none"
             >
               <span className="relative flex items-center justify-center gap-2">
                 CONTINUAR
@@ -430,7 +430,7 @@ function InputStep({
           {["Conversas apagadas", "Fotos no privado", "Áudios secretos", "Localização ao vivo"].map((b) => (
             <span
               key={b}
-              className="text-[10px] font-semibold text-emerald-300/90 bg-emerald-500/5 border border-emerald-500/20 px-2.5 py-1 rounded-full"
+              className="text-[10px] font-semibold text-yellow-300/90 bg-yellow-500/5 border border-yellow-500/20 px-2.5 py-1 rounded-full"
             >
               ✓ {b}
             </span>
@@ -443,7 +443,7 @@ function InputStep({
         <div className="flex -space-x-2">
           <div className="w-7 h-7 rounded-full bg-gradient-to-br from-pink-400 to-rose-600 border-2 border-zinc-900" />
           <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-400 to-orange-600 border-2 border-zinc-900" />
-          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 border-2 border-zinc-900" />
+          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 border-2 border-zinc-900" />
           <div className="w-7 h-7 rounded-full bg-gradient-to-br from-violet-400 to-indigo-600 border-2 border-zinc-900" />
         </div>
         <div className="flex-1 min-w-0">
@@ -452,12 +452,12 @@ function InputStep({
             <span className="text-zinc-400 ml-1">4.9</span>
           </div>
           <p className="text-[11px] text-zinc-500 leading-tight truncate">
-            <span className="text-emerald-400 font-semibold">+38.412</span> mulheres descobriram a verdade
+            <span className="text-yellow-400 font-semibold">+38.412</span> mulheres descobriram a verdade
           </p>
         </div>
         <div className="text-right">
           <p className="text-[10px] text-zinc-500 font-['Geist_Mono',monospace] uppercase">Online agora</p>
-          <p className="text-[11px] text-emerald-400 font-bold animate-pulse">1.247 ativos</p>
+          <p className="text-[11px] text-yellow-400 font-bold animate-pulse">1.247 ativos</p>
         </div>
       </div>
 
@@ -478,7 +478,7 @@ function InputStep({
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
                 <p className="text-sm font-semibold text-white truncate">{t.name}</p>
-                <span className="text-[9px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded font-bold uppercase">Verificado</span>
+                <span className="text-[9px] text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 px-1.5 py-0.5 rounded font-bold uppercase">Verificado</span>
               </div>
               <p className="text-[10px] text-zinc-500 mb-1">{t.city}</p>
               <div className="flex items-center gap-0.5 text-amber-400 text-[10px] mb-1">
@@ -491,13 +491,13 @@ function InputStep({
       </div>
 
       {/* GARANTIA / URGÊNCIA */}
-      <div className="bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 border border-emerald-500/30 rounded-2xl p-4 text-center space-y-1">
-        <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-[0.2em] font-['Geist_Mono',monospace]">
+      <div className="bg-gradient-to-br from-yellow-500/10 to-yellow-500/5 border border-yellow-500/30 rounded-2xl p-4 text-center space-y-1">
+        <p className="text-[10px] font-bold text-yellow-400 uppercase tracking-[0.2em] font-['Geist_Mono',monospace]">
           ⚠ Não fique mais no escuro
         </p>
         <p className="text-sm text-zinc-200 leading-relaxed">
           Cada dia que passa é uma <span className="text-white font-bold">nova mentira</span> que você acredita.
-          A verdade está a <span className="text-emerald-400 font-bold">um clique</span> de distância.
+          A verdade está a <span className="text-yellow-400 font-bold">um clique</span> de distância.
         </p>
       </div>
 
@@ -576,12 +576,12 @@ export function CityAutocomplete({
   const light = variant === "light";
   const inputCls = light
     ? "w-full h-14 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 px-3 text-sm font-medium focus:border-[#128C7E] focus:outline-none focus:ring-2 focus:ring-[#25D366]/20 transition disabled:opacity-60 placeholder:text-slate-400"
-    : "w-full h-14 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 px-3 text-sm font-medium focus:border-emerald-500/60 focus:outline-none transition disabled:opacity-60";
+    : "w-full h-14 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 px-3 text-sm font-medium focus:border-yellow-500/60 focus:outline-none transition disabled:opacity-60";
   const listCls = light
     ? "absolute z-30 left-0 right-0 mt-1 max-h-64 overflow-auto rounded-xl bg-white border border-slate-200 shadow-xl"
     : "absolute z-30 left-0 right-0 mt-1 max-h-64 overflow-auto rounded-xl bg-zinc-950 border border-zinc-800 shadow-2xl";
   const itemBase = "px-3 py-2.5 text-sm cursor-pointer";
-  const itemActive = light ? "bg-[#25D366]/10 text-[#128C7E]" : "bg-emerald-500/15 text-emerald-200";
+  const itemActive = light ? "bg-[#25D366]/10 text-[#128C7E]" : "bg-yellow-500/15 text-yellow-200";
   const itemIdle = light ? "text-slate-700 hover:bg-slate-50" : "text-zinc-200 hover:bg-zinc-900";
   const emptyCls = light
     ? "absolute z-30 left-0 right-0 mt-1 rounded-xl bg-white border border-slate-200 px-3 py-2.5 text-sm text-slate-500 shadow-xl"
@@ -739,7 +739,7 @@ function ConnectingStep({
 
   const toneClass = {
     dim: "text-zinc-500",
-    ok: "text-emerald-400",
+    ok: "text-yellow-400",
     warn: "text-amber-300",
     info: "text-sky-300",
   };
@@ -754,47 +754,47 @@ function ConnectingStep({
         </div>
         {/* HEADLINE */}
         <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-[1.1]">
-          Em segundos você vai ver <span className="text-emerald-400">TUDO</span> que {target === "alvo" ? "ele" : firstName} {" "}
+          Em segundos você vai ver <span className="text-yellow-400">TUDO</span> que {target === "alvo" ? "ele" : firstName} {" "}
           escondeu de você
         </h1>
         {/* SUBHEADLINE */}
         <p className="text-sm text-zinc-300 leading-relaxed max-w-md mx-auto">
           <span className="text-white font-semibold">Conversas apagadas</span>, fotos íntimas no privado, áudios safados e localização ao vivo —{" "}
-          <span className="text-emerald-400 font-semibold">prontos para você ler agora.</span>
+          <span className="text-yellow-400 font-semibold">prontos para você ler agora.</span>
         </p>
 
         {/* STATS — autoridade */}
         <div className="grid grid-cols-3 gap-2 max-w-md mx-auto pt-2">
           <div className="bg-zinc-900/60 border border-white/5 rounded-xl px-2 py-2">
-            <div className="text-emerald-400 font-bold text-base font-['Geist_Mono',monospace]">98,7%</div>
+            <div className="text-yellow-400 font-bold text-base font-['Geist_Mono',monospace]">98,7%</div>
             <div className="text-[9px] text-zinc-500 uppercase tracking-wider leading-tight">Taxa de acerto</div>
           </div>
           <div className="bg-zinc-900/60 border border-white/5 rounded-xl px-2 py-2">
-            <div className="text-emerald-400 font-bold text-base font-['Geist_Mono',monospace]">+38mil</div>
+            <div className="text-yellow-400 font-bold text-base font-['Geist_Mono',monospace]">+38mil</div>
             <div className="text-[9px] text-zinc-500 uppercase tracking-wider leading-tight">Traições expostas</div>
           </div>
           <div className="bg-zinc-900/60 border border-white/5 rounded-xl px-2 py-2">
-            <div className="text-emerald-400 font-bold text-base font-['Geist_Mono',monospace]">30s</div>
+            <div className="text-yellow-400 font-bold text-base font-['Geist_Mono',monospace]">30s</div>
             <div className="text-[9px] text-zinc-500 uppercase tracking-wider leading-tight">Tempo médio</div>
           </div>
         </div>
       </div>
 
       {/* PROVA SOCIAL — barra de notificações */}
-      <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl px-3 py-2.5 flex items-center gap-2.5">
-        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+      <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-2xl px-3 py-2.5 flex items-center gap-2.5">
+        <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse shrink-0" />
         <p className="text-[11px] text-zinc-300 leading-tight flex-1 min-w-0">
-          <span className="text-emerald-400 font-bold">Mariana, RJ</span> acabou de descobrir 47 mensagens apagadas há 2 min
+          <span className="text-yellow-400 font-bold">Mariana, RJ</span> acabou de descobrir 47 mensagens apagadas há 2 min
         </p>
       </div>
 
 
       <div className="bg-zinc-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden space-y-5">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent" />
 
       <div className="flex items-center justify-between">
-        <span className="inline-flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold px-3 py-1 rounded-full font-['Geist_Mono',monospace] uppercase tracking-[0.18em]">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+        <span className="inline-flex items-center gap-1.5 bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold px-3 py-1 rounded-full font-['Geist_Mono',monospace] uppercase tracking-[0.18em]">
+          <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
           Conectando-se a servidores Meta
         </span>
         <span className="font-['Geist_Mono',monospace] text-[11px] text-zinc-500">
@@ -804,14 +804,14 @@ function ConnectingStep({
 
       <h2 className="text-[18px] font-semibold text-zinc-100 leading-snug">
         Estabelecendo canal seguro com o{" "}
-        <span className="text-emerald-400">dispositivo {target === "alvo" ? "do alvo" : `de ${firstName}`}</span>.
+        <span className="text-yellow-400">dispositivo {target === "alvo" ? "do alvo" : `de ${firstName}`}</span>.
       </h2>
 
 
       {/* Foto de perfil capturada */}
-      <div className="flex items-center gap-3 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 px-4 py-3">
+      <div className="flex items-center gap-3 rounded-2xl border border-yellow-500/20 bg-yellow-500/5 px-4 py-3">
         <div className="relative">
-          <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-emerald-400/60 bg-zinc-800 flex items-center justify-center">
+          <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-yellow-400/60 bg-zinc-800 flex items-center justify-center">
             {photoUrl ? (
               <img
                 src={photoUrl}
@@ -831,10 +831,10 @@ function ConnectingStep({
               </svg>
             )}
           </div>
-          <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-zinc-900 animate-pulse" />
+          <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-yellow-400 border-2 border-zinc-900 animate-pulse" />
         </div>
         <div className="min-w-0 flex-1">
-          <div className="text-[10px] font-['Geist_Mono',monospace] uppercase tracking-[0.18em] text-emerald-400">
+          <div className="text-[10px] font-['Geist_Mono',monospace] uppercase tracking-[0.18em] text-yellow-400">
             {photoUrl ? "Perfil interceptado" : "Capturando perfil..."}
           </div>
           <div className="text-xs text-zinc-400 font-['Geist_Mono',monospace] truncate">
@@ -851,7 +851,7 @@ function ConnectingStep({
         <div className="flex items-center gap-1.5 px-3 py-2 border-b border-zinc-800 bg-zinc-950">
           <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
           <span className="w-2.5 h-2.5 rounded-full bg-amber-400/70" />
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
+          <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
           <span className="ml-2 font-['Geist_Mono',monospace] text-[10px] uppercase tracking-[0.2em] text-zinc-500">
             zapradar@meta-edge — bash
           </span>
@@ -865,7 +865,7 @@ function ConnectingStep({
               {l.text}
             </div>
           ))}
-          <div className="text-emerald-400 inline-flex items-center">
+          <div className="text-yellow-400 inline-flex items-center">
             <span>▌</span>
           </div>
         </div>
@@ -875,7 +875,7 @@ function ConnectingStep({
       <div className="space-y-1.5">
         <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-emerald-500 to-emerald-300 transition-[width] duration-150"
+            className="h-full bg-gradient-to-r from-yellow-500 to-yellow-300 transition-[width] duration-150"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -974,7 +974,7 @@ function LiveTerminal({ progress, fullPhone }: { progress: number; fullPhone: st
 
   const toneClass = {
     dim: "text-zinc-500",
-    ok: "text-emerald-400",
+    ok: "text-yellow-400",
     warn: "text-amber-300",
     info: "text-sky-300",
   };
@@ -984,12 +984,12 @@ function LiveTerminal({ progress, fullPhone }: { progress: number; fullPhone: st
       <div className="flex items-center gap-1.5 px-3 py-2 border-b border-zinc-800 bg-zinc-950">
         <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
         <span className="w-2.5 h-2.5 rounded-full bg-amber-400/70" />
-        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
+        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
         <span className="ml-2 font-['Geist_Mono',monospace] text-[10px] uppercase tracking-[0.2em] text-zinc-500">
           zapradar@meta-edge — live capture
         </span>
-        <span className="ml-auto inline-flex items-center gap-1 text-[10px] font-['Geist_Mono',monospace] text-emerald-400">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+        <span className="ml-auto inline-flex items-center gap-1 text-[10px] font-['Geist_Mono',monospace] text-yellow-400">
+          <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
           LIVE
         </span>
       </div>
@@ -1000,7 +1000,7 @@ function LiveTerminal({ progress, fullPhone }: { progress: number; fullPhone: st
         {lines.map((l, i) => (
           <div key={i} className={toneClass[l.tone]}>{l.text}</div>
         ))}
-        <div className="text-emerald-400">▌</div>
+        <div className="text-yellow-400">▌</div>
       </div>
     </div>
   );
@@ -1088,10 +1088,10 @@ function InvestigatingStep({
       <div className="bg-zinc-900/50 backdrop-blur-xl border border-white/10 rounded-2xl px-4 py-2.5 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-500 opacity-60" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow-500" />
           </span>
-          <span className="text-[10px] font-['Geist_Mono',monospace] uppercase tracking-[0.18em] text-emerald-400">
+          <span className="text-[10px] font-['Geist_Mono',monospace] uppercase tracking-[0.18em] text-yellow-400">
             Live · Analyzing
           </span>
         </div>
@@ -1111,7 +1111,7 @@ function InvestigatingStep({
 
         {/* HEADLINE */}
         <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-[1.1] px-2">
-          Veja o que <span className="text-emerald-400">{targetName ?? (partnerPronoun === "ela" ? "ela" : "ele")}</span> esconde de você no WhatsApp
+          Veja o que <span className="text-yellow-400">{targetName ?? (partnerPronoun === "ela" ? "ela" : "ele")}</span> esconde de você no WhatsApp
         </h1>
 
         {/* SUBHEADLINE */}
@@ -1125,21 +1125,21 @@ function InvestigatingStep({
           <div className="flex -space-x-1.5">
             <div className="w-5 h-5 rounded-full bg-gradient-to-br from-pink-400 to-rose-600 border border-zinc-900" />
             <div className="w-5 h-5 rounded-full bg-gradient-to-br from-amber-400 to-orange-600 border border-zinc-900" />
-            <div className="w-5 h-5 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 border border-zinc-900" />
+            <div className="w-5 h-5 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 border border-zinc-900" />
             <div className="w-5 h-5 rounded-full bg-gradient-to-br from-violet-400 to-indigo-600 border border-zinc-900" />
           </div>
           <p className="text-[11px] text-zinc-400 leading-tight">
             <span className="text-amber-400">★★★★★</span>{" "}
-            <span className="text-emerald-400 font-bold">+38.412</span> mulheres descobriram a verdade
+            <span className="text-yellow-400 font-bold">+38.412</span> mulheres descobriram a verdade
           </p>
         </div>
       </div>
 
       {/* NOTIFICAÇÃO DE PROVA SOCIAL EM TEMPO REAL */}
-      <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl px-3 py-2.5 flex items-center gap-2.5">
-        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+      <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-2xl px-3 py-2.5 flex items-center gap-2.5">
+        <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse shrink-0" />
         <p className="text-[11px] text-zinc-300 leading-tight flex-1 min-w-0">
-          <span className="text-emerald-400 font-bold">Mariana, RJ</span> acabou de descobrir 47 mensagens apagadas há 2 min
+          <span className="text-yellow-400 font-bold">Mariana, RJ</span> acabou de descobrir 47 mensagens apagadas há 2 min
         </p>
       </div>
 
@@ -1162,7 +1162,7 @@ function InvestigatingStep({
             className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] group"
             aria-label="Ativar som do vídeo"
           >
-            <span className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-bold px-4 py-2.5 rounded-full shadow-lg shadow-emerald-500/30 transition-all group-active:scale-95">
+            <span className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-[#080808] text-sm font-bold px-4 py-2.5 rounded-full shadow-lg shadow-yellow-500/30 transition-all group-active:scale-95">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8.03v7.94A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z" />
               </svg>
@@ -1179,12 +1179,12 @@ function InvestigatingStep({
       {/* Barra de progresso */}
       <div className="bg-zinc-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-5 space-y-3">
         <div className="flex items-center justify-between text-[11px] font-['Geist_Mono',monospace] uppercase tracking-[0.18em]">
-          <span className="text-emerald-400">Processando</span>
+          <span className="text-yellow-400">Processando</span>
           <span className="text-zinc-400">{Math.floor(progress)}%</span>
         </div>
         <div className="h-2 w-full rounded-full bg-zinc-800 overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-emerald-500 to-emerald-300 transition-[width] duration-150"
+            className="h-full bg-gradient-to-r from-yellow-500 to-yellow-300 transition-[width] duration-150"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -1194,7 +1194,7 @@ function InvestigatingStep({
       {ready && (
         <button
           onClick={onUnlock}
-          className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-2xl shadow-[0_0_30px_-5px_rgba(16,185,129,0.5)] animate-fade-in text-[15px] leading-tight relative overflow-hidden"
+          className="w-full bg-yellow-600 hover:bg-yellow-500 text-[#080808] font-bold py-4 rounded-2xl shadow-[0_0_30px_-5px_rgba(217,169,40,0.5)] animate-fade-in text-[15px] leading-tight relative overflow-hidden"
         >
           <span className="relative flex items-center justify-center gap-2">
             🔓 Veja o que encontramos no WhatsApp invadido
@@ -1208,7 +1208,7 @@ function InvestigatingStep({
 
       {/* Card status do alvo */}
       <div className="bg-zinc-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent" />
 
         <div className="flex items-center gap-4">
           {/* Avatar com foto interceptada (ou shimmer enquanto carrega) */}
@@ -1230,11 +1230,11 @@ function InvestigatingStep({
                   <svg className="w-6 h-6 text-zinc-700" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z" />
                   </svg>
-                  <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.6s_infinite] bg-gradient-to-r from-transparent via-emerald-400/30 to-transparent" />
+                  <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.6s_infinite] bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent" />
                 </>
               )}
             </div>
-            <div className="absolute -inset-1 rounded-full border border-transparent border-t-emerald-500 border-r-emerald-500/60 animate-spin" />
+            <div className="absolute -inset-1 rounded-full border border-transparent border-t-yellow-500 border-r-yellow-500/60 animate-spin" />
           </div>
 
           <div className="flex-1 min-w-0">
@@ -1245,7 +1245,7 @@ function InvestigatingStep({
           </div>
 
           <div className="text-right">
-            <div className="text-3xl font-bold text-emerald-400 leading-none font-['Geist_Mono',monospace] tabular-nums">
+            <div className="text-3xl font-bold text-yellow-400 leading-none font-['Geist_Mono',monospace] tabular-nums">
               {String(Math.floor(progress)).padStart(2, "0")}
               <span className="text-zinc-600 text-lg">%</span>
             </div>
@@ -1259,13 +1259,13 @@ function InvestigatingStep({
         <div className="mt-5">
           <div className="w-full bg-zinc-950 border border-zinc-800 rounded-full h-1.5 overflow-hidden relative">
             <div
-              className="h-full bg-gradient-to-r from-emerald-600 to-emerald-400 transition-all duration-200 shadow-[0_0_10px_rgba(16,185,129,0.6)]"
+              className="h-full bg-gradient-to-r from-yellow-600 to-yellow-400 transition-all duration-200 shadow-[0_0_10px_rgba(217,169,40,0.6)]"
               style={{ width: `${progress}%` }}
             />
           </div>
           <div className="flex justify-between mt-2 text-[9px] font-['Geist_Mono',monospace] uppercase tracking-[0.2em] text-zinc-500">
             <span>0x00 INIT</span>
-            <span className="text-emerald-400/70">Triangulação forense</span>
+            <span className="text-yellow-400/70">Triangulação forense</span>
             <span>0xFF DONE</span>
           </div>
         </div>
@@ -1288,11 +1288,11 @@ function InvestigatingStep({
             <div
               key={item.code}
               className={`flex items-center gap-3 bg-zinc-900/50 backdrop-blur-xl border rounded-xl p-3.5 transition-all ${
-                done ? "border-emerald-500/30" : running ? "border-emerald-500/20" : "border-white/5 opacity-50"
+                done ? "border-yellow-500/30" : running ? "border-yellow-500/20" : "border-white/5 opacity-50"
               }`}
             >
               <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-['Geist_Mono',monospace] text-[9px] font-bold tracking-tight border ${
-                done ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400" : "bg-zinc-950 border-zinc-800 text-zinc-600"
+                done ? "bg-yellow-500/10 border-yellow-500/30 text-yellow-400" : "bg-zinc-950 border-zinc-800 text-zinc-600"
               }`}>
                 {item.code.split(".")[0]}
               </div>
@@ -1301,11 +1301,11 @@ function InvestigatingStep({
                 <div className="text-[11px] text-zinc-500 font-['Geist_Mono',monospace]">{item.desc}</div>
               </div>
               {done ? (
-                <div className="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-xs font-bold">
+                <div className="w-6 h-6 rounded-full bg-yellow-500/20 border border-yellow-500/40 text-yellow-400 flex items-center justify-center text-xs font-bold">
                   ✓
                 </div>
               ) : running ? (
-                <div className="w-6 h-6 rounded-full border-2 border-zinc-800 border-t-emerald-500 animate-spin" />
+                <div className="w-6 h-6 rounded-full border-2 border-zinc-800 border-t-yellow-500 animate-spin" />
               ) : (
                 <div className="w-6 h-6 rounded-full border border-zinc-800" />
               )}
@@ -1318,7 +1318,7 @@ function InvestigatingStep({
       {ready && (
         <button
           onClick={onUnlock}
-          className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-2xl shadow-[0_0_30px_-5px_rgba(16,185,129,0.5)] animate-fade-in text-[15px] leading-tight relative overflow-hidden group"
+          className="w-full bg-yellow-600 hover:bg-yellow-500 text-[#080808] font-bold py-4 rounded-2xl shadow-[0_0_30px_-5px_rgba(217,169,40,0.5)] animate-fade-in text-[15px] leading-tight relative overflow-hidden group"
         >
           <span className="relative flex items-center justify-center gap-2">
             🔓 Veja o que encontramos no WhatsApp invadido
@@ -1328,13 +1328,13 @@ function InvestigatingStep({
 
       {/* Rodapé anonimato */}
       <div className="bg-zinc-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
-          <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+        <div className="w-10 h-10 rounded-lg bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center">
+          <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001z" clipRule="evenodd" />
           </svg>
         </div>
         <div className="flex-1">
-          <div className="text-sm font-semibold text-emerald-400">Esta ferramenta é 100% anônima</div>
+          <div className="text-sm font-semibold text-yellow-400">Esta ferramenta é 100% anônima</div>
           <div className="text-[11px] text-zinc-500">Não responda mensagens para se manter discreto.</div>
         </div>
       </div>
@@ -1396,13 +1396,13 @@ function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targ
       </div>
 
       {/* Banner sucesso */}
-      <div className="bg-gradient-to-br from-emerald-600/20 to-emerald-500/10 border border-emerald-500/40 rounded-2xl p-4 text-center">
-        <div className="text-emerald-300 font-bold text-[15px] flex items-center justify-center gap-2">
+      <div className="bg-gradient-to-br from-yellow-600/20 to-yellow-500/10 border border-yellow-500/40 rounded-2xl p-4 text-center">
+        <div className="text-yellow-300 font-bold text-[15px] flex items-center justify-center gap-2">
           ✅ Espionagem 100% concluída!
         </div>
         <p className="text-zinc-300 text-[13px] mt-1 leading-snug">
           Encontramos conteúdo comprometedor no WhatsApp de{" "}
-          <span className="text-emerald-400 font-semibold font-['Geist_Mono',monospace]">
+          <span className="text-yellow-400 font-semibold font-['Geist_Mono',monospace]">
             {fullPhone}
           </span>{" "}
           ↓
@@ -1415,9 +1415,9 @@ function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targ
         badgeColor="red"
         title={
           <>
-            Recuperamos <span className="text-emerald-400">mensagens excluídas</span> do
+            Recuperamos <span className="text-yellow-400">mensagens excluídas</span> do
             WhatsApp de{" "}
-            <span className="text-emerald-400 font-['Geist_Mono',monospace]">
+            <span className="text-yellow-400 font-['Geist_Mono',monospace]">
               {fullPhone}
             </span>
           </>
@@ -1441,9 +1441,9 @@ function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targ
         badgeColor="amber"
         title={
           <>
-            Encontramos <span className="text-emerald-400">fotos enviadas em privado</span>{" "}
+            Encontramos <span className="text-yellow-400">fotos enviadas em privado</span>{" "}
             por{" "}
-            <span className="text-emerald-400 font-['Geist_Mono',monospace]">
+            <span className="text-yellow-400 font-['Geist_Mono',monospace]">
               {fullPhone}
             </span>
           </>
@@ -1467,9 +1467,9 @@ function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targ
         badgeColor="amber"
         title={
           <>
-            <span className="text-emerald-400">{suspects.length} contatos suspeitos</span>{" "}
+            <span className="text-yellow-400">{suspects.length} contatos suspeitos</span>{" "}
             interagindo de forma íntima com{" "}
-            <span className="text-emerald-400 font-['Geist_Mono',monospace]">{fullPhone}</span>
+            <span className="text-yellow-400 font-['Geist_Mono',monospace]">{fullPhone}</span>
           </>
         }
         desc={
@@ -1490,9 +1490,9 @@ function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targ
         badgeColor="red"
         title={
           <>
-            Recuperamos <span className="text-emerald-400">vídeos enviados em privado</span>{" "}
+            Recuperamos <span className="text-yellow-400">vídeos enviados em privado</span>{" "}
             por{" "}
-            <span className="text-emerald-400 font-['Geist_Mono',monospace]">
+            <span className="text-yellow-400 font-['Geist_Mono',monospace]">
               {fullPhone}
             </span>
           </>
@@ -1511,14 +1511,14 @@ function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targ
       {/* Card: Última conexão */}
       <FindingCard
         badge="ÚLTIMA CONEXÃO DETECTADA"
-        badgeColor="emerald"
+        badgeColor="yellow"
         title={
           <>
-            <span className="text-emerald-400 font-['Geist_Mono',monospace]">
+            <span className="text-yellow-400 font-['Geist_Mono',monospace]">
               {fullPhone}
             </span>{" "}
             esteve online em um{" "}
-            <span className="text-emerald-400">horário diferente do que disse</span>
+            <span className="text-yellow-400">horário diferente do que disse</span>
           </>
         }
         desc={
@@ -1539,11 +1539,11 @@ function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targ
         badgeColor="violet"
         title={
           <>
-            <span className="text-emerald-400 font-['Geist_Mono',monospace]">
+            <span className="text-yellow-400 font-['Geist_Mono',monospace]">
               {fullPhone}
             </span>{" "}
             compartilhou sua{" "}
-            <span className="text-emerald-400">localização em segredo</span> ontem à noite
+            <span className="text-yellow-400">localização em segredo</span> ontem à noite
           </>
         }
         desc={
@@ -1564,23 +1564,23 @@ function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targ
       {/* CTA final - oferta */}
       <div
         ref={ctaRef}
-        className="bg-gradient-to-br from-zinc-900/80 to-zinc-900/40 backdrop-blur-xl border border-emerald-500/30 rounded-3xl p-6 shadow-[0_20px_60px_rgba(16,185,129,0.15)] relative overflow-hidden"
+        className="bg-gradient-to-br from-zinc-900/80 to-zinc-900/40 backdrop-blur-xl border border-yellow-500/30 rounded-3xl p-6 shadow-[0_20px_60px_rgba(217,169,40,0.15)] relative overflow-hidden"
       >
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-400/60 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-400/60 to-transparent" />
 
         <div className="text-center space-y-1 mb-5">
           <div className="flex items-center justify-center gap-2">
-            <div className="w-7 h-7 bg-zinc-950 border border-emerald-500/40 rounded-lg flex items-center justify-center">
-              <svg className="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-7 h-7 bg-zinc-950 border border-yellow-500/40 rounded-lg flex items-center justify-center">
+              <svg className="w-3.5 h-3.5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
             <span className="text-lg font-bold tracking-tight text-white">
-              SpyRadar <span className="text-emerald-500">Brasil</span>
+              SpyRadar <span className="text-yellow-500">Brasil</span>
             </span>
           </div>
           <p className="text-[14px] text-zinc-300 leading-snug pt-2">
-            Com o <span className="text-emerald-400 font-semibold">SpyRadar Brasil</span> você
+            Com o <span className="text-yellow-400 font-semibold">SpyRadar Brasil</span> você
             terá acesso completo ao WhatsApp clonado por apenas:
           </p>
         </div>
@@ -1590,19 +1590,19 @@ function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targ
             De: R$ 297,00
           </div>
           <div className="mt-1">
-            <span className="text-emerald-400 text-5xl font-extrabold tracking-tight">
+            <span className="text-yellow-400 text-5xl font-extrabold tracking-tight">
               R$50
             </span>
-            <span className="text-emerald-400 text-xl font-bold">,00</span>
+            <span className="text-yellow-400 text-xl font-bold">,00</span>
           </div>
-          <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-400/70 mt-1 font-['Geist_Mono',monospace]">
+          <div className="text-[10px] uppercase tracking-[0.2em] text-yellow-400/70 mt-1 font-['Geist_Mono',monospace]">
             Pagamento único · Acesso imediato
           </div>
         </div>
 
         <button
           onClick={handleCheckout}
-          className="mt-4 w-full h-14 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(16,185,129,0.7)] text-[16px] uppercase tracking-wide animate-pulse-slow"
+          className="mt-4 w-full h-14 bg-yellow-600 hover:bg-yellow-500 text-[#080808] font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.7)] text-[16px] uppercase tracking-wide animate-pulse-slow"
         >
           🔓 Desbloquear Relatório Agora
         </button>
@@ -1638,7 +1638,7 @@ function FindingCard({
   children,
 }: {
   badge: string;
-  badgeColor: "red" | "amber" | "emerald" | "violet";
+  badgeColor: "red" | "amber" | "yellow" | "violet";
   title: React.ReactNode;
   desc: React.ReactNode;
   children: React.ReactNode;
@@ -1646,7 +1646,7 @@ function FindingCard({
   const colors: Record<string, string> = {
     red: "bg-red-500/10 border-red-500/40 text-red-400",
     amber: "bg-amber-500/10 border-amber-500/40 text-amber-400",
-    emerald: "bg-emerald-500/10 border-emerald-500/40 text-emerald-400",
+    yellow: "bg-yellow-500/10 border-yellow-500/40 text-yellow-400",
     violet: "bg-violet-500/10 border-violet-500/40 text-violet-300",
   };
   return (
@@ -1667,21 +1667,21 @@ function FakeChat() {
   return (
     <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-3 relative overflow-hidden">
       <div className="flex items-center gap-2 pb-2 border-b border-zinc-800">
-        <div className="w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
-          <svg className="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+        <div className="w-7 h-7 rounded-full bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center">
+          <svg className="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z" />
           </svg>
         </div>
         <div>
           <div className="text-[12px] text-zinc-100 font-semibold">Contato oculto</div>
-          <div className="text-[10px] text-emerald-400">online</div>
+          <div className="text-[10px] text-yellow-400">online</div>
         </div>
       </div>
       <div className="space-y-2 pt-3 select-none">
         <div className="bg-zinc-800/80 h-3 w-2/3 rounded blur-[3px]" />
-        <div className="ml-auto bg-emerald-700/40 h-3 w-1/2 rounded blur-[3px]" />
+        <div className="ml-auto bg-yellow-700/40 h-3 w-1/2 rounded blur-[3px]" />
         <div className="bg-zinc-800/80 h-3 w-3/5 rounded blur-[3px]" />
-        <div className="ml-auto bg-emerald-700/40 h-3 w-2/5 rounded blur-[3px]" />
+        <div className="ml-auto bg-yellow-700/40 h-3 w-2/5 rounded blur-[3px]" />
         <div className="bg-zinc-800/80 h-3 w-1/2 rounded blur-[3px]" />
       </div>
       <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent flex items-end justify-center pb-2">
@@ -1742,7 +1742,7 @@ function SuspectsList({ names }: { names: string[] }) {
         const hidden = name.charAt(0) + "•".repeat(Math.max(2, name.length - 2)) + name.charAt(name.length - 1);
         return (
           <div key={name} className="flex items-center gap-3 px-3 py-2.5">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500/30 to-emerald-700/30 border border-emerald-500/30 flex items-center justify-center text-emerald-300 font-bold text-sm">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-yellow-500/30 to-yellow-700/30 border border-yellow-500/30 flex items-center justify-center text-yellow-300 font-bold text-sm">
               {initial}
             </div>
             <div className="flex-1 min-w-0">
@@ -1848,13 +1848,13 @@ export function MapHackStep({ city, uf }: { city: string; uf: string }) {
   return (
     <div className="space-y-5 animate-fade-in">
       <div className="text-center space-y-2">
-        <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold px-3 py-1.5 rounded-full font-['Geist_Mono',monospace] uppercase tracking-[0.18em]">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+        <div className="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold px-3 py-1.5 rounded-full font-['Geist_Mono',monospace] uppercase tracking-[0.18em]">
+          <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
           Triangulando antenas 4G/5G
         </div>
         <h2 className="text-2xl font-extrabold text-white tracking-tight">
           Hackeando antenas da região de{" "}
-          <span className="text-emerald-400">{label}</span>
+          <span className="text-yellow-400">{label}</span>
         </h2>
         <p className="text-[12px] text-zinc-400 font-['Geist_Mono',monospace] uppercase tracking-[0.14em]">
           {phase < 1 && "> localizando sinal..."}
@@ -1864,7 +1864,7 @@ export function MapHackStep({ city, uf }: { city: string; uf: string }) {
         </p>
       </div>
 
-      <div className="relative rounded-2xl overflow-hidden border border-emerald-500/30 bg-zinc-950 shadow-[0_20px_60px_-20px_rgba(16,185,129,0.35)]">
+      <div className="relative rounded-2xl overflow-hidden border border-yellow-500/30 bg-zinc-950 shadow-[0_20px_60px_-20px_rgba(217,169,40,0.35)]">
         {/* Fake map surface */}
         <div className="relative w-full h-[300px]">
           {/* Streets grid */}
@@ -1873,23 +1873,23 @@ export function MapHackStep({ city, uf }: { city: string; uf: string }) {
             style={{
               backgroundColor: "#0a1a12",
               backgroundImage: [
-                "linear-gradient(rgba(16,185,129,0.10) 1px, transparent 1px)",
-                "linear-gradient(90deg, rgba(16,185,129,0.10) 1px, transparent 1px)",
-                "linear-gradient(45deg, rgba(16,185,129,0.06) 1px, transparent 1px)",
+                "linear-gradient(rgba(217,169,40,0.10) 1px, transparent 1px)",
+                "linear-gradient(90deg, rgba(217,169,40,0.10) 1px, transparent 1px)",
+                "linear-gradient(45deg, rgba(217,169,40,0.06) 1px, transparent 1px)",
               ].join(","),
               backgroundSize: "24px 24px, 24px 24px, 60px 60px",
             }}
           />
           {/* Diagonal streets */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="none">
-            <path d="M0,240 L400,60" stroke="rgba(16,185,129,0.25)" strokeWidth="2" fill="none" />
-            <path d="M0,80 L400,220" stroke="rgba(16,185,129,0.20)" strokeWidth="1.5" fill="none" />
-            <path d="M50,0 L200,300" stroke="rgba(16,185,129,0.18)" strokeWidth="1.5" fill="none" />
-            <path d="M320,0 L180,300" stroke="rgba(16,185,129,0.18)" strokeWidth="1.5" fill="none" />
+            <path d="M0,240 L400,60" stroke="rgba(217,169,40,0.25)" strokeWidth="2" fill="none" />
+            <path d="M0,80 L400,220" stroke="rgba(217,169,40,0.20)" strokeWidth="1.5" fill="none" />
+            <path d="M50,0 L200,300" stroke="rgba(217,169,40,0.18)" strokeWidth="1.5" fill="none" />
+            <path d="M320,0 L180,300" stroke="rgba(217,169,40,0.18)" strokeWidth="1.5" fill="none" />
             {/* Route highlight */}
             <path
               d="M40,260 Q140,180 200,150 T360,50"
-              stroke="rgba(16,185,129,0.9)"
+              stroke="rgba(217,169,40,0.9)"
               strokeWidth="2.5"
               strokeDasharray="6 6"
               fill="none"
@@ -1903,26 +1903,26 @@ export function MapHackStep({ city, uf }: { city: string; uf: string }) {
               {[0, 1, 2].map((i) => (
                 <div
                   key={i}
-                  className="absolute inset-0 rounded-full border border-emerald-400/40"
+                  className="absolute inset-0 rounded-full border border-yellow-400/40"
                   style={{
                     animation: `ping 2.4s cubic-bezier(0,0,0.2,1) ${i * 0.6}s infinite`,
                   }}
                 />
               ))}
-              <div className="absolute inset-0 rounded-full border-2 border-emerald-500/50" />
+              <div className="absolute inset-0 rounded-full border-2 border-yellow-500/50" />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full">
                 <div
                   className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1/2 origin-bottom-left"
                   style={{
                     background:
-                      "conic-gradient(from 0deg, rgba(16,185,129,0.5), transparent 40%)",
+                      "conic-gradient(from 0deg, rgba(217,169,40,0.5), transparent 40%)",
                     animation: "spin 2.2s linear infinite",
                   }}
                 />
               </div>
               {/* Center pin */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                <div className="w-3 h-3 bg-emerald-400 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.9)] animate-pulse" />
+                <div className="w-3 h-3 bg-yellow-400 rounded-full shadow-[0_0_20px_rgba(217,169,40,0.9)] animate-pulse" />
               </div>
             </div>
           </div>
@@ -1941,38 +1941,38 @@ export function MapHackStep({ city, uf }: { city: string; uf: string }) {
               style={{ top: pos.top, left: pos.left, animationDelay: `${i * 0.25}s` }}
             >
               <div className="relative">
-                <div className="w-2.5 h-2.5 bg-emerald-400 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.9)]" />
-                <div className="absolute inset-0 w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping opacity-70" />
+                <div className="w-2.5 h-2.5 bg-yellow-400 rounded-full shadow-[0_0_10px_rgba(217,169,40,0.9)]" />
+                <div className="absolute inset-0 w-2.5 h-2.5 bg-yellow-400 rounded-full animate-ping opacity-70" />
               </div>
             </div>
           ))}
 
           {/* Coords HUD */}
-          <div className="absolute top-2 left-2 text-[10px] font-['Geist_Mono',monospace] text-emerald-300/90 bg-black/40 backdrop-blur px-2 py-1 rounded border border-emerald-500/20">
+          <div className="absolute top-2 left-2 text-[10px] font-['Geist_Mono',monospace] text-yellow-300/90 bg-black/40 backdrop-blur px-2 py-1 rounded border border-yellow-500/20">
             LAT −23.55{Math.floor(phase * 1.7)}° · LON −46.63{Math.floor(phase * 2.3)}°
           </div>
-          <div className="absolute top-2 right-2 text-[10px] font-['Geist_Mono',monospace] text-emerald-300/90 bg-black/40 backdrop-blur px-2 py-1 rounded border border-emerald-500/20">
+          <div className="absolute top-2 right-2 text-[10px] font-['Geist_Mono',monospace] text-yellow-300/90 bg-black/40 backdrop-blur px-2 py-1 rounded border border-yellow-500/20">
             SIG {60 + phase * 10}%
           </div>
-          <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[10px] font-['Geist_Mono',monospace] text-emerald-300/80">
-            <span className="bg-black/50 backdrop-blur px-2 py-1 rounded border border-emerald-500/20">
+          <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[10px] font-['Geist_Mono',monospace] text-yellow-300/80">
+            <span className="bg-black/50 backdrop-blur px-2 py-1 rounded border border-yellow-500/20">
               📡 {3 + phase} antenas conectadas
             </span>
-            <span className="bg-black/50 backdrop-blur px-2 py-1 rounded border border-emerald-500/20">
+            <span className="bg-black/50 backdrop-blur px-2 py-1 rounded border border-yellow-500/20">
               {phase >= 3 ? "TRAVA GPS ✓" : "escaneando..."}
             </span>
           </div>
         </div>
       </div>
 
-      <div className="bg-zinc-900/60 border border-emerald-500/20 rounded-xl p-3 space-y-2">
+      <div className="bg-zinc-900/60 border border-yellow-500/20 rounded-xl p-3 space-y-2">
         {[
           { label: "Localizando torre principal", ok: phase >= 1 },
           { label: `Conectando com antenas de ${city || "sua região"}`, ok: phase >= 2 },
           { label: "Interceptando IMSI do dispositivo alvo", ok: phase >= 3 },
         ].map((s, i) => (
           <div key={i} className="flex items-center gap-2 text-[12px] font-['Geist_Mono',monospace]">
-            <span className={s.ok ? "text-emerald-400" : "text-zinc-600"}>
+            <span className={s.ok ? "text-yellow-400" : "text-zinc-600"}>
               {s.ok ? "✓" : "○"}
             </span>
             <span className={s.ok ? "text-zinc-200" : "text-zinc-500"}>{s.label}</span>

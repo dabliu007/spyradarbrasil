@@ -78,24 +78,24 @@ function CpfAlvoPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-zinc-100 font-['Inter',sans-serif] relative overflow-hidden">
+    <div className="min-h-screen bg-[#080808] text-zinc-100 font-['Inter',sans-serif] relative overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(16,185,129,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(16,185,129,0.06) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(217,169,40,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(217,169,40,0.06) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-emerald-500/[0.10] blur-[160px] rounded-full pointer-events-none" />
+      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-yellow-500/[0.10] blur-[160px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 max-w-xl mx-auto px-4 py-8 space-y-5">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-zinc-900 border border-emerald-500/40 rounded-xl flex items-center justify-center">
-            <span className="text-emerald-400 text-xl">🎯</span>
+          <div className="w-10 h-10 bg-zinc-900 border border-yellow-500/40 rounded-xl flex items-center justify-center">
+            <span className="text-yellow-400 text-xl">🎯</span>
           </div>
           <div>
-            <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-400/80 font-['Geist_Mono',monospace]">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-yellow-400/80 font-['Geist_Mono',monospace]">
               Etapa opcional · Precisão máxima
             </div>
             <div className="text-base font-extrabold">Adicionar CPF do alvo</div>
@@ -139,14 +139,14 @@ function CpfAlvoPage() {
             ))}
           </ul>
 
-          <div className="bg-emerald-500/10 border border-emerald-500/40 rounded-xl p-3 text-[12px] text-emerald-200 leading-relaxed">
+          <div className="bg-yellow-500/10 border border-yellow-500/40 rounded-xl p-3 text-[12px] text-yellow-200 leading-relaxed">
             🔒 100% sigiloso. O CPF é usado <strong>apenas</strong> para refinar a clonagem — o alvo nunca é notificado.
           </div>
 
           <div className="grid sm:grid-cols-2 gap-3 pt-1">
             <button
               onClick={() => navigate({ to: "/cpf-input", search: { phone } as any })}
-              className="h-14 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[14px] shadow-[0_10px_30px_-8px_rgba(16,185,129,0.6)]"
+              className="h-14 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[14px] shadow-[0_10px_30px_-8px_rgba(217,169,40,0.6)]"
             >
               ✅ Sim, adicionar CPF
             </button>
@@ -175,7 +175,7 @@ function CpfAlvoPage() {
             onTouchMove={(e) => e.stopPropagation()}
           >
             <div className="flex items-start gap-3">
-              <div className="w-11 h-11 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center justify-center text-2xl shrink-0">
+              <div className="w-11 h-11 bg-yellow-50 border border-yellow-200 rounded-2xl flex items-center justify-center text-2xl shrink-0">
                 🔐
               </div>
               <div>
@@ -228,7 +228,7 @@ function CpfAlvoPage() {
                 type="button"
                 onClick={submitCpf}
                 disabled={loading}
-                className="h-12 bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl uppercase tracking-wider text-[13px] disabled:opacity-60 disabled:cursor-wait shadow-lg shadow-emerald-200"
+                className="h-12 bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl uppercase tracking-wider text-[13px] disabled:opacity-60 disabled:cursor-wait shadow-lg shadow-yellow-200"
               >
                 {loading ? "Consultando…" : "Confirmar"}
               </button>

@@ -164,11 +164,11 @@ function LicencaSpyRadarPage() {
           backgroundSize: "32px 32px",
         }}
       />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-emerald-500/[0.08] blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/[0.08] blur-[140px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 max-w-md mx-auto px-4 py-8 space-y-5">
         {/* Depoimentos em vídeo — prova social */}
-        <div className="bg-gradient-to-br from-emerald-600/15 to-slate-50/40 border border-emerald-200 rounded-2xl p-4 shadow-[0_0_30px_-12px_rgba(16,185,129,0.5)] space-y-3">
+        <div className="bg-gradient-to-br from-yellow-600/15 to-slate-50/40 border border-yellow-200 rounded-2xl p-4 shadow-[0_0_30px_-12px_rgba(217,169,40,0.5)] space-y-3">
           <div className="flex items-center justify-between">
             <div className="text-[10px] uppercase tracking-[0.2em] text-[#25D366] font-['Geist_Mono',monospace] font-bold">
               ▶ Depoimentos reais
@@ -184,14 +184,14 @@ function LicencaSpyRadarPage() {
               controls
               playsInline
               preload="metadata"
-              className="w-full aspect-[9/16] rounded-xl bg-white border border-emerald-100 object-cover"
+              className="w-full aspect-[9/16] rounded-xl bg-white border border-yellow-100 object-cover"
             />
             <video
               src={depoimento2.url}
               controls
               playsInline
               preload="metadata"
-              className="w-full aspect-[9/16] rounded-xl bg-white border border-emerald-100 object-cover"
+              className="w-full aspect-[9/16] rounded-xl bg-white border border-yellow-100 object-cover"
             />
           </div>
           <div className="text-[11px] text-slate-500 text-center pt-1">
@@ -202,15 +202,15 @@ function LicencaSpyRadarPage() {
 
 
         {/* Header — taxa meta aprovada */}
-        <div className="bg-emerald-600/15 border border-emerald-300 rounded-2xl p-4 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-emerald-100 border border-emerald-500/50 flex items-center justify-center text-[#25D366] text-xl">
+        <div className="bg-yellow-600/15 border border-yellow-300 rounded-2xl p-4 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-yellow-100 border border-yellow-500/50 flex items-center justify-center text-[#25D366] text-xl">
             ✓
           </div>
           <div>
             <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace] font-bold">
               Taxa Meta confirmada
             </div>
-            <div className="text-sm font-bold text-emerald-800">
+            <div className="text-sm font-bold text-yellow-800">
               Falta apenas 1 passo para liberar o acesso
             </div>
           </div>
@@ -229,7 +229,7 @@ function LicencaSpyRadarPage() {
         </div>
 
         {/* Oferta principal */}
-        <div className="bg-gradient-to-br from-emerald-600/20 to-emerald-900/10 border-2 border-emerald-500/50 rounded-3xl p-6 shadow-[0_0_40px_-10px_rgba(16,185,129,0.4)]">
+        <div className="bg-gradient-to-br from-yellow-600/20 to-yellow-900/10 border-2 border-yellow-500/50 rounded-3xl p-6 shadow-[0_0_40px_-10px_rgba(217,169,40,0.4)]">
           <div className="flex items-start gap-3 mb-3">
             <span className="text-3xl">🪪</span>
             <div>
@@ -307,7 +307,7 @@ function LicencaSpyRadarPage() {
               }
               window.location.href = CHECKOUT_URL;
             }}
-            className="mt-5 flex w-full min-h-14 items-center justify-center text-center bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(16,185,129,0.8)] text-[15px] uppercase tracking-wide"
+            className="mt-5 flex w-full min-h-14 items-center justify-center text-center bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.8)] text-[15px] uppercase tracking-wide"
           >
             🪪 Ativar minha licença agora
           </button>
@@ -318,7 +318,7 @@ function LicencaSpyRadarPage() {
 
         {/* PIX */}
         {showPix && (
-          <div className="bg-gradient-to-br from-white/90 to-slate-50/40 backdrop-blur-xl border border-emerald-200 rounded-3xl p-6 space-y-4 shadow-[0_20px_60px_rgba(16,185,129,0.15)]">
+          <div className="bg-gradient-to-br from-white/90 to-slate-50/40 backdrop-blur-xl border border-yellow-200 rounded-3xl p-6 space-y-4 shadow-[0_20px_60px_rgba(217,169,40,0.15)]">
             <div className="text-center space-y-1">
               <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
                 Licença SpyRadar Brasil · 1 ano
@@ -337,7 +337,7 @@ function LicencaSpyRadarPage() {
 
             {!charge && !error && (
               <div className="flex flex-col items-center gap-3 py-6">
-                <div className="w-10 h-10 border-2 border-emerald-200 border-t-emerald-400 rounded-full animate-spin" />
+                <div className="w-10 h-10 border-2 border-yellow-200 border-t-yellow-400 rounded-full animate-spin" />
                 <p className="text-sm text-slate-500">Gerando seu código PIX…</p>
               </div>
             )}
@@ -370,7 +370,7 @@ function LicencaSpyRadarPage() {
                 </div>
 
                 <div className="flex items-center justify-center gap-2 text-[12px] text-slate-500">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
                   {statusLabel}
                 </div>
               </>

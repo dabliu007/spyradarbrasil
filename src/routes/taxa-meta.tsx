@@ -170,15 +170,15 @@ function TaxaMetaPage() {
 
       <div className="relative z-10 max-w-md mx-auto px-4 py-6 space-y-5">
         {/* Header — sigilo aprovado */}
-        <div className="bg-emerald-600/15 border border-emerald-300 rounded-2xl p-4 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-emerald-100 border border-emerald-500/50 flex items-center justify-center text-[#25D366] text-xl">
+        <div className="bg-yellow-600/15 border border-yellow-300 rounded-2xl p-4 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-yellow-100 border border-yellow-500/50 flex items-center justify-center text-[#25D366] text-xl">
             ✓
           </div>
           <div>
             <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace] font-bold">
               Sigilo confirmado · Invasão concluída
             </div>
-            <div className="text-sm font-bold text-emerald-800">
+            <div className="text-sm font-bold text-yellow-800">
               Falta apenas 1 passo para o acesso total
             </div>
           </div>
@@ -366,14 +366,14 @@ function TaxaMetaPage() {
             Quem já liberou hoje:
           </div>
           <div className="space-y-3 text-[12px]">
-            <div className="border-l-2 border-emerald-500/60 pl-3">
+            <div className="border-l-2 border-yellow-500/60 pl-3">
               <div className="text-slate-800">
                 "Paguei a taxa Meta e em 40 segundos apareceu tudo. Descobri que ele
                 tinha uma segunda conta escondida no Instagram."
               </div>
               <div className="text-slate-500 text-[11px] mt-1">— Camila R., São Paulo · há 4 min</div>
             </div>
-            <div className="border-l-2 border-emerald-500/60 pl-3">
+            <div className="border-l-2 border-yellow-500/60 pl-3">
               <div className="text-slate-800">
                 "Achei que era caro pelo relatório, mas o valor da Meta é o que
                 realmente destrava o WhatsApp ao vivo. Valeu MUITO."
@@ -382,17 +382,17 @@ function TaxaMetaPage() {
             </div>
           </div>
           <div className="flex items-center gap-2 text-[11px] text-[#128C7E] font-bold pt-1 border-t border-slate-200">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
             2.847 liberações Meta processadas nas últimas 24h
           </div>
         </div>
 
         {/* Garantia */}
-        <div className="bg-gradient-to-br from-emerald-950/40 to-slate-50/60 border border-emerald-300 rounded-2xl p-4">
+        <div className="bg-gradient-to-br from-yellow-950/40 to-slate-50/60 border border-yellow-300 rounded-2xl p-4">
           <div className="flex items-start gap-3">
             <span className="text-2xl">🛡️</span>
             <div>
-              <div className="text-[13px] font-extrabold text-emerald-700">
+              <div className="text-[13px] font-extrabold text-yellow-700">
                 Garantia total de liberação
               </div>
               <p className="text-[12px] text-slate-700 leading-snug mt-1">

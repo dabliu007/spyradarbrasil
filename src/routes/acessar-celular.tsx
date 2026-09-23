@@ -71,15 +71,15 @@ function AcessarCelularPage() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(16,185,129,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(16,185,129,0.06) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(217,169,40,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(217,169,40,0.06) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-emerald-500/[0.10] blur-[160px] rounded-full pointer-events-none" />
+      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-yellow-500/[0.10] blur-[160px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 max-w-md mx-auto px-4 py-8 space-y-5">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-slate-100 border border-emerald-300 rounded-xl flex items-center justify-center">
+          <div className="w-10 h-10 bg-slate-100 border border-yellow-300 rounded-xl flex items-center justify-center">
             <span className="text-[#128C7E] text-xl">🔓</span>
           </div>
           <div>
@@ -90,7 +90,7 @@ function AcessarCelularPage() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-emerald-300 rounded-3xl p-5 space-y-4 shadow-[0_25px_70px_rgba(16,185,129,0.18)]">
+        <div className="bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-yellow-300 rounded-3xl p-5 space-y-4 shadow-[0_25px_70px_rgba(217,169,40,0.18)]">
           <div className="text-center space-y-1">
             <h1 className="text-xl font-extrabold">Entrar no espelhamento</h1>
             <p className="text-[13px] text-slate-500">
@@ -108,7 +108,7 @@ function AcessarCelularPage() {
                 onChange={(e) => setPhone(maskPhone(e.target.value))}
                 inputMode="tel"
                 placeholder="(11) 99999-9999"
-                className="mt-1 w-full h-12 bg-white border border-emerald-200 focus:border-emerald-400 rounded-xl px-3 text-slate-900 font-['Geist_Mono',monospace] outline-none"
+                className="mt-1 w-full h-12 bg-white border border-yellow-200 focus:border-yellow-400 rounded-xl px-3 text-slate-900 font-['Geist_Mono',monospace] outline-none"
               />
             </div>
 
@@ -121,7 +121,7 @@ function AcessarCelularPage() {
                 onChange={(e) => setPin(e.target.value.replace(/\D/g, "").slice(0, 4))}
                 inputMode="numeric"
                 placeholder="••••"
-                className="mt-1 w-full h-12 bg-white border border-emerald-200 focus:border-emerald-400 rounded-xl px-3 text-slate-900 tracking-[0.5em] text-center text-xl font-bold outline-none"
+                className="mt-1 w-full h-12 bg-white border border-yellow-200 focus:border-yellow-400 rounded-xl px-3 text-slate-900 tracking-[0.5em] text-center text-xl font-bold outline-none"
               />
             </div>
 
@@ -152,7 +152,7 @@ function AcessarCelularPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full h-14 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-900 font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[15px] shadow-[0_10px_30px_-8px_rgba(16,185,129,0.6)] disabled:opacity-60 disabled:cursor-wait"
+              className="w-full h-14 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-slate-900 font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[15px] shadow-[0_10px_30px_-8px_rgba(217,169,40,0.6)] disabled:opacity-60 disabled:cursor-wait"
             >
               {loading ? "🔎 Verificando…" : "🔓 Entrar no espelhamento"}
             </button>
