@@ -8,7 +8,7 @@ import depoimento1 from "@/assets/depoimento-1.mp4.asset.json";
 import depoimento2 from "@/assets/depoimento-2.mp4.asset.json";
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
-const LICENSE_AMOUNT = 137;
+const LICENSE_AMOUNT = 197;
 const LICENSE_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 const CHECKOUT_URL = "https://checkout.retroplay.top/VCCL1O8SD8PD";
 
@@ -285,7 +285,7 @@ function LicencaSpyRadarPage() {
               Pagamento único · 1 ano de licença
             </div>
             <div className="mt-1">
-              <span className="text-[#128C7E] text-5xl font-extrabold tracking-tight">R$137</span>
+              <span className="text-[#128C7E] text-5xl font-extrabold tracking-tight">R$197</span>
               <span className="text-[#128C7E] text-xl font-bold">,00</span>
             </div>
             <div className="text-[11px] text-slate-500 mt-1">
@@ -324,7 +324,7 @@ function LicencaSpyRadarPage() {
                 Licença SpyRadar Brasil · 1 ano
               </div>
               <div>
-                <span className="text-[#128C7E] text-4xl font-extrabold tracking-tight">R$137</span>
+                <span className="text-[#128C7E] text-4xl font-extrabold tracking-tight">R$197</span>
                 <span className="text-[#128C7E] text-lg font-bold">,00</span>
               </div>
             </div>
