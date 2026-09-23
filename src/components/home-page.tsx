@@ -1,6 +1,7 @@
 import { SiteNavbar } from "./home/site-navbar";
 import { HeroSection } from "./home/hero-section";
 import { SolutionsSection } from "./home/solutions-section";
+import { ProofSection } from "./home/proof-section";
 import { KitSection } from "./home/kit-section";
 import { ExperienceSection } from "./home/experience-section";
 import { ProcessSection } from "./home/process-section";
@@ -26,6 +27,7 @@ export function HomePage() {
         <main>
           <HeroSection />
           <SolutionsSection />
+          <ProofSection />
           <KitSection />
           <ExperienceSection />
           <ProcessSection />
