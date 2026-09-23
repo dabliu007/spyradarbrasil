@@ -8,6 +8,10 @@ import manBeach3 from "@/assets/man-beach-3.jpg.asset.json";
 import womanFlirt1 from "@/assets/woman-flirt-1.jpg";
 import womanFlirt2 from "@/assets/woman-flirt-2.jpg";
 import womanFlirt3 from "@/assets/woman-flirt-3.jpg";
+import kitApp from "@/assets/kit-app.png";
+import kitCaneta from "@/assets/kit-caneta.png";
+import kitCamera from "@/assets/kit-camera.png";
+import kitRastreador from "@/assets/kit-rastreador.png";
 // Evidências do parceiro homem (amante mulher) — servidas de /public para
 // evitar o resolver de assets do v0 que troca imports não registrados por placeholder.
 const provaH1 = "/prova-h-1.jpg";
@@ -70,10 +74,10 @@ export const Route = createFileRoute("/relatorio")({
 });
 
 const KIT_ITEMS = [
-  { name: "App Clonador", image: "/kit/app.png", desc: "Espelha o WhatsApp e apps do alvo" },
-  { name: "Caneta com Câmera", image: "/kit/caneta.png", desc: "Grava vídeo e áudio escondido" },
-  { name: "Mini Câmera Wi-Fi", image: "/kit/camera.png", desc: "Monitoramento remoto ao vivo" },
-  { name: "Localizador", image: "/kit/rastreador.png", desc: "Rastreio de localização pelo celular" },
+  { name: "App Clonador", image: kitApp, desc: "Espelha o WhatsApp e apps do alvo" },
+  { name: "Caneta com Câmera", image: kitCaneta, desc: "Grava vídeo e áudio escondido" },
+  { name: "Mini Câmera Wi-Fi", image: kitCamera, desc: "Monitoramento remoto ao vivo" },
+  { name: "Localizador", image: kitRastreador, desc: "Rastreio de localização pelo celular" },
 ];
 
 function AudioPlayer({ src }: { src: string }) {
@@ -917,6 +921,18 @@ function RelatorioPage() {
             <div className="bg-gradient-to-br from-yellow-500/15 to-yellow-900/10 border border-yellow-500/40 rounded-xl p-3">
               <p className="text-[12px] text-yellow-100 leading-snug">
                 📱 <span className="font-bold text-yellow-300">Inclui o acesso total ao celular clonado</span> por 365 dias — conversas, fotos, áudios e localização em tempo real, tudo pelo seu próprio celular.
+              </p>
+            </div>
+
+            <div className="text-center border-t border-yellow-500/20 pt-4">
+              <p className="text-[11px] uppercase tracking-[0.15em] text-zinc-400 font-['Geist_Mono',monospace] mb-1">
+                Kit Detetive completo por apenas
+              </p>
+              <div className="flex items-baseline justify-center gap-2">
+                <span className="text-[38px] font-extrabold leading-none text-yellow-400">R$ 137,00</span>
+              </div>
+              <p className="text-[12px] text-zinc-300 mt-1">
+                Pagamento único via PIX · acesso liberado na hora
               </p>
             </div>
           </div>
