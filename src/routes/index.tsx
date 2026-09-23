@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { VerificarPage } from "./verificar";
+import { HomePage } from "@/components/home-page";
 
 const SITE_URL = "https://clonawhats.com";
 
@@ -153,5 +153,5 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  component: VerificarPage,
+  component: HomePage,
 });
