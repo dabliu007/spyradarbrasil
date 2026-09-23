@@ -34,8 +34,8 @@ function ContatoPage() {
     <LegalShell title="Contato" updated="Atualizado em 06 de julho de 2026">
       <p>
         O <strong>SpyRadar Brasil</strong> é operado por{" "}
-        <strong>TechBiz Forense Digital Ltda</strong>, inscrita no CNPJ sob o
-        nº <strong>05.757.597/0001-37</strong>. Utilize os canais abaixo para
+        <strong>Spy Monitoramento LTDA</strong>, inscrita no CNPJ sob o
+        nº <strong>17.722.425/0001-07</strong>. Utilize os canais abaixo para
         falar com nossa equipe — respondemos em até <strong>24 horas úteis</strong>,
         de segunda a sexta, das 9h às 18h (horário de Brasília).
       </p>
@@ -44,8 +44,18 @@ function ContatoPage() {
       <p>
         Dúvidas sobre o serviço, pagamentos, acesso ou suporte técnico:{" "}
         <strong>
-          <a href="mailto:sac@whatsradar.com" className="text-yellow-700 hover:underline">
-            sac@whatsradar.com
+          <a href="mailto:sac@spyradarbrasil.com" className="text-yellow-700 hover:underline">
+            sac@spyradarbrasil.com
+          </a>
+        </strong>
+      </p>
+
+      <H2>Telefone e WhatsApp</H2>
+      <p>
+        Atendimento por telefone e WhatsApp:{" "}
+        <strong>
+          <a href="tel:+5511965072638" className="text-yellow-700 hover:underline">
+            (11) 96507-2638
           </a>
         </strong>
       </p>
@@ -55,8 +65,8 @@ function ContatoPage() {
         Solicitações de titulares de dados, encarregado (DPO) e assuntos
         relacionados à LGPD:{" "}
         <strong>
-          <a href="mailto:privacidade@whatsradar.com" className="text-yellow-700 hover:underline">
-            privacidade@whatsradar.com
+          <a href="mailto:sac@spyradarbrasil.com" className="text-yellow-700 hover:underline">
+            sac@spyradarbrasil.com
           </a>
         </strong>
       </p>
@@ -65,19 +75,21 @@ function ContatoPage() {
       <p>
         Notificações extrajudiciais, imprensa, parcerias e questões contratuais:{" "}
         <strong>
-          <a href="mailto:contato@whatsradar.com" className="text-yellow-700 hover:underline">
-            contato@whatsradar.com
+          <a href="mailto:sac@spyradarbrasil.com" className="text-yellow-700 hover:underline">
+            sac@spyradarbrasil.com
           </a>
         </strong>
       </p>
 
       <H2>Endereço da empresa</H2>
       <p>
-        TechBiz Forense Digital Ltda
+        Spy Monitoramento LTDA
         <br />
-        CNPJ: 05.757.597/0001-37
+        CNPJ: 17.722.425/0001-07
         <br />
-        Brasil
+        Rodovia Curitiba–Paranaguá, BR-277, 793 — Cajuru
+        <br />
+        Curitiba – PR, CEP 82900-335
       </p>
 
       <H2>Prazos de resposta</H2>
@@ -88,9 +100,9 @@ function ContatoPage() {
       </ul>
 
       <p className="text-xs text-slate-500 mt-6">
-        O SpyRadar Brasil não realiza atendimento por telefone ou WhatsApp. Todo o
-        suporte oficial acontece exclusivamente pelos e-mails listados acima —
-        desconfie de qualquer contato feito por outros canais em nome da marca.
+        O suporte oficial do SpyRadar Brasil acontece exclusivamente pelo e-mail
+        e pelo telefone/WhatsApp listados acima — desconfie de qualquer contato
+        feito por outros canais em nome da marca.
       </p>
     </LegalShell>
   );

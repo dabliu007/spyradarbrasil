@@ -66,6 +66,10 @@ export function ProcessSection() {
               </div>
             ))}
           </div>
+
+          <div className="mt-14 flex justify-center">
+            <GoldButton to="/verificar">Testar grátis agora</GoldButton>
+          </div>
         </Container>
       </section>
 

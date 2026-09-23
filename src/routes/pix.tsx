@@ -389,7 +389,7 @@ function PixPage() {
             </h3>
           </div>
           <p className="text-[12px] text-slate-800 leading-relaxed">
-            Seu dinheiro fica <span className="text-[#25D366] font-semibold">protegido</span> e só é liberado para a empresa <span className="text-[#25D366] font-semibold">SpyRadar Brasil LTDA</span> após os 7 dias de uso da plataforma.
+            Seu dinheiro fica <span className="text-[#25D366] font-semibold">protegido</span> e só é liberado para a empresa <span className="text-[#25D366] font-semibold">Spy Monitoramento LTDA</span> após os 7 dias de uso da plataforma.
           </p>
         </div>
 

@@ -82,7 +82,7 @@ function DisclaimerPage() {
       <H2>Contato</H2>
       <p>
         Dúvidas sobre este aviso podem ser enviadas para{" "}
-        <strong>contato@whatsradar.com</strong>.
+        <strong>sac@spyradarbrasil.com</strong>.
       </p>
     </LegalShell>
   );

@@ -24,6 +24,7 @@ import { Route as CpfInputRouteImport } from './routes/cpf-input'
 import { Route as DadosAlvoRouteImport } from './routes/dados-alvo'
 import { Route as DetetivesRouteImport } from './routes/detetives'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
+import { Route as GarantiaRouteImport } from './routes/garantia'
 import { Route as InvestigarRouteImport } from './routes/investigar'
 import { Route as LicencaZapradarRouteImport } from './routes/licenca-zapradar'
 import { Route as NotaFiscalRouteImport } from './routes/nota-fiscal'
@@ -31,6 +32,7 @@ import { Route as PainelRouteImport } from './routes/painel'
 import { Route as PixRouteImport } from './routes/pix'
 import { Route as PresellRouteImport } from './routes/presell'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as RastreamentoRouteImport } from './routes/rastreamento'
 import { Route as RelatorioRouteImport } from './routes/relatorio'
 import { Route as RelatorioEspecialRouteImport } from './routes/relatorio-especial'
 import { Route as SigiloRouteImport } from './routes/sigilo'
@@ -38,6 +40,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as TaxaMetaRouteImport } from './routes/taxa-meta'
 import { Route as TermosRouteImport } from './routes/termos'
+import { Route as TrocaRouteImport } from './routes/troca'
 import { Route as VerificarRouteImport } from './routes/verificar'
 import { Route as WhatsappClonadoRouteImport } from './routes/whatsapp-clonado'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
@@ -129,6 +132,11 @@ const DisclaimerRoute = DisclaimerRouteImport.update({
   path: '/disclaimer',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GarantiaRoute = GarantiaRouteImport.update({
+  id: '/garantia',
+  path: '/garantia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InvestigarRoute = InvestigarRouteImport.update({
   id: '/investigar',
   path: '/investigar',
@@ -164,6 +172,11 @@ const PrivacidadeRoute = PrivacidadeRouteImport.update({
   path: '/privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RastreamentoRoute = RastreamentoRouteImport.update({
+  id: '/rastreamento',
+  path: '/rastreamento',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RelatorioRoute = RelatorioRouteImport.update({
   id: '/relatorio',
   path: '/relatorio',
@@ -197,6 +210,11 @@ const TaxaMetaRoute = TaxaMetaRouteImport.update({
 const TermosRoute = TermosRouteImport.update({
   id: '/termos',
   path: '/termos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrocaRoute = TrocaRouteImport.update({
+  id: '/troca',
+  path: '/troca',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VerificarRoute = VerificarRouteImport.update({
@@ -297,6 +315,7 @@ export interface FileRoutesByFullPath {
   '/dados-alvo': typeof DadosAlvoRoute
   '/detetives': typeof DetetivesRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/garantia': typeof GarantiaRoute
   '/investigar': typeof InvestigarRoute
   '/licenca-zapradar': typeof LicencaZapradarRoute
   '/nota-fiscal': typeof NotaFiscalRoute
@@ -304,6 +323,7 @@ export interface FileRoutesByFullPath {
   '/pix': typeof PixRoute
   '/presell': typeof PresellRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/rastreamento': typeof RastreamentoRoute
   '/relatorio': typeof RelatorioRoute
   '/relatorio-especial': typeof RelatorioEspecialRoute
   '/sigilo': typeof SigiloRoute
@@ -311,6 +331,7 @@ export interface FileRoutesByFullPath {
   '/sobre': typeof SobreRoute
   '/taxa-meta': typeof TaxaMetaRoute
   '/termos': typeof TermosRoute
+  '/troca': typeof TrocaRoute
   '/verificar': typeof VerificarRoute
   '/whatsapp-clonado': typeof WhatsappClonadoRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -343,6 +364,7 @@ export interface FileRoutesByTo {
   '/dados-alvo': typeof DadosAlvoRoute
   '/detetives': typeof DetetivesRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/garantia': typeof GarantiaRoute
   '/investigar': typeof InvestigarRoute
   '/licenca-zapradar': typeof LicencaZapradarRoute
   '/nota-fiscal': typeof NotaFiscalRoute
@@ -350,6 +372,7 @@ export interface FileRoutesByTo {
   '/pix': typeof PixRoute
   '/presell': typeof PresellRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/rastreamento': typeof RastreamentoRoute
   '/relatorio': typeof RelatorioRoute
   '/relatorio-especial': typeof RelatorioEspecialRoute
   '/sigilo': typeof SigiloRoute
@@ -357,6 +380,7 @@ export interface FileRoutesByTo {
   '/sobre': typeof SobreRoute
   '/taxa-meta': typeof TaxaMetaRoute
   '/termos': typeof TermosRoute
+  '/troca': typeof TrocaRoute
   '/verificar': typeof VerificarRoute
   '/whatsapp-clonado': typeof WhatsappClonadoRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -390,6 +414,7 @@ export interface FileRoutesById {
   '/dados-alvo': typeof DadosAlvoRoute
   '/detetives': typeof DetetivesRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/garantia': typeof GarantiaRoute
   '/investigar': typeof InvestigarRoute
   '/licenca-zapradar': typeof LicencaZapradarRoute
   '/nota-fiscal': typeof NotaFiscalRoute
@@ -397,6 +422,7 @@ export interface FileRoutesById {
   '/pix': typeof PixRoute
   '/presell': typeof PresellRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/rastreamento': typeof RastreamentoRoute
   '/relatorio': typeof RelatorioRoute
   '/relatorio-especial': typeof RelatorioEspecialRoute
   '/sigilo': typeof SigiloRoute
@@ -404,6 +430,7 @@ export interface FileRoutesById {
   '/sobre': typeof SobreRoute
   '/taxa-meta': typeof TaxaMetaRoute
   '/termos': typeof TermosRoute
+  '/troca': typeof TrocaRoute
   '/verificar': typeof VerificarRoute
   '/whatsapp-clonado': typeof WhatsappClonadoRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -438,6 +465,7 @@ export interface FileRouteTypes {
     | '/dados-alvo'
     | '/detetives'
     | '/disclaimer'
+    | '/garantia'
     | '/investigar'
     | '/licenca-zapradar'
     | '/nota-fiscal'
@@ -445,6 +473,7 @@ export interface FileRouteTypes {
     | '/pix'
     | '/presell'
     | '/privacidade'
+    | '/rastreamento'
     | '/relatorio'
     | '/relatorio-especial'
     | '/sigilo'
@@ -452,6 +481,7 @@ export interface FileRouteTypes {
     | '/sobre'
     | '/taxa-meta'
     | '/termos'
+    | '/troca'
     | '/verificar'
     | '/whatsapp-clonado'
     | '/blog/$slug'
@@ -484,6 +514,7 @@ export interface FileRouteTypes {
     | '/dados-alvo'
     | '/detetives'
     | '/disclaimer'
+    | '/garantia'
     | '/investigar'
     | '/licenca-zapradar'
     | '/nota-fiscal'
@@ -491,6 +522,7 @@ export interface FileRouteTypes {
     | '/pix'
     | '/presell'
     | '/privacidade'
+    | '/rastreamento'
     | '/relatorio'
     | '/relatorio-especial'
     | '/sigilo'
@@ -498,6 +530,7 @@ export interface FileRouteTypes {
     | '/sobre'
     | '/taxa-meta'
     | '/termos'
+    | '/troca'
     | '/verificar'
     | '/whatsapp-clonado'
     | '/blog/$slug'
@@ -530,6 +563,7 @@ export interface FileRouteTypes {
     | '/dados-alvo'
     | '/detetives'
     | '/disclaimer'
+    | '/garantia'
     | '/investigar'
     | '/licenca-zapradar'
     | '/nota-fiscal'
@@ -537,6 +571,7 @@ export interface FileRouteTypes {
     | '/pix'
     | '/presell'
     | '/privacidade'
+    | '/rastreamento'
     | '/relatorio'
     | '/relatorio-especial'
     | '/sigilo'
@@ -544,6 +579,7 @@ export interface FileRouteTypes {
     | '/sobre'
     | '/taxa-meta'
     | '/termos'
+    | '/troca'
     | '/verificar'
     | '/whatsapp-clonado'
     | '/blog/$slug'
@@ -577,6 +613,7 @@ export interface RootRouteChildren {
   DadosAlvoRoute: typeof DadosAlvoRoute
   DetetivesRoute: typeof DetetivesRoute
   DisclaimerRoute: typeof DisclaimerRoute
+  GarantiaRoute: typeof GarantiaRoute
   InvestigarRoute: typeof InvestigarRoute
   LicencaZapradarRoute: typeof LicencaZapradarRoute
   NotaFiscalRoute: typeof NotaFiscalRoute
@@ -584,6 +621,7 @@ export interface RootRouteChildren {
   PixRoute: typeof PixRoute
   PresellRoute: typeof PresellRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
+  RastreamentoRoute: typeof RastreamentoRoute
   RelatorioRoute: typeof RelatorioRoute
   RelatorioEspecialRoute: typeof RelatorioEspecialRoute
   SigiloRoute: typeof SigiloRoute
@@ -591,6 +629,7 @@ export interface RootRouteChildren {
   SobreRoute: typeof SobreRoute
   TaxaMetaRoute: typeof TaxaMetaRoute
   TermosRoute: typeof TermosRoute
+  TrocaRoute: typeof TrocaRoute
   VerificarRoute: typeof VerificarRoute
   WhatsappClonadoRoute: typeof WhatsappClonadoRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -715,6 +754,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DisclaimerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/garantia': {
+      id: '/garantia'
+      path: '/garantia'
+      fullPath: '/garantia'
+      preLoaderRoute: typeof GarantiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/investigar': {
       id: '/investigar'
       path: '/investigar'
@@ -764,6 +810,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/rastreamento': {
+      id: '/rastreamento'
+      path: '/rastreamento'
+      fullPath: '/rastreamento'
+      preLoaderRoute: typeof RastreamentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/relatorio': {
       id: '/relatorio'
       path: '/relatorio'
@@ -811,6 +864,13 @@ declare module '@tanstack/react-router' {
       path: '/termos'
       fullPath: '/termos'
       preLoaderRoute: typeof TermosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/troca': {
+      id: '/troca'
+      path: '/troca'
+      fullPath: '/troca'
+      preLoaderRoute: typeof TrocaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/verificar': {
@@ -937,6 +997,7 @@ const rootRouteChildren: RootRouteChildren = {
   DadosAlvoRoute: DadosAlvoRoute,
   DetetivesRoute: DetetivesRoute,
   DisclaimerRoute: DisclaimerRoute,
+  GarantiaRoute: GarantiaRoute,
   InvestigarRoute: InvestigarRoute,
   LicencaZapradarRoute: LicencaZapradarRoute,
   NotaFiscalRoute: NotaFiscalRoute,
@@ -944,6 +1005,7 @@ const rootRouteChildren: RootRouteChildren = {
   PixRoute: PixRoute,
   PresellRoute: PresellRoute,
   PrivacidadeRoute: PrivacidadeRoute,
+  RastreamentoRoute: RastreamentoRoute,
   RelatorioRoute: RelatorioRoute,
   RelatorioEspecialRoute: RelatorioEspecialRoute,
   SigiloRoute: SigiloRoute,
@@ -951,6 +1013,7 @@ const rootRouteChildren: RootRouteChildren = {
   SobreRoute: SobreRoute,
   TaxaMetaRoute: TaxaMetaRoute,
   TermosRoute: TermosRoute,
+  TrocaRoute: TrocaRoute,
   VerificarRoute: VerificarRoute,
   WhatsappClonadoRoute: WhatsappClonadoRoute,
   BlogSlugRoute: BlogSlugRoute,

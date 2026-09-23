@@ -317,14 +317,14 @@ function TerminalFooter() {
       </div>
       <div className="bg-zinc-900/40 backdrop-blur border border-zinc-800 rounded-xl p-4 text-center space-y-1">
         <div className="text-[11px] font-['Geist_Mono',monospace] text-yellow-400 uppercase tracking-[0.18em] font-bold">
-          TechBiz Forense Digital
+          Spy Monitoramento LTDA
         </div>
         <div className="text-[11px] text-zinc-400">
-          CNPJ: 05.757.597/0001-37
+          CNPJ: 17.722.425/0001-07
         </div>
         <div className="text-[10px] text-zinc-500 leading-relaxed pt-1">
-          Focada em soluções de forense digital e análise de evidências.<br />
-          Sede em São Paulo — SP.
+          Focada em soluções de monitoramento e análise de evidências.<br />
+          Sede em Curitiba — PR.
         </div>
       </div>
       <div className="flex justify-between text-[10px] font-['Geist_Mono',monospace] text-zinc-600 uppercase tracking-[0.2em] pointer-events-none">

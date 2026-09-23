@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Shield, Lock, Mail } from "lucide-react";
+import { Shield, Lock, Mail, Phone } from "lucide-react";
 
 export default function FooterCredibilidade() {
   const anoAtual = new Date().getFullYear();
@@ -30,9 +30,13 @@ export default function FooterCredibilidade() {
         <div>
           <h3 className="text-white font-semibold mb-3">SpyRadar Brasil</h3>
           <p className="text-sm leading-relaxed">
-            TechBiz Forense Digital Ltda
+            Spy Monitoramento LTDA
             <br />
-            CNPJ: 05.757.597/0001-37
+            CNPJ: 17.722.425/0001-07
+            <br />
+            Rodovia Curitiba–Paranaguá, BR-277, 793 — Cajuru
+            <br />
+            Curitiba – PR, CEP 82900-335
           </p>
           <p className="text-sm mt-3 text-slate-400">
             Ferramenta independente de análise e conteúdo digital, com foco em
@@ -88,8 +92,14 @@ export default function FooterCredibilidade() {
           <ul className="space-y-2 text-sm">
             <li className="flex items-center gap-2">
               <Mail className="w-4 h-4" />
-              <a href="mailto:sac@whatsradar.com" className="hover:text-white transition-colors">
-                sac@whatsradar.com
+              <a href="mailto:sac@spyradarbrasil.com" className="hover:text-white transition-colors">
+                sac@spyradarbrasil.com
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
+              <Phone className="w-4 h-4" />
+              <a href="tel:+5511965072638" className="hover:text-white transition-colors">
+                (11) 96507-2638
               </a>
             </li>
             <li className="text-slate-400">
@@ -139,7 +149,7 @@ export default function FooterCredibilidade() {
       {/* Copyright */}
       <div className="border-t border-slate-800">
         <div className="max-w-6xl mx-auto px-6 py-4 text-center text-xs text-slate-500">
-          © {anoAtual} SpyRadar Brasil — TechBiz Forense Digital Ltda — CNPJ 05.757.597/0001-37.
+          © {anoAtual} SpyRadar Brasil — Spy Monitoramento LTDA — CNPJ 17.722.425/0001-07.
           Todos os direitos reservados.
         </div>
       </div>

@@ -42,9 +42,9 @@ function SobrePage() {
 
       <H2>Quem opera o SpyRadar Brasil</H2>
       <p>
-        A plataforma é mantida por <strong>TechBiz Forense Digital Ltda</strong>,
+        A plataforma é mantida por <strong>Spy Monitoramento LTDA</strong>,
         pessoa jurídica de direito privado inscrita no CNPJ sob o nº{" "}
-        <strong>05.757.597/0001-37</strong>, com sede no Brasil.
+        <strong>17.722.425/0001-07</strong>, com sede em Curitiba – PR.
       </p>
 
       <H2>Nossa proposta</H2>
@@ -92,8 +92,8 @@ function SobrePage() {
         </a>{" "}
         ou envie um e-mail para{" "}
         <strong>
-          <a href="mailto:sac@whatsradar.com" className="text-yellow-700 hover:underline">
-            sac@whatsradar.com
+              <a href="mailto:sac@spyradarbrasil.com" className="text-yellow-700 hover:underline">
+                sac@spyradarbrasil.com
           </a>
         </strong>
         .

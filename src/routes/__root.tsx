@@ -158,7 +158,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             {
               "@type": "ContactPoint",
               contactType: "customer support",
-              email: "sac@whatsradar.com",
+              email: "sac@spyradarbrasil.com",
+              telephone: "+55-11-96507-2638",
               availableLanguage: ["Portuguese"],
             },
           ],

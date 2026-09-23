@@ -74,7 +74,7 @@ export function KitSection() {
             subtitle="Além do app clonador, o Kit Detetive traz câmeras escondidas e rastreadores para você pegar a pessoa em flagrante."
           />
           <div className="shrink-0">
-            <GoldButton to="/verificar">Clonar agora</GoldButton>
+            <GoldButton to="/verificar">Testar grátis</GoldButton>
           </div>
         </div>
 

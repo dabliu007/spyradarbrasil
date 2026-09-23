@@ -75,7 +75,7 @@ function CookiesPage() {
       <H2>6. Contato</H2>
       <p>
         Dúvidas sobre cookies podem ser enviadas para{" "}
-        <strong>privacidade@whatsradar.com</strong>.
+        <strong>sac@spyradarbrasil.com</strong>.
       </p>
     </LegalShell>
   );

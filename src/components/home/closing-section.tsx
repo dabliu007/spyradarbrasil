@@ -1,17 +1,34 @@
+import { Link } from "@tanstack/react-router";
 import { Container, GoldButton, OutlineButton, Logo } from "./primitives";
 
-const footerColumns = [
+type FooterLink = { label: string; to?: string; href?: string };
+
+const footerColumns: { title: string; links: FooterLink[] }[] = [
   {
     title: "Empresa",
-    links: ["Sobre", "Contato", "Suporte"],
+    links: [
+      { label: "Sobre", to: "/sobre" },
+      { label: "Contato", to: "/contato" },
+      { label: "Suporte", to: "/contato" },
+    ],
   },
   {
     title: "Recursos",
-    links: ["WhatsApp Clonado", "Localização em Tempo Real", "Kit Detetive"],
+    links: [
+      { label: "WhatsApp Clonado", href: "#solucoes" },
+      { label: "Localização em Tempo Real", href: "#solucoes" },
+      { label: "Como Funciona", href: "#como-funciona" },
+    ],
   },
   {
     title: "Institucional",
-    links: ["Privacidade", "Termos de Uso", "Garantia", "Política de Trocas"],
+    links: [
+      { label: "Privacidade", to: "/privacidade" },
+      { label: "Termos de Uso", to: "/termos" },
+      { label: "Garantia", to: "/garantia" },
+      { label: "Política de Trocas", to: "/troca" },
+      { label: "Rastreamento", to: "/rastreamento" },
+    ],
   },
 ];
 
@@ -49,7 +66,7 @@ export function ClosingSection() {
                 acontecendo. Rápido, sigiloso e sem deixar rastros.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <GoldButton to="/verificar">Clonar agora</GoldButton>
+                <GoldButton to="/verificar">Começar teste grátis</GoldButton>
                 <OutlineButton href="#como-funciona">Como funciona</OutlineButton>
               </div>
             </div>
@@ -76,13 +93,22 @@ export function ClosingSection() {
                 </h3>
                 <ul className="mt-5 flex flex-col gap-3">
                   {col.links.map((link) => (
-                    <li key={link}>
-                      <a
-                        href="#topo"
-                        className="text-[13px] text-[#A7A7A7] transition-colors hover:text-[#D9A928]"
-                      >
-                        {link}
-                      </a>
+                    <li key={link.label}>
+                      {link.to ? (
+                        <Link
+                          to={link.to}
+                          className="text-[13px] text-[#A7A7A7] transition-colors hover:text-[#D9A928]"
+                        >
+                          {link.label}
+                        </Link>
+                      ) : (
+                        <a
+                          href={link.href}
+                          className="text-[13px] text-[#A7A7A7] transition-colors hover:text-[#D9A928]"
+                        >
+                          {link.label}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -90,11 +116,14 @@ export function ClosingSection() {
             ))}
           </div>
 
-          <div className="mt-14 flex flex-col gap-6 border-t border-[#292929] pt-8 text-[12px] text-[#A7A7A7] sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-14 flex flex-col gap-6 border-t border-[#292929] pt-8 text-[12px] text-[#A7A7A7] sm:flex-row sm:items-start sm:justify-between">
             <div className="flex flex-col gap-1">
-              <span>Spy Radar Brasil</span>
-              <span className="text-[#A7A7A7]/70">CNPJ: —</span>
-              <span className="text-[#A7A7A7]/70">Atendimento: —</span>
+              <span className="text-[#F5F5F2]">Spy Monitoramento LTDA</span>
+              <span className="text-[#A7A7A7]/70">CNPJ: 17.722.425/0001-07</span>
+              <span className="text-[#A7A7A7]/70">
+                Rodovia Curitiba–Paranaguá, BR-277, 793
+              </span>
+              <span className="text-[#A7A7A7]/70">Cajuru, Curitiba – PR, 82900-335</span>
             </div>
             <p className="text-[11px] leading-relaxed text-[#A7A7A7]/70 sm:max-w-md sm:text-right">
               Utilize os dispositivos de acordo com a legislação aplicável e mediante
@@ -103,7 +132,8 @@ export function ClosingSection() {
           </div>
 
           <p className="mt-8 text-[11px] text-[#A7A7A7]/60">
-            © {new Date().getFullYear()} Spy Radar Brasil. Todos os direitos reservados.
+            © {new Date().getFullYear()} Spy Monitoramento LTDA. Todos os direitos
+            reservados.
           </p>
         </Container>
       </footer>

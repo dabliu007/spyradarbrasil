@@ -37,7 +37,7 @@ export function HeroSection() {
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <GoldButton to="/verificar">Clonar agora</GoldButton>
+            <GoldButton to="/verificar">Testar grátis agora</GoldButton>
             <OutlineButton href="#como-funciona">Como funciona</OutlineButton>
           </div>
 
