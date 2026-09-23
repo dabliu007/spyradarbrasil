@@ -7,6 +7,20 @@ import { createPixCharge } from "@/lib/pix.functions";
 
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
+import kitApp from "@/assets/kit-app.png";
+import kitCaneta from "@/assets/kit-caneta.png";
+import kitCamera from "@/assets/kit-camera.png";
+import kitRastreador from "@/assets/kit-rastreador.png";
+
+const KIT_ITEMS = [
+  { name: "App Clonador", image: kitApp, desc: "Acesso ao celular clonado do alvo" },
+  { name: "Caneta com Câmera", image: kitCaneta, desc: "Grava vídeo e áudio escondido" },
+  { name: "Mini Câmera Wi-Fi", image: kitCamera, desc: "Monitoramento remoto ao vivo" },
+  { name: "Localizador GPS", image: kitRastreador, desc: "Rastreio de localização em tempo real" },
+];
+
+const UFS = ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"];
+
 const searchSchema = z.object({
   phone: z.coerce.string().optional().default(""),
   sex: z.enum(["M", "F"]).optional().default("M"),
@@ -51,6 +65,58 @@ function CheckoutPage() {
   const [error, setError] = useState<string | null>(null);
   const [generating, setGenerating] = useState(false);
   const createdRef = useRef(false);
+
+  const [ship, setShip] = useState({
+    name: "",
+    cep: "",
+    street: "",
+    number: "",
+    complement: "",
+    district: "",
+    city: "",
+    uf: "",
+  });
+  const [cepLoading, setCepLoading] = useState(false);
+  const [touched, setTouched] = useState(false);
+
+  const setField = (k: keyof typeof ship) => (v: string) =>
+    setShip((s) => ({ ...s, [k]: v }));
+
+  const digits = (v: string) => v.replace(/\D/g, "");
+  const cepDigits = digits(ship.cep);
+
+  const fieldErrors = {
+    name: ship.name.trim().split(/\s+/).filter(Boolean).length < 2,
+    cep: cepDigits.length !== 8,
+    street: ship.street.trim().length < 3,
+    number: ship.number.trim().length < 1,
+    district: ship.district.trim().length < 2,
+    city: ship.city.trim().length < 2,
+    uf: !UFS.includes(ship.uf.toUpperCase()),
+  };
+  const formValid = !Object.values(fieldErrors).some(Boolean);
+
+  const lookupCep = async (raw: string) => {
+    const cep = digits(raw);
+    if (cep.length !== 8) return;
+    setCepLoading(true);
+    try {
+      const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const data = await res.json();
+      if (!data?.erro) {
+        setShip((s) => ({
+          ...s,
+          street: data.logradouro || s.street,
+          district: data.bairro || s.district,
+          city: data.localidade || s.city,
+          uf: (data.uf || s.uf).toUpperCase(),
+        }));
+      }
+    } catch {}
+    finally {
+      setCepLoading(false);
+    }
+  };
   const [currentAmount, setCurrentAmount] = useState<number>(amount ?? DEFAULT_AMOUNT);
   const [downsellOffer, setDownsellOffer] = useState<number | null>(null);
   const downsellStepRef = useRef(0);
@@ -96,12 +162,24 @@ function CheckoutPage() {
 
   const handleGenerate = async (e: React.FormEvent) => {
     e.preventDefault();
+    setTouched(true);
+    if (!formValid) {
+      const el = document.getElementById("shipping-form");
+      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
     if (createdRef.current) return;
     createdRef.current = true;
     setGenerating(true);
     try {
       const { fbc, fbp } = getMetaCookies();
       const utms = getPersistedUtms();
+      try {
+        sessionStorage.setItem(
+          "zr.shipping",
+          JSON.stringify({ ...ship, cep: cepDigits }),
+        );
+      } catch {}
       const c = await createPix({
         data: {
           amount: currentAmount,
@@ -110,6 +188,7 @@ function CheckoutPage() {
           utms,
           phone,
           gender: sex,
+          customerName: ship.name.trim(),
         },
       });
       try {
@@ -173,6 +252,164 @@ function CheckoutPage() {
         </div>
 
 
+        {/* Resumo do pedido — Kit Detetive */}
+        <div className="bg-white border border-yellow-200 rounded-3xl p-5 space-y-4 shadow-[0_12px_40px_rgba(217,169,40,0.10)]">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
+                Seu pedido
+              </div>
+              <h2 className="text-base font-extrabold text-slate-900">Kit Detetive Completo</h2>
+            </div>
+            <span className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-md font-bold bg-[#25D366]/10 text-[#128C7E] border border-[#25D366]/30 whitespace-nowrap">
+              Frete grátis
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2.5">
+            {KIT_ITEMS.map((item) => (
+              <div
+                key={item.name}
+                className="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-2xl p-2.5"
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-12 h-12 rounded-xl object-cover bg-white border border-slate-200 shrink-0"
+                />
+                <div className="min-w-0">
+                  <div className="text-[12px] font-bold text-slate-900 leading-tight">{item.name}</div>
+                  <div className="text-[10px] text-slate-500 leading-tight">{item.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-start gap-2 bg-[#25D366]/[0.07] border border-[#25D366]/25 rounded-2xl p-3">
+            <span className="text-[#128C7E] text-base leading-none mt-0.5">📱</span>
+            <p className="text-[12px] text-slate-700 leading-relaxed">
+              Inclui <span className="font-bold text-slate-900">acesso total ao celular clonado {doAlvo}</span> por 365 dias — mensagens, fotos, localização e apps.
+            </p>
+          </div>
+
+          <div className="flex items-center justify-between border-t border-slate-100 pt-3">
+            <span className="text-[13px] font-semibold text-slate-600">Total com frete grátis</span>
+            <span className="text-lg font-extrabold text-[#128C7E]">{formatBRL(displayAmount)}</span>
+          </div>
+        </div>
+
+        {/* Formulário de entrega */}
+        <div
+          id="shipping-form"
+          className="bg-white border border-yellow-200 rounded-3xl p-5 space-y-4 shadow-[0_12px_40px_rgba(217,169,40,0.10)]"
+        >
+          <div className="space-y-1">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
+              Dados de entrega
+            </div>
+            <h2 className="text-base font-extrabold text-slate-900">Onde enviamos seu kit?</h2>
+            <p className="text-[12px] text-slate-500 leading-relaxed">
+              Preencha seu nome e endereço para receber o Kit Detetive com <span className="font-semibold text-[#128C7E]">frete grátis</span>. É obrigatório para gerar o PIX.
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <Field
+              label="Nome completo"
+              placeholder="Como está no seu documento"
+              value={ship.name}
+              onChange={setField("name")}
+              error={touched && fieldErrors.name ? "Informe seu nome e sobrenome" : null}
+              autoComplete="name"
+            />
+
+            <div className="grid grid-cols-[1fr_auto] gap-2 items-start">
+              <Field
+                label="CEP"
+                placeholder="00000-000"
+                value={ship.cep}
+                onChange={(v) => {
+                  const d = digits(v).slice(0, 8);
+                  const masked = d.length > 5 ? `${d.slice(0, 5)}-${d.slice(5)}` : d;
+                  setField("cep")(masked);
+                  if (d.length === 8) lookupCep(d);
+                }}
+                error={touched && fieldErrors.cep ? "CEP inválido" : null}
+                inputMode="numeric"
+                autoComplete="postal-code"
+              />
+              <div className="pt-[22px]">
+                {cepLoading && (
+                  <span className="text-[11px] text-slate-400 font-['Geist_Mono',monospace]">
+                    buscando…
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-[1fr_90px] gap-2">
+              <Field
+                label="Endereço"
+                placeholder="Rua, avenida…"
+                value={ship.street}
+                onChange={setField("street")}
+                error={touched && fieldErrors.street ? "Obrigatório" : null}
+                autoComplete="address-line1"
+              />
+              <Field
+                label="Número"
+                placeholder="Nº"
+                value={ship.number}
+                onChange={setField("number")}
+                error={touched && fieldErrors.number ? "—" : null}
+                inputMode="numeric"
+              />
+            </div>
+
+            <Field
+              label="Complemento (opcional)"
+              placeholder="Apto, bloco, referência"
+              value={ship.complement}
+              onChange={setField("complement")}
+              autoComplete="address-line2"
+            />
+
+            <Field
+              label="Bairro"
+              placeholder="Seu bairro"
+              value={ship.district}
+              onChange={setField("district")}
+              error={touched && fieldErrors.district ? "Obrigatório" : null}
+            />
+
+            <div className="grid grid-cols-[1fr_80px] gap-2">
+              <Field
+                label="Cidade"
+                placeholder="Sua cidade"
+                value={ship.city}
+                onChange={setField("city")}
+                error={touched && fieldErrors.city ? "Obrigatório" : null}
+                autoComplete="address-level2"
+              />
+              <div className="space-y-1">
+                <label className="text-[11px] font-semibold text-slate-600 block">UF</label>
+                <select
+                  value={ship.uf}
+                  onChange={(e) => setField("uf")(e.target.value)}
+                  className={`w-full h-11 px-2 rounded-xl border bg-white text-sm text-slate-900 outline-none focus:ring-2 focus:ring-[#25D366]/40 ${
+                    touched && fieldErrors.uf ? "border-red-300" : "border-slate-200"
+                  }`}
+                >
+                  <option value="">--</option>
+                  {UFS.map((u) => (
+                    <option key={u} value={u}>{u}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="bg-gradient-to-br from-white/90 to-slate-50/40 backdrop-blur-xl border border-yellow-200 rounded-3xl p-6 space-y-4 shadow-[0_20px_60px_rgba(217,169,40,0.15)]">
           <div className="text-center space-y-1">
             <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
@@ -195,15 +432,30 @@ function CheckoutPage() {
             <form onSubmit={handleGenerate} className="space-y-3 py-2">
               <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 text-[12px] text-slate-700 leading-relaxed">
                 <div className="font-bold text-[#128C7E] mb-1">🔐 Sigilo absoluto</div>
-                Será gerado um <span className="font-semibold text-slate-900">nome e CPF aleatórios</span> como identificador do PIX para manter seu <span className="font-semibold text-slate-900">sigilo absoluto</span>. Nenhum dado seu aparece na cobrança.
+                Seu endereço é usado <span className="font-semibold text-slate-900">apenas para a entrega do kit</span>. Na cobrança PIX é gerado um <span className="font-semibold text-slate-900">nome e CPF aleatórios</span>, então nenhum dado seu aparece no pagamento.
               </div>
+
+              {touched && !formValid && (
+                <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-[12px] text-red-600 text-center">
+                  Preencha seus dados de entrega acima para gerar o PIX.
+                </div>
+              )}
 
               <button
                 type="submit"
                 disabled={generating}
-                className="w-full h-12 bg-[#25D366] hover:bg-[#1eb959] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all active:scale-[0.98] uppercase tracking-wide text-sm"
+                aria-disabled={!formValid}
+                className={`w-full h-12 text-white font-bold rounded-xl transition-all active:scale-[0.98] uppercase tracking-wide text-sm ${
+                  formValid
+                    ? "bg-[#25D366] hover:bg-[#1eb959]"
+                    : "bg-slate-300 cursor-not-allowed"
+                } disabled:opacity-60`}
               >
-                {generating ? "Gerando PIX…" : "Gerar PIX agora"}
+                {generating
+                  ? "Gerando PIX…"
+                  : formValid
+                    ? `Gerar PIX de ${formatBRL(displayAmount)}`
+                    : "Preencha a entrega para continuar"}
               </button>
             </form>
           )}
@@ -292,6 +544,44 @@ function CheckoutPage() {
             </button>
           </div>
         </div>
+      )}
+    </div>
+  );
+}
+
+function Field({
+  label,
+  value,
+  onChange,
+  placeholder,
+  error,
+  inputMode,
+  autoComplete,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+  error?: string | null;
+  inputMode?: "text" | "numeric" | "tel" | "email";
+  autoComplete?: string;
+}) {
+  return (
+    <div className="space-y-1">
+      <label className="text-[11px] font-semibold text-slate-600 block">{label}</label>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        inputMode={inputMode}
+        autoComplete={autoComplete}
+        className={`w-full h-11 px-3 rounded-xl border bg-white text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-[#25D366]/40 ${
+          error ? "border-red-300" : "border-slate-200"
+        }`}
+      />
+      {error && error !== "—" && (
+        <span className="text-[10px] text-red-500">{error}</span>
       )}
     </div>
   );
