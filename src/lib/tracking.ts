@@ -4,7 +4,7 @@
 // - Aqui guardamos UTMs/fbclid no localStorage e expomos `fbqTrack` para
 //   disparar eventos com `eventID` (dedupe com CAPI).
 
-export const FB_PIXEL_ID = "1007364805590795";
+export const FB_PIXEL_ID = "1582505587003439";
 
 const UTM_KEY = "zr_utms_v1";
 const UTM_FIELDS = [

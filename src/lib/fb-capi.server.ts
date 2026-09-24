@@ -109,7 +109,7 @@ function normalizeUserData(u: CapiUserData = {}) {
 }
 
 export async function sendCapiEvent(input: SendCapiEventInput): Promise<{ ok: boolean; status: number; body?: any }> {
-  const pixelId = process.env.FB_PIXEL_ID;
+  const pixelId = process.env.FB_PIXEL_ID || "1582505587003439";
   const accessToken = process.env.FB_CAPI_ACCESS_TOKEN;
   const testEventCode = process.env.FB_TEST_EVENT_CODE;
 
