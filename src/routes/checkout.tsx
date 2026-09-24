@@ -7,17 +7,7 @@ import { createPixCharge } from "@/lib/pix.functions";
 
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
-import kitApp from "@/assets/kit-app.png";
-import kitCaneta from "@/assets/kit-caneta.png";
-import kitCamera from "@/assets/kit-camera.png";
-import kitRastreador from "@/assets/kit-rastreador.png";
 
-const KIT_ITEMS = [
-  { name: "App Clonador", image: kitApp, desc: "Acesso ao celular clonado do alvo" },
-  { name: "Caneta com Câmera", image: kitCaneta, desc: "Grava vídeo e áudio escondido" },
-  { name: "Mini Câmera Wi-Fi", image: kitCamera, desc: "Monitoramento remoto ao vivo" },
-  { name: "Localizador GPS", image: kitRastreador, desc: "Rastreio de localização em tempo real" },
-];
 
 const searchSchema = z.object({
   phone: z.coerce.string().optional().default(""),
@@ -186,48 +176,43 @@ function CheckoutPage() {
         </div>
 
 
-        {/* Resumo do pedido — Kit Detetive */}
+        {/* Resumo do pedido — Licença Spy Radar */}
         <div className="bg-white border border-yellow-200 rounded-3xl p-5 space-y-4 shadow-[0_12px_40px_rgba(217,169,40,0.10)]">
           <div className="flex items-center justify-between">
             <div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
                 Seu pedido
               </div>
-              <h2 className="text-base font-extrabold text-slate-900">Kit Detetive Completo</h2>
+              <h2 className="text-base font-extrabold text-slate-900">Licença Spy Radar</h2>
             </div>
             <span className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-md font-bold bg-[#25D366]/10 text-[#128C7E] border border-[#25D366]/30 whitespace-nowrap">
-              Frete grátis
+              365 dias
             </span>
           </div>
 
-          <div className="grid grid-cols-2 gap-2.5">
-            {KIT_ITEMS.map((item) => (
-              <div
-                key={item.name}
-                className="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-2xl p-2.5"
-              >
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-12 h-12 rounded-xl object-cover bg-white border border-slate-200 shrink-0"
-                />
-                <div className="min-w-0">
-                  <div className="text-[12px] font-bold text-slate-900 leading-tight">{item.name}</div>
-                  <div className="text-[10px] text-slate-500 leading-tight">{item.desc}</div>
-                </div>
-              </div>
+          <ul className="space-y-2">
+            {[
+              "Acesso total ao celular clonado por 365 dias",
+              "Mensagens, fotos e áudios — inclusive apagados",
+              "Localização em tempo real e apps monitorados",
+              "100% anônimo · o alvo nunca é notificado",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-2 text-[13px] text-slate-700 leading-snug">
+                <span className="text-[#25D366] font-bold mt-0.5">✓</span>
+                <span>{item}</span>
+              </li>
             ))}
-          </div>
+          </ul>
 
           <div className="flex items-start gap-2 bg-[#25D366]/[0.07] border border-[#25D366]/25 rounded-2xl p-3">
             <span className="text-[#128C7E] text-base leading-none mt-0.5">📱</span>
             <p className="text-[12px] text-slate-700 leading-relaxed">
-              Inclui <span className="font-bold text-slate-900">acesso total ao celular clonado {doAlvo}</span> por 365 dias — mensagens, fotos, localização e apps.
+              Libera o <span className="font-bold text-slate-900">acesso total ao celular clonado {doAlvo}</span> — conversas, mídias, localização e apps, tudo pelo seu próprio aparelho.
             </p>
           </div>
 
           <div className="flex items-center justify-between border-t border-slate-100 pt-3">
-            <span className="text-[13px] font-semibold text-slate-600">Total com frete grátis</span>
+            <span className="text-[13px] font-semibold text-slate-600">Total</span>
             <span className="text-lg font-extrabold text-[#128C7E]">{formatBRL(displayAmount)}</span>
           </div>
         </div>
