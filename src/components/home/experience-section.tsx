@@ -10,54 +10,6 @@ const humanIndicators = [
 export function ExperienceSection() {
   return (
     <>
-      {/* Unboxing */}
-      <section className="py-20 sm:py-28">
-        <Container>
-          <SectionHeading
-            eyebrow="Kit Detetive"
-            title={
-              <>
-                As provas que você
-                <br className="hidden sm:block" /> precisa, na mão
-              </>
-            }
-            subtitle="Câmeras espiãs, rastreadores e equipamentos discretos que chegam prontos para você flagrar a traição."
-          />
-
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-6 sm:grid-rows-2 lg:h-[560px]">
-            <figure className="group relative overflow-hidden rounded-2xl border border-[#292929] bg-[#151515] sm:col-span-4 sm:row-span-2">
-              <img
-                src="/brand/unbox-flatlay.png"
-                alt="Itens do Kit Detetive Spy Radar organizados sobre superfície escura"
-                className="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105 sm:h-full"
-                loading="lazy"
-              />
-              <figcaption className="absolute bottom-4 left-4 rounded-full border border-[#292929] bg-[#080808]/70 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#F5F5F2] backdrop-blur-md">
-                Kit completo
-              </figcaption>
-            </figure>
-
-            <figure className="group relative overflow-hidden rounded-2xl border border-[#292929] bg-[#151515] sm:col-span-2">
-              <img
-                src="/brand/unbox-box.png"
-                alt="Embalagem premium Spy Radar Brasil"
-                className="h-48 w-full object-cover transition-transform duration-700 group-hover:scale-105 sm:h-full"
-                loading="lazy"
-              />
-            </figure>
-
-            <figure className="group relative overflow-hidden rounded-2xl border border-[#292929] bg-[#151515] sm:col-span-2">
-              <img
-                src="/brand/unbox-hand.png"
-                alt="Produto Spy Radar retirado da embalagem"
-                className="h-48 w-full object-cover transition-transform duration-700 group-hover:scale-105 sm:h-full"
-                loading="lazy"
-              />
-            </figure>
-          </div>
-        </Container>
-      </section>
-
       {/* Quem Somos */}
       <section id="sobre" className="scroll-mt-24 border-y border-[#292929] bg-[#0d0d0d] py-20 sm:py-28">
         <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
