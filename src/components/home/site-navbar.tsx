@@ -24,7 +24,7 @@ export function SiteNavbar() {
   return (
     <header
       className={
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300 " +
+        "absolute inset-x-0 top-0 z-50 transition-colors duration-300 lg:fixed " +
         (scrolled
           ? "border-b border-[#292929] bg-[#080808]/85 backdrop-blur-md"
           : "border-b border-transparent bg-transparent")

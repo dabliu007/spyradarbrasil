@@ -1,9 +1,12 @@
 import { MessageCircle, Images, MapPin } from "lucide-react";
 import { Container, SectionHeading } from "./primitives";
+import provaWhatsapp from "@/assets/prova-whatsapp.png";
+import provaGaleria from "@/assets/prova-galeria.png";
+import provaRastreador from "@/assets/prova-rastreador.png";
 
 const proofs = [
   {
-    src: "/provas/whatsapp.png",
+    src: provaWhatsapp,
     alt: "Print de conversa suspeita no WhatsApp revelada pelo monitoramento",
     icon: MessageCircle,
     title: "Conversas que ela(e) apaga",
@@ -11,7 +14,7 @@ const proofs = [
       "Mensagens comprometedoras, combinados escondidos e tudo que foi apagado — recuperado e visível pra você.",
   },
   {
-    src: "/provas/galeria.png",
+    src: provaGaleria,
     alt: "Galeria de fotos e vídeos íntimos encontrados no celular monitorado",
     icon: Images,
     title: "Fotos e vídeos guardados",
@@ -19,7 +22,7 @@ const proofs = [
       "A galeria completa, incluindo as pastas ocultas: fotos íntimas, viagens e registros que provam a traição.",
   },
   {
-    src: "/provas/rastreador.png",
+    src: provaRastreador,
     alt: "Mapa com a localização em tempo real do alvo monitorado",
     icon: MapPin,
     title: "Onde ela(e) está agora",
