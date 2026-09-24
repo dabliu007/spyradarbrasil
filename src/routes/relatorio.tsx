@@ -572,7 +572,7 @@ function RelatorioPage() {
 
 
 
-        {/* EVID��NCIAS DAS REDES SOCIAIS */}
+        {/* EVID����NCIAS DAS REDES SOCIAIS */}
         <Section title="🕵️ Evidências capturadas nas redes sociais">
           <p className="text-[12px] text-zinc-400 -mt-1 mb-3">
             Perfis ocultos, matches recentes e prints de conversas que {amanteIsWoman ? "ele" : "ela"} <span className="text-red-300 font-semibold">tentou esconder de você</span>.
@@ -929,7 +929,7 @@ function RelatorioPage() {
                 Kit Detetive completo por apenas
               </p>
               <div className="flex items-baseline justify-center gap-2">
-                <span className="text-[38px] font-extrabold leading-none text-yellow-400">R$ 197,00</span>
+                <span className="text-[38px] font-extrabold leading-none text-yellow-400">R$ 47,00</span>
               </div>
               <p className="text-[12px] text-zinc-300 mt-1">
                 Pagamento único via PIX · acesso liberado na hora
@@ -1039,7 +1039,7 @@ function RelatorioPage() {
               🔓 ADQUIRIR KIT DETETIVE
             </button>
             <p className="text-center text-[11px] text-zinc-500 mt-2">
-              🔒 PIX R$ 197,00 · ativação em segundos · válido por 365 dias
+              🔒 PIX R$ 47,00 · ativação em segundos · válido por 365 dias
             </p>
           </div>
         </div>

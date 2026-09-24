@@ -6,7 +6,7 @@ import { getRequest } from "@tanstack/react-start/server";
  *
  * Base:    https://api.blackcatoficial.com/api
  * Auth:    Header  X-API-Key: <api_key>
- * Valores: em CENTAVOS (integer, ex.: 19700 = R$ 197,00)
+ * Valores: em CENTAVOS (integer, ex.: 4700 = R$ 47,00)
  * Fluxo:   POST /sales/create-sale        (paymentMethod: "pix")
  * Status:  GET  /sales/:id/status
  * Webhook: src/routes/api/public/blackcat-webhook.ts

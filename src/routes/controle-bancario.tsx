@@ -6,7 +6,7 @@ import { z } from "zod";
 import { createPixCharge, getPixStatus, type PixCharge } from "@/lib/pix.functions";
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
-const BANK_AMOUNT = 197.00;
+const BANK_AMOUNT = 47.00;
 const BANK_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 
 const searchSchema = z.object({
@@ -286,7 +286,7 @@ function ControleBancarioPage() {
                 Hoje · pagamento único · sem mensalidade
               </div>
               <div>
-                <span className="text-[#128C7E] text-5xl font-extrabold tracking-tight">R$197,00</span>
+                <span className="text-[#128C7E] text-5xl font-extrabold tracking-tight">R$47,00</span>
               </div>
               <div className="text-[11px] text-slate-500">
                 = menos que 1 jantar dele{sex === "F" ? "a" : ""} com a amante
@@ -367,7 +367,7 @@ function ControleBancarioPage() {
             onClick={() => setShowPix(true)}
             className="flex w-full min-h-14 items-center justify-center text-center bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-4px_rgba(217,169,40,0.9)] text-[15px] uppercase tracking-wide"
           >
-            🔓 Quero ver tudo agora · R$ 197
+            🔓 Quero ver tudo agora · R$ 47
           </button>
         )}
 
@@ -379,7 +379,7 @@ function ControleBancarioPage() {
                 Controle Bancário Total
               </div>
               <div>
-                <span className="text-[#128C7E] text-4xl font-extrabold tracking-tight">R$197,00</span>
+                <span className="text-[#128C7E] text-4xl font-extrabold tracking-tight">R$47,00</span>
               </div>
               <div className="text-[11px] text-slate-500">Escaneie o QR ou copie o código PIX</div>
             </div>

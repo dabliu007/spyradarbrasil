@@ -295,7 +295,7 @@ export const Route = createFileRoute("/api/public/umbrella-webhook")({
                   external_id: txId,
                 },
                 custom_data: {
-                  value: finalAmount || 197,
+                  value: finalAmount || 47,
                   currency: "BRL",
                   content_ids: [txId],
                   content_type: "product",

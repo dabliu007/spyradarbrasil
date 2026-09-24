@@ -32,7 +32,7 @@ const WHATSAPP_URL = "https://wa.me/5511999999999";
 
 /** ⚠️ Preço do Kit Completo — confirme/ajuste */
 const PRICE_FROM = "R$ 397,00";
-const PRICE_NOW = "R$ 197,00";
+const PRICE_NOW = "R$ 47,00";
 const PRICE_INSTALLMENT = "12x de R$ 19,90";
 
 function goToCheckout() {

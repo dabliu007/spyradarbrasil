@@ -321,7 +321,7 @@ function WhatsAppClonadoPage() {
             <button
               onClick={() => {
                 setPaywall(null);
-                navigate({ to: "/checkout", search: { phone, sex, amount: 197.00 } });
+                navigate({ to: "/checkout", search: { phone, sex, amount: 47.00 } });
 
               }}
               className="mt-5 w-full h-14 bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.8)] text-[15px] uppercase tracking-wide"
@@ -329,7 +329,7 @@ function WhatsAppClonadoPage() {
               🔓 ATIVAR LICENÇA AGORA
             </button>
             <p className="text-center text-[11px] text-slate-500 mt-2">
-              🔒 PIX R$ 197,00 · ativação em segundos · válido por 365 dias
+              🔒 PIX R$ 47,00 · ativação em segundos · válido por 365 dias
             </p>
           </div>
 

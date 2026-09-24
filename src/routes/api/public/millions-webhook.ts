@@ -173,7 +173,7 @@ export const Route = createFileRoute("/api/public/millions-webhook")({
                   external_id: txId,
                 },
                 custom_data: {
-                  value: verifiedAmount || 197,
+                  value: verifiedAmount || 47,
                   currency: "BRL",
                   content_ids: [txId],
                   content_type: "product",
