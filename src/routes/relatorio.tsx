@@ -26,7 +26,6 @@ const amanteHExtra4 = "/prova-m-4.jpg";
 
 
 import phoneChat from "@/assets/phone-chat.jpg.asset.json";
-import messengerChat from "@/assets/messenger-chat.png.asset.json";
 // Áudios da amante mulher — servidos de /public (blob real), fora do resolver de assets do v0.
 const audioAmante1 = "/audio-amante-1.mp3";
 const audioAmante2 = "/audio-amante-2.mp3";
@@ -161,7 +160,6 @@ function RelatorioPage() {
       if (!cityParam) setCity(sessionStorage.getItem("zr.partner.city") || "");
     }
   }, [ufParam, cityParam]);
-  const regiaoLabel = city ? `${city}${uf ? ` · ${uf}` : ""}` : "sua região";
   const targetName = useTargetName();
   const doAlvo = targetName ? `de ${targetName}` : "do alvo";
   const oAlvo = targetName ?? "o alvo";
@@ -171,6 +169,9 @@ function RelatorioPage() {
   // Se o parceiro investigado é HOMEM (sex=M) → o amante é MULHER.
   // Se o parceiro investigado é MULHER (sex=F) → o amante é HOMEM.
   const amanteIsWoman = sex === "M";
+  // Quem está sendo traído é o oposto do parceiro investigado:
+  // parceiro homem (M) → vítima mulher → "TRAÍDA"; parceiro mulher (F) → "TRAÍDO".
+  const traidoLabel = sex === "M" ? "TRAÍDA" : "TRAÍDO";
   const amanteImgs = amanteIsWoman
     ? [womanFlirt1, womanFlirt2, womanFlirt3]
     : [manBeach1.url, manBeach2.url, manBeach3.url];
@@ -223,8 +224,15 @@ function RelatorioPage() {
 
         {/* ALERTA VERMELHO — soco no estômago */}
         <div className="bg-gradient-to-br from-red-600/25 to-red-900/10 border-2 border-red-500/50 rounded-2xl p-5 shadow-[0_0_40px_-10px_rgba(239,68,68,0.6)]">
+          {/* Manchete de impacto */}
+          <div className="flex items-center gap-2.5 mb-4 pb-4 border-b border-red-500/30">
+            <span className="text-3xl animate-pulse">🚨</span>
+            <h2 className="text-2xl sm:text-3xl font-black uppercase leading-none tracking-tight text-red-400 drop-shadow-[0_0_14px_rgba(239,68,68,0.5)]">
+              Você está sendo {traidoLabel}!
+            </h2>
+          </div>
           <div className="flex items-start gap-3">
-            <span className="text-2xl">🚨</span>
+            <span className="text-2xl">🔍</span>
             <div className="space-y-2">
               <div className="text-[10px] uppercase tracking-[0.2em] text-red-300 font-['Geist_Mono',monospace] font-bold">
                 Resultado da invasão e clonagem
@@ -468,48 +476,6 @@ function RelatorioPage() {
             {amanteIsWoman ? " Ele" : " Ela"} tentou apagar — mas <span className="text-amber-300 font-semibold">nós recuperamos</span>.
           </p>
 
-          {/* Comprovante Motel */}
-          <div className="rounded-2xl border border-red-500/40 bg-gradient-to-br from-zinc-950 to-red-950/20 overflow-hidden shadow-[0_0_30px_rgba(239,68,68,0.15)] mb-3">
-            <div className="flex items-center justify-between px-3 py-2 border-b border-red-500/30 bg-zinc-950/70">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
-                <span className="text-[10px] font-['Geist_Mono',monospace] uppercase tracking-wider text-red-200">
-                  🏨 Comprovante · Motel
-                </span>
-              </div>
-              <span className="text-[9px] text-zinc-500 font-['Geist_Mono',monospace]">02:14 AM</span>
-            </div>
-            <div className="relative p-4 bg-white text-zinc-800">
-              <div className={locked ? "blur-[5px] select-none" : ""}>
-                <div className="text-center border-b border-dashed border-zinc-400 pb-2 mb-2">
-                  <div className="text-[13px] font-black tracking-tight">MOTEL ██████████ LTDA</div>
-                  <div className="text-[9px] text-zinc-500 font-mono">CNPJ: ██.███.███/0001-██</div>
-                  <div className="text-[9px] text-zinc-500 font-mono">Suíte Presidencial · Hidro + Espelhos</div>
-                </div>
-                <div className="text-[10px] font-mono space-y-0.5">
-                  <div className="flex justify-between"><span>Data / Entrada</span><span>██/██/2026 · 23:47</span></div>
-                  <div className="flex justify-between"><span>Data / Saída</span><span>██/██/2026 · 05:12</span></div>
-                  <div className="flex justify-between"><span>Suíte</span><span>Nº ██ · Pacote 6h</span></div>
-                  <div className="flex justify-between"><span>Consumo bar</span><span>R$ 187,00</span></div>
-                  <div className="flex justify-between"><span>Adicional casal</span><span>R$ 120,00</span></div>
-                  <div className="flex justify-between font-black text-red-700 text-[11px] pt-1 border-t border-dashed border-zinc-400 mt-1">
-                    <span>TOTAL PAGO</span><span>R$ 487,00</span>
-                  </div>
-                  <div className="flex justify-between pt-1"><span>Forma</span><span>PIX · ████ ████ ████</span></div>
-                  <div className="flex justify-between"><span>Titular</span><span>█████ ███████ ██████</span></div>
-                </div>
-              </div>
-              {locked && (
-                <span className="absolute top-2 right-2 text-[9px] font-bold text-red-700 bg-red-100 border border-red-500/60 rounded px-1.5 py-0.5 font-['Geist_Mono',monospace] rotate-[-8deg] shadow">
-                  🔒 CENSURADO
-                </span>
-              )}
-            </div>
-            <div className="px-3 py-2 bg-zinc-950/80 border-t border-red-500/20 text-[11px] text-red-200">
-              ⚠️ Companhia registrada no check-in: <span className="italic">{locked ? "██████████" : "Não era você"}</span>
-            </div>
-          </div>
-
           {/* Extrato bancário */}
           <div className="rounded-2xl border border-amber-500/40 bg-gradient-to-br from-zinc-950 to-amber-950/10 overflow-hidden shadow-[0_0_30px_rgba(245,158,11,0.12)]">
             <div className="flex items-center justify-between px-3 py-2 border-b border-amber-500/30 bg-zinc-950/70">
@@ -570,25 +536,6 @@ function RelatorioPage() {
             Perfis ocultos, matches recentes e prints de conversas que {amanteIsWoman ? "ele" : "ela"} <span className="text-red-300 font-semibold">tentou esconder de você</span>.
           </p>
 
-
-          {/* FACEBOOK MESSENGER */}
-          <div className="bg-gradient-to-br from-blue-950/30 to-zinc-950 border border-blue-500/30 rounded-2xl p-3 mb-3">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-blue-300 font-bold font-['Geist_Mono',monospace]">💬 Facebook Messenger</span>
-              <span className="text-[9px] bg-blue-500/20 text-blue-200 border border-blue-500/30 rounded px-2 py-0.5 font-bold">3 conversas secretas</span>
-            </div>
-            <div className="rounded-xl overflow-hidden border border-blue-500/20 relative aspect-[4/3] bg-zinc-950">
-              <img src={messengerChat.url} alt="" className={`w-full h-full object-contain ${locked ? "blur-[12px] scale-110 select-none" : ""}`} draggable={false} />
-              {locked && (
-                <>
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
-                  <div className="absolute bottom-2 left-2 right-2 text-center">
-                    <p className="text-[11px] text-blue-200 font-bold">🔒 Print da conversa bloqueado</p>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
 
           {/* WHATSAPP - print de áudio */}
           <div className="bg-gradient-to-br from-yellow-950/30 to-zinc-950 border border-yellow-500/30 rounded-2xl p-3">
@@ -661,29 +608,6 @@ function RelatorioPage() {
         </Section>
 
 
-        {/* Padrão de comportamento */}
-        <Section title="🧠 Padrão de comportamento detectado">
-          <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-4 space-y-2 text-[13px] text-zinc-300 leading-relaxed">
-            <p>
-              🔴 <span className="font-bold text-red-300">Picos de atividade</span> no WhatsApp entre <span className="text-red-300 font-bold">23h e 03h</span> — exatamente quando {oAlvo} finge estar dormindo.
-            </p>
-            <p>
-              🔴 <span className="font-bold text-red-300">Conversas deletadas em massa</span> sempre nas manhãs de segunda, quarta e sexta.
-            </p>
-            <p>
-              🔴 <span className="font-bold text-red-300">Modo "arquivar conversa"</span> ativado em pelo menos <span className="text-red-300 font-bold">3 contatos</span> — clássico truque de quem esconde.
-            </p>
-            <p>
-              🔴 <span className="font-bold text-red-300">Localização desligada</span> nos horários em que diz estar "no trabalho" ou "com amigos(as)".
-            </p>
-          </div>
-          {locked && (
-            <p className="text-center text-[11px] text-red-300/80 font-bold pt-2 uppercase tracking-wider">
-              🔒 4 padrões críticos identificados — bloqueados
-            </p>
-          )}
-        </Section>
-
         {/* Inteligência detalhada — somente alvo masculino */}
         {amanteIsWoman && (
           <Section title="🕵️ Inteligência comportamental · dossiê íntimo">
@@ -698,14 +622,11 @@ function RelatorioPage() {
                 🍝 <span className="font-bold text-red-300">Almoçou com ela recentemente</span> e faz <b>visitas esporádicas</b>. O último encontro registrado foi <b>na casa dela</b> — permaneceu por 2h47min.
               </p>
               <p>
-                👀 <span className="font-bold text-amber-300">ALERTA:</span> ela pode ser <span className="font-bold text-red-300">alguém conhecido seu</span> — os dados de convivência indicam que ela está <b>dentro do círculo social da sua fam��lia</b>.
+                👀 <span className="font-bold text-amber-300">ALERTA:</span> ela pode ser <span className="font-bold text-red-300">alguém conhecido seu</span> — os dados de convivência indicam que ela está <b>dentro do círculo social da sua fam���lia</b>.
               </p>
               <p>
                 💸 <span className="font-bold text-red-300">PIX de presente recorrentes</span> enviados pra ela. Recentemente ele comprou uma <b>lingerie de presente</b> (registro em cartão · loja de moda íntima).
               </p>
-                <p>
-                  🚫 <span className="font-bold text-red-300">Relações sexuais sem preservativo</span> — mencionado <b>múltiplas vezes</b> nas conversas. Ela relatou ter tomado a <span className="font-bold text-amber-300">pílula do dia seguinte pelo menos 4 vezes</span> nos últimos meses.
-                </p>
               <p>
                 😢 <span className="font-bold text-red-300">Ela tem medo dele largar ela e ficar de vez com você</span> — por isso vive <b>fazendo drama</b> e <b>ameaçando expor o relacionamento</b> pra forçar uma decisão.
               </p>
@@ -763,60 +684,6 @@ function RelatorioPage() {
           {locked && (
             <p className="text-center text-[11px] text-red-300/80 font-bold pt-2 uppercase tracking-wider">
               🔒 4 endereços suspeitos · nomes e horários bloqueados
-            </p>
-          )}
-        </Section>
-
-        {/* Deslocamentos suspeitos em cidades vizinhas */}
-        <Section title="🛰️ Deslocamentos fora da cidade">
-          <p className="text-[12px] text-zinc-400 -mt-1 mb-2">
-            Triangulação de antenas 4G/5G detectou que {oAlvo} esteve pelo menos{" "}
-            <span className="text-red-300 font-bold">4 vezes em outras cidades da região de {regiaoLabel}</span>{" "}
-            nos últimos 30 dias — sem te avisar.
-          </p>
-          <div className={`bg-zinc-950 border border-red-500/30 rounded-xl p-4 ${locked ? "blur-[6px] select-none" : ""}`}>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-2">
-                <span>🏨</span>
-                <div>
-                  <div className="font-semibold text-zinc-100">Motel ███████ Prime</div>
-                  <div className="text-[11px] text-zinc-500 font-['Geist_Mono',monospace]">
-                    Cidade vizinha · a 27km de {city || "sua cidade"} · pernoite
-                  </div>
-                </div>
-              </li>
-              <li className="flex items-start gap-2">
-                <span>🏨</span>
-                <div>
-                  <div className="font-semibold text-zinc-100">Motel ██████ Suítes</div>
-                  <div className="text-[11px] text-zinc-500 font-['Geist_Mono',monospace]">
-                    Rodovia de saída · 2 entradas registradas · 3h42min e 4h11min
-                  </div>
-                </div>
-              </li>
-              <li className="flex items-start gap-2">
-                <span>🎶</span>
-                <div>
-                  <div className="font-semibold text-zinc-100">Casa noturna ███████ Club</div>
-                  <div className="text-[11px] text-zinc-500 font-['Geist_Mono',monospace]">
-                    Sábado · 23:48 até 04:17 — disse estar em casa
-                  </div>
-                </div>
-              </li>
-              <li className="flex items-start gap-2">
-                <span>💐</span>
-                <div>
-                  <div className="font-semibold text-zinc-100">Floricultura ███████ Flores</div>
-                  <div className="text-[11px] text-zinc-500 font-['Geist_Mono',monospace]">
-                    Compra de buquê · entrega em endereço que não é o seu
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          {locked && (
-            <p className="text-center text-[11px] text-red-300/80 font-bold pt-2 uppercase tracking-wider">
-              🔒 2 motéis · 1 casa noturna · 1 floricultura — endereços bloqueados
             </p>
           )}
         </Section>
