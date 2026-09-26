@@ -359,8 +359,8 @@ function InputStep({
 
         {/* HEADLINE */}
         <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-[1.1]">
-          Descubra HOJE se ele está{" "}
-          <span className="text-yellow-400">te traindo pelo WhatsApp</span>
+          Descubra hoje se você está sendo{" "}
+          <span className="text-yellow-400">corno(a)</span>.
         </h1>
       </div>
 
