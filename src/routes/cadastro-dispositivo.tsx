@@ -78,9 +78,10 @@ function CadastroDispositivoPage() {
   const [pinError, setPinError] = useState<string | null>(null);
   const [showLgpd, setShowLgpd] = useState(false);
 
+  // 30s installation
   useEffect(() => {
     if (phase !== "installing") return;
-    const totalMs = 10000;
+    const totalMs = 30000;
     const tickMs = 200;
     const inc = (tickMs / totalMs) * 100;
     const iv = window.setInterval(() => {
@@ -122,10 +123,7 @@ function CadastroDispositivoPage() {
       sessionStorage.setItem("zr.access.pin", code);
       sessionStorage.setItem("zr.access.phone", phone || "");
     } catch {}
-    // Showing the "access released" instructions here made leads believe the
-    // purchase was finished and leave before the upsells, so go straight to
-    // the LGPD gate that leads into /sigilo.
-    setShowLgpd(true);
+    setPhase("instructions");
   };
 
   // After showing instructions, wait ~10s then check LGPD
