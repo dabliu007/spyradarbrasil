@@ -43,6 +43,33 @@ const DOWNSELL_CHAIN = [57, 47, 37, 27];
 const formatBRL = (v: number) =>
   `R$ ${v.toFixed(2).replace(".", ",")}`;
 
+const TESTIMONIALS = [
+  {
+    name: "Mariana S.",
+    location: "São Paulo, SP",
+    time: "há 3 min",
+    text: "Eu tinha certeza que ele mentia. Em 2 minutos depois do pagamento eu já estava vendo TODAS as conversas apagadas. Doeu, mas hoje eu sei a verdade.",
+  },
+  {
+    name: "Rafael M.",
+    location: "Rio de Janeiro, RJ",
+    time: "há 11 min",
+    text: "Melhor R$ 47 que já gastei. Descobri o que estava acontecendo pelas minhas costas sem ela nunca desconfiar de nada. Vale cada centavo.",
+  },
+  {
+    name: "Juliana P.",
+    location: "Belo Horizonte, MG",
+    time: "há 24 min",
+    text: "Fiquei com medo de ser golpe, mas liberou na hora certinho. Consegui ver fotos, áudios e até a localização em tempo real. Recomendo demais.",
+  },
+  {
+    name: "Carlos E.",
+    location: "Curitiba, PR",
+    time: "há 38 min",
+    text: "Passei meses na dúvida, perdendo o sono. Em uma tarde tive todas as respostas. A paz de saber a verdade não tem preço.",
+  },
+];
+
 function CheckoutPage() {
   const { phone, sex, amount } = Route.useSearch();
   const navigate = useNavigate();
@@ -58,6 +85,30 @@ function CheckoutPage() {
   const [downsellOffer, setDownsellOffer] = useState<number | null>(null);
   const downsellStepRef = useRef(0);
   const displayAmount = currentAmount;
+
+  // Countdown de urgência (10 min) para reservar o acesso liberado
+  const [secondsLeft, setSecondsLeft] = useState(9 * 60 + 43);
+  useEffect(() => {
+    const t = setInterval(() => {
+      setSecondsLeft((s) => (s <= 1 ? 9 * 60 + 43 : s - 1));
+    }, 1000);
+    return () => clearInterval(t);
+  }, []);
+  const mm = String(Math.floor(secondsLeft / 60)).padStart(2, "0");
+  const ss = String(secondsLeft % 60).padStart(2, "0");
+
+  // Contador "ao vivo" de pessoas visualizando/pagando agora
+  const [liveViewers, setLiveViewers] = useState(37);
+  useEffect(() => {
+    const t = setInterval(() => {
+      setLiveViewers((v) => {
+        const delta = Math.floor(Math.random() * 5) - 2;
+        const next = v + delta;
+        return Math.min(64, Math.max(23, next));
+      });
+    }, 3200);
+    return () => clearInterval(t);
+  }, []);
 
   useEffect(() => {
     // Push a sentinel state so the first back press fires popstate here
@@ -175,8 +226,111 @@ function CheckoutPage() {
           </span>
         </div>
 
+        {/* Barra de urgência — reserva de acesso */}
+        <div className="flex items-center justify-between gap-2 bg-red-50 border border-red-200 rounded-2xl px-4 py-2.5">
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600" />
+            </span>
+            <span className="text-[11px] font-bold text-red-700 uppercase tracking-wide">
+              Acesso reservado por
+            </span>
+          </div>
+          <span className="text-base font-extrabold text-red-600 font-['Geist_Mono',monospace] tabular-nums">
+            {mm}:{ss}
+          </span>
+        </div>
 
-        {/* Resumo do pedido — Licença Spy Radar */}
+        {/* Cartão de pagamento — primeira dobra no mobile */}
+        <div className="bg-gradient-to-br from-white/90 to-slate-50/40 backdrop-blur-xl border border-yellow-200 rounded-3xl p-6 space-y-4 shadow-[0_20px_60px_rgba(217,169,40,0.15)]">
+          <div className="text-center space-y-1">
+            <h2 className="text-base font-extrabold text-slate-900 leading-tight">
+              Libere o acesso total ao celular {doAlvo}
+            </h2>
+            <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace] pt-1">
+              Total a pagar hoje
+            </div>
+            <div>
+              <span className="text-slate-400 text-lg line-through mr-2">R$197</span>
+              <span className="text-[#128C7E] text-5xl font-extrabold tracking-tight">R${Math.floor(displayAmount)}</span>
+              <span className="text-[#128C7E] text-xl font-bold">,{String(Math.round((displayAmount - Math.floor(displayAmount)) * 100)).padStart(2, "0")}</span>
+            </div>
+            <div className="text-[12px] text-slate-500">Pagamento único · Liberação imediata após confirmação</div>
+          </div>
+
+          {error && (
+            <div className="bg-red-50 border border-red-300 rounded-xl p-3 text-red-700 text-sm text-center">
+              {error}
+            </div>
+          )}
+
+          {!error && (
+            <form onSubmit={handleGenerate} className="space-y-3">
+              <button
+                type="submit"
+                disabled={generating}
+                className="w-full h-14 text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wide text-[15px] bg-[#25D366] hover:bg-[#1eb959] disabled:opacity-60 shadow-[0_0_40px_-8px_rgba(37,211,102,0.9)] animate-pulse"
+              >
+                {generating ? "Gerando PIX…" : `🔓 Gerar PIX de ${formatBRL(displayAmount)}`}
+              </button>
+
+              <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#25D366]" />
+                </span>
+                <span className="font-semibold text-slate-600 tabular-nums">{liveViewers} pessoas</span>
+                gerando o acesso agora
+              </div>
+
+              <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 text-[12px] text-slate-700 leading-relaxed">
+                <div className="font-bold text-[#128C7E] mb-1">🔐 Sigilo absoluto</div>
+                Na cobrança PIX é gerado um <span className="font-semibold text-slate-900">nome e CPF aleatórios</span>, então nenhum dado seu aparece no pagamento.
+              </div>
+
+              <div className="grid grid-cols-3 gap-2 pt-1">
+                <Badge>🛡️ 100% anônimo</Badge>
+                <Badge>⚡ Na hora</Badge>
+                <Badge>🕵️ Sigilo total</Badge>
+              </div>
+            </form>
+          )}
+        </div>
+
+        {/* Prova social — avaliação */}
+        <div className="flex items-center justify-center gap-3 text-center">
+          <div className="text-amber-500 text-lg leading-none">⭐⭐⭐⭐⭐</div>
+          <div className="text-[12px] text-slate-600">
+            <span className="font-extrabold text-slate-900">4,9/5</span> · mais de{" "}
+            <span className="font-extrabold text-slate-900">18.400</span> acessos liberados
+          </div>
+        </div>
+
+        {/* Apelo emocional */}
+        <div className="bg-white border border-yellow-200 rounded-3xl p-5 space-y-2 shadow-[0_12px_40px_rgba(217,169,40,0.10)]">
+          <h3 className="text-sm font-extrabold text-slate-900 leading-snug">
+            Pare de perder o sono com a dúvida.
+          </h3>
+          <p className="text-[13px] text-slate-700 leading-relaxed">
+            Cada dia sem saber a verdade é mais uma noite acordado, imaginando o pior. Você merece{" "}
+            <span className="font-bold text-slate-900">enxergar tudo com os próprios olhos</span> — mensagens
+            apagadas, fotos escondidas e a localização em tempo real. Em minutos a angústia vira{" "}
+            <span className="font-bold text-[#128C7E]">certeza</span>, e ninguém nunca vai saber que foi você.
+          </p>
+        </div>
+
+        {/* Depoimentos */}
+        <div className="space-y-3">
+          <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace] text-center">
+            Quem já descobriu a verdade
+          </div>
+          {TESTIMONIALS.map((t) => (
+            <Testimonial key={t.name} {...t} />
+          ))}
+        </div>
+
+        {/* Resumo do pedido — o que você recebe */}
         <div className="bg-white border border-yellow-200 rounded-3xl p-5 space-y-4 shadow-[0_12px_40px_rgba(217,169,40,0.10)]">
           <div className="flex items-center justify-between">
             <div>
@@ -204,55 +358,21 @@ function CheckoutPage() {
             ))}
           </ul>
 
-          <div className="flex items-start gap-2 bg-[#25D366]/[0.07] border border-[#25D366]/25 rounded-2xl p-3">
-            <span className="text-[#128C7E] text-base leading-none mt-0.5">📱</span>
-            <p className="text-[12px] text-slate-700 leading-relaxed">
-              Libera o <span className="font-bold text-slate-900">acesso total ao celular clonado {doAlvo}</span> — conversas, mídias, localização e apps, tudo pelo seu próprio aparelho.
-            </p>
-          </div>
-
           <div className="flex items-center justify-between border-t border-slate-100 pt-3">
             <span className="text-[13px] font-semibold text-slate-600">Total</span>
             <span className="text-lg font-extrabold text-[#128C7E]">{formatBRL(displayAmount)}</span>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-white/90 to-slate-50/40 backdrop-blur-xl border border-yellow-200 rounded-3xl p-6 space-y-4 shadow-[0_20px_60px_rgba(217,169,40,0.15)]">
-          <div className="text-center space-y-1">
-            <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
-              Total a pagar
-            </div>
-            <div>
-              <span className="text-[#128C7E] text-5xl font-extrabold tracking-tight">R${Math.floor(displayAmount)}</span>
-              <span className="text-[#128C7E] text-xl font-bold">,{String(Math.round((displayAmount - Math.floor(displayAmount)) * 100)).padStart(2, "0")}</span>
-            </div>
-            <div className="text-[12px] text-slate-500">Liberação imediata após confirmação</div>
+        {/* Garantia */}
+        <div className="flex items-start gap-3 bg-[#25D366]/[0.07] border border-[#25D366]/25 rounded-2xl p-4">
+          <span className="text-2xl leading-none">🛡️</span>
+          <div>
+            <div className="text-sm font-extrabold text-[#128C7E]">Garantia de liberação</div>
+            <p className="text-[12px] text-slate-700 leading-relaxed">
+              Se o acesso não for liberado após a confirmação do PIX, seu dinheiro volta integralmente. Risco zero para você.
+            </p>
           </div>
-
-          {error && (
-            <div className="bg-red-50 border border-red-300 rounded-xl p-3 text-red-700 text-sm text-center">
-              {error}
-            </div>
-          )}
-
-          {!error && (
-            <form onSubmit={handleGenerate} className="space-y-3 py-2">
-              <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 text-[12px] text-slate-700 leading-relaxed">
-                <div className="font-bold text-[#128C7E] mb-1">🔐 Sigilo absoluto</div>
-                Na cobrança PIX é gerado um <span className="font-semibold text-slate-900">nome e CPF aleatórios</span>, então nenhum dado seu aparece no pagamento.
-              </div>
-
-              <button
-                type="submit"
-                disabled={generating}
-                className="w-full h-12 text-white font-bold rounded-xl transition-all active:scale-[0.98] uppercase tracking-wide text-sm bg-[#25D366] hover:bg-[#1eb959] disabled:opacity-60"
-              >
-                {generating ? "Gerando PIX…" : `Gerar PIX de ${formatBRL(displayAmount)}`}
-              </button>
-            </form>
-          )}
-
-
         </div>
 
         <ul className="text-[12px] text-slate-500 space-y-1.5">
@@ -261,12 +381,6 @@ function CheckoutPage() {
           <li>3. Confirme o pagamento de {formatBRL(displayAmount)}.</li>
           <li>4. A liberação é automática — não precisa enviar comprovante.</li>
         </ul>
-
-        <div className="grid grid-cols-3 gap-2">
-          <Badge>🛡️ 100% anônimo</Badge>
-          <Badge>⚡ Liberação na hora</Badge>
-          <Badge>🕵️ Sigilo total</Badge>
-        </div>
 
         {/* Aviso pós-pagamento */}
         <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-4 space-y-2">
