@@ -22,7 +22,7 @@ export const Route = createFileRoute("/checkout")({
       {
         name: "description",
         content:
-          "Etapa de pagamento PIX do SpyRadar Brasil. Liberação automática do relatório após a confirmação, com sigilo total e sem envio de comprovante.",
+          "Etapa de pagamento PIX do SpyRadar Brasil. Liberação automática do relatório após a confirmação, sem envio de comprovante.",
       },
       { property: "og:title", content: "Pagamento PIX — SpyRadar Brasil" },
       {
@@ -74,7 +74,7 @@ const BENEFITS = [
   "Acesso total ao celular clonado por 365 dias",
   "Mensagens, fotos e áudios — inclusive os apagados",
   "Localização em tempo real e apps monitorados",
-  "100% anônimo — o alvo nunca é notificado",
+  "O alvo nunca é notificado do monitoramento",
 ];
 
 function CheckoutPage() {
@@ -310,22 +310,8 @@ function CheckoutPage() {
                 liberando o acesso agora
               </div>
 
-              <div className="flex items-start gap-2 bg-slate-50 border border-slate-200 rounded-xl p-3">
-                <ShieldIcon className="w-4 h-4 text-[#128C7E] mt-0.5 shrink-0" />
-                <p className="text-[12px] text-slate-600 leading-relaxed">
-                  Na cobrança é gerado um{" "}
-                  <span className="font-semibold text-slate-800">nome e CPF aleatórios</span> — nenhum
-                  dado seu aparece no pagamento.
-                </p>
-              </div>
             </form>
           )}
-
-          <div className="grid grid-cols-3 gap-2">
-            <Badge>100% anônimo</Badge>
-            <Badge>Liberação imediata</Badge>
-            <Badge>Sigilo total</Badge>
-          </div>
         </div>
 
         {/* Prova social — avaliação */}
@@ -397,6 +383,13 @@ function CheckoutPage() {
           </div>
         </div>
 
+        {/* Compra protegida */}
+        <img
+          src="/images/compra-protegida.png"
+          alt="Compra protegida — transação 100% segura, satisfação garantida em até 30 dias, ambiente seguro, pagamento protegido, dados criptografados e privacidade garantida. Aceitamos Visa, Mastercard, Elo, American Express, Pix e Boleto."
+          className="w-full h-auto rounded-2xl border border-slate-200"
+        />
+
         {/* Garantia */}
         <div className="flex items-start gap-3 bg-[#25D366]/[0.06] border border-[#25D366]/20 rounded-2xl p-4">
           <ShieldIcon className="w-6 h-6 text-[#128C7E] shrink-0" />
@@ -465,7 +458,7 @@ function CheckoutPage() {
                   {formatBRL(downsellOffer)}
                 </div>
                 <div className="text-[11px] text-slate-500 mt-1">
-                  pagamento único · liberação imediata
+                  pagamento único
                 </div>
               </div>
             </div>
@@ -485,14 +478,6 @@ function CheckoutPage() {
           </div>
         </div>
       )}
-    </div>
-  );
-}
-
-function Badge({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="bg-slate-50 border border-slate-200 rounded-xl py-2 px-1 text-center text-[10px] leading-tight text-slate-600 font-semibold">
-      {children}
     </div>
   );
 }
