@@ -65,7 +65,7 @@ function PixPage() {
         if (cancelled) return;
         if (s.paid) {
           paidRef.current = true;
-          navigate({ to: "/cadastro-dispositivo", search: { phone, sex } });
+          navigate({ to: "/sigilo", search: { phone, sex } });
           return;
         }
       } catch {}
@@ -127,7 +127,7 @@ function PixPage() {
             { eventId: `purchase-${id}` }
           );
           try { sessionStorage.removeItem(STORAGE_PREFIX + id); } catch {}
-          navigate({ to: "/cadastro-dispositivo", search: { phone, sex } });
+          navigate({ to: "/sigilo", search: { phone, sex } });
           return true;
         }
         setStatusLabel("Aguardando pagamento…");
