@@ -698,7 +698,7 @@ function RelatorioPage() {
                 🍝 <span className="font-bold text-red-300">Almoçou com ela recentemente</span> e faz <b>visitas esporádicas</b>. O último encontro registrado foi <b>na casa dela</b> — permaneceu por 2h47min.
               </p>
               <p>
-                👀 <span className="font-bold text-amber-300">ALERTA:</span> ela pode ser <span className="font-bold text-red-300">alguém conhecido seu</span> — os dados de convivência indicam que ela está <b>dentro do círculo social da sua fam��lia</b>.
+                👀 <span className="font-bold text-amber-300">ALERTA:</span> ela pode ser <span className="font-bold text-red-300">alguém conhecido seu</span> — os dados de convivência indicam que ela está <b>dentro do círculo social da sua fam���lia</b>.
               </p>
               <p>
                 💸 <span className="font-bold text-red-300">PIX de presente recorrentes</span> enviados pra ela. Recentemente ele comprou uma <b>lingerie de presente</b> (registro em cartão · loja de moda íntima).
@@ -894,7 +894,7 @@ function RelatorioPage() {
 
             <button
               type="button"
-              onClick={() => setShowLicenseModal(true)}
+              onClick={() => navigate({ to: "/whatsapp-clonado", search: { phone, sex } })}
               className="mt-5 flex w-full min-h-14 items-center justify-center text-center bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.8)] uppercase tracking-wide px-4 py-3 text-[14px] leading-tight sm:text-[16px]"
             >
               📱 Acessar Celular Clonado
@@ -965,14 +965,14 @@ function RelatorioPage() {
             <button
               onClick={() => {
                 setShowLicenseModal(false);
-                navigate({ to: "/checkout", search: { phone, sex } });
+                navigate({ to: "/checkout", search: { phone, sex, amount: 97 } });
               }}
               className="mt-5 w-full h-14 bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.8)] text-[15px] uppercase tracking-wide"
             >
               🔓 ATIVAR LICENÇA SPY RADAR
             </button>
             <p className="text-center text-[11px] text-zinc-500 mt-2">
-              🔒 PIX R$ 47,00 · ativação em segundos · válido por 365 dias
+              🔒 PIX R$ 97,00 · ativação em segundos · válido por 365 dias
             </p>
           </div>
         </div>
