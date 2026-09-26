@@ -501,20 +501,90 @@ function InputStep({
         </p>
       </div>
 
-      {/* PROVA SOCIAL — destaque na mídia */}
-      <div className="bg-zinc-900/40 backdrop-blur border border-white/5 rounded-2xl px-4 py-3">
-        <p className="text-[9px] text-zinc-500 font-['Geist_Mono',monospace] uppercase tracking-[0.2em] text-center mb-2">
-          Destaque em
-        </p>
-        <div className="flex items-center justify-around gap-3 opacity-80">
-          <span className="text-zinc-300 text-xs sm:text-sm font-serif italic font-bold">G1</span>
-          <span className="text-zinc-300 text-[10px] sm:text-xs font-bold tracking-tight">UOL</span>
-          <span className="text-zinc-300 text-[10px] sm:text-xs font-bold tracking-tight">R7</span>
-          <span className="text-zinc-300 text-[10px] sm:text-xs font-bold tracking-tight">Folha</span>
-          <span className="text-zinc-300 text-[10px] sm:text-xs font-bold tracking-tight">Band</span>
-        </div>
-      </div>
+      {/* PROVA SOCIAL — destaque na mídia (matérias reais) */}
+      <PressSection />
     </div>
+  );
+}
+
+/* -------------------- IMPRENSA / NA MÍDIA -------------------- */
+const PRESS_ITEMS = [
+  {
+    outlet: "g1",
+    img: "/images/imprensa-g1.png",
+    headline: "Spy Radar Brasil ganha destaque por reunir informações públicas em um único relatório",
+    section: "Tecnologia",
+  },
+  {
+    outlet: "UOL",
+    img: "/images/imprensa-uol.png",
+    headline: "Spy Radar Brasil se destaca por reunir informações públicas em um único relatório",
+    section: "Tecnologia",
+  },
+  {
+    outlet: "R7",
+    img: "/images/imprensa-r7.png",
+    headline: "Spy Radar Brasil ganha destaque por facilitar o acesso a informações públicas",
+    section: "Tecnologia",
+  },
+];
+
+function PressSection() {
+  return (
+    <section className="space-y-4">
+      <div className="text-center space-y-2">
+        <div className="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold px-3 py-1.5 rounded-full font-['Geist_Mono',monospace] uppercase tracking-[0.18em]">
+          <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
+          Na mídia
+        </div>
+        <h2 className="text-xl font-extrabold tracking-tight text-white leading-tight">
+          Você já viu a <span className="text-yellow-400">Spy Radar</span> por aí
+        </h2>
+        <p className="text-[12.5px] text-zinc-400 leading-relaxed max-w-sm mx-auto">
+          Grandes portais de notícias já destacaram a plataforma pela forma prática de reunir informações públicas.
+        </p>
+      </div>
+
+      <div className="space-y-3">
+        {PRESS_ITEMS.map((item) => (
+          <figure
+            key={item.outlet}
+            className="group bg-zinc-900/50 backdrop-blur border border-white/10 rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.4)]"
+          >
+            <div className="relative overflow-hidden">
+              <img
+                src={item.img || "/placeholder.svg"}
+                alt={`Matéria do portal ${item.outlet}: ${item.headline}`}
+                loading="lazy"
+                className="w-full h-auto block"
+              />
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+            </div>
+            <figcaption className="flex items-center justify-between gap-3 px-4 py-3 border-t border-white/5">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="shrink-0 inline-flex items-center gap-1 text-yellow-400">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 20h9M3 20h.01M4 4h16v10H4z" />
+                  </svg>
+                </span>
+                <p className="text-[11px] text-zinc-400 truncate">
+                  <span className="text-zinc-200 font-bold">{item.outlet}</span>
+                  <span className="text-zinc-600"> · {item.section}</span>
+                </p>
+              </div>
+              <span className="shrink-0 inline-flex items-center gap-1 text-[9px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded-full uppercase tracking-wide font-['Geist_Mono',monospace]">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                Publicado
+              </span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <p className="text-center text-[10px] text-zinc-600 leading-relaxed px-4">
+        Imagens ilustrativas de divulgação. As reportagens abordam o uso de plataformas de consulta de informações públicas.
+      </p>
+    </section>
   );
 }
 
