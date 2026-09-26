@@ -471,33 +471,19 @@ function InputStep({
         </div>
       </div>
 
-      {/* DEPOIMENTOS textuais */}
+      {/* DEPOIMENTOS reais de clientes (imagem) */}
       <div className="space-y-3">
         <p className="text-center text-[10px] text-zinc-500 font-['Geist_Mono',monospace] uppercase tracking-[0.2em]">
           Quem usou, descobriu
         </p>
-        {[
-          { name: "Camila R.", city: "São Paulo · SP", text: "Desconfiei por meses. Em 4 minutos vi as conversas dele com a outra. Salvou minha vida.", initial: "C", color: "from-pink-400 to-rose-600" },
-          { name: "Juliana M.", city: "Rio de Janeiro · RJ", text: "Ele jurava de pés juntos. Cloné o WhatsApp e achei áudios safados com a colega de trabalho.", initial: "J", color: "from-violet-400 to-indigo-600" },
-          { name: "Patrícia L.", city: "Belo Horizonte · MG", text: "Fotos no arquivado, conversas apagadas, tudo veio à tona. Não fiquei mais no escuro.", initial: "P", color: "from-amber-400 to-orange-600" },
-        ].map((t) => (
-          <div key={t.name} className="bg-zinc-900/40 backdrop-blur border border-white/5 rounded-2xl p-4 flex gap-3">
-            <div className={`w-10 h-10 shrink-0 rounded-full bg-gradient-to-br ${t.color} flex items-center justify-center text-white font-bold text-sm`}>
-              {t.initial}
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2">
-                <p className="text-sm font-semibold text-white truncate">{t.name}</p>
-                <span className="text-[9px] text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 px-1.5 py-0.5 rounded font-bold uppercase">Verificado</span>
-              </div>
-              <p className="text-[10px] text-zinc-500 mb-1">{t.city}</p>
-              <div className="flex items-center gap-0.5 text-amber-400 text-[10px] mb-1">
-                {"★★★★★".split("").map((s, i) => <span key={i}>{s}</span>)}
-              </div>
-              <p className="text-xs text-zinc-300 leading-relaxed italic">"{t.text}"</p>
-            </div>
-          </div>
-        ))}
+        <div className="overflow-hidden rounded-2xl border border-yellow-500/20 shadow-[0_0_40px_-12px_rgba(234,179,8,0.35)]">
+          <img
+            src="/images/depoimentos-whatsapp.png"
+            alt="Depoimentos reais de clientes da Spy Radar Brasil em conversas de WhatsApp, com avaliações de 5 estrelas e selo de cliente verificado"
+            className="w-full h-auto block"
+            loading="lazy"
+          />
+        </div>
       </div>
 
       {/* GARANTIA / URGÊNCIA */}
