@@ -1182,30 +1182,7 @@ function InvestigatingStep({
 
         {/* SUBHEADLINE */}
         <p className="text-sm text-zinc-300 leading-relaxed max-w-md mx-auto px-2">
-          Assista ao vídeo enquanto a clonagem é finalizada.{" "}
-          <span className="text-white font-semibold">Conversas apagadas, fotos no privado e áudios secretos</span> serão liberados na próxima tela.
-        </p>
-
-        {/* PROVA SOCIAL — barra */}
-        <div className="flex items-center justify-center gap-3 pt-1">
-          <div className="flex -space-x-1.5">
-            <div className="w-5 h-5 rounded-full bg-gradient-to-br from-pink-400 to-rose-600 border border-zinc-900" />
-            <div className="w-5 h-5 rounded-full bg-gradient-to-br from-amber-400 to-orange-600 border border-zinc-900" />
-            <div className="w-5 h-5 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 border border-zinc-900" />
-            <div className="w-5 h-5 rounded-full bg-gradient-to-br from-violet-400 to-indigo-600 border border-zinc-900" />
-          </div>
-          <p className="text-[11px] text-zinc-400 leading-tight">
-            <span className="text-amber-400">★★★★★</span>{" "}
-            <span className="text-yellow-400 font-bold">+38.412</span> mulheres descobriram a verdade
-          </p>
-        </div>
-      </div>
-
-      {/* NOTIFICAÇÃO DE PROVA SOCIAL EM TEMPO REAL */}
-      <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-2xl px-3 py-2.5 flex items-center gap-2.5">
-        <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse shrink-0" />
-        <p className="text-[11px] text-zinc-300 leading-tight flex-1 min-w-0">
-          <span className="text-yellow-400 font-bold">Mariana, RJ</span> acabou de descobrir 47 mensagens apagadas há 2 min
+          Assista ao vídeo enquanto a clonagem é finalizada.
         </p>
       </div>
 
