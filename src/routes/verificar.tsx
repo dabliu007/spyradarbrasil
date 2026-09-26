@@ -438,6 +438,16 @@ function InputStep({
         </div>
       </div>
 
+      {/* MATÉRIA NA TV — Brasil Agora */}
+      <div className="rounded-2xl overflow-hidden border border-yellow-500/20 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+        <img
+          src="/images/tv-brasil-agora.png"
+          alt="Reportagem de TV sobre a Spy Radar Brasil, responsável por descobrir mais de 2.831 traições em 2026"
+          className="w-full h-auto block"
+          loading="lazy"
+        />
+      </div>
+
       {/* PROVA SOCIAL — ratings + ativos */}
       <div className="bg-zinc-900/40 backdrop-blur border border-white/5 rounded-2xl px-4 py-3 flex items-center justify-between gap-3">
         <div className="flex -space-x-2">
