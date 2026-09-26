@@ -314,15 +314,6 @@ function CheckoutPage() {
           )}
         </div>
 
-        {/* Prova social — avaliação */}
-        <div className="flex items-center justify-center gap-2 text-center">
-          <Stars className="text-amber-400" />
-          <div className="text-[12px] text-slate-600">
-            <span className="font-extrabold text-slate-900">4,9/5</span> · mais de{" "}
-            <span className="font-extrabold text-slate-900">18.400</span> acessos liberados
-          </div>
-        </div>
-
         {/* Apelo emocional */}
         <div className="bg-white border border-slate-200 rounded-3xl p-5 space-y-2 shadow-sm">
           <h3 className="text-[15px] font-extrabold text-slate-900 leading-snug">
@@ -338,13 +329,12 @@ function CheckoutPage() {
         </div>
 
         {/* Depoimentos */}
-        <div className="space-y-3">
-          <div className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-['Geist_Mono',monospace] text-center">
-            Quem já descobriu a verdade
-          </div>
-          {TESTIMONIALS.map((t) => (
-            <Testimonial key={t.name} {...t} />
-          ))}
+        <div className="overflow-hidden rounded-3xl border border-slate-200 shadow-sm">
+          <img
+            src="/images/depoimentos.png"
+            alt="Depoimentos de clientes da Spy Radar Brasil: mais de 25.000 clientes ativos, avaliação média 4,8 de 5 e 98% recomendam"
+            className="w-full h-auto block"
+          />
         </div>
 
         {/* Resumo do pedido */}
@@ -478,45 +468,6 @@ function CheckoutPage() {
           </div>
         </div>
       )}
-    </div>
-  );
-}
-
-function Testimonial({
-  name,
-  location,
-  text,
-  time,
-}: {
-  name: string;
-  location: string;
-  text: string;
-  time: string;
-}) {
-  const initials = name
-    .split(" ")
-    .map((p) => p[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-  return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-4 space-y-2 shadow-sm">
-      <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-full bg-[#25D366]/12 border border-[#25D366]/25 grid place-items-center text-[#128C7E] text-xs font-bold">
-          {initials}
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-1.5">
-            <span className="text-sm font-bold text-slate-900 truncate">{name}</span>
-            <CheckIcon className="w-3.5 h-3.5 text-[#25D366]" />
-          </div>
-          <div className="text-[10px] text-slate-400 font-['Geist_Mono',monospace] uppercase tracking-wider">
-            {location} · {time}
-          </div>
-        </div>
-        <Stars className="text-amber-400 text-[9px]" />
-      </div>
-      <p className="text-[12px] text-slate-600 leading-relaxed">"{text}"</p>
     </div>
   );
 }
