@@ -215,6 +215,17 @@ function CheckoutPage() {
       <div className="relative z-10 max-w-md mx-auto px-4 pt-4 pb-10 space-y-4">
         <h1 className="sr-only">Pagamento PIX do relatório SpyRadar Brasil</h1>
 
+        {/* Banner topo */}
+        <div className="-mx-4 -mt-4 overflow-hidden">
+          <img
+            src="/images/checkout-hero.png"
+            alt="Spy Radar Brasil — Falta pouco para você ter acesso à traição descoberta. Finalize a compra da sua licença."
+            className="w-full h-auto block"
+            width={1706}
+            height={960}
+          />
+        </div>
+
         {/* Header de confiança */}
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
