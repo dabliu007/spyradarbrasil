@@ -4,20 +4,20 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import {
+  BadgeCheck,
   Check,
   ChevronDown,
   Clock,
   EyeOff,
+  Gift,
+  Image as ImageIcon,
+  Loader2,
   Lock,
   MapPin,
   MessageCircle,
   ShieldCheck,
   Star,
   Zap,
-  Image as ImageIcon,
-  Loader2,
-  Gift,
-  BadgeCheck,
 } from "lucide-react";
 import { createPixCharge } from "@/lib/pix.functions";
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
@@ -78,4 +78,34 @@ const TESTIMONIALS = [
   {
     name: "Juliana M.",
     city: "Campinas, SP",
-    text: "Paguei o PIX e em menos de 1 minuto já estava vendo as conversas. Descobri tudo o que eu precis
+    time: "há 2 horas",
+    text: "Paguei o PIX e em menos de 1 minuto já estava vendo as conversas. Descobri tudo o que eu precisava saber.",
+  },
+  {
+    name: "Ricardo A.",
+    city: "Belo Horizonte, MG",
+    time: "há 5 horas",
+    text: "Achei que era golpe, mas liberou na hora. Vi até as mensagens que ela tinha apagado. Valeu cada centavo.",
+  },
+  {
+    name: "Fernanda S.",
+    city: "Recife, PE",
+    time: "ontem",
+    text: "O nome e CPF no PIX vieram aleatórios, ninguém ficou sabendo. A localização em tempo real me abriu os olhos.",
+  },
+];
+
+const STEPS = [
+  { title: "Gere o PIX", text: "Toque no botão e o código PIX é criado na hora." },
+  { title: "Pague no seu banco", text: "Use o Copia e Cola ou o QR Code em qualquer banco." },
+  { title: "Acesso liberado", text: "A confirmação é automática, sem enviar comprovante." },
+];
+
+const FAQ = [
+  {
+    q: "A pessoa vai saber que estou vendo o celular dela?",
+    a: "Não. O espelhamento é 100% invisível: nenhuma notificação, ícone ou aviso aparece no aparelho do alvo.",
+  },
+  {
+    q: "Meu nome aparece no pagamento?",
+    a: "Não. A cobrança PIX é gerada com nome e CPF aleatórios,
