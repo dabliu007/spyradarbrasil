@@ -38,23 +38,23 @@ export const Route = createFileRoute("/checkout")({
   component: CheckoutPage,
 });
 
-const DEFAULT_AMOUNT = 47.00;
-const DOWNSELL_CHAIN = [57, 47, 37, 27];
-const formatBRL = (v: number) =>
-  `R$ ${v.toFixed(2).replace(".", ",")}`;
+const DEFAULT_AMOUNT = 97.0;
+const ANCHOR_AMOUNT = 297;
+const DOWNSELL_CHAIN = [77, 57, 47, 37];
+const formatBRL = (v: number) => `R$ ${v.toFixed(2).replace(".", ",")}`;
 
 const TESTIMONIALS = [
   {
     name: "Mariana S.",
     location: "São Paulo, SP",
     time: "há 3 min",
-    text: "Eu tinha certeza que ele mentia. Em 2 minutos depois do pagamento eu já estava vendo TODAS as conversas apagadas. Doeu, mas hoje eu sei a verdade.",
+    text: "Eu tinha certeza que ele mentia. Dois minutos depois do pagamento eu já estava vendo TODAS as conversas apagadas. Doeu, mas hoje eu sei a verdade.",
   },
   {
     name: "Rafael M.",
     location: "Rio de Janeiro, RJ",
     time: "há 11 min",
-    text: "Melhor R$ 47 que já gastei. Descobri o que estava acontecendo pelas minhas costas sem ela nunca desconfiar de nada. Vale cada centavo.",
+    text: "Melhor R$ 97 que já gastei. Descobri o que estava acontecendo pelas minhas costas sem ela nunca desconfiar de nada. Vale cada centavo.",
   },
   {
     name: "Juliana P.",
@@ -68,6 +68,13 @@ const TESTIMONIALS = [
     time: "há 38 min",
     text: "Passei meses na dúvida, perdendo o sono. Em uma tarde tive todas as respostas. A paz de saber a verdade não tem preço.",
   },
+];
+
+const BENEFITS = [
+  "Acesso total ao celular clonado por 365 dias",
+  "Mensagens, fotos e áudios — inclusive os apagados",
+  "Localização em tempo real e apps monitorados",
+  "100% anônimo — o alvo nunca é notificado",
 ];
 
 function CheckoutPage() {
@@ -112,7 +119,9 @@ function CheckoutPage() {
 
   useEffect(() => {
     // Push a sentinel state so the first back press fires popstate here
-    try { window.history.pushState({ zr: "guard" }, ""); } catch {}
+    try {
+      window.history.pushState({ zr: "guard" }, "");
+    } catch {}
     const onPop = () => {
       const idx = Math.min(downsellStepRef.current, DOWNSELL_CHAIN.length - 1);
       const offer = DOWNSELL_CHAIN[idx];
@@ -121,7 +130,9 @@ function CheckoutPage() {
         setDownsellOffer(offer);
       }
       // Re-arm the guard so subsequent back presses also intercept (eterno)
-      try { window.history.pushState({ zr: "guard" }, ""); } catch {}
+      try {
+        window.history.pushState({ zr: "guard" }, "");
+      } catch {}
     };
     window.addEventListener("popstate", onPop);
     return () => window.removeEventListener("popstate", onPop);
@@ -130,7 +141,9 @@ function CheckoutPage() {
 
   // Keep a ref of currentAmount for the popstate closure
   const currentAmountRef = useRef(currentAmount);
-  useEffect(() => { currentAmountRef.current = currentAmount; }, [currentAmount]);
+  useEffect(() => {
+    currentAmountRef.current = currentAmount;
+  }, [currentAmount]);
 
   const acceptDownsell = () => {
     if (downsellOffer == null) return;
@@ -146,7 +159,6 @@ function CheckoutPage() {
     downsellStepRef.current = Math.min(downsellStepRef.current + 1, DOWNSELL_CHAIN.length - 1);
     setDownsellOffer(null);
   };
-
 
   const handleGenerate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -181,86 +193,82 @@ function CheckoutPage() {
         currency: "BRL",
         content_ids: [c.externalId],
         content_type: "product",
-          phone,
-          gender: sex,
+        phone,
+        gender: sex,
       });
       navigate({ to: "/pix", search: { id: c.id, phone, sex } });
     } catch (e: any) {
       setError(e?.message || "Falha ao gerar PIX");
       createdRef.current = false;
     } finally {
-
       setGenerating(false);
     }
   };
 
+  const reais = Math.floor(displayAmount);
+  const centavos = String(Math.round((displayAmount - reais) * 100)).padStart(2, "0");
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-['Inter',sans-serif] relative overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(128,128,128,0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(128,128,128,0.07) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/[0.06] blur-[140px] rounded-full pointer-events-none" />
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-['Inter',sans-serif] relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(115%_75%_at_50%_-5%,rgba(37,211,102,0.14),transparent_60%)]" />
 
-      <div className="relative z-10 max-w-md mx-auto px-4 py-8 space-y-5">
+      <div className="relative z-10 max-w-md mx-auto px-4 pt-4 pb-10 space-y-4">
         <h1 className="sr-only">Pagamento PIX do relatório SpyRadar Brasil</h1>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-9 h-9 bg-slate-100 border border-yellow-300 rounded-xl flex items-center justify-center">
-              <span className="text-[#128C7E] text-lg">🔒</span>
-            </div>
-            <div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
-                Checkout anônimo
-              </div>
-              <div className="text-sm font-bold">Pagamento via PIX</div>
-            </div>
-          </div>
-          <span className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-md font-bold bg-yellow-100 text-[#25D366] border border-yellow-200">
-            {formatBRL(displayAmount)}
-          </span>
-        </div>
 
-        {/* Barra de urgência — reserva de acesso */}
-        <div className="flex items-center justify-between gap-2 bg-red-50 border border-red-200 rounded-2xl px-4 py-2.5">
+        {/* Header de confiança */}
+        <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <span className="relative flex h-2.5 w-2.5">
+            <div className="w-8 h-8 bg-[#25D366]/10 border border-[#25D366]/25 rounded-lg flex items-center justify-center">
+              <LockIcon className="w-4 h-4 text-[#128C7E]" />
+            </div>
+            <div className="leading-tight">
+              <div className="text-[9px] uppercase tracking-[0.18em] text-slate-400 font-['Geist_Mono',monospace]">
+                Checkout seguro
+              </div>
+              <div className="text-[13px] font-bold text-slate-800">Pagamento via PIX</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-1.5 text-[11px] text-slate-500 font-semibold">
+            <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600" />
             </span>
-            <span className="text-[11px] font-bold text-red-700 uppercase tracking-wide">
-              Acesso reservado por
+            <span className="tabular-nums text-red-600 font-['Geist_Mono',monospace] font-bold">
+              {mm}:{ss}
             </span>
           </div>
-          <span className="text-base font-extrabold text-red-600 font-['Geist_Mono',monospace] tabular-nums">
-            {mm}:{ss}
-          </span>
         </div>
 
         {/* Cartão de pagamento — primeira dobra no mobile */}
-        <div className="bg-gradient-to-br from-white/90 to-slate-50/40 backdrop-blur-xl border border-yellow-200 rounded-3xl p-6 space-y-4 shadow-[0_20px_60px_rgba(217,169,40,0.15)]">
-          <div className="text-center space-y-1">
-            <h2 className="text-base font-extrabold text-slate-900 leading-tight">
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-[0_10px_40px_-12px_rgba(15,23,42,0.18)] space-y-4">
+          <div className="text-center space-y-2">
+            <div className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#128C7E] bg-[#25D366]/10 border border-[#25D366]/20 rounded-full px-2.5 py-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#25D366]" />
+              Acesso liberado na hora
+            </div>
+            <h2 className="text-[17px] font-extrabold text-slate-900 leading-tight px-2">
               Libere o acesso total ao celular {doAlvo}
             </h2>
-            <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace] pt-1">
-              Total a pagar hoje
+
+            <div className="pt-1">
+              <div className="text-[13px] text-slate-400 line-through leading-none">
+                de {formatBRL(ANCHOR_AMOUNT)}
+              </div>
+              <div className="flex items-start justify-center gap-0.5 mt-0.5">
+                <span className="text-[#128C7E] text-2xl font-bold mt-1.5">R$</span>
+                <span className="text-[#128C7E] text-[56px] leading-none font-extrabold tracking-tight">
+                  {reais}
+                </span>
+                <span className="text-[#128C7E] text-2xl font-bold mt-1.5">,{centavos}</span>
+              </div>
+              <div className="text-[12px] text-slate-500 mt-1">
+                pagamento único · sem mensalidade
+              </div>
             </div>
-            <div>
-              <span className="text-slate-400 text-lg line-through mr-2">R$197</span>
-              <span className="text-[#128C7E] text-5xl font-extrabold tracking-tight">R${Math.floor(displayAmount)}</span>
-              <span className="text-[#128C7E] text-xl font-bold">,{String(Math.round((displayAmount - Math.floor(displayAmount)) * 100)).padStart(2, "0")}</span>
-            </div>
-            <div className="text-[12px] text-slate-500">Pagamento único · Liberação imediata após confirmação</div>
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-300 rounded-xl p-3 text-red-700 text-sm text-center">
+            <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-red-700 text-sm text-center">
               {error}
             </div>
           )}
@@ -270,9 +278,16 @@ function CheckoutPage() {
               <button
                 type="submit"
                 disabled={generating}
-                className="w-full h-14 text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wide text-[15px] bg-[#25D366] hover:bg-[#1eb959] disabled:opacity-60 shadow-[0_0_40px_-8px_rgba(37,211,102,0.9)] animate-pulse"
+                className="w-full h-14 text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] text-[16px] bg-[#25D366] hover:bg-[#1eb959] disabled:opacity-60 shadow-[0_12px_30px_-8px_rgba(37,211,102,0.7)] flex items-center justify-center gap-2"
               >
-                {generating ? "Gerando PIX…" : `🔓 Gerar PIX de ${formatBRL(displayAmount)}`}
+                {generating ? (
+                  "Gerando PIX…"
+                ) : (
+                  <>
+                    <LockIcon className="w-5 h-5" />
+                    Gerar PIX de {formatBRL(displayAmount)}
+                  </>
+                )}
               </button>
 
               <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500">
@@ -280,27 +295,31 @@ function CheckoutPage() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#25D366]" />
                 </span>
-                <span className="font-semibold text-slate-600 tabular-nums">{liveViewers} pessoas</span>
-                gerando o acesso agora
+                <span className="font-bold text-slate-700 tabular-nums">{liveViewers} pessoas</span>
+                liberando o acesso agora
               </div>
 
-              <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 text-[12px] text-slate-700 leading-relaxed">
-                <div className="font-bold text-[#128C7E] mb-1">🔐 Sigilo absoluto</div>
-                Na cobrança PIX é gerado um <span className="font-semibold text-slate-900">nome e CPF aleatórios</span>, então nenhum dado seu aparece no pagamento.
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 pt-1">
-                <Badge>🛡️ 100% anônimo</Badge>
-                <Badge>⚡ Na hora</Badge>
-                <Badge>🕵️ Sigilo total</Badge>
+              <div className="flex items-start gap-2 bg-slate-50 border border-slate-200 rounded-xl p-3">
+                <ShieldIcon className="w-4 h-4 text-[#128C7E] mt-0.5 shrink-0" />
+                <p className="text-[12px] text-slate-600 leading-relaxed">
+                  Na cobrança é gerado um{" "}
+                  <span className="font-semibold text-slate-800">nome e CPF aleatórios</span> — nenhum
+                  dado seu aparece no pagamento.
+                </p>
               </div>
             </form>
           )}
+
+          <div className="grid grid-cols-3 gap-2">
+            <Badge>100% anônimo</Badge>
+            <Badge>Liberação imediata</Badge>
+            <Badge>Sigilo total</Badge>
+          </div>
         </div>
 
         {/* Prova social — avaliação */}
-        <div className="flex items-center justify-center gap-3 text-center">
-          <div className="text-amber-500 text-lg leading-none">⭐⭐⭐⭐⭐</div>
+        <div className="flex items-center justify-center gap-2 text-center">
+          <Stars className="text-amber-400" />
           <div className="text-[12px] text-slate-600">
             <span className="font-extrabold text-slate-900">4,9/5</span> · mais de{" "}
             <span className="font-extrabold text-slate-900">18.400</span> acessos liberados
@@ -308,21 +327,22 @@ function CheckoutPage() {
         </div>
 
         {/* Apelo emocional */}
-        <div className="bg-white border border-yellow-200 rounded-3xl p-5 space-y-2 shadow-[0_12px_40px_rgba(217,169,40,0.10)]">
-          <h3 className="text-sm font-extrabold text-slate-900 leading-snug">
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 space-y-2 shadow-sm">
+          <h3 className="text-[15px] font-extrabold text-slate-900 leading-snug">
             Pare de perder o sono com a dúvida.
           </h3>
-          <p className="text-[13px] text-slate-700 leading-relaxed">
-            Cada dia sem saber a verdade é mais uma noite acordado, imaginando o pior. Você merece{" "}
-            <span className="font-bold text-slate-900">enxergar tudo com os próprios olhos</span> — mensagens
-            apagadas, fotos escondidas e a localização em tempo real. Em minutos a angústia vira{" "}
-            <span className="font-bold text-[#128C7E]">certeza</span>, e ninguém nunca vai saber que foi você.
+          <p className="text-[13px] text-slate-600 leading-relaxed">
+            Cada dia sem saber a verdade é mais uma noite acordado imaginando o pior. Você merece{" "}
+            <span className="font-bold text-slate-900">enxergar tudo com os próprios olhos</span> —
+            mensagens apagadas, fotos escondidas e a localização em tempo real. Em minutos a angústia
+            vira <span className="font-bold text-[#128C7E]">certeza</span>, e ninguém nunca vai saber
+            que foi você.
           </p>
         </div>
 
         {/* Depoimentos */}
         <div className="space-y-3">
-          <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace] text-center">
+          <div className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-['Geist_Mono',monospace] text-center">
             Quem já descobriu a verdade
           </div>
           {TESTIMONIALS.map((t) => (
@@ -330,78 +350,82 @@ function CheckoutPage() {
           ))}
         </div>
 
-        {/* Resumo do pedido — o que você recebe */}
-        <div className="bg-white border border-yellow-200 rounded-3xl p-5 space-y-4 shadow-[0_12px_40px_rgba(217,169,40,0.10)]">
+        {/* Resumo do pedido */}
+        <div className="bg-white border border-slate-200 rounded-3xl p-5 space-y-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
+              <div className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-['Geist_Mono',monospace]">
                 Seu pedido
               </div>
-              <h2 className="text-base font-extrabold text-slate-900">Licença Spy Radar</h2>
+              <h2 className="text-[16px] font-extrabold text-slate-900">Licença Spy Radar</h2>
             </div>
-            <span className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-md font-bold bg-[#25D366]/10 text-[#128C7E] border border-[#25D366]/30 whitespace-nowrap">
+            <span className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-md font-bold bg-[#25D366]/10 text-[#128C7E] border border-[#25D366]/25 whitespace-nowrap">
               365 dias
             </span>
           </div>
 
           <ul className="space-y-2">
-            {[
-              "Acesso total ao celular clonado por 365 dias",
-              "Mensagens, fotos e áudios — inclusive apagados",
-              "Localização em tempo real e apps monitorados",
-              "100% anônimo · o alvo nunca é notificado",
-            ].map((item) => (
+            {BENEFITS.map((item) => (
               <li key={item} className="flex items-start gap-2 text-[13px] text-slate-700 leading-snug">
-                <span className="text-[#25D366] font-bold mt-0.5">✓</span>
+                <CheckIcon className="w-4 h-4 text-[#25D366] mt-0.5 shrink-0" />
                 <span>{item}</span>
               </li>
             ))}
           </ul>
 
           <div className="flex items-center justify-between border-t border-slate-100 pt-3">
-            <span className="text-[13px] font-semibold text-slate-600">Total</span>
-            <span className="text-lg font-extrabold text-[#128C7E]">{formatBRL(displayAmount)}</span>
+            <span className="text-[13px] font-semibold text-slate-600">Total hoje</span>
+            <div className="text-right">
+              <span className="text-[11px] text-slate-400 line-through mr-1.5">
+                {formatBRL(ANCHOR_AMOUNT)}
+              </span>
+              <span className="text-[18px] font-extrabold text-[#128C7E]">
+                {formatBRL(displayAmount)}
+              </span>
+            </div>
           </div>
         </div>
 
         {/* Garantia */}
-        <div className="flex items-start gap-3 bg-[#25D366]/[0.07] border border-[#25D366]/25 rounded-2xl p-4">
-          <span className="text-2xl leading-none">🛡️</span>
+        <div className="flex items-start gap-3 bg-[#25D366]/[0.06] border border-[#25D366]/20 rounded-2xl p-4">
+          <ShieldIcon className="w-6 h-6 text-[#128C7E] shrink-0" />
           <div>
-            <div className="text-sm font-extrabold text-[#128C7E]">Garantia de liberação</div>
-            <p className="text-[12px] text-slate-700 leading-relaxed">
-              Se o acesso não for liberado após a confirmação do PIX, seu dinheiro volta integralmente. Risco zero para você.
+            <div className="text-[14px] font-extrabold text-[#128C7E]">Garantia de liberação</div>
+            <p className="text-[12px] text-slate-600 leading-relaxed">
+              Se o acesso não for liberado após a confirmação do PIX, seu dinheiro volta
+              integralmente. Risco zero para você.
             </p>
           </div>
         </div>
 
-        <ul className="text-[12px] text-slate-500 space-y-1.5">
+        {/* Passo a passo */}
+        <ol className="text-[12px] text-slate-500 space-y-1.5">
           <li>1. Abra o app do seu banco e escolha pagar via PIX.</li>
           <li>2. Selecione "Pix Copia e Cola" ou escaneie o QR Code.</li>
           <li>3. Confirme o pagamento de {formatBRL(displayAmount)}.</li>
           <li>4. A liberação é automática — não precisa enviar comprovante.</li>
-        </ul>
+        </ol>
 
         {/* Aviso pós-pagamento */}
-        <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-4 space-y-2">
+        <div className="bg-white border border-slate-200 rounded-2xl p-4 space-y-2 shadow-sm">
           <div className="flex items-center gap-2">
-            <span className="text-[#128C7E] text-lg">✅</span>
-            <h3 className="text-sm font-bold text-[#25D366]">Após o pagamento</h3>
+            <CheckIcon className="w-4 h-4 text-[#25D366]" />
+            <h3 className="text-[14px] font-bold text-[#128C7E]">Após o pagamento</h3>
           </div>
-          <p className="text-[12px] text-slate-700 leading-relaxed">
-            Você terá <span className="text-[#25D366] font-semibold">acesso total ao celular clonado</span> {doAlvo} — mensagens, fotos, localização e aplicativos.
+          <p className="text-[12px] text-slate-600 leading-relaxed">
+            Você terá <span className="text-[#128C7E] font-semibold">acesso total ao celular clonado</span>{" "}
+            {doAlvo} — mensagens, fotos, localização e aplicativos.
           </p>
-          <p className="text-[11px] text-slate-500 leading-relaxed border-t border-yellow-100 pt-2">
-            ⚠️ O SpyRadar Brasil <span className="text-slate-500 font-semibold">não se responsabiliza</span> pelo mau uso das informações obtidas. O uso é de inteira responsabilidade do contratante.
+          <p className="text-[11px] text-slate-400 leading-relaxed border-t border-slate-100 pt-2">
+            O SpyRadar Brasil <span className="font-semibold">não se responsabiliza</span> pelo mau uso
+            das informações obtidas. O uso é de inteira responsabilidade do contratante.
           </p>
         </div>
-
-
 
         <Link
           to="/relatorio"
           search={{ phone, sex, paid: 0 }}
-          className="block w-full text-center text-[11px] font-['Geist_Mono',monospace] uppercase tracking-[0.2em] text-slate-500 hover:text-slate-500 transition-colors py-3"
+          className="block w-full text-center text-[11px] font-['Geist_Mono',monospace] uppercase tracking-[0.2em] text-slate-400 hover:text-slate-600 transition-colors py-3"
         >
           ← voltar ao relatório
         </Link>
@@ -409,10 +433,10 @@ function CheckoutPage() {
 
       {downsellOffer != null && (
         <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm grid place-items-center px-4 animate-in fade-in duration-200">
-          <div className="w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl border border-yellow-200 relative">
+          <div className="w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl border border-slate-200 relative">
             <div className="text-center space-y-2">
-              <div className="w-16 h-16 mx-auto rounded-full bg-yellow-50 border border-yellow-200 grid place-items-center text-3xl">
-                🎁
+              <div className="w-16 h-16 mx-auto rounded-full bg-[#25D366]/10 border border-[#25D366]/20 grid place-items-center">
+                <ShieldIcon className="w-8 h-8 text-[#128C7E]" />
               </div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E] font-bold">
                 Espera! Oferta exclusiva
@@ -421,12 +445,11 @@ function CheckoutPage() {
                 Última chance de <span className="text-[#25D366]">liberar o acesso</span>
               </h2>
               <p className="text-[13px] text-slate-600 leading-snug">
-                Você vai perder o clone ativo agora. Liberamos um <strong>desconto único</strong> para você garantir o acesso:
+                Você vai perder o clone ativo agora. Liberamos um <strong>desconto único</strong> para
+                você garantir o acesso:
               </p>
               <div className="py-3">
-                <div className="text-sm text-slate-400 line-through">
-                  De {formatBRL(currentAmount)}
-                </div>
+                <div className="text-sm text-slate-400 line-through">de {formatBRL(currentAmount)}</div>
                 <div className="text-5xl font-extrabold text-[#25D366] tracking-tight">
                   {formatBRL(downsellOffer)}
                 </div>
@@ -438,9 +461,9 @@ function CheckoutPage() {
 
             <button
               onClick={acceptDownsell}
-              className="w-full h-14 bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.8)] text-[15px] uppercase tracking-wide"
+              className="w-full h-14 bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_12px_30px_-8px_rgba(37,211,102,0.7)] text-[15px]"
             >
-              🔓 Aceitar por {formatBRL(downsellOffer)}
+              Aceitar por {formatBRL(downsellOffer)}
             </button>
             <button
               onClick={declineDownsell}
@@ -457,7 +480,7 @@ function CheckoutPage() {
 
 function Badge({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-xl py-2 text-center text-[10px] text-slate-500 font-semibold">
+    <div className="bg-slate-50 border border-slate-200 rounded-xl py-2 px-1 text-center text-[10px] leading-tight text-slate-600 font-semibold">
       {children}
     </div>
   );
@@ -481,24 +504,64 @@ function Testimonial({
     .slice(0, 2)
     .toUpperCase();
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-4 space-y-2">
+    <div className="bg-white border border-slate-200 rounded-2xl p-4 space-y-2 shadow-sm">
       <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-yellow-500/30 to-yellow-700/30 border border-yellow-200 grid place-items-center text-yellow-700 text-xs font-bold">
+        <div className="w-9 h-9 rounded-full bg-[#25D366]/12 border border-[#25D366]/25 grid place-items-center text-[#128C7E] text-xs font-bold">
           {initials}
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5">
             <span className="text-sm font-bold text-slate-900 truncate">{name}</span>
-            <span className="text-[#128C7E] text-xs">✔</span>
+            <CheckIcon className="w-3.5 h-3.5 text-[#25D366]" />
           </div>
-          <div className="text-[10px] text-slate-500 font-['Geist_Mono',monospace] uppercase tracking-wider">
+          <div className="text-[10px] text-slate-400 font-['Geist_Mono',monospace] uppercase tracking-wider">
             {location} · {time}
           </div>
         </div>
-        <div className="text-amber-600 text-[10px]">⭐⭐⭐⭐⭐</div>
+        <Stars className="text-amber-400 text-[9px]" />
       </div>
-      <p className="text-[12px] text-slate-700 leading-relaxed">"{text}"</p>
+      <p className="text-[12px] text-slate-600 leading-relaxed">"{text}"</p>
     </div>
   );
 }
 
+function Stars({ className = "" }: { className?: string }) {
+  return (
+    <div className={`flex items-center gap-0.5 ${className}`} aria-label="5 de 5 estrelas">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg key={i} viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5">
+          <path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1.99 5.79L10 14.77l-5.2 2.73.99-5.79-4.21-4.1 5.82-.85L10 1.5z" />
+        </svg>
+      ))}
+    </div>
+  );
+}
+
+function LockIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} className={className}>
+      <rect x="4" y="10" width="16" height="10" rx="2.5" strokeLinejoin="round" />
+      <path d="M8 10V7a4 4 0 018 0v3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ShieldIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className={className}>
+      <path
+        d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z"
+        strokeLinejoin="round"
+      />
+      <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function CheckIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.6} className={className}>
+      <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
