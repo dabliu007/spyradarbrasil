@@ -6,8 +6,9 @@
 
 export const FB_PIXEL_ID = "1582505587003439";
 export const FB_PIXEL_ID_2 = "1298162017522804";
+export const FB_PIXEL_ID_3 = "4429752110611862";
 // fbq('track') sem trackSingle dispara para todos os pixels inicializados.
-export const FB_PIXEL_IDS = [FB_PIXEL_ID, FB_PIXEL_ID_2];
+export const FB_PIXEL_IDS = [FB_PIXEL_ID, FB_PIXEL_ID_2, FB_PIXEL_ID_3];
 
 const UTM_KEY = "zr_utms_v1";
 const UTM_FIELDS = [
