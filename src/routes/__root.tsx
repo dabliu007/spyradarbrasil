@@ -16,7 +16,7 @@ import { Analytics } from "@vercel/analytics/react";
 import appCss from "../styles.css?inline";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
-import { capturePersistedUtms, fbqTrack, FB_PIXEL_ID } from "../lib/tracking";
+import { capturePersistedUtms, fbqTrack, FB_PIXEL_IDS } from "../lib/tracking";
 
 const FB_PIXEL_INIT = `
 (function(){
@@ -30,7 +30,7 @@ const FB_PIXEL_INIT = `
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '${FB_PIXEL_ID}');
+${FB_PIXEL_IDS.map((id) => `    fbq('init', '${id}');`).join("\n")}
   }
   if (document.readyState === 'complete') { setTimeout(loadPixel, 0); }
   else { window.addEventListener('load', function(){ setTimeout(loadPixel, 0); }, { once: true }); }
@@ -186,13 +186,16 @@ function RootShell({ children }: { children: ReactNode }) {
       </head>
       <body>
         <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
-            alt=""
-          />
+          {FB_PIXEL_IDS.map((id) => (
+            <img
+              key={id}
+              height="1"
+              width="1"
+              style={{ display: "none" }}
+              src={`https://www.facebook.com/tr?id=${id}&ev=PageView&noscript=1`}
+              alt=""
+            />
+          ))}
         </noscript>
         {children}
         <Scripts />

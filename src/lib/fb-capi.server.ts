@@ -108,9 +108,40 @@ function normalizeUserData(u: CapiUserData = {}) {
   return out;
 }
 
-export async function sendCapiEvent(input: SendCapiEventInput): Promise<{ ok: boolean; status: number; body?: any }> {
-  const pixelId = process.env.FB_PIXEL_ID || "1582505587003439";
-  const accessToken = process.env.FB_CAPI_ACCESS_TOKEN;
+type CapiResult = { ok: boolean; status: number; body?: any };
+
+/**
+ * Envia o evento para todos os pixels configurados (mesmo event_id em cada um,
+ * então a desduplicação com o Pixel do navegador funciona por pixel).
+ * Retorna o resultado do pixel principal.
+ */
+export async function sendCapiEvent(input: SendCapiEventInput): Promise<CapiResult> {
+  const targets = [
+    {
+      pixelId: process.env.FB_PIXEL_ID || "1582505587003439",
+      accessToken: process.env.FB_CAPI_ACCESS_TOKEN,
+    },
+    {
+      pixelId: process.env.FB_PIXEL_ID_2 || "1298162017522804",
+      accessToken: process.env.FB_CAPI_ACCESS_TOKEN_2,
+    },
+  ];
+  const results = await Promise.all(
+    targets.map((t, i) =>
+      // O 2º pixel só recebe CAPI se tiver token próprio configurado.
+      i > 0 && !t.accessToken
+        ? Promise.resolve<CapiResult>({ ok: false, status: 0 })
+        : sendCapiEventToPixel(input, t.pixelId, t.accessToken),
+    ),
+  );
+  return results[0];
+}
+
+async function sendCapiEventToPixel(
+  input: SendCapiEventInput,
+  pixelId: string,
+  accessToken: string | undefined,
+): Promise<CapiResult> {
   const testEventCode = process.env.FB_TEST_EVENT_CODE;
 
   if (!pixelId || !accessToken) {
