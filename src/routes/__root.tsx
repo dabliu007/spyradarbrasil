@@ -109,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Spy Radar Brasil: descubra traições em 5 minutos. Clone o WhatsApp do seu parceiro(a) e veja conversas apagadas, fotos ocultas e áudios secretos sem que ele(a) desconfie.",
       },
-      { name: "keywords", content: "spyradar brasil, spyradar, spyzap, zapspy, como clonar celular do marido, como clonar celular da esposa, clonar whatsapp, descobrir traição" },
+      { name: "keywords", content: "spyradar brasil, spyradar, spyzap, zapspy, descobrir traição, espelhar whatsapp, clonar whatsapp, clonar celular, hackear whatsapp, hackear redes sociais, hackear instagram, hackear facebook, como clonar celular do marido, como clonar celular da esposa, ver conversas apagadas do whatsapp" },
       { name: "author", content: "SpyRadar Brasil" },
       { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" },
       { property: "og:site_name", content: "SpyRadar Brasil" },
