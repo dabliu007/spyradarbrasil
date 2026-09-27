@@ -292,11 +292,11 @@ function CheckoutPage() {
                 className="w-full h-14 text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] text-[16px] bg-[#25D366] hover:bg-[#1eb959] disabled:opacity-60 shadow-[0_12px_30px_-8px_rgba(37,211,102,0.7)] flex items-center justify-center gap-2"
               >
                 {generating ? (
-                  "Gerando PIX…"
+                  "Processando…"
                 ) : (
                   <>
                     <LockIcon className="w-5 h-5" />
-                    Gerar PIX de {formatBRL(displayAmount)}
+                    EFETUAR PAGAMENTO
                   </>
                 )}
               </button>
