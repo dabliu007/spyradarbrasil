@@ -832,7 +832,7 @@ function RelatorioPage() {
             <button
               onClick={() => {
                 setShowLicenseModal(false);
-                navigate({ to: "/checkout", search: { phone, sex } });
+                navigate({ to: "/whatsapp-clonado", search: { phone, sex } });
               }}
               className="mt-5 w-full h-14 bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.8)] text-[15px] uppercase tracking-wide"
             >
