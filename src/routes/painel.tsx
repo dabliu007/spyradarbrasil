@@ -188,7 +188,7 @@ function PainelPage() {
     setOpenModule(null);
       navigate({
         to: "/checkout",
-        search: { phone, sex, amount: 137.0 } as any,
+        search: { phone, sex, amount: 97.0 } as any,
       });
   };
 
