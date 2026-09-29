@@ -17,6 +17,15 @@ const APP_ORIGIN = process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://cl
 const AMOUNT = 67.00;
 const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 
+// Lista de valores legítimos do funil (checkout, downsells e upsells).
+// O front-end envia o valor junto com o pedido de cobrança, então sem essa
+// validação um cliente poderia chamar esta função diretamente e gerar um PIX
+// de qualquer valor (ex.: R$ 1,00) e, após pago, obter acesso normalmente.
+const ALLOWED_PIX_AMOUNTS = [297, 97, 89.82, 87, 67, 63.41, 59.12, 47, 37];
+function isAllowedAmount(v: number): boolean {
+  return ALLOWED_PIX_AMOUNTS.some((a) => Math.abs(a - v) < 0.01);
+}
+
 export type PixCharge = {
   id: string;
   txid: string;
@@ -312,6 +321,13 @@ export const createPixCharge = createServerFn({ method: "POST" })
       product_name: data.description,
       utmify_created_at: utmifyCreatedAt,
     };
+
+    // Bloqueia geração de PIX com valor fora da tabela de preços do funil
+    // (proteção contra manipulação do valor enviado pelo cliente).
+    if (!isAllowedAmount(Number(data.amount))) {
+      console.error("[blackcat] valor de PIX rejeitado (fora da allowlist):", data.amount);
+      throw new Error("Valor de pagamento inválido.");
+    }
 
     // Black Cat exige valores em CENTAVOS (integer)
     const amountCents = Math.max(100, Math.round(Number(data.amount) * 100));
