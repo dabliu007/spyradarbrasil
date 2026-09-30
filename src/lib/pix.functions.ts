@@ -21,7 +21,7 @@ const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 // O front-end envia o valor junto com o pedido de cobrança, então sem essa
 // validação um cliente poderia chamar esta função diretamente e gerar um PIX
 // de qualquer valor (ex.: R$ 1,00) e, após pago, obter acesso normalmente.
-const ALLOWED_PIX_AMOUNTS = [297, 97, 89.82, 87, 67, 63.41, 59.12, 47, 37];
+const ALLOWED_PIX_AMOUNTS = [297, 197, 177, 157, 137, 117, 97, 89.82, 63.41, 59.12, 47];
 function isAllowedAmount(v: number): boolean {
   return ALLOWED_PIX_AMOUNTS.some((a) => Math.abs(a - v) < 0.01);
 }

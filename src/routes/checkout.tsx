@@ -38,9 +38,9 @@ export const Route = createFileRoute("/checkout")({
   component: CheckoutPage,
 });
 
-const DEFAULT_AMOUNT = 97.0;
-const ANCHOR_AMOUNT = 297;
-const DOWNSELL_CHAIN = [87, 67, 47, 37];
+const DEFAULT_AMOUNT = 197.0;
+const ANCHOR_AMOUNT = 397;
+const DOWNSELL_CHAIN = [177, 157, 137, 117, 97];
 const formatBRL = (v: number) => `R$ ${v.toFixed(2).replace(".", ",")}`;
 
 const TESTIMONIALS = [
@@ -54,7 +54,7 @@ const TESTIMONIALS = [
     name: "Rafael M.",
     location: "Rio de Janeiro, RJ",
     time: "há 11 min",
-    text: "Melhor R$ 97 que já gastei. Descobri o que estava acontecendo pelas minhas costas sem ela nunca desconfiar de nada. Vale cada centavo.",
+    text: "Melhor R$ 197 que já gastei. Descobri o que estava acontecendo pelas minhas costas sem ela nunca desconfiar de nada. Vale cada centavo.",
   },
   {
     name: "Juliana P.",
