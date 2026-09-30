@@ -62,7 +62,7 @@ function ContaPoupancaPage() {
         const { fbc, fbp } = getMetaCookies();
         const utms = getPersistedUtms();
         const c = await createPix({
-          data: { amount: POUPANCA_AMOUNT, description: POUPANCA_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
+          data: { product: "conta_poupanca", amount: POUPANCA_AMOUNT, description: POUPANCA_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
         });
         setCharge(c);
         (window as any).dataLayer = (window as any).dataLayer || [];

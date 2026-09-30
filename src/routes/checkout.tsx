@@ -169,8 +169,9 @@ function CheckoutPage() {
       const { fbc, fbp } = getMetaCookies();
       const utms = getPersistedUtms();
       const c = await createPix({
-        data: {
-          amount: currentAmount,
+  data: {
+  product: "checkout",
+  amount: currentAmount,
           fbc,
           fbp,
           utms,

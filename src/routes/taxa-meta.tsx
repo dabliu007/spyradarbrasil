@@ -71,7 +71,7 @@ function TaxaMetaPage() {
         const { fbc, fbp } = getMetaCookies();
         const utms = getPersistedUtms();
         const c = await createPix({
-          data: { amount: META_AMOUNT, description: META_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
+          data: { product: "taxa_meta", amount: META_AMOUNT, description: META_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
         });
         setCharge(c);
         (window as any).dataLayer = (window as any).dataLayer || [];

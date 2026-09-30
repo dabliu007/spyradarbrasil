@@ -73,7 +73,7 @@ function NotaFiscalPage() {
         const { fbc, fbp } = getMetaCookies();
         const utms = getPersistedUtms();
         const c = await createPix({
-          data: { amount: NF_AMOUNT, description: NF_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
+          data: { product: "nota_fiscal", amount: NF_AMOUNT, description: NF_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
         });
         setCharge(c);
         (window as any).dataLayer = (window as any).dataLayer || [];

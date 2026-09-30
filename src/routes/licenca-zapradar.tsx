@@ -62,7 +62,7 @@ function LicencaSpyRadarPage() {
       try {
         const { fbc, fbp } = getMetaCookies(); const utms = getPersistedUtms();
         const c = await createPix({
-          data: { amount: LICENSE_AMOUNT, description: LICENSE_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
+          data: { product: "licenca_zapradar", amount: LICENSE_AMOUNT, description: LICENSE_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
         });
         setCharge(c);
         (window as any).dataLayer = (window as any).dataLayer || [];

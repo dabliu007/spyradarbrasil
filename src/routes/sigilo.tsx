@@ -59,7 +59,7 @@ function SigiloPage() {
       try {
         const { fbc, fbp } = getMetaCookies(); const utms = getPersistedUtms();
         const c = await createPix({
-          data: { amount: SIGILO_AMOUNT, description: SIGILO_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
+          data: { product: "sigilo", amount: SIGILO_AMOUNT, description: SIGILO_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
         });
         setCharge(c);
         (window as any).dataLayer = (window as any).dataLayer || [];

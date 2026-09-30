@@ -21,9 +21,26 @@ const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 // O front-end envia o valor junto com o pedido de cobrança, então sem essa
 // validação um cliente poderia chamar esta função diretamente e gerar um PIX
 // de qualquer valor (ex.: R$ 1,00) e, após pago, obter acesso normalmente.
-const ALLOWED_PIX_AMOUNTS = [297, 197, 177, 157, 137, 117, 97, 89.82, 63.41, 59.12, 47];
-function isAllowedAmount(v: number): boolean {
-  return ALLOWED_PIX_AMOUNTS.some((a) => Math.abs(a - v) < 0.01);
+// Cada produto só aceita os próprios preços, para impedir que o PIX de um
+// produto seja gerado com o preço mais barato de outro.
+const PRODUCT_PRICES = {
+  checkout: [197, 177, 157, 137, 117, 97],
+  licenca_zapradar: [97],
+  sigilo: [89.82],
+  nota_fiscal: [59.12],
+  taxa_meta: [63.41],
+  conta_poupanca: [297],
+  controle_bancario: [47],
+} as const;
+
+export type PixProduct = keyof typeof PRODUCT_PRICES;
+
+function isPixProduct(v: unknown): v is PixProduct {
+  return typeof v === "string" && Object.prototype.hasOwnProperty.call(PRODUCT_PRICES, v);
+}
+
+function isAllowedAmount(product: PixProduct, v: number): boolean {
+  return PRODUCT_PRICES[product].some((a) => Math.abs(a - v) < 0.01);
 }
 
 export type PixCharge = {
@@ -249,6 +266,7 @@ function pickIpv4(ip?: string | null): string | undefined {
 export const createPixCharge = createServerFn({ method: "POST" })
   .inputValidator((input: {
     externalId?: string;
+    product: PixProduct;
     amount?: number;
     description?: string;
     fbc?: string;
@@ -263,6 +281,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
     externalId:
       input?.externalId?.trim() ||
       `cs-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
+    product: isPixProduct(input?.product) ? input.product : null,
     amount: typeof input?.amount === "number" && input.amount > 0 ? input.amount : AMOUNT,
     description: input?.description?.trim() || PRODUCT_DESCRIPTION,
     fbc: input?.fbc?.trim() || undefined,
@@ -324,8 +343,8 @@ export const createPixCharge = createServerFn({ method: "POST" })
 
     // Bloqueia geração de PIX com valor fora da tabela de preços do funil
     // (proteção contra manipulação do valor enviado pelo cliente).
-    if (!isAllowedAmount(Number(data.amount))) {
-      console.error("[blackcat] valor de PIX rejeitado (fora da allowlist):", data.amount);
+    if (!data.product || !isAllowedAmount(data.product, Number(data.amount))) {
+      console.error("[blackcat] valor de PIX rejeitado:", data.product, data.amount);
       throw new Error("Valor de pagamento inválido.");
     }
 

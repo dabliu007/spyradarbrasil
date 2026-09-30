@@ -59,7 +59,7 @@ function ControleBancarioPage() {
       try {
         const { fbc, fbp } = getMetaCookies(); const utms = getPersistedUtms();
         const c = await createPix({
-          data: { amount: BANK_AMOUNT, description: BANK_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
+          data: { product: "controle_bancario", amount: BANK_AMOUNT, description: BANK_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
         });
         setCharge(c);
         (window as any).dataLayer = (window as any).dataLayer || [];
