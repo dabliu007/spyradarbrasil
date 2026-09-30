@@ -80,7 +80,7 @@ export async function sendUtmifyOrder(input: SendUtmifyOrderInput) {
   const customer = input.customer || {};
   const payload = {
     orderId: input.orderId,
-    platform: "BlackCat",
+    platform: "AssetPay",
     paymentMethod: "pix",
     status: input.status,
     createdAt: formatUtmifyDate(input.createdAt),
