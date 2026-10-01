@@ -376,7 +376,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
       pix: { expiresInDays: 1 },
     };
 
-    const payRes = await blackcatFetch("/sales", {
+    const payRes = await blackcatFetch("/sales/create-sale", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(txBody),
