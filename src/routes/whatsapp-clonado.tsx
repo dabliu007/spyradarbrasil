@@ -365,7 +365,7 @@ function WhatsAppClonadoPage() {
               🔓 ATIVAR LICENÇA AGORA
             </button>
             <p className="text-center text-[11px] text-slate-400 mt-2">
-                  🔒 PIX R$ 47,00 · ativação em segundos · válido por 365 dias
+                  🔒 PIX R$ 87,00 · ativação em segundos · válido por 365 dias
             </p>
           </div>
         </div>
