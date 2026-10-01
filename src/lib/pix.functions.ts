@@ -2,19 +2,19 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
 
 /**
- * Integração AssetPay — PIX
+ * Integração Black Cat Pay — PIX
  *
- * Base:    https://api.assetpay.com.br/api/v1
- * Auth:    Basic base64(secret_key:public_key)
+ * Base:    https://api.blackcatoficial.com/api
+ * Auth:    Header X-API-Key
  * Valores: em CENTAVOS (integer, ex.: 4700 = R$ 47,00)
- * Fluxo:   POST /transactions        (paymentMethod: "PIX")
- * Status:  GET  /transactions/:id
- * Webhook: src/routes/api/public/assetpay-webhook.ts
+ * Fluxo:   POST /sales              (cria cobrança PIX)
+ * Status:  GET  /sales/:id/status
+ * Webhook: src/routes/api/public/blackcat-webhook.ts
  */
 
-const BASE_URL = "https://api.assetpay.com.br/api/v1";
+const BASE_URL = "https://api.blackcatoficial.com/api";
 const APP_ORIGIN = process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://clonawhats.com";
-const AMOUNT = 67.00;
+const AMOUNT = 47.0;
 const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 
 // Lista de valores legítimos do funil (checkout, downsells e upsells).
@@ -108,11 +108,13 @@ function syntheticClient() {
 /*  HTTP helper                                                                */
 /* -------------------------------------------------------------------------- */
 
-function getAssetpayAuthHeader(): string {
-  const secretKey = process.env.ASSETPAY_SECRET_KEY?.trim();
-  const publicKey = process.env.ASSETPAY_PUBLIC_KEY?.trim();
-  if (!secretKey || !publicKey) throw new Error("Credencial AssetPay não configurada.");
-  return `Basic ${Buffer.from(`${secretKey}:${publicKey}`).toString("base64")}`;
+function getBlackcatApiKey(): string {
+  const apiKey =
+    process.env.BLACKCAT_API_KEY?.trim() ||
+    process.env.BLACKCAT_SECRET_KEY?.trim() ||
+    process.env.BLACKCAT_PUBLIC_KEY?.trim();
+  if (!apiKey) throw new Error("Credencial Black Cat não configurada.");
+  return apiKey;
 }
 
 function parseRetryAfterMs(res: Response): number | null {
@@ -125,11 +127,11 @@ function parseRetryAfterMs(res: Response): number | null {
   return null;
 }
 
-export async function assetpayFetch(
+export async function blackcatFetch(
   path: string,
   init: RequestInit & { maxRetries?: number } = {},
 ): Promise<Response> {
-  const authorization = getAssetpayAuthHeader();
+  const apiKey = getBlackcatApiKey();
   const { maxRetries = 4, headers, ...rest } = init;
   let lastErr: unknown = null;
 
@@ -139,7 +141,7 @@ export async function assetpayFetch(
         ...rest,
         headers: {
           Accept: "application/json",
-          Authorization: authorization,
+          "X-API-Key": apiKey,
           ...(headers || {}),
         },
       });
@@ -160,7 +162,7 @@ export async function assetpayFetch(
       await new Promise((r) => setTimeout(r, Math.min(1000 * 2 ** attempt, 8000) + jitter));
     }
   }
-  throw lastErr instanceof Error ? lastErr : new Error("Falha de rede na AssetPay");
+  throw lastErr instanceof Error ? lastErr : new Error("Falha de rede na Black Cat");
 }
 
 async function parseJson(res: Response): Promise<any> {
@@ -180,12 +182,12 @@ function extractError(json: any, status: number): string {
   if (typeof msg === "string" && msg.trim()) return msg;
   switch (status) {
     case 400: return "Dados inválidos para gerar o PIX.";
-    case 401: return "Credencial AssetPay inválida.";
-    case 403: return "Chave AssetPay sem permissão (use uma chave cash_in ou both).";
+    case 401: return "Credencial Black Cat inválida.";
+    case 403: return "Chave Black Cat sem permissão.";
     case 404: return "Recurso não encontrado.";
     case 422: return "Dados de transação inválidos.";
     case 429: return "Muitas requisições. Aguarde um instante.";
-    default:  return `Falha na AssetPay (HTTP ${status}).`;
+    default:  return `Falha na Black Cat (HTTP ${status}).`;
   }
 }
 
@@ -224,8 +226,8 @@ function pickQrImage(body: any): string | null {
   if (typeof candidate !== "string" || !candidate.trim()) return null;
   const v = candidate.trim();
 
-  // A Codefy (e vários gateways) devolvem o PRÓPRIO payload PIX ("copia e cola")
-  // nesses campos, não uma imagem. Um payload PIX começa com "0002" e contém
+  // Alguns gateways devolvem o PRÓPRIO payload PIX ("copia e cola") nesses
+  // campos, não uma imagem. Um payload PIX começa com "0002" e contém
   // "br.gov.bcb.pix". Nesse caso, retornamos null para o frontend gerar o QR
   // a partir do payload. Só tratamos como imagem quando for realmente uma
   // imagem (data URI de imagem, base64 puro ou URL http de imagem).
@@ -306,7 +308,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
   .handler(async ({ data }): Promise<PixCharge> => {
     const req = getRequest();
 
-    const callbackUrl = `${APP_ORIGIN}/api/public/assetpay-webhook`;
+    const callbackUrl = `${APP_ORIGIN}/api/public/blackcat-webhook`;
 
     const synth = syntheticClient();
     const clientName = data.customerName || synth.name;
@@ -341,11 +343,11 @@ export const createPixCharge = createServerFn({ method: "POST" })
     // Bloqueia geração de PIX com valor fora da tabela de preços do funil
     // (proteção contra manipulação do valor enviado pelo cliente).
     if (!data.product || !isAllowedAmount(data.product, Number(data.amount))) {
-      console.error("[assetpay] valor de PIX rejeitado:", data.product, data.amount);
+      console.error("[blackcat] valor de PIX rejeitado:", data.product, data.amount);
       throw new Error("Valor de pagamento inválido.");
     }
 
-    // AssetPay exige valores de Cash In em CENTAVOS (integer, mínimo 100)
+    // Black Cat exige valores em CENTAVOS (integer, mínimo 100)
     const amountCents = Math.max(100, Math.round(Number(data.amount) * 100));
 
     const txBody: Record<string, any> = {
@@ -374,14 +376,14 @@ export const createPixCharge = createServerFn({ method: "POST" })
       pix: { expiresInDays: 1 },
     };
 
-    const payRes = await assetpayFetch("/transactions", {
+    const payRes = await blackcatFetch("/sales", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(txBody),
     });
     const payJson = await parseJson(payRes);
     if (!payRes.ok) {
-      console.error("[assetpay] create pix error", payRes.status, JSON.stringify(payJson).slice(0, 1200));
+      console.error("[blackcat] create pix error", payRes.status, JSON.stringify(payJson).slice(0, 1200));
       throw new Error(extractError(payJson, payRes.status));
     }
 
@@ -392,7 +394,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
     const expiresAt: string | null = body?.pix?.expirationDate ?? body?.expiresAt ?? null;
 
     if (!pixCode) {
-      console.error("[assetpay] pix sem código:", JSON.stringify(body).slice(0, 1200));
+      console.error("[blackcat] pix sem código:", JSON.stringify(body).slice(0, 1200));
       throw new Error("Gateway não retornou o código PIX.");
     }
 
@@ -501,8 +503,8 @@ export const getPixStatus = createServerFn({ method: "POST" })
       return { id: data.id, status: "pending", paid: false, paidAt: null, expiresAt: null };
     }
 
-    const res = await assetpayFetch(
-      `/transactions/${encodeURIComponent(data.id)}`,
+    const res = await blackcatFetch(
+      `/sales/${encodeURIComponent(data.id)}/status`,
       { method: "GET" },
     );
     const json = await parseJson(res);
@@ -521,7 +523,7 @@ export const getPixStatus = createServerFn({ method: "POST" })
 
     if (status === "paid") {
       try {
-        // AssetPay retorna amount em CENTAVOS -> converte para reais
+        // Black Cat retorna amount em CENTAVOS -> converte para reais
         const amount = (Number(tx?.amount ?? 0) || 0) / 100;
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const { data: existing } = await supabaseAdmin

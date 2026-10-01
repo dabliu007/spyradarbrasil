@@ -45,7 +45,6 @@ import { Route as VerificarRouteImport } from './routes/verificar'
 import { Route as WhatsappClonadoRouteImport } from './routes/whatsapp-clonado'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
-import { Route as ApiPublicAssetpayWebhookRouteImport } from './routes/api/public/assetpay-webhook'
 import { Route as ApiPublicBlackcatWebhookRouteImport } from './routes/api/public/blackcat-webhook'
 import { Route as ApiPublicCodefyWebhookRouteImport } from './routes/api/public/codefy-webhook'
 import { Route as ApiPublicFbTrackRouteImport } from './routes/api/public/fb-track'
@@ -237,12 +236,6 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicAssetpayWebhookRoute =
-  ApiPublicAssetpayWebhookRouteImport.update({
-    id: '/api/public/assetpay-webhook',
-    path: '/api/public/assetpay-webhook',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ApiPublicBlackcatWebhookRoute =
   ApiPublicBlackcatWebhookRouteImport.update({
     id: '/api/public/blackcat-webhook',
@@ -336,7 +329,6 @@ export interface FileRoutesByFullPath {
   '/whatsapp-clonado': typeof WhatsappClonadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
-  '/api/public/assetpay-webhook': typeof ApiPublicAssetpayWebhookRoute
   '/api/public/blackcat-webhook': typeof ApiPublicBlackcatWebhookRoute
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
   '/api/public/fb-track': typeof ApiPublicFbTrackRoute
@@ -385,7 +377,6 @@ export interface FileRoutesByTo {
   '/whatsapp-clonado': typeof WhatsappClonadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
-  '/api/public/assetpay-webhook': typeof ApiPublicAssetpayWebhookRoute
   '/api/public/blackcat-webhook': typeof ApiPublicBlackcatWebhookRoute
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
   '/api/public/fb-track': typeof ApiPublicFbTrackRoute
@@ -435,7 +426,6 @@ export interface FileRoutesById {
   '/whatsapp-clonado': typeof WhatsappClonadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
-  '/api/public/assetpay-webhook': typeof ApiPublicAssetpayWebhookRoute
   '/api/public/blackcat-webhook': typeof ApiPublicBlackcatWebhookRoute
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
   '/api/public/fb-track': typeof ApiPublicFbTrackRoute
@@ -486,7 +476,6 @@ export interface FileRouteTypes {
     | '/whatsapp-clonado'
     | '/blog/$slug'
     | '/blog/'
-    | '/api/public/assetpay-webhook'
     | '/api/public/blackcat-webhook'
     | '/api/public/codefy-webhook'
     | '/api/public/fb-track'
@@ -535,7 +524,6 @@ export interface FileRouteTypes {
     | '/whatsapp-clonado'
     | '/blog/$slug'
     | '/blog'
-    | '/api/public/assetpay-webhook'
     | '/api/public/blackcat-webhook'
     | '/api/public/codefy-webhook'
     | '/api/public/fb-track'
@@ -584,7 +572,6 @@ export interface FileRouteTypes {
     | '/whatsapp-clonado'
     | '/blog/$slug'
     | '/blog/'
-    | '/api/public/assetpay-webhook'
     | '/api/public/blackcat-webhook'
     | '/api/public/codefy-webhook'
     | '/api/public/fb-track'
@@ -634,7 +621,6 @@ export interface RootRouteChildren {
   WhatsappClonadoRoute: typeof WhatsappClonadoRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
-  ApiPublicAssetpayWebhookRoute: typeof ApiPublicAssetpayWebhookRoute
   ApiPublicBlackcatWebhookRoute: typeof ApiPublicBlackcatWebhookRoute
   ApiPublicCodefyWebhookRoute: typeof ApiPublicCodefyWebhookRoute
   ApiPublicFbTrackRoute: typeof ApiPublicFbTrackRoute
@@ -901,13 +887,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/assetpay-webhook': {
-      id: '/api/public/assetpay-webhook'
-      path: '/api/public/assetpay-webhook'
-      fullPath: '/api/public/assetpay-webhook'
-      preLoaderRoute: typeof ApiPublicAssetpayWebhookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/public/blackcat-webhook': {
       id: '/api/public/blackcat-webhook'
       path: '/api/public/blackcat-webhook'
@@ -1018,7 +997,6 @@ const rootRouteChildren: RootRouteChildren = {
   WhatsappClonadoRoute: WhatsappClonadoRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
-  ApiPublicAssetpayWebhookRoute: ApiPublicAssetpayWebhookRoute,
   ApiPublicBlackcatWebhookRoute: ApiPublicBlackcatWebhookRoute,
   ApiPublicCodefyWebhookRoute: ApiPublicCodefyWebhookRoute,
   ApiPublicFbTrackRoute: ApiPublicFbTrackRoute,
