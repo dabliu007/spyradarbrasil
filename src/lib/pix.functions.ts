@@ -205,6 +205,8 @@ export function normalizeStatus(raw: any): PixCharge["status"] {
 
 function pickPixCode(body: any): string {
   return (
+    body?.paymentData?.copyPaste ||
+    body?.paymentData?.qrCode ||
     body?.pix_code ||
     body?.pixCode ||
     body?.pix?.qrcode ||
@@ -388,10 +390,16 @@ export const createPixCharge = createServerFn({ method: "POST" })
     }
 
     const body = payJson?.data ?? payJson?.transaction ?? payJson;
-    const identifier: string = String(body?.id ?? body?.transactionId ?? data.externalId);
-    const pixCode = body?.pix?.qrcode || pickPixCode(body);
-    const qrImage = pickQrImage({ qrCodeUrl: body?.pix?.qrcodeUrl }) ?? pickQrImage(body);
-    const expiresAt: string | null = body?.pix?.expirationDate ?? body?.expiresAt ?? null;
+    const identifier: string = String(
+      body?.transactionId ?? body?.id ?? data.externalId,
+    );
+    const pixCode = pickPixCode(body) || body?.pix?.qrcode;
+    const qrImage =
+      pickQrImage({ qrCodeUrl: body?.paymentData?.qrCodeBase64 }) ??
+      pickQrImage({ qrCodeUrl: body?.pix?.qrcodeUrl }) ??
+      pickQrImage(body);
+    const expiresAt: string | null =
+      body?.paymentData?.expiresAt ?? body?.pix?.expirationDate ?? body?.expiresAt ?? null;
 
     if (!pixCode) {
       console.error("[blackcat] pix sem código:", JSON.stringify(body).slice(0, 1200));
