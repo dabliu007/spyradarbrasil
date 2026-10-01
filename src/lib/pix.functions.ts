@@ -388,6 +388,9 @@ export const createPixCharge = createServerFn({ method: "POST" })
       console.error("[blackcat] create pix error", payRes.status, JSON.stringify(payJson).slice(0, 1200));
       throw new Error(extractError(payJson, payRes.status));
     }
+    // DEBUG TEMP: log completo da resposta real da Black Cat para diagnosticar
+    // divergência de formato (remover após confirmar).
+    console.log("[blackcat DEBUG] create-sale raw response:", JSON.stringify(payJson));
 
     const body = payJson?.data ?? payJson?.transaction ?? payJson;
     const identifier: string = String(
@@ -524,6 +527,9 @@ export const getPixStatus = createServerFn({ method: "POST" })
       throw new Error(extractError(json, res.status));
     }
 
+    // DEBUG TEMP: log completo para diagnosticar divergência de formato real
+    // da Black Cat no GET de status. Remover após confirmar o payload.
+    console.log("[blackcat status DEBUG] raw response completo:", JSON.stringify(json));
     const tx = json?.data ?? json?.transaction ?? json;
     const rawStatus = tx?.status ?? tx?.payment_status;
     const status = normalizeStatus(rawStatus);

@@ -15,7 +15,13 @@ export const Route = createFileRoute("/api/public/blackcat-webhook")({
     handlers: {
       POST: async ({ request }) => {
         const rawBody = await request.text();
-        console.log("[blackcat webhook] body", rawBody.slice(0, 2000));
+        // DEBUG TEMP: log completo (sem truncar) para diagnosticar divergência
+        // de formato real da Black Cat. Remover após confirmar o payload.
+        console.log("[blackcat webhook DEBUG] headers", {
+          "x-webhook-event": request.headers.get("x-webhook-event"),
+          "x-webhook-source": request.headers.get("x-webhook-source"),
+        });
+        console.log("[blackcat webhook DEBUG] raw body completo:", rawBody);
         let payload: any = {};
         try {
           payload = rawBody ? JSON.parse(rawBody) : {};
