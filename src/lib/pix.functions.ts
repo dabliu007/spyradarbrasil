@@ -6,7 +6,7 @@ import { getRequest } from "@tanstack/react-start/server";
  *
  * Base:    https://api-gateway.umbrellapag.com/api
  * Auth:    Header x-api-key + User-Agent: UMBRELLAB2B/1.0
- * Valores: em CENTAVOS (integer, ex.: 8700 = R$ 87,00)
+ * Valores: em CENTAVOS (integer, ex.: 6812 = R$ 68,12)
  * Fluxo:   POST /user/transactions        (cria cobrança PIX)
  * Status:  GET  /user/transactions/:id
  * Webhook: src/routes/api/public/umbrellapag-webhook.ts
@@ -20,7 +20,7 @@ import { getRequest } from "@tanstack/react-start/server";
 const BASE_URL = "https://api-gateway.umbrellapag.com/api";
 const USER_AGENT = "UMBRELLAB2B/1.0";
 const APP_ORIGIN = process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://clonawhats.com";
-const AMOUNT = 87.0;
+const AMOUNT = 68.12;
 const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 
 // Lista de valores legítimos do funil (checkout, downsells e upsells).
@@ -30,7 +30,7 @@ const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 // Cada produto só aceita os próprios preços, para impedir que o PIX de um
 // produto seja gerado com o preço mais barato de outro.
 const PRODUCT_PRICES = {
-  checkout: [87],
+  checkout: [68.12],
   licenca_zapradar: [97],
   sigilo: [89.82],
   nota_fiscal: [59.12],
