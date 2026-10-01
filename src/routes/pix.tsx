@@ -38,7 +38,6 @@ function PixPage() {
   const [copied, setCopied] = useState(false);
   const [statusLabel, setStatusLabel] = useState("Aguardando pagamento…");
   const [seconds, setSeconds] = useState(15 * 60); // 15 min de urgência
-  const [viewers] = useState(() => 27 + Math.floor(Math.random() * 41));
   const paidRef = useRef(false);
 
   // Recupera o charge salvo no sessionStorage pelo checkout
@@ -207,24 +206,6 @@ function PixPage() {
       </div>
 
       <div className="relative z-10 max-w-md mx-auto px-4 py-6 space-y-5">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-9 h-9 bg-slate-100 border border-yellow-300 rounded-xl flex items-center justify-center">
-              <span className="text-[#128C7E] text-lg">🔒</span>
-            </div>
-            <div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
-                PIX gerado
-              </div>
-              <div className="text-sm font-bold">Conexão segura · Banco Central</div>
-            </div>
-          </div>
-          <div className="flex items-center gap-1.5 bg-yellow-50 border border-yellow-200 rounded-full px-2 py-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
-            <span className="text-[10px] text-[#25D366] font-bold uppercase tracking-wider">{viewers} pessoas pagando agora</span>
-          </div>
-        </div>
-
         {/* banner principal */}
         <div className="rounded-2xl overflow-hidden border border-yellow-300 shadow-[0_15px_40px_rgba(217,169,40,0.15)]">
           <img
@@ -333,10 +314,3 @@ function PixPage() {
   );
 }
 
-function Badge({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="bg-white border border-slate-200 rounded-xl py-2 text-center text-[10px] text-slate-700 font-semibold">
-      {children}
-    </div>
-  );
-}
