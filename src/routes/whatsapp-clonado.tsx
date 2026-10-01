@@ -358,7 +358,7 @@ function WhatsAppClonadoPage() {
             <button
               onClick={() => {
                 setPaywall(null);
-                navigate({ to: "/checkout", search: { phone, sex, amount: 47.0 } });
+                navigate({ to: "/checkout", search: { phone, sex, amount: 87.0 } });
               }}
               className="mt-5 w-full h-14 bg-emerald-500 hover:bg-emerald-400 text-[#0b141a] font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.8)] text-[15px] uppercase tracking-wide"
             >
