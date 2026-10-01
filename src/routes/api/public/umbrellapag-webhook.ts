@@ -1,27 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 /**
- * Webhook Black Cat Pay — POST /api/public/blackcat-webhook
+ * Webhook Umbrella Pag — POST /api/public/umbrellapag-webhook
  *
- * Headers:
- *  - X-Webhook-Event  (ex.: transaction.paid)
- *  - X-Webhook-Source (blackcat-api)
+ * O formato exato do payload de notificação da Umbrella Pag não está
+ * documentado com confiança (a documentação divergiu da API real em outros
+ * pontos já confirmados por teste). Por isso, este webhook NUNCA confia no
+ * conteúdo do corpo para decidir se a transação foi paga: ele apenas extrai
+ * o id da transação do payload (em qualquer formato razoável) e sempre
+ * reconsulta GET /user/transactions/:id na própria Umbrella Pag — essa é a
+ * fonte de verdade autoritativa.
  *
- * Re-consulta a transação pela API antes de marcar como paga (autoritativo).
  * Valores em CENTAVOS. Persistimos em REAIS.
  */
-export const Route = createFileRoute("/api/public/blackcat-webhook")({
+export const Route = createFileRoute("/api/public/umbrellapag-webhook")({
   server: {
     handlers: {
       POST: async ({ request }) => {
         const rawBody = await request.text();
-        // DEBUG TEMP: log completo (sem truncar) para diagnosticar divergência
-        // de formato real da Black Cat. Remover após confirmar o payload.
-        console.log("[blackcat webhook DEBUG] headers", {
-          "x-webhook-event": request.headers.get("x-webhook-event"),
-          "x-webhook-source": request.headers.get("x-webhook-source"),
-        });
-        console.log("[blackcat webhook DEBUG] raw body completo:", rawBody);
+        console.log("[umbrellapag webhook] raw body completo:", rawBody);
         let payload: any = {};
         try {
           payload = rawBody ? JSON.parse(rawBody) : {};
@@ -29,79 +26,56 @@ export const Route = createFileRoute("/api/public/blackcat-webhook")({
           return new Response("invalid json", { status: 400 });
         }
 
-        const tx =
-          payload?.data?.transaction ??
-          payload?.data ??
-          payload?.transaction ??
-          payload ?? {};
+        const tx = payload?.data?.transaction ?? payload?.data ?? payload?.transaction ?? payload ?? {};
         const txId: string | undefined =
-          tx?.transactionId || tx?.id || tx?.transaction_id || payload?.transactionId;
+          tx?.id ||
+          tx?.transactionId ||
+          payload?.id ||
+          payload?.transactionId ||
+          payload?.objectId;
 
         if (!txId) {
-          console.warn("[blackcat webhook] sem transactionId", JSON.stringify(payload).slice(0, 400));
+          console.warn("[umbrellapag webhook] sem id de transação", JSON.stringify(payload).slice(0, 400));
           return new Response(JSON.stringify({ received: true }), {
             status: 200,
             headers: { "content-type": "application/json" },
           });
         }
 
-        const { normalizeStatus } = await import("@/lib/pix.functions");
-
-        // 1) Trust the webhook body first — gateway is the source of truth.
-        const eventType: string = String(
-          request.headers.get("x-webhook-event") ||
-            payload?.event ||
-            payload?.type ||
-            payload?.eventType ||
-            "",
-        ).toLowerCase();
-        const bodyRawStatus = tx?.status ?? payload?.status;
-        let verifiedStatus = normalizeStatus(bodyRawStatus);
-        if (
-          verifiedStatus !== "paid" &&
-          /paid|approved|complete|success|captured|settled|authorized|confirmed/.test(eventType)
-        ) {
-          verifiedStatus = "paid";
-        }
-        // amountCents vindo do body (centavos)
-        let verifiedAmountCents = Number(tx?.amount ?? payload?.amount ?? 0) || 0;
-
-        console.log("[blackcat webhook] raw", {
-          id: txId,
-          eventType,
-          bodyRawStatus,
-          bodyStatus: verifiedStatus,
-        });
-
-        // 2) Fallback: re-consulta a API só se o body não confirmou pagamento.
-        if (verifiedStatus !== "paid") {
-          try {
-            const apiKey =
-              process.env.BLACKCAT_API_KEY ||
-              process.env.BLACKCAT_SECRET_KEY ||
-              process.env.BLACKCAT_PUBLIC_KEY ||
-              process.env.BLACKCATHUB_SECRET_KEY;
-            if (apiKey) {
-              const res = await fetch(
-                `https://api.blackcatoficial.com/api/sales/${encodeURIComponent(txId)}/status`,
-                {
-                  method: "GET",
-                  headers: {
-                    Accept: "application/json",
-                    "X-API-Key": apiKey,
-                  },
+        // Reconsulta autoritativa: nunca confia no status enviado pelo webhook.
+        let verifiedStatus: string = "pending";
+        let verifiedAmountCents = 0;
+        let paidAt: string | null = null;
+        try {
+          const apiKey = process.env.UMBRELLAPAG_API_KEY;
+          if (apiKey) {
+            const res = await fetch(
+              `https://api-gateway.umbrellapag.com/api/user/transactions/${encodeURIComponent(txId)}`,
+              {
+                method: "GET",
+                headers: {
+                  Accept: "application/json",
+                  "User-Agent": "UMBRELLAB2B/1.0",
+                  "x-api-key": apiKey,
                 },
-              );
-              const json: any = await res.json().catch(() => ({}));
-              const inner = json?.data ?? json;
-              const apiStatus = normalizeStatus(inner?.status);
-              if (apiStatus === "paid") verifiedStatus = "paid";
-              verifiedAmountCents =
-                Number(inner?.amount ?? verifiedAmountCents) || verifiedAmountCents;
-            }
-          } catch (err) {
-            console.error("[blackcat webhook] re-consulta falhou", err);
+              },
+            );
+            const json: any = await res.json().catch(() => ({}));
+            const inner = json?.data ?? json;
+            const { normalizeStatus } = await import("@/lib/pix.functions");
+            verifiedStatus = normalizeStatus(inner?.status);
+            verifiedAmountCents = Number(inner?.amount ?? 0) || 0;
+            paidAt = inner?.paidAt ?? null;
+            console.log("[umbrellapag webhook] reconsulta", {
+              id: txId,
+              rawStatus: inner?.status,
+              verifiedStatus,
+            });
+          } else {
+            console.error("[umbrellapag webhook] UMBRELLAPAG_API_KEY ausente — não é possível confirmar pagamento");
           }
+        } catch (err) {
+          console.error("[umbrellapag webhook] reconsulta falhou", err);
         }
 
         const isPaid = verifiedStatus === "paid";
@@ -171,7 +145,7 @@ export const Route = createFileRoute("/api/public/blackcat-webhook")({
               },
               { onConflict: "transaction_id" },
             );
-            if (error) console.error("[blackcat webhook] purchase_logs upsert", error);
+            if (error) console.error("[umbrellapag webhook] purchase_logs upsert", error);
 
             // Claim atômico — só um caller (polling OU webhook) envia à Utmify.
             const { data: utmifyClaim } = await supabaseAdmin
@@ -192,7 +166,7 @@ export const Route = createFileRoute("/api/public/blackcat-webhook")({
                 productId: utmifyOrderId,
                 productName: existingRaw?.product_name || "Recupera Relacionamento: Acesso Anual",
                 createdAt: existingRaw?.utmify_created_at || existing?.created_at || new Date(),
-                approvedDate: new Date(),
+                approvedDate: paidAt || new Date(),
                 customer: {
                   name: existingRaw?.customer_name,
                   email: existingRaw?.customer_email,
@@ -224,7 +198,7 @@ export const Route = createFileRoute("/api/public/blackcat-webhook")({
                   external_id: txId,
                 },
                 custom_data: {
-                  value: finalAmount || 47,
+                  value: finalAmount || 87,
                   currency: "BRL",
                   content_ids: [txId],
                   content_type: "product",
@@ -234,7 +208,7 @@ export const Route = createFileRoute("/api/public/blackcat-webhook")({
               });
             }
           } catch (err) {
-            console.error("[blackcat webhook] erro registrando purchase", err);
+            console.error("[umbrellapag webhook] erro registrando purchase", err);
           }
         }
 

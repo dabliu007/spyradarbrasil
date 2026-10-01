@@ -2,17 +2,23 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
 
 /**
- * Integração Black Cat Pay — PIX
+ * Integração Umbrella Pag — PIX
  *
- * Base:    https://api.blackcatoficial.com/api
- * Auth:    Header X-API-Key
- * Valores: em CENTAVOS (integer, ex.: 4700 = R$ 47,00)
- * Fluxo:   POST /sales              (cria cobrança PIX)
- * Status:  GET  /sales/:id/status
- * Webhook: src/routes/api/public/blackcat-webhook.ts
+ * Base:    https://api-gateway.umbrellapag.com/api
+ * Auth:    Header x-api-key + User-Agent: UMBRELLAB2B/1.0
+ * Valores: em CENTAVOS (integer, ex.: 8700 = R$ 87,00)
+ * Fluxo:   POST /user/transactions        (cria cobrança PIX)
+ * Status:  GET  /user/transactions/:id
+ * Webhook: src/routes/api/public/umbrellapag-webhook.ts
+ *
+ * Observação: a API rejeita qualquer campo "externalRef" (no corpo, no
+ * customer ou nos items) com 400 "property externalRef should not exist",
+ * apesar da documentação listá-lo como aceito. Confirmado em teste real —
+ * nunca envie esse campo.
  */
 
-const BASE_URL = "https://api.blackcatoficial.com/api";
+const BASE_URL = "https://api-gateway.umbrellapag.com/api";
+const USER_AGENT = "UMBRELLAB2B/1.0";
 const APP_ORIGIN = process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://clonawhats.com";
 const AMOUNT = 87.0;
 const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
@@ -104,16 +110,30 @@ function syntheticClient() {
   };
 }
 
+// Umbrella Pag exige um endereço completo do cliente. Como não coletamos
+// endereço real no funil, usamos um endereço sintético plausível e válido
+// (testado com sucesso contra a API real).
+function syntheticAddress() {
+  const streetNumber = String(Math.floor(Math.random() * 900 + 10));
+  return {
+    street: "Rua das Flores",
+    streetNumber,
+    complement: "",
+    zipCode: "01310100",
+    neighborhood: "Centro",
+    city: "Sao Paulo",
+    state: "SP",
+    country: "BR",
+  };
+}
+
 /* -------------------------------------------------------------------------- */
 /*  HTTP helper                                                                */
 /* -------------------------------------------------------------------------- */
 
-function getBlackcatApiKey(): string {
-  const apiKey =
-    process.env.BLACKCAT_API_KEY?.trim() ||
-    process.env.BLACKCAT_SECRET_KEY?.trim() ||
-    process.env.BLACKCAT_PUBLIC_KEY?.trim();
-  if (!apiKey) throw new Error("Credencial Black Cat não configurada.");
+function getUmbrellaApiKey(): string {
+  const apiKey = process.env.UMBRELLAPAG_API_KEY?.trim();
+  if (!apiKey) throw new Error("Credencial Umbrella Pag não configurada.");
   return apiKey;
 }
 
@@ -127,11 +147,11 @@ function parseRetryAfterMs(res: Response): number | null {
   return null;
 }
 
-export async function blackcatFetch(
+export async function umbrellapagFetch(
   path: string,
   init: RequestInit & { maxRetries?: number } = {},
 ): Promise<Response> {
-  const apiKey = getBlackcatApiKey();
+  const apiKey = getUmbrellaApiKey();
   const { maxRetries = 4, headers, ...rest } = init;
   let lastErr: unknown = null;
 
@@ -141,7 +161,8 @@ export async function blackcatFetch(
         ...rest,
         headers: {
           Accept: "application/json",
-          "X-API-Key": apiKey,
+          "User-Agent": USER_AGENT,
+          "x-api-key": apiKey,
           ...(headers || {}),
         },
       });
@@ -162,7 +183,7 @@ export async function blackcatFetch(
       await new Promise((r) => setTimeout(r, Math.min(1000 * 2 ** attempt, 8000) + jitter));
     }
   }
-  throw lastErr instanceof Error ? lastErr : new Error("Falha de rede na Black Cat");
+  throw lastErr instanceof Error ? lastErr : new Error("Falha de rede na Umbrella Pag");
 }
 
 async function parseJson(res: Response): Promise<any> {
@@ -172,22 +193,21 @@ async function parseJson(res: Response): Promise<any> {
 }
 
 function extractError(json: any, status: number): string {
-  const fieldErrors =
-    json?.errors && typeof json.errors === "object" && !Array.isArray(json.errors)
-      ? Object.values(json.errors).flat().join("; ")
-      : Array.isArray(json?.errors)
-        ? json.errors.map((e: any) => e?.message || e).join("; ")
-        : null;
-  const msg = fieldErrors || json?.message || json?.error?.message || json?.error || null;
+  const fieldErrors = Array.isArray(json?.message)
+    ? json.message.join("; ")
+    : typeof json?.message === "string"
+      ? json.message
+      : null;
+  const msg = fieldErrors || json?.error?.message || json?.error || null;
   if (typeof msg === "string" && msg.trim()) return msg;
   switch (status) {
     case 400: return "Dados inválidos para gerar o PIX.";
-    case 401: return "Credencial Black Cat inválida.";
-    case 403: return "Chave Black Cat sem permissão.";
+    case 401: return "Credencial Umbrella Pag inválida.";
+    case 403: return "Chave Umbrella Pag sem permissão.";
     case 404: return "Recurso não encontrado.";
     case 422: return "Dados de transação inválidos.";
     case 429: return "Muitas requisições. Aguarde um instante.";
-    default:  return `Falha na Black Cat (HTTP ${status}).`;
+    default:  return `Falha na Umbrella Pag (HTTP ${status}).`;
   }
 }
 
@@ -197,53 +217,6 @@ export function normalizeStatus(raw: any): PixCharge["status"] {
   if (["expired","expirado"].includes(s)) return "expired";
   if (["failed","falha","cancelled","canceled","cancelado","rejected","recusado","refused","refunded","estornado","charged_back","chargeback","med"].includes(s)) return "cancelled";
   return "pending";
-}
-
-/* -------------------------------------------------------------------------- */
-/*  Extrai PIX da resposta                                                     */
-/* -------------------------------------------------------------------------- */
-
-function pickPixCode(body: any): string {
-  return (
-    body?.paymentData?.copyPaste ||
-    body?.paymentData?.qrCode ||
-    body?.pix_code ||
-    body?.pixCode ||
-    body?.pix?.qrcode ||
-    body?.pix?.payload ||
-    body?.qrcode ||
-    ""
-  );
-}
-function pickQrImage(body: any): string | null {
-  const candidate =
-    body?.qr_code_url ||
-    body?.qrCodeUrl ||
-    body?.qr_code_base64 ||
-    body?.qrCodeBase64 ||
-    body?.qr_code_image ||
-    body?.qrCodeImage ||
-    null;
-
-  if (typeof candidate !== "string" || !candidate.trim()) return null;
-  const v = candidate.trim();
-
-  // Alguns gateways devolvem o PRÓPRIO payload PIX ("copia e cola") nesses
-  // campos, não uma imagem. Um payload PIX começa com "0002" e contém
-  // "br.gov.bcb.pix". Nesse caso, retornamos null para o frontend gerar o QR
-  // a partir do payload. Só tratamos como imagem quando for realmente uma
-  // imagem (data URI de imagem, base64 puro ou URL http de imagem).
-  const looksLikePixPayload =
-    v.startsWith("0002") || /br\.gov\.bcb\.pix/i.test(v);
-  if (looksLikePixPayload) return null;
-
-  if (v.startsWith("data:image/")) return v;
-  if (/^https?:\/\//i.test(v)) return v;
-  // base64 puro (sem prefixo) -> monta data URI de imagem PNG
-  if (/^[A-Za-z0-9+/=\s]+$/.test(v) && v.length > 100) {
-    return `data:image/png;base64,${v.replace(/\s+/g, "")}`;
-  }
-  return null;
 }
 
 function pickIpv4(ip?: string | null): string | undefined {
@@ -310,9 +283,10 @@ export const createPixCharge = createServerFn({ method: "POST" })
   .handler(async ({ data }): Promise<PixCharge> => {
     const req = getRequest();
 
-    const callbackUrl = `${APP_ORIGIN}/api/public/blackcat-webhook`;
+    const callbackUrl = `${APP_ORIGIN}/api/public/umbrellapag-webhook`;
 
     const synth = syntheticClient();
+    const address = syntheticAddress();
     const clientName = data.customerName || synth.name;
     const clientDocument = data.customerDocument || synth.document;
     const clientPhone = data.phone || synth.phone;
@@ -345,67 +319,61 @@ export const createPixCharge = createServerFn({ method: "POST" })
     // Bloqueia geração de PIX com valor fora da tabela de preços do funil
     // (proteção contra manipulação do valor enviado pelo cliente).
     if (!data.product || !isAllowedAmount(data.product, Number(data.amount))) {
-      console.error("[blackcat] valor de PIX rejeitado:", data.product, data.amount);
+      console.error("[umbrellapag] valor de PIX rejeitado:", data.product, data.amount);
       throw new Error("Valor de pagamento inválido.");
     }
 
-    // Black Cat exige valores em CENTAVOS (integer, mínimo 100)
+    // Umbrella Pag exige valores em CENTAVOS (integer, mínimo 100)
     const amountCents = Math.max(100, Math.round(Number(data.amount) * 100));
 
+    // IMPORTANTE: nunca inclua "externalRef" em nenhum nível deste corpo —
+    // a API rejeita com 400 "property externalRef should not exist" mesmo a
+    // documentação listando o campo como válido (confirmado em teste real).
     const txBody: Record<string, any> = {
       amount: amountCents,
+      currency: "BRL",
       paymentMethod: "PIX",
+      installments: 1,
       postbackUrl: callbackUrl,
-      externalRef: data.externalId,
-      description: data.description,
-      ...(clientIp ? { ip: clientIp } : {}),
-      metadata: { external_id: data.externalId, product: data.product, ...data.utms },
+      metadata: JSON.stringify({ external_id: data.externalId, product: data.product, ...data.utms }),
+      traceable: true,
+      ip: clientIp || "177.1.1.1",
       customer: {
         name: clientName,
         email: synth.email,
         phone: clientPhone,
-        ...(clientIp ? { ip: clientIp } : {}),
         document: { type: "CPF", number: clientDocument },
+        address,
       },
       items: [
         {
           title: data.description,
           unitPrice: amountCents,
           quantity: 1,
-          type: "digital",
+          tangible: false,
         },
       ],
       pix: { expiresInDays: 1 },
     };
 
-    const payRes = await blackcatFetch("/sales/create-sale", {
+    const payRes = await umbrellapagFetch("/user/transactions", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(txBody),
     });
     const payJson = await parseJson(payRes);
     if (!payRes.ok) {
-      console.error("[blackcat] create pix error", payRes.status, JSON.stringify(payJson).slice(0, 1200));
+      console.error("[umbrellapag] create pix error", payRes.status, JSON.stringify(payJson).slice(0, 1200));
       throw new Error(extractError(payJson, payRes.status));
     }
-    // DEBUG TEMP: log completo da resposta real da Black Cat para diagnosticar
-    // divergência de formato (remover após confirmar).
-    console.log("[blackcat DEBUG] create-sale raw response:", JSON.stringify(payJson));
 
-    const body = payJson?.data ?? payJson?.transaction ?? payJson;
-    const identifier: string = String(
-      body?.transactionId ?? body?.id ?? data.externalId,
-    );
-    const pixCode = pickPixCode(body) || body?.pix?.qrcode;
-    const qrImage =
-      pickQrImage({ qrCodeUrl: body?.paymentData?.qrCodeBase64 }) ??
-      pickQrImage({ qrCodeUrl: body?.pix?.qrcodeUrl }) ??
-      pickQrImage(body);
-    const expiresAt: string | null =
-      body?.paymentData?.expiresAt ?? body?.pix?.expirationDate ?? body?.expiresAt ?? null;
+    const body = payJson?.data ?? payJson;
+    const identifier: string = String(body?.id ?? data.externalId);
+    const pixCode: string = body?.qrCode || body?.pix?.qrcode || "";
+    const expiresAt: string | null = body?.pix?.expirationDate ?? null;
 
     if (!pixCode) {
-      console.error("[blackcat] pix sem código:", JSON.stringify(body).slice(0, 1200));
+      console.error("[umbrellapag] pix sem código:", JSON.stringify(body).slice(0, 1200));
       throw new Error("Gateway não retornou o código PIX.");
     }
 
@@ -434,7 +402,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
         { onConflict: "transaction_id", ignoreDuplicates: false },
       );
     } catch (err) {
-      console.error("[blackcat] purchase_logs pre-insert falhou", err);
+      console.error("[umbrellapag] purchase_logs pre-insert falhou", err);
     }
 
     // Utmify: notifica PIX gerado (waiting_payment)
@@ -466,7 +434,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
         });
       }
     } catch (err) {
-      console.error("[blackcat] utmify waiting_payment falhou", err);
+      console.error("[umbrellapag] utmify waiting_payment falhou", err);
     }
 
     return {
@@ -476,7 +444,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
       amount: Number(data.amount),
       status: normalizeStatus(body?.status),
       pixCopiaCola: pixCode,
-      qrCodeBase64: qrImage,
+      qrCodeBase64: null,
       expiresAt,
     };
   });
@@ -485,8 +453,8 @@ export const getPixStatus = createServerFn({ method: "POST" })
   .inputValidator((input: { id: string; light?: boolean }) => ({
     id: String(input?.id ?? "").trim(),
     // Modo leve: só consulta o Supabase (alimentado pelo webhook do gateway),
-    // sem tocar na Black Cat. Usado pelo polling frequente para não saturar o
-    // rate limit da Black Cat e liberar capacidade para a geração de novos PIX.
+    // sem tocar na Umbrella Pag. Usado pelo polling frequente para não saturar
+    // o rate limit e liberar capacidade para a geração de novos PIX.
     light: input?.light === true,
   }))
   .handler(async ({ data }): Promise<PixStatus> => {
@@ -504,18 +472,18 @@ export const getPixStatus = createServerFn({ method: "POST" })
         return { id: data.id, status: "paid", paid: true, paidAt: null, expiresAt: null };
       }
     } catch (err) {
-      console.error("[blackcat status] purchase_logs lookup falhou", err);
+      console.error("[umbrellapag status] purchase_logs lookup falhou", err);
     }
 
-    // Polling leve não consulta a Black Cat: retorna pendente e deixa o webhook
-    // confirmar o pagamento via Supabase. Isso reduz drasticamente as chamadas
-    // à Black Cat e evita o 429 na geração de PIX.
+    // Polling leve não consulta a Umbrella Pag: retorna pendente e deixa o
+    // webhook confirmar o pagamento via Supabase. Isso reduz drasticamente as
+    // chamadas à Umbrella Pag e evita o 429 na geração de PIX.
     if (data.light) {
       return { id: data.id, status: "pending", paid: false, paidAt: null, expiresAt: null };
     }
 
-    const res = await blackcatFetch(
-      `/sales/${encodeURIComponent(data.id)}/status`,
+    const res = await umbrellapagFetch(
+      `/user/transactions/${encodeURIComponent(data.id)}`,
       { method: "GET" },
     );
     const json = await parseJson(res);
@@ -527,17 +495,14 @@ export const getPixStatus = createServerFn({ method: "POST" })
       throw new Error(extractError(json, res.status));
     }
 
-    // DEBUG TEMP: log completo para diagnosticar divergência de formato real
-    // da Black Cat no GET de status. Remover após confirmar o payload.
-    console.log("[blackcat status DEBUG] raw response completo:", JSON.stringify(json));
-    const tx = json?.data ?? json?.transaction ?? json;
-    const rawStatus = tx?.status ?? tx?.payment_status;
+    const tx = json?.data ?? json;
+    const rawStatus = tx?.status;
     const status = normalizeStatus(rawStatus);
-    console.log("[blackcat status]", { id: data.id, rawStatus, normalized: status });
+    console.log("[umbrellapag status]", { id: data.id, rawStatus, normalized: status });
 
     if (status === "paid") {
       try {
-        // Black Cat retorna amount em CENTAVOS -> converte para reais
+        // Umbrella Pag retorna amount em CENTAVOS -> converte para reais
         const amount = (Number(tx?.amount ?? 0) || 0) / 100;
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const { data: existing } = await supabaseAdmin
@@ -585,7 +550,7 @@ export const getPixStatus = createServerFn({ method: "POST" })
           },
           { onConflict: "transaction_id" },
         );
-        if (upErr) console.error("[blackcat status] purchase_logs upsert", upErr);
+        if (upErr) console.error("[umbrellapag status] purchase_logs upsert", upErr);
 
         if (!alreadyPaid) {
           const { sendCapiEvent } = await import("@/lib/fb-capi.server");
@@ -616,15 +581,15 @@ export const getPixStatus = createServerFn({ method: "POST" })
           });
         }
       } catch (err) {
-        console.error("[blackcat status] erro registrando purchase", err);
+        console.error("[umbrellapag status] erro registrando purchase", err);
       }
     }
 
     return {
-      id: String(tx?.id ?? tx?.transactionId ?? data.id),
+      id: String(tx?.id ?? data.id),
       status,
       paid: status === "paid",
-      paidAt: status === "paid" ? (tx?.paid_at ?? tx?.paidAt ?? tx?.updatedAt ?? null) : null,
-      expiresAt: tx?.pix?.expirationDate ?? tx?.expires_at ?? tx?.expiresAt ?? null,
+      paidAt: status === "paid" ? (tx?.paidAt ?? null) : null,
+      expiresAt: tx?.pix?.expirationDate ?? null,
     };
   });

@@ -45,7 +45,6 @@ import { Route as VerificarRouteImport } from './routes/verificar'
 import { Route as WhatsappClonadoRouteImport } from './routes/whatsapp-clonado'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
-import { Route as ApiPublicBlackcatWebhookRouteImport } from './routes/api/public/blackcat-webhook'
 import { Route as ApiPublicCodefyWebhookRouteImport } from './routes/api/public/codefy-webhook'
 import { Route as ApiPublicFbTrackRouteImport } from './routes/api/public/fb-track'
 import { Route as ApiPublicImperiumWebhookRouteImport } from './routes/api/public/imperium-webhook'
@@ -54,6 +53,7 @@ import { Route as ApiPublicNexuspagWebhookRouteImport } from './routes/api/publi
 import { Route as ApiPublicOmegaWebhookRouteImport } from './routes/api/public/omega-webhook'
 import { Route as ApiPublicSyncpayWebhookRouteImport } from './routes/api/public/syncpay-webhook'
 import { Route as ApiPublicUmbrellaWebhookRouteImport } from './routes/api/public/umbrella-webhook'
+import { Route as ApiPublicUmbrellapagWebhookRouteImport } from './routes/api/public/umbrellapag-webhook'
 import { Route as ApiPublicVizzionWebhookRouteImport } from './routes/api/public/vizzion-webhook'
 
 const IndexRoute = IndexRouteImport.update({
@@ -236,12 +236,6 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicBlackcatWebhookRoute =
-  ApiPublicBlackcatWebhookRouteImport.update({
-    id: '/api/public/blackcat-webhook',
-    path: '/api/public/blackcat-webhook',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ApiPublicCodefyWebhookRoute = ApiPublicCodefyWebhookRouteImport.update({
   id: '/api/public/codefy-webhook',
   path: '/api/public/codefy-webhook',
@@ -284,6 +278,12 @@ const ApiPublicUmbrellaWebhookRoute =
   ApiPublicUmbrellaWebhookRouteImport.update({
     id: '/api/public/umbrella-webhook',
     path: '/api/public/umbrella-webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicUmbrellapagWebhookRoute =
+  ApiPublicUmbrellapagWebhookRouteImport.update({
+    id: '/api/public/umbrellapag-webhook',
+    path: '/api/public/umbrellapag-webhook',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiPublicVizzionWebhookRoute = ApiPublicVizzionWebhookRouteImport.update({
@@ -329,7 +329,6 @@ export interface FileRoutesByFullPath {
   '/whatsapp-clonado': typeof WhatsappClonadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
-  '/api/public/blackcat-webhook': typeof ApiPublicBlackcatWebhookRoute
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
   '/api/public/fb-track': typeof ApiPublicFbTrackRoute
   '/api/public/imperium-webhook': typeof ApiPublicImperiumWebhookRoute
@@ -338,6 +337,7 @@ export interface FileRoutesByFullPath {
   '/api/public/omega-webhook': typeof ApiPublicOmegaWebhookRoute
   '/api/public/syncpay-webhook': typeof ApiPublicSyncpayWebhookRoute
   '/api/public/umbrella-webhook': typeof ApiPublicUmbrellaWebhookRoute
+  '/api/public/umbrellapag-webhook': typeof ApiPublicUmbrellapagWebhookRoute
   '/api/public/vizzion-webhook': typeof ApiPublicVizzionWebhookRoute
 }
 export interface FileRoutesByTo {
@@ -377,7 +377,6 @@ export interface FileRoutesByTo {
   '/whatsapp-clonado': typeof WhatsappClonadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
-  '/api/public/blackcat-webhook': typeof ApiPublicBlackcatWebhookRoute
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
   '/api/public/fb-track': typeof ApiPublicFbTrackRoute
   '/api/public/imperium-webhook': typeof ApiPublicImperiumWebhookRoute
@@ -386,6 +385,7 @@ export interface FileRoutesByTo {
   '/api/public/omega-webhook': typeof ApiPublicOmegaWebhookRoute
   '/api/public/syncpay-webhook': typeof ApiPublicSyncpayWebhookRoute
   '/api/public/umbrella-webhook': typeof ApiPublicUmbrellaWebhookRoute
+  '/api/public/umbrellapag-webhook': typeof ApiPublicUmbrellapagWebhookRoute
   '/api/public/vizzion-webhook': typeof ApiPublicVizzionWebhookRoute
 }
 export interface FileRoutesById {
@@ -426,7 +426,6 @@ export interface FileRoutesById {
   '/whatsapp-clonado': typeof WhatsappClonadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
-  '/api/public/blackcat-webhook': typeof ApiPublicBlackcatWebhookRoute
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
   '/api/public/fb-track': typeof ApiPublicFbTrackRoute
   '/api/public/imperium-webhook': typeof ApiPublicImperiumWebhookRoute
@@ -435,6 +434,7 @@ export interface FileRoutesById {
   '/api/public/omega-webhook': typeof ApiPublicOmegaWebhookRoute
   '/api/public/syncpay-webhook': typeof ApiPublicSyncpayWebhookRoute
   '/api/public/umbrella-webhook': typeof ApiPublicUmbrellaWebhookRoute
+  '/api/public/umbrellapag-webhook': typeof ApiPublicUmbrellapagWebhookRoute
   '/api/public/vizzion-webhook': typeof ApiPublicVizzionWebhookRoute
 }
 export interface FileRouteTypes {
@@ -476,7 +476,6 @@ export interface FileRouteTypes {
     | '/whatsapp-clonado'
     | '/blog/$slug'
     | '/blog/'
-    | '/api/public/blackcat-webhook'
     | '/api/public/codefy-webhook'
     | '/api/public/fb-track'
     | '/api/public/imperium-webhook'
@@ -485,6 +484,7 @@ export interface FileRouteTypes {
     | '/api/public/omega-webhook'
     | '/api/public/syncpay-webhook'
     | '/api/public/umbrella-webhook'
+    | '/api/public/umbrellapag-webhook'
     | '/api/public/vizzion-webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -524,7 +524,6 @@ export interface FileRouteTypes {
     | '/whatsapp-clonado'
     | '/blog/$slug'
     | '/blog'
-    | '/api/public/blackcat-webhook'
     | '/api/public/codefy-webhook'
     | '/api/public/fb-track'
     | '/api/public/imperium-webhook'
@@ -533,6 +532,7 @@ export interface FileRouteTypes {
     | '/api/public/omega-webhook'
     | '/api/public/syncpay-webhook'
     | '/api/public/umbrella-webhook'
+    | '/api/public/umbrellapag-webhook'
     | '/api/public/vizzion-webhook'
   id:
     | '__root__'
@@ -572,7 +572,6 @@ export interface FileRouteTypes {
     | '/whatsapp-clonado'
     | '/blog/$slug'
     | '/blog/'
-    | '/api/public/blackcat-webhook'
     | '/api/public/codefy-webhook'
     | '/api/public/fb-track'
     | '/api/public/imperium-webhook'
@@ -581,6 +580,7 @@ export interface FileRouteTypes {
     | '/api/public/omega-webhook'
     | '/api/public/syncpay-webhook'
     | '/api/public/umbrella-webhook'
+    | '/api/public/umbrellapag-webhook'
     | '/api/public/vizzion-webhook'
   fileRoutesById: FileRoutesById
 }
@@ -621,7 +621,6 @@ export interface RootRouteChildren {
   WhatsappClonadoRoute: typeof WhatsappClonadoRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
-  ApiPublicBlackcatWebhookRoute: typeof ApiPublicBlackcatWebhookRoute
   ApiPublicCodefyWebhookRoute: typeof ApiPublicCodefyWebhookRoute
   ApiPublicFbTrackRoute: typeof ApiPublicFbTrackRoute
   ApiPublicImperiumWebhookRoute: typeof ApiPublicImperiumWebhookRoute
@@ -630,6 +629,7 @@ export interface RootRouteChildren {
   ApiPublicOmegaWebhookRoute: typeof ApiPublicOmegaWebhookRoute
   ApiPublicSyncpayWebhookRoute: typeof ApiPublicSyncpayWebhookRoute
   ApiPublicUmbrellaWebhookRoute: typeof ApiPublicUmbrellaWebhookRoute
+  ApiPublicUmbrellapagWebhookRoute: typeof ApiPublicUmbrellapagWebhookRoute
   ApiPublicVizzionWebhookRoute: typeof ApiPublicVizzionWebhookRoute
 }
 
@@ -887,13 +887,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/blackcat-webhook': {
-      id: '/api/public/blackcat-webhook'
-      path: '/api/public/blackcat-webhook'
-      fullPath: '/api/public/blackcat-webhook'
-      preLoaderRoute: typeof ApiPublicBlackcatWebhookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/public/codefy-webhook': {
       id: '/api/public/codefy-webhook'
       path: '/api/public/codefy-webhook'
@@ -950,6 +943,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicUmbrellaWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/umbrellapag-webhook': {
+      id: '/api/public/umbrellapag-webhook'
+      path: '/api/public/umbrellapag-webhook'
+      fullPath: '/api/public/umbrellapag-webhook'
+      preLoaderRoute: typeof ApiPublicUmbrellapagWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/vizzion-webhook': {
       id: '/api/public/vizzion-webhook'
       path: '/api/public/vizzion-webhook'
@@ -997,7 +997,6 @@ const rootRouteChildren: RootRouteChildren = {
   WhatsappClonadoRoute: WhatsappClonadoRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
-  ApiPublicBlackcatWebhookRoute: ApiPublicBlackcatWebhookRoute,
   ApiPublicCodefyWebhookRoute: ApiPublicCodefyWebhookRoute,
   ApiPublicFbTrackRoute: ApiPublicFbTrackRoute,
   ApiPublicImperiumWebhookRoute: ApiPublicImperiumWebhookRoute,
@@ -1006,6 +1005,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicOmegaWebhookRoute: ApiPublicOmegaWebhookRoute,
   ApiPublicSyncpayWebhookRoute: ApiPublicSyncpayWebhookRoute,
   ApiPublicUmbrellaWebhookRoute: ApiPublicUmbrellaWebhookRoute,
+  ApiPublicUmbrellapagWebhookRoute: ApiPublicUmbrellapagWebhookRoute,
   ApiPublicVizzionWebhookRoute: ApiPublicVizzionWebhookRoute,
 }
 export const routeTree = rootRouteImport
