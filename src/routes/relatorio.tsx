@@ -832,14 +832,14 @@ function RelatorioPage() {
             <button
               onClick={() => {
                 setShowLicenseModal(false);
-                navigate({ to: "/whatsapp-clonado", search: { phone, sex } });
+                navigate({ to: "/checkout", search: { phone, sex, amount: 68.12 } });
               }}
               className="mt-5 w-full h-14 bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.8)] text-[15px] uppercase tracking-wide"
             >
               🔓 ATIVAR LICENÇA SPY RADAR
             </button>
             <p className="text-center text-[11px] text-zinc-500 mt-2">
-              🔒 PIX R$ 47,00 · ativação em segundos · válido por 365 dias
+              🔒 PIX R$ 68,12 · ativação em segundos · válido por 365 dias
             </p>
           </div>
         </div>
