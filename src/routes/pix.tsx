@@ -34,10 +34,6 @@ function PixPage() {
   const { id, phone, sex } = Route.useSearch();
   const navigate = useNavigate();
   const checkPix = useServerFn(getPixStatus);
-  const targetName = useTargetName();
-  const doAlvo = targetName ? `de ${targetName}` : "do alvo";
-  const paraAlvo = targetName ? `para ${targetName}` : "para o alvo";
-
   const [charge, setCharge] = useState<PixCharge | null>(null);
   const [copied, setCopied] = useState(false);
   const [statusLabel, setStatusLabel] = useState("Aguardando pagamento…");
@@ -191,7 +187,6 @@ function PixPage() {
   const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
   const ss = String(seconds % 60).padStart(2, "0");
   const amount = charge?.amount ?? 0;
-  const formatBRL = (v: number) => `R$ ${v.toFixed(2).replace(".", ",")}`;
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-['Inter',sans-serif] relative overflow-hidden">
@@ -230,19 +225,13 @@ function PixPage() {
           </div>
         </div>
 
-        {/* gatilho emocional */}
-        <div className="bg-gradient-to-br from-red-600/20 via-red-900/10 to-slate-50/40 border border-red-200 rounded-2xl p-4">
-          <div className="flex items-start gap-2">
-            <span className="text-red-600 text-xl leading-none">⚠️</span>
-            <div className="space-y-1">
-              <div className="text-[11px] uppercase tracking-[0.2em] text-red-700 font-bold font-['Geist_Mono',monospace]">
-                A verdade está a 1 PIX de distância
-              </div>
-              <p className="text-[13px] text-slate-800 leading-snug">
-                Mensagens apagadas, áudios secretos, fotos escondidas, conversas com terceiros… <span className="text-red-700 font-semibold">tudo isso será desbloqueado agora.</span>
-              </p>
-            </div>
-          </div>
+        {/* banner principal */}
+        <div className="rounded-2xl overflow-hidden border border-yellow-300 shadow-[0_15px_40px_rgba(217,169,40,0.15)]">
+          <img
+            src="/images/pix-falta-pouco.png"
+            alt="Falta pouco para seu acesso ser liberado — pague o seu PIX com segurança"
+            className="w-full h-auto block"
+          />
         </div>
 
         {/* Card principal */}
@@ -310,74 +299,13 @@ function PixPage() {
           )}
         </div>
 
-        {/* Passo a passo */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-4 space-y-2">
-          <div className="text-[11px] uppercase tracking-[0.2em] text-[#25D366] font-bold font-['Geist_Mono',monospace] mb-1">
-            Passo a passo · Como pagar o PIX
-          </div>
-          <p className="text-[12px] text-slate-500 leading-snug mb-2">
-            Siga os 4 passos abaixo. O processo leva menos de 1 minuto e a liberação do acesso é automática.
-          </p>
-          <ol className="text-[13px] text-slate-700 space-y-3">
-            <li className="flex gap-3">
-              <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">1</span>
-              <div>
-                <div className="font-semibold text-slate-900">Abra o aplicativo do seu banco</div>
-                <div className="text-[12px] text-slate-500">Use qualquer banco ou carteira digital (Nubank, Itaú, Bradesco, Caixa, Inter, PicPay, Mercado Pago, etc.) e entre no menu <span className="text-[#25D366]">Área PIX</span>.</div>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">2</span>
-              <div>
-                <div className="font-semibold text-slate-900">Escolha "PIX Copia e Cola" ou "Ler QR Code"</div>
-                <div className="text-[12px] text-slate-500">
-                  <span className="text-[#25D366] font-semibold">No celular:</span> toque em <span className="text-[#25D366]">Copiar código PIX</span> acima e cole no campo do banco.<br />
-                  <span className="text-[#25D366] font-semibold">No computador:</span> abra a câmera do banco no celular e aponte para o QR Code da tela.
-                </div>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">3</span>
-              <div>
-                <div className="font-semibold text-slate-900">Confira os dados e confirme o pagamento de <span className="text-[#25D366]">{formatBRL(amount)}</span></div>
-                <div className="text-[12px] text-slate-500">O nome do recebedor aparece de forma neutra para preservar o seu sigilo. Confirme com a sua senha do banco normalmente.</div>
-              </div>
-            </li>
-            <li className="flex gap-3">
-              <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">4</span>
-              <div>
-                <div className="font-semibold text-slate-900">Pronto! Aguarde nessa tela</div>
-                <div className="text-[12px] text-slate-500">Em poucos segundos o pagamento é identificado automaticamente e o <span className="text-[#25D366] font-semibold">acesso ao celular clonado é liberado</span> sem você precisar fazer mais nada. Não feche essa página.</div>
-              </div>
-            </li>
-          </ol>
-        </div>
-
-        {/* Aviso de sigilo */}
-        <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-4 space-y-2">
-          <div className="flex items-center gap-2">
-            <span className="text-[#128C7E] text-lg">🛡️</span>
-            <h3 className="text-sm font-bold text-[#25D366]">100% sigiloso</h3>
-          </div>
-          <p className="text-[12px] text-slate-700 leading-relaxed">
-            O nome no extrato bancário aparece de forma <span className="text-[#25D366] font-semibold">neutra</span>. Ninguém vai saber para onde foi o pagamento.
-          </p>
-          <p className="text-[11px] text-slate-500 leading-relaxed border-t border-yellow-100 pt-2">
-            Após o pagamento você terá <span className="text-slate-700 font-semibold">acesso total ao celular clonado</span> {doAlvo}. O SpyRadar Brasil não se responsabiliza pelo mau uso das informações.
-          </p>
-        </div>
-
-        {/* Aviso de quebra de sigilo */}
-        <div className="bg-gradient-to-br from-red-600/20 via-red-900/10 to-slate-50/40 border border-red-300 rounded-2xl p-4 space-y-2">
-          <div className="flex items-center gap-2">
-            <span className="text-red-600 text-lg">🚨</span>
-            <h3 className="text-sm font-bold text-red-700 uppercase tracking-wider font-['Geist_Mono',monospace]">
-              Atenção · Risco de exposição
-            </h3>
-          </div>
-          <p className="text-[12px] text-slate-800 leading-relaxed">
-            O <span className="text-red-700 font-semibold">não pagamento para ativação da licença</span> pode acarretar na <span className="text-red-700 font-semibold">quebra de sigilo</span> e vazamento de informações {paraAlvo}.
-          </p>
+        {/* Como pagar o PIX */}
+        <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+          <img
+            src="/images/pix-como-pagar.png"
+            alt="Veja como pagar seu PIX: copie o código, abra o app do banco, cole o código e confirme o pagamento"
+            className="w-full h-auto block"
+          />
         </div>
 
         {/* Garantia 7 dias */}
@@ -391,25 +319,6 @@ function PixPage() {
           <p className="text-[12px] text-slate-800 leading-relaxed">
             Seu dinheiro fica <span className="text-[#25D366] font-semibold">protegido</span> e só é liberado para a empresa <span className="text-[#25D366] font-semibold">Spy Monitoramento LTDA</span> após os 7 dias de uso da plataforma.
           </p>
-        </div>
-
-        {/* Garantias */}
-        <div className="grid grid-cols-3 gap-2">
-          <Badge>🔒 Anônimo</Badge>
-          <Badge>⚡ Liberação na hora</Badge>
-          <Badge>🕵️ Sigilo total</Badge>
-        </div>
-
-        {/* Microdepoimento de fechamento */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-4">
-          <div className="flex items-center gap-2 mb-1">
-            <div className="text-amber-600 text-sm">★★★★★</div>
-            <div className="text-[10px] text-slate-500 uppercase tracking-wider font-['Geist_Mono',monospace]">Cliente verificado · há 6 min</div>
-          </div>
-          <p className="text-[12px] text-slate-700 italic leading-snug">
-            "Paguei o PIX e em segundos vi tudo. Confirmou tudo que eu já suspeitava. Valeu cada centavo."
-          </p>
-          <div className="text-[11px] text-slate-500 mt-1">— Camila R., São Paulo</div>
         </div>
 
         <Link
