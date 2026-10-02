@@ -42,6 +42,7 @@ import { Route as TaxaMetaRouteImport } from './routes/taxa-meta'
 import { Route as TermosRouteImport } from './routes/termos'
 import { Route as TrocaRouteImport } from './routes/troca'
 import { Route as VerificarRouteImport } from './routes/verificar'
+import { Route as WhatsappClonadoRouteImport } from './routes/whatsapp-clonado'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ApiPublicCodefyWebhookRouteImport } from './routes/api/public/codefy-webhook'
@@ -220,6 +221,11 @@ const VerificarRoute = VerificarRouteImport.update({
   path: '/verificar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WhatsappClonadoRoute = WhatsappClonadoRouteImport.update({
+  id: '/whatsapp-clonado',
+  path: '/whatsapp-clonado',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -320,6 +326,7 @@ export interface FileRoutesByFullPath {
   '/termos': typeof TermosRoute
   '/troca': typeof TrocaRoute
   '/verificar': typeof VerificarRoute
+  '/whatsapp-clonado': typeof WhatsappClonadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
@@ -367,6 +374,7 @@ export interface FileRoutesByTo {
   '/termos': typeof TermosRoute
   '/troca': typeof TrocaRoute
   '/verificar': typeof VerificarRoute
+  '/whatsapp-clonado': typeof WhatsappClonadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
@@ -415,6 +423,7 @@ export interface FileRoutesById {
   '/termos': typeof TermosRoute
   '/troca': typeof TrocaRoute
   '/verificar': typeof VerificarRoute
+  '/whatsapp-clonado': typeof WhatsappClonadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
@@ -464,6 +473,7 @@ export interface FileRouteTypes {
     | '/termos'
     | '/troca'
     | '/verificar'
+    | '/whatsapp-clonado'
     | '/blog/$slug'
     | '/blog/'
     | '/api/public/codefy-webhook'
@@ -511,6 +521,7 @@ export interface FileRouteTypes {
     | '/termos'
     | '/troca'
     | '/verificar'
+    | '/whatsapp-clonado'
     | '/blog/$slug'
     | '/blog'
     | '/api/public/codefy-webhook'
@@ -558,6 +569,7 @@ export interface FileRouteTypes {
     | '/termos'
     | '/troca'
     | '/verificar'
+    | '/whatsapp-clonado'
     | '/blog/$slug'
     | '/blog/'
     | '/api/public/codefy-webhook'
@@ -606,6 +618,7 @@ export interface RootRouteChildren {
   TermosRoute: typeof TermosRoute
   TrocaRoute: typeof TrocaRoute
   VerificarRoute: typeof VerificarRoute
+  WhatsappClonadoRoute: typeof WhatsappClonadoRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
   ApiPublicCodefyWebhookRoute: typeof ApiPublicCodefyWebhookRoute
@@ -853,6 +866,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerificarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/whatsapp-clonado': {
+      id: '/whatsapp-clonado'
+      path: '/whatsapp-clonado'
+      fullPath: '/whatsapp-clonado'
+      preLoaderRoute: typeof WhatsappClonadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
@@ -974,6 +994,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermosRoute: TermosRoute,
   TrocaRoute: TrocaRoute,
   VerificarRoute: VerificarRoute,
+  WhatsappClonadoRoute: WhatsappClonadoRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
   ApiPublicCodefyWebhookRoute: ApiPublicCodefyWebhookRoute,
