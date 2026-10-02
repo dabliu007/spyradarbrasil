@@ -19,7 +19,7 @@ import { getRequest } from "@tanstack/react-start/server";
 
 const BASE_URL = "https://api-gateway.umbrellapag.com/api";
 const USER_AGENT = "UMBRELLAB2B/1.0";
-const APP_ORIGIN = process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://clonawhats.com";
+const APP_ORIGIN = process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://whatsradar.top";
 const AMOUNT = 68.12;
 const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 
@@ -555,7 +555,7 @@ export const getPixStatus = createServerFn({ method: "POST" })
         if (!alreadyPaid) {
           const { sendCapiEvent } = await import("@/lib/fb-capi.server");
           const origin =
-            process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://www.whatsradar.com";
+            process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://whatsradar.top";
           await sendCapiEvent({
             event_name: "Purchase",
             event_id: `purchase-${data.id}`,
