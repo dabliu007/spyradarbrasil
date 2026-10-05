@@ -15,10 +15,10 @@ export const Route = createFileRoute("/rastreamento")({
         property: "og:description",
         content: "Como rastrear o seu pedido no SpyRadar Brasil.",
       },
-      { property: "og:url", content: "https://clonawhats.com/rastreamento" },
+      { property: "og:url", content: "https://whatsradar.top/rastreamento" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://clonawhats.com/rastreamento" }],
+    links: [{ rel: "canonical", href: "https://whatsradar.top/rastreamento" }],
   }),
   component: RastreamentoPage,
 });

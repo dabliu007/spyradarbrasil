@@ -16,4 +16,4 @@ Disallow: /presell
 Disallow: /investigar
 Disallow: /api/
 
-Sitemap: https://clonawhats.com/sitemap.xml
+Sitemap: https://whatsradar.top/sitemap.xml

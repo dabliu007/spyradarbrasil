@@ -15,10 +15,10 @@ export const Route = createFileRoute("/contato")({
         property: "og:description",
         content: "Canais oficiais de contato do SpyRadar Brasil.",
       },
-      { property: "og:url", content: "https://clonawhats.com/contato" },
+      { property: "og:url", content: "https://whatsradar.top/contato" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://clonawhats.com/contato" }],
+    links: [{ rel: "canonical", href: "https://whatsradar.top/contato" }],
   }),
   component: ContatoPage,
 });

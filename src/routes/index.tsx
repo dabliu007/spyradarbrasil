@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { VerificarPage } from "@/routes/verificar";
 
-const SITE_URL = "https://clonawhats.com";
+const SITE_URL = "https://whatsradar.top";
 
-const TITLE = "SpyRadar Brasil (SpyZap): Clonar Celular do Marido ou da Esposa";
+const TITLE = "Spy Radar Brasil: Descubra Traição em 5 Minutos (SpyZap)";
 
 const DESCRIPTION =
-  "SpyRadar Brasil e SpyZap: veja como clonar o celular do marido ou da esposa e descobrir traição pelo WhatsApp. Conversas apagadas, fotos ocultas, áudios e localização em tempo real, 100% sigiloso.";
+  "Spy Radar Brasil: descubra traição em 5 minutos informando apenas o número do WhatsApp. Veja conversas apagadas, fotos ocultas, áudios e localização em tempo real, 100% sigiloso.";
 
 const KEYWORDS = [
   "SpyRadar Brasil",
@@ -97,7 +97,7 @@ export const Route = createFileRoute("/")({
           description: DESCRIPTION,
           offers: {
             "@type": "Offer",
-            price: "47.00",
+            price: "137.00",
             priceCurrency: "BRL",
             availability: "https://schema.org/InStock",
             url: `${SITE_URL}/checkout`,

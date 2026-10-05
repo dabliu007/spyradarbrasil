@@ -7,10 +7,10 @@ export const Route = createFileRoute("/termos")({
       { name: "description", content: "Termos de uso do SpyRadar Brasil: regras, responsabilidades e limitações de uso da plataforma." },
       { property: "og:title", content: "Termos de Uso · SpyRadar Brasil" },
       { property: "og:description", content: "Termos de uso do SpyRadar Brasil." },
-      { property: "og:url", content: "https://clonawhats.com/termos" },
+      { property: "og:url", content: "https://whatsradar.top/termos" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://clonawhats.com/termos" }],
+    links: [{ rel: "canonical", href: "https://whatsradar.top/termos" }],
   }),
   component: TermosPage,
 });
@@ -20,7 +20,7 @@ function TermosPage() {
     <p>
       Estes Termos de Uso ("Termos") regulam o acesso e a utilização do site
       <strong> SpyRadar Brasil</strong> ("SpyRadar Brasil", "nós", "plataforma"), acessível em
-      https://clonawhats.com. Ao acessar ou utilizar a plataforma, você declara
+      https://whatsradar.top. Ao acessar ou utilizar a plataforma, você declara
       ter lido, entendido e concordado integralmente com estes Termos. Caso não
       concorde, você não deve utilizar o serviço.
     </p>

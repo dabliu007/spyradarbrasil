@@ -15,10 +15,10 @@ export const Route = createFileRoute("/troca")({
         property: "og:description",
         content: "Regras de troca, cancelamento e devolução do SpyRadar Brasil.",
       },
-      { property: "og:url", content: "https://clonawhats.com/troca" },
+      { property: "og:url", content: "https://whatsradar.top/troca" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://clonawhats.com/troca" }],
+    links: [{ rel: "canonical", href: "https://whatsradar.top/troca" }],
   }),
   component: TrocaPage,
 });

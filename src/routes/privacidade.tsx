@@ -8,10 +8,10 @@ export const Route = createFileRoute("/privacidade")({
       { name: "description", content: "Como o SpyRadar Brasil coleta, utiliza e protege seus dados pessoais em conformidade com a LGPD." },
       { property: "og:title", content: "Política de Privacidade · SpyRadar Brasil" },
       { property: "og:description", content: "Como tratamos seus dados no SpyRadar Brasil." },
-      { property: "og:url", content: "https://clonawhats.com/privacidade" },
+      { property: "og:url", content: "https://whatsradar.top/privacidade" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://clonawhats.com/privacidade" }],
+    links: [{ rel: "canonical", href: "https://whatsradar.top/privacidade" }],
   }),
   component: PrivacidadePage,
 });
@@ -29,7 +29,7 @@ function PrivacidadePage() {
       <p>
         Esta Política de Privacidade descreve como o <strong>SpyRadar Brasil</strong>
         {" "}("nós", "plataforma") coleta, utiliza, armazena e protege dados
-        pessoais dos usuários que acessam https://clonawhats.com, em
+        pessoais dos usuários que acessam https://whatsradar.top, em
         conformidade com a <strong>Lei Geral de Proteção de Dados (Lei nº
         13.709/2018 — LGPD)</strong> e demais normas aplicáveis.
       </p>

@@ -16,10 +16,10 @@ export const Route = createFileRoute("/sobre")({
         content:
           "Missão, valores e responsáveis pela plataforma SpyRadar Brasil.",
       },
-      { property: "og:url", content: "https://clonawhats.com/sobre" },
+      { property: "og:url", content: "https://whatsradar.top/sobre" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://clonawhats.com/sobre" }],
+    links: [{ rel: "canonical", href: "https://whatsradar.top/sobre" }],
   }),
   component: SobrePage,
 });

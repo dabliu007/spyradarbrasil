@@ -17,10 +17,10 @@ export const Route = createFileRoute("/blog/")({
         content:
           "Guias e artigos práticos sobre relacionamentos, traição e investigação digital.",
       },
-      { property: "og:url", content: "https://clonawhats.com/blog" },
+      { property: "og:url", content: "https://whatsradar.top/blog" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://clonawhats.com/blog" }],
+    links: [{ rel: "canonical", href: "https://whatsradar.top/blog" }],
   }),
   component: BlogIndex,
 });
