@@ -143,9 +143,14 @@ function SigiloPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-['Inter',sans-serif]">
       <img
-        src="/images/sigilo-hero.png"
+        src="/images/sigilo-hero.webp"
         alt="Por que é necessário pagar a Taxa de Sigilo"
         className="w-full h-auto block"
+        width={960}
+        height={540}
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
       />
 
       <div className="max-w-md mx-auto px-4 py-6 space-y-4">

@@ -441,10 +441,13 @@ function InputStep({
       {/* MATÉRIA NA TV — Brasil Agora */}
       <div className="rounded-2xl overflow-hidden border border-yellow-500/20 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
         <img
-          src="/images/tv-brasil-agora.png"
+          src="/images/tv-brasil-agora.webp"
           alt="Reportagem de TV sobre a Spy Radar Brasil, responsável por descobrir mais de 2.831 traições em 2026"
           className="w-full h-auto block"
+          width={960}
+          height={640}
           loading="lazy"
+          decoding="async"
         />
       </div>
 
@@ -478,10 +481,13 @@ function InputStep({
         </p>
         <div className="overflow-hidden rounded-2xl border border-yellow-500/20 shadow-[0_0_40px_-12px_rgba(234,179,8,0.35)]">
           <img
-            src="/images/depoimentos-whatsapp.png"
+            src="/images/depoimentos-whatsapp.webp"
             alt="Depoimentos reais de clientes da Spy Radar Brasil em conversas de WhatsApp, com avaliações de 5 estrelas e selo de cliente verificado"
             className="w-full h-auto block"
+            width={960}
+            height={1440}
             loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
@@ -507,19 +513,19 @@ function InputStep({
 const PRESS_ITEMS = [
   {
     outlet: "g1",
-    img: "/images/imprensa-g1.png",
+    img: "/images/imprensa-g1.webp",
     headline: "Spy Radar Brasil ganha destaque por reunir informações públicas em um único relatório",
     section: "Tecnologia",
   },
   {
     outlet: "UOL",
-    img: "/images/imprensa-uol.png",
+    img: "/images/imprensa-uol.webp",
     headline: "Spy Radar Brasil se destaca por reunir informações públicas em um único relatório",
     section: "Tecnologia",
   },
   {
     outlet: "R7",
-    img: "/images/imprensa-r7.png",
+    img: "/images/imprensa-r7.webp",
     headline: "Spy Radar Brasil ganha destaque por facilitar o acesso a informações públicas",
     section: "Tecnologia",
   },
@@ -549,11 +555,14 @@ function PressSection() {
           >
             <div className="relative overflow-hidden">
               <img
-                src={item.img || "/placeholder.svg"}
-                alt={`Matéria do portal ${item.outlet}: ${item.headline}`}
-                loading="lazy"
-                className="w-full h-auto block"
-              />
+            src={item.img || "/placeholder.svg"}
+            alt={`Matéria do portal ${item.outlet}: ${item.headline}`}
+            loading="lazy"
+            decoding="async"
+            width={960}
+            height={640}
+            className="w-full h-auto block"
+          />
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/30 via-transparent to-transparent" />
             </div>
             <figcaption className="flex items-center justify-between gap-3 px-4 py-3 border-t border-white/5">

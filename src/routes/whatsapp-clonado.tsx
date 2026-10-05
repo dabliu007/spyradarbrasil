@@ -178,9 +178,13 @@ function WhatsAppClonadoPage() {
       <div className="max-w-md mx-auto px-3 pt-3">
         <div className="rounded-2xl overflow-hidden border border-yellow-500/30 shadow-[0_0_40px_-12px_rgba(217,169,40,0.6)]">
           <img
-            src="/images/dispositivo-emparelhado.png"
+            src="/images/dispositivo-emparelhado.webp"
             alt="Dispositivo emparelhado — para desbloquear as conversas é necessário ser assinante do Spy Radar Brasil"
             loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            width={960}
+            height={540}
             className="w-full h-auto block select-none"
             draggable={false}
           />

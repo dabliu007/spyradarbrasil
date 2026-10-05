@@ -220,11 +220,14 @@ function CheckoutPage() {
         {/* Banner topo */}
         <div className="-mx-4 -mt-4 overflow-hidden">
           <img
-            src="/images/checkout-hero.png"
+            src="/images/checkout-hero.webp"
             alt="Spy Radar Brasil — Falta pouco para você ter acesso à traição descoberta. Finalize a compra da sua licença."
             className="w-full h-auto block"
-            width={1706}
-            height={960}
+            width={960}
+            height={540}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
           />
         </div>
 
@@ -333,9 +336,13 @@ function CheckoutPage() {
         {/* Depoimentos */}
         <div className="overflow-hidden rounded-3xl border border-slate-200 shadow-sm">
           <img
-            src="/images/depoimentos.png"
+            src="/images/depoimentos.webp"
             alt="Depoimentos de clientes da Spy Radar Brasil: mais de 25.000 clientes ativos, avaliação média 4,8 de 5 e 98% recomendam"
             className="w-full h-auto block"
+            width={960}
+            height={1008}
+            loading="lazy"
+            decoding="async"
           />
         </div>
 
@@ -377,9 +384,13 @@ function CheckoutPage() {
 
         {/* Compra protegida */}
         <img
-          src="/images/compra-protegida.png"
+          src="/images/compra-protegida.webp"
           alt="Compra protegida — transação 100% segura, satisfação garantida em até 30 dias, ambiente seguro, pagamento protegido, dados criptografados e privacidade garantida. Aceitamos Visa, Mastercard, Elo, American Express, Pix e Boleto."
           className="w-full h-auto rounded-2xl border border-slate-200"
+          width={960}
+          height={640}
+          loading="lazy"
+          decoding="async"
         />
 
         {/* Garantia */}

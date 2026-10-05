@@ -18,6 +18,20 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 
 import { capturePersistedUtms, fbqTrack, FB_PIXEL_IDS } from "../lib/tracking";
 
+const FONTS_HREF =
+  "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap";
+
+// Injeta o CSS das fontes via JS após o parsing do HTML, para não bloquear
+// a renderização inicial (First Contentful Paint).
+const FONTS_LOADER = `
+(function(){
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = '${FONTS_HREF}';
+  document.head.appendChild(link);
+})();
+`;
+
 const FB_PIXEL_INIT = `
 (function(){
   function loadPixel(){
@@ -131,17 +145,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "preconnect", href: "https://connect.facebook.net" },
-      {
-        rel: "preload",
-        as: "style",
-        href: "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap",
-      },
     ],
     scripts: [
+      // Injeta o CSS das fontes de forma assíncrona (não bloqueia o FCP).
+      { children: FONTS_LOADER, defer: true },
       // Defer FB Pixel init until after `load` — não bloqueia a renderização inicial.
       { children: FB_PIXEL_INIT, defer: true },
       {
@@ -183,6 +190,10 @@ function RootShell({ children }: { children: ReactNode }) {
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: appCss }}
         />
+        {/* Fallback para navegadores sem JS — o caso comum carrega as fontes via FONTS_LOADER */}
+        <noscript>
+          <link rel="stylesheet" href={FONTS_HREF} />
+        </noscript>
       </head>
       <body>
         <noscript>

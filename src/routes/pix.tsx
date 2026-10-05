@@ -209,9 +209,14 @@ function PixPage() {
         {/* banner principal */}
         <div className="rounded-2xl overflow-hidden border border-yellow-300 shadow-[0_15px_40px_rgba(217,169,40,0.15)]">
           <img
-            src="/images/pix-falta-pouco.png"
+            src="/images/pix-falta-pouco.webp"
             alt="Falta pouco para seu acesso ser liberado — pague o seu PIX com segurança"
             className="w-full h-auto block"
+            width={960}
+            height={541}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
           />
         </div>
 
@@ -283,9 +288,13 @@ function PixPage() {
         {/* Como pagar o PIX */}
         <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
           <img
-            src="/images/pix-como-pagar.png"
+            src="/images/pix-como-pagar.webp"
             alt="Veja como pagar seu PIX: copie o código, abra o app do banco, cole o código e confirme o pagamento"
             className="w-full h-auto block"
+            width={960}
+            height={405}
+            loading="lazy"
+            decoding="async"
           />
         </div>
 
