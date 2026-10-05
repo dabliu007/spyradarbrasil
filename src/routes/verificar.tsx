@@ -12,6 +12,7 @@ import manBeach3 from "@/assets/man-beach-3.jpg.asset.json";
 import wppVideo from "@/assets/wpp.mp4.asset.json";
 import { getWhatsAppProfilePicture } from "@/lib/wa-profile.functions";
 import { useTargetName } from "@/lib/use-target-name";
+import FooterLegal from "@/components/FooterLegal";
 
 const VIDEO_START_SECONDS = 0; // VSL toca desde o início
 
@@ -185,6 +186,7 @@ export function VerificarPage() {
 
         {step === "input" && <FAQ />}
         <TerminalFooter />
+        <FooterLegal />
       </div>
     </div>
   );
