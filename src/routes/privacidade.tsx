@@ -38,7 +38,7 @@ function PrivacidadePage() {
       <p>
         O SpyRadar Brasil é o controlador dos dados pessoais tratados no âmbito da
         plataforma. Solicitações relacionadas a dados pessoais podem ser
-        enviadas para <strong>sac@spyradarbrasil.com</strong>.
+        enviadas para <strong>sac@zapradarbrasil.com.br</strong>.
       </p>
 
       <H2>2. Dados que coletamos</H2>
@@ -121,7 +121,7 @@ function PrivacidadePage() {
         <li>Informação sobre com quem compartilhamos seus dados.</li>
       </ul>
       <p>
-        Solicitações devem ser enviadas para <strong>sac@spyradarbrasil.com</strong>
+        Solicitações devem ser enviadas para <strong>sac@zapradarbrasil.com.br</strong>
         {" "}e serão respondidas nos prazos legais.
       </p>
 
@@ -146,7 +146,7 @@ function PrivacidadePage() {
       <H2>13. Encarregado (DPO) e contato</H2>
       <p>
         Para questões sobre privacidade e proteção de dados, entre em contato
-        pelo e-mail <strong>sac@spyradarbrasil.com</strong>.
+        pelo e-mail <strong>sac@zapradarbrasil.com.br</strong>.
       </p>
     </LegalShell>
   );

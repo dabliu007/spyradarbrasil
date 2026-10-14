@@ -75,7 +75,7 @@ function CookiesPage() {
       <H2>6. Contato</H2>
       <p>
         Dúvidas sobre cookies podem ser enviadas para{" "}
-        <strong>sac@spyradarbrasil.com</strong>.
+        <strong>sac@zapradarbrasil.com.br</strong>.
       </p>
     </LegalShell>
   );

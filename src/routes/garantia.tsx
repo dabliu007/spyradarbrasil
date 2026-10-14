@@ -58,8 +58,8 @@ function GarantiaPage() {
       <p>
         Basta enviar um e-mail para{" "}
         <strong>
-          <a href="mailto:sac@spyradarbrasil.com" className="text-yellow-700 hover:underline">
-            sac@spyradarbrasil.com
+          <a href="mailto:sac@zapradarbrasil.com.br" className="text-yellow-700 hover:underline">
+            sac@zapradarbrasil.com.br
           </a>
         </strong>{" "}
         ou chamar no WhatsApp <strong>(11) 96507-2638</strong> informando o
@@ -77,7 +77,7 @@ function GarantiaPage() {
       <H2>5. Contato</H2>
       <p>
         Dúvidas sobre a garantia? Fale com o nosso atendimento pelo e-mail{" "}
-        <strong>sac@spyradarbrasil.com</strong> ou pelo telefone/WhatsApp{" "}
+        <strong>sac@zapradarbrasil.com.br</strong> ou pelo telefone/WhatsApp{" "}
         <strong>(11) 96507-2638</strong>.
       </p>
     </LegalShell>

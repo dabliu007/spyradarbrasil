@@ -166,7 +166,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             {
               "@type": "ContactPoint",
               contactType: "customer support",
-              email: "sac@spyradarbrasil.com",
+              email: "sac@zapradarbrasil.com.br",
               telephone: "+55-11-96507-2638",
               availableLanguage: ["Portuguese"],
             },

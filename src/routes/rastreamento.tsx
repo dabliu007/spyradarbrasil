@@ -79,8 +79,8 @@ function RastreamentoPage() {
         Precisa de ajuda com o seu pedido? Fale com o nosso atendimento pelo
         e-mail{" "}
         <strong>
-          <a href="mailto:sac@spyradarbrasil.com" className="text-yellow-700 hover:underline">
-            sac@spyradarbrasil.com
+          <a href="mailto:sac@zapradarbrasil.com.br" className="text-yellow-700 hover:underline">
+            sac@zapradarbrasil.com.br
           </a>
         </strong>{" "}
         ou pelo telefone/WhatsApp <strong>(11) 96507-2638</strong>.

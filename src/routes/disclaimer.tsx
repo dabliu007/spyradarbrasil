@@ -82,7 +82,7 @@ function DisclaimerPage() {
       <H2>Contato</H2>
       <p>
         Dúvidas sobre este aviso podem ser enviadas para{" "}
-        <strong>sac@spyradarbrasil.com</strong>.
+        <strong>sac@zapradarbrasil.com.br</strong>.
       </p>
     </LegalShell>
   );

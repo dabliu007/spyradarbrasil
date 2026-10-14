@@ -44,8 +44,8 @@ function ContatoPage() {
       <p>
         Dúvidas sobre o serviço, pagamentos, acesso ou suporte técnico:{" "}
         <strong>
-          <a href="mailto:sac@spyradarbrasil.com" className="text-yellow-700 hover:underline">
-            sac@spyradarbrasil.com
+          <a href="mailto:sac@zapradarbrasil.com.br" className="text-yellow-700 hover:underline">
+            sac@zapradarbrasil.com.br
           </a>
         </strong>
       </p>
@@ -65,8 +65,8 @@ function ContatoPage() {
         Solicitações de titulares de dados, encarregado (DPO) e assuntos
         relacionados à LGPD:{" "}
         <strong>
-          <a href="mailto:sac@spyradarbrasil.com" className="text-yellow-700 hover:underline">
-            sac@spyradarbrasil.com
+          <a href="mailto:sac@zapradarbrasil.com.br" className="text-yellow-700 hover:underline">
+            sac@zapradarbrasil.com.br
           </a>
         </strong>
       </p>
@@ -75,8 +75,8 @@ function ContatoPage() {
       <p>
         Notificações extrajudiciais, imprensa, parcerias e questões contratuais:{" "}
         <strong>
-          <a href="mailto:sac@spyradarbrasil.com" className="text-yellow-700 hover:underline">
-            sac@spyradarbrasil.com
+          <a href="mailto:sac@zapradarbrasil.com.br" className="text-yellow-700 hover:underline">
+            sac@zapradarbrasil.com.br
           </a>
         </strong>
       </p>

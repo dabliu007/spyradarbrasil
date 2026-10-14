@@ -104,7 +104,7 @@ function TermosPage() {
     <H2>8. Contato</H2>
     <p>
       Dúvidas, solicitações ou reclamações podem ser encaminhadas para
-      <strong> sac@spyradarbrasil.com</strong> ou pelo telefone/WhatsApp{" "}
+      <strong> sac@zapradarbrasil.com.br</strong> ou pelo telefone/WhatsApp{" "}
       <strong>(11) 96507-2638</strong>.
     </p>
   </LegalShell>;

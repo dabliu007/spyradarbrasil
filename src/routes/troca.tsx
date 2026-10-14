@@ -76,8 +76,8 @@ function TrocaPage() {
       <p>
         Envie um e-mail para{" "}
         <strong>
-          <a href="mailto:sac@spyradarbrasil.com" className="text-yellow-700 hover:underline">
-            sac@spyradarbrasil.com
+          <a href="mailto:sac@zapradarbrasil.com.br" className="text-yellow-700 hover:underline">
+            sac@zapradarbrasil.com.br
           </a>
         </strong>{" "}
         ou chame no WhatsApp <strong>(11) 96507-2638</strong> com o e-mail da
@@ -94,7 +94,7 @@ function TrocaPage() {
       <H2>6. Contato</H2>
       <p>
         Dúvidas? Fale com o nosso atendimento pelo e-mail{" "}
-        <strong>sac@spyradarbrasil.com</strong> ou pelo telefone/WhatsApp{" "}
+        <strong>sac@zapradarbrasil.com.br</strong> ou pelo telefone/WhatsApp{" "}
         <strong>(11) 96507-2638</strong>.
       </p>
     </LegalShell>

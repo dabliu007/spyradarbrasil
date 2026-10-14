@@ -92,8 +92,8 @@ export default function FooterCredibilidade() {
           <ul className="space-y-2 text-sm">
             <li className="flex items-center gap-2">
               <Mail className="w-4 h-4" />
-              <a href="mailto:sac@spyradarbrasil.com" className="hover:text-white transition-colors">
-                sac@spyradarbrasil.com
+              <a href="mailto:sac@zapradarbrasil.com.br" className="hover:text-white transition-colors">
+                sac@zapradarbrasil.com.br
               </a>
             </li>
             <li className="flex items-center gap-2">

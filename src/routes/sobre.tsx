@@ -92,8 +92,8 @@ function SobrePage() {
         </a>{" "}
         ou envie um e-mail para{" "}
         <strong>
-              <a href="mailto:sac@spyradarbrasil.com" className="text-yellow-700 hover:underline">
-                sac@spyradarbrasil.com
+              <a href="mailto:sac@zapradarbrasil.com.br" className="text-yellow-700 hover:underline">
+                sac@zapradarbrasil.com.br
           </a>
         </strong>
         .
