@@ -331,7 +331,7 @@ function CadastroDispositivoPage() {
                   Acesse esse link no navegador
                 </div>
                 <div className="text-[#25D366] font-bold text-lg font-['Geist_Mono',monospace] break-all select-all">
-                  https://whatsradar.top/acessar-celular
+                  https://zapradarbrasil.com.br/acessar-celular
                 </div>
                 <div className="text-[11px] text-slate-500 mt-2">
                   Digite a URL manualmente no seu navegador. Por segurança, o link não é clicável aqui.
@@ -349,7 +349,7 @@ function CadastroDispositivoPage() {
                 <li className="flex gap-3">
                   <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">2</span>
                   <div>
-                    <div className="font-semibold text-slate-900 text-[14px]">Digite o endereço <span className="text-[#25D366] font-['Geist_Mono',monospace]">whatsradar.com/acessar-celular</span></div>
+                    <div className="font-semibold text-slate-900 text-[14px]">Digite o endereço <span className="text-[#25D366] font-['Geist_Mono',monospace]">zapradarbrasil.com.br/acessar-celular</span></div>
                     <div className="text-[12px] text-slate-500">Digite manualmente na barra de endereço (não clique em links suspeitos). Salve nos favoritos para acessar rapidamente quando quiser.</div>
                   </div>
                 </li>

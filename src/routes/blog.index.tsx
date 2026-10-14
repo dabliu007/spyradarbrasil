@@ -17,10 +17,10 @@ export const Route = createFileRoute("/blog/")({
         content:
           "Guias e artigos práticos sobre relacionamentos, traição e investigação digital.",
       },
-      { property: "og:url", content: "https://whatsradar.top/blog" },
+      { property: "og:url", content: "https://zapradarbrasil.com.br/blog" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://whatsradar.top/blog" }],
+    links: [{ rel: "canonical", href: "https://zapradarbrasil.com.br/blog" }],
   }),
   component: BlogIndex,
 });

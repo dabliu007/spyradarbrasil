@@ -75,8 +75,8 @@ export const Route = createFileRoute("/api/public/umbrella-webhook")({
                     Accept: "application/json",
                     "x-api-key": token,
                     "User-Agent": "UMBRELLAB2B/1.0",
-                    Origin: "https://whatsradar.com",
-                    Referer: "https://whatsradar.com/checkout",
+                    Origin: "https://zapradarbrasil.com.br",
+                    Referer: "https://zapradarbrasil.com.br/checkout",
                   },
                 },
               );

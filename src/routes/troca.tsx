@@ -15,10 +15,10 @@ export const Route = createFileRoute("/troca")({
         property: "og:description",
         content: "Regras de troca, cancelamento e devolução do SpyRadar Brasil.",
       },
-      { property: "og:url", content: "https://whatsradar.top/troca" },
+      { property: "og:url", content: "https://zapradarbrasil.com.br/troca" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://whatsradar.top/troca" }],
+    links: [{ rel: "canonical", href: "https://zapradarbrasil.com.br/troca" }],
   }),
   component: TrocaPage,
 });

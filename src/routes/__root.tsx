@@ -131,14 +131,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "Spy Radar Brasil: Descubra Traição em 5 Minutos" },
       { property: "og:description", content: "Spy Radar Brasil: descubra traição em 5 minutos. Clone o WhatsApp e veja conversas apagadas, fotos ocultas e áudios secretos sem que ele(a) desconfie." },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://whatsradar.top/og-image.png" },
+      { property: "og:image", content: "https://zapradarbrasil.com.br/og-image.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "SpyRadar Brasil - Descubra a verdade pelo WhatsApp" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Spy Radar Brasil: Descubra Traição em 5 Minutos" },
       { name: "twitter:description", content: "Spy Radar Brasil: descubra traição em 5 minutos. Clone o WhatsApp e veja conversas apagadas, fotos e áudios secretos sem que ele(a) desconfie." },
-      { name: "twitter:image", content: "https://whatsradar.top/og-image.png" },
+      { name: "twitter:image", content: "https://zapradarbrasil.com.br/og-image.png" },
 
     ],
     links: [
@@ -158,8 +158,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "Organization",
           name: "SpyRadar Brasil",
           alternateName: ["SpyRadar Brasil", "SpyZap", "ZapSpy", "WhatsRadar"],
-          url: "https://whatsradar.top/",
-          logo: "https://whatsradar.top/og-image.png",
+          url: "https://zapradarbrasil.com.br/",
+          logo: "https://zapradarbrasil.com.br/og-image.png",
           description:
             "Plataforma de análise digital que ajuda pessoas a investigarem suspeitas de infidelidade a partir do número de WhatsApp do parceiro(a).",
           contactPoint: [
@@ -179,13 +179,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "WebSite",
           name: "SpyRadar Brasil",
-          url: "https://whatsradar.top/",
+          url: "https://zapradarbrasil.com.br/",
           inLanguage: "pt-BR",
           potentialAction: {
             "@type": "SearchAction",
             target: {
               "@type": "EntryPoint",
-              urlTemplate: "https://whatsradar.top/verificar?phone={search_term_string}",
+              urlTemplate: "https://zapradarbrasil.com.br/verificar?phone={search_term_string}",
             },
             "query-input": "required name=search_term_string",
           },

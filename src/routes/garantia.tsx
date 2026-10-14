@@ -15,10 +15,10 @@ export const Route = createFileRoute("/garantia")({
         property: "og:description",
         content: "Garantia de satisfação do SpyRadar Brasil.",
       },
-      { property: "og:url", content: "https://whatsradar.top/garantia" },
+      { property: "og:url", content: "https://zapradarbrasil.com.br/garantia" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://whatsradar.top/garantia" }],
+    links: [{ rel: "canonical", href: "https://zapradarbrasil.com.br/garantia" }],
   }),
   component: GarantiaPage,
 });

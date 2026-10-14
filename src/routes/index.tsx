@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { VerificarPage } from "@/routes/verificar";
 
-const SITE_URL = "https://whatsradar.top";
+const SITE_URL = "https://zapradarbrasil.com.br";
 
 const TITLE = "Spy Radar Brasil: Descubra Traição em 5 Minutos (SpyZap)";
 

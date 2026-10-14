@@ -11,10 +11,10 @@ export const Route = createFileRoute("/disclaimer")({
           "Aviso legal do SpyRadar Brasil sobre a natureza informativa e de entretenimento do conteúdo, isenção de responsabilidade e ausência de vínculo com terceiros.",
       },
       { property: "og:title", content: "Disclaimer · SpyRadar Brasil" },
-      { property: "og:url", content: "https://whatsradar.top/disclaimer" },
+      { property: "og:url", content: "https://zapradarbrasil.com.br/disclaimer" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://whatsradar.top/disclaimer" }],
+    links: [{ rel: "canonical", href: "https://zapradarbrasil.com.br/disclaimer" }],
   }),
   component: DisclaimerPage,
 });

@@ -16,4 +16,4 @@ Disallow: /presell
 Disallow: /investigar
 Disallow: /api/
 
-Sitemap: https://whatsradar.top/sitemap.xml
+Sitemap: https://zapradarbrasil.com.br/sitemap.xml

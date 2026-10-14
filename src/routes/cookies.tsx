@@ -7,10 +7,10 @@ export const Route = createFileRoute("/cookies")({
       { title: "Política de Cookies · SpyRadar Brasil" },
       { name: "description", content: "Como o SpyRadar Brasil utiliza cookies para funcionamento do site, análise e mensuração de campanhas." },
       { property: "og:title", content: "Política de Cookies · SpyRadar Brasil" },
-      { property: "og:url", content: "https://whatsradar.top/cookies" },
+      { property: "og:url", content: "https://zapradarbrasil.com.br/cookies" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://whatsradar.top/cookies" }],
+    links: [{ rel: "canonical", href: "https://zapradarbrasil.com.br/cookies" }],
   }),
   component: CookiesPage,
 });
@@ -24,7 +24,7 @@ function CookiesPage() {
     <LegalShell title="Política de Cookies" updated="Atualizado em 06 de julho de 2026">
       <p>
         Esta Política explica como o <strong>SpyRadar Brasil</strong> utiliza cookies
-        e tecnologias semelhantes em https://whatsradar.top, em conformidade
+        e tecnologias semelhantes em https://zapradarbrasil.com.br, em conformidade
         com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD).
       </p>
 

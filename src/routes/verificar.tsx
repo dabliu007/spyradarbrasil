@@ -33,7 +33,7 @@ export const Route = createFileRoute("/verificar")({
         property: "og:description",
         content: "Descubra se ele(a) está te traindo sem ele(a) descobrir. Clone o WhatsApp em minutos, 100% sigiloso.",
       },
-      { property: "og:url", content: "https://whatsradar.top/verificar" },
+      { property: "og:url", content: "https://zapradarbrasil.com.br/verificar" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Verificar Número · SpyRadar Brasil (SpyZap)" },
@@ -43,7 +43,7 @@ export const Route = createFileRoute("/verificar")({
       },
     ],
     // Conteúdo idêntico ao da home — consolida sinal de ranqueamento em "/".
-    links: [{ rel: "canonical", href: "https://whatsradar.top/" }],
+    links: [{ rel: "canonical", href: "https://zapradarbrasil.com.br/" }],
   }),
   component: VerificarPage,
 });

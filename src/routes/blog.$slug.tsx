@@ -17,7 +17,7 @@ export const Route = createFileRoute("/blog/$slug")({
       };
     }
     const { post } = loaderData;
-    const url = `https://whatsradar.top/blog/${post.slug}`;
+    const url = `https://zapradarbrasil.com.br/blog/${post.slug}`;
     const image = post.heroImage?.startsWith("http") ? post.heroImage : undefined;
     return {
       meta: [
@@ -57,7 +57,7 @@ export const Route = createFileRoute("/blog/$slug")({
             publisher: {
               "@type": "Organization",
               name: "SpyRadar Brasil",
-              url: "https://whatsradar.top/",
+              url: "https://zapradarbrasil.com.br/",
             },
             mainEntityOfPage: { "@type": "WebPage", "@id": url },
           }),
@@ -68,8 +68,8 @@ export const Route = createFileRoute("/blog/$slug")({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Início", item: "https://whatsradar.top/" },
-              { "@type": "ListItem", position: 2, name: "Blog", item: "https://whatsradar.top/blog" },
+              { "@type": "ListItem", position: 1, name: "Início", item: "https://zapradarbrasil.com.br/" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://zapradarbrasil.com.br/blog" },
               { "@type": "ListItem", position: 3, name: post.title, item: url },
             ],
           }),

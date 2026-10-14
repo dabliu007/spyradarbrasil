@@ -15,10 +15,10 @@ export const Route = createFileRoute("/rastreamento")({
         property: "og:description",
         content: "Como rastrear o seu pedido no SpyRadar Brasil.",
       },
-      { property: "og:url", content: "https://whatsradar.top/rastreamento" },
+      { property: "og:url", content: "https://zapradarbrasil.com.br/rastreamento" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://whatsradar.top/rastreamento" }],
+    links: [{ rel: "canonical", href: "https://zapradarbrasil.com.br/rastreamento" }],
   }),
   component: RastreamentoPage,
 });

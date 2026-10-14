@@ -25,7 +25,7 @@ export const Route = createFileRoute("/acesso-liberado")({
       },
       { name: "robots", content: "noindex,follow" },
     ],
-    links: [{ rel: "canonical", href: "https://whatsradar.top/acesso-liberado" }],
+    links: [{ rel: "canonical", href: "https://zapradarbrasil.com.br/acesso-liberado" }],
   }),
   validateSearch: (s) => searchSchema.parse(s),
   component: AcessoLiberadoPage,
