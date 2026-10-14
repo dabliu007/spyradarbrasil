@@ -159,6 +159,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           name: "SpyRadar Brasil",
           alternateName: ["SpyRadar Brasil", "SpyZap", "ZapSpy", "WhatsRadar"],
           url: "https://whatsradar.top/",
+          logo: "https://whatsradar.top/og-image.png",
           description:
             "Plataforma de análise digital que ajuda pessoas a investigarem suspeitas de infidelidade a partir do número de WhatsApp do parceiro(a).",
           contactPoint: [
@@ -170,6 +171,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               availableLanguage: ["Portuguese"],
             },
           ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "SpyRadar Brasil",
+          url: "https://whatsradar.top/",
+          inLanguage: "pt-BR",
+          potentialAction: {
+            "@type": "SearchAction",
+            target: {
+              "@type": "EntryPoint",
+              urlTemplate: "https://whatsradar.top/verificar?phone={search_term_string}",
+            },
+            "query-input": "required name=search_term_string",
+          },
         }),
       },
     ],
