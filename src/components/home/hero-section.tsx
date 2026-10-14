@@ -60,6 +60,8 @@ export function HeroSection() {
               src="/brand/hero.png"
               alt="Aplicativo Spy Radar Brasil espelhando a tela de um celular clonado"
               className="aspect-[4/5] w-full object-cover sm:aspect-[5/5]"
+              fetchpriority="high"
+              decoding="async"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent" />
             <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between rounded-2xl border border-[#292929] bg-[#080808]/70 px-4 py-3 backdrop-blur-md">
