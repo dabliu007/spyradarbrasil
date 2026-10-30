@@ -48,6 +48,7 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ApiPublicCodefyWebhookRouteImport } from './routes/api/public/codefy-webhook'
 import { Route as ApiPublicFbTrackRouteImport } from './routes/api/public/fb-track'
 import { Route as ApiPublicImperiumWebhookRouteImport } from './routes/api/public/imperium-webhook'
+import { Route as ApiPublicInvictuspayWebhookRouteImport } from './routes/api/public/invictuspay-webhook'
 import { Route as ApiPublicMillionsWebhookRouteImport } from './routes/api/public/millions-webhook'
 import { Route as ApiPublicNexuspagWebhookRouteImport } from './routes/api/public/nexuspag-webhook'
 import { Route as ApiPublicOmegaWebhookRouteImport } from './routes/api/public/omega-webhook'
@@ -252,6 +253,12 @@ const ApiPublicImperiumWebhookRoute =
     path: '/api/public/imperium-webhook',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicInvictuspayWebhookRoute =
+  ApiPublicInvictuspayWebhookRouteImport.update({
+    id: '/api/public/invictuspay-webhook',
+    path: '/api/public/invictuspay-webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicMillionsWebhookRoute =
   ApiPublicMillionsWebhookRouteImport.update({
     id: '/api/public/millions-webhook',
@@ -332,6 +339,7 @@ export interface FileRoutesByFullPath {
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
   '/api/public/fb-track': typeof ApiPublicFbTrackRoute
   '/api/public/imperium-webhook': typeof ApiPublicImperiumWebhookRoute
+  '/api/public/invictuspay-webhook': typeof ApiPublicInvictuspayWebhookRoute
   '/api/public/millions-webhook': typeof ApiPublicMillionsWebhookRoute
   '/api/public/nexuspag-webhook': typeof ApiPublicNexuspagWebhookRoute
   '/api/public/omega-webhook': typeof ApiPublicOmegaWebhookRoute
@@ -380,6 +388,7 @@ export interface FileRoutesByTo {
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
   '/api/public/fb-track': typeof ApiPublicFbTrackRoute
   '/api/public/imperium-webhook': typeof ApiPublicImperiumWebhookRoute
+  '/api/public/invictuspay-webhook': typeof ApiPublicInvictuspayWebhookRoute
   '/api/public/millions-webhook': typeof ApiPublicMillionsWebhookRoute
   '/api/public/nexuspag-webhook': typeof ApiPublicNexuspagWebhookRoute
   '/api/public/omega-webhook': typeof ApiPublicOmegaWebhookRoute
@@ -429,6 +438,7 @@ export interface FileRoutesById {
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
   '/api/public/fb-track': typeof ApiPublicFbTrackRoute
   '/api/public/imperium-webhook': typeof ApiPublicImperiumWebhookRoute
+  '/api/public/invictuspay-webhook': typeof ApiPublicInvictuspayWebhookRoute
   '/api/public/millions-webhook': typeof ApiPublicMillionsWebhookRoute
   '/api/public/nexuspag-webhook': typeof ApiPublicNexuspagWebhookRoute
   '/api/public/omega-webhook': typeof ApiPublicOmegaWebhookRoute
@@ -479,6 +489,7 @@ export interface FileRouteTypes {
     | '/api/public/codefy-webhook'
     | '/api/public/fb-track'
     | '/api/public/imperium-webhook'
+    | '/api/public/invictuspay-webhook'
     | '/api/public/millions-webhook'
     | '/api/public/nexuspag-webhook'
     | '/api/public/omega-webhook'
@@ -527,6 +538,7 @@ export interface FileRouteTypes {
     | '/api/public/codefy-webhook'
     | '/api/public/fb-track'
     | '/api/public/imperium-webhook'
+    | '/api/public/invictuspay-webhook'
     | '/api/public/millions-webhook'
     | '/api/public/nexuspag-webhook'
     | '/api/public/omega-webhook'
@@ -575,6 +587,7 @@ export interface FileRouteTypes {
     | '/api/public/codefy-webhook'
     | '/api/public/fb-track'
     | '/api/public/imperium-webhook'
+    | '/api/public/invictuspay-webhook'
     | '/api/public/millions-webhook'
     | '/api/public/nexuspag-webhook'
     | '/api/public/omega-webhook'
@@ -624,6 +637,7 @@ export interface RootRouteChildren {
   ApiPublicCodefyWebhookRoute: typeof ApiPublicCodefyWebhookRoute
   ApiPublicFbTrackRoute: typeof ApiPublicFbTrackRoute
   ApiPublicImperiumWebhookRoute: typeof ApiPublicImperiumWebhookRoute
+  ApiPublicInvictuspayWebhookRoute: typeof ApiPublicInvictuspayWebhookRoute
   ApiPublicMillionsWebhookRoute: typeof ApiPublicMillionsWebhookRoute
   ApiPublicNexuspagWebhookRoute: typeof ApiPublicNexuspagWebhookRoute
   ApiPublicOmegaWebhookRoute: typeof ApiPublicOmegaWebhookRoute
@@ -908,6 +922,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicImperiumWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/invictuspay-webhook': {
+      id: '/api/public/invictuspay-webhook'
+      path: '/api/public/invictuspay-webhook'
+      fullPath: '/api/public/invictuspay-webhook'
+      preLoaderRoute: typeof ApiPublicInvictuspayWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/millions-webhook': {
       id: '/api/public/millions-webhook'
       path: '/api/public/millions-webhook'
@@ -1000,6 +1021,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicCodefyWebhookRoute: ApiPublicCodefyWebhookRoute,
   ApiPublicFbTrackRoute: ApiPublicFbTrackRoute,
   ApiPublicImperiumWebhookRoute: ApiPublicImperiumWebhookRoute,
+  ApiPublicInvictuspayWebhookRoute: ApiPublicInvictuspayWebhookRoute,
   ApiPublicMillionsWebhookRoute: ApiPublicMillionsWebhookRoute,
   ApiPublicNexuspagWebhookRoute: ApiPublicNexuspagWebhookRoute,
   ApiPublicOmegaWebhookRoute: ApiPublicOmegaWebhookRoute,

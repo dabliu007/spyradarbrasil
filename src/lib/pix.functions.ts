@@ -2,23 +2,17 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
 
 /**
- * Integração Umbrella Pag — PIX
+ * Integração InvictusPay — PIX (provedor principal)
  *
- * Base:    https://api-gateway.umbrellapag.com/api
- * Auth:    Header x-api-key + User-Agent: UMBRELLAB2B/1.0
- * Valores: em CENTAVOS (integer, ex.: 13700 = R$ 137,00)
- * Fluxo:   POST /user/transactions        (cria cobrança PIX)
- * Status:  GET  /user/transactions/:id
- * Webhook: src/routes/api/public/umbrellapag-webhook.ts
- *
- * Observação: a API rejeita qualquer campo "externalRef" (no corpo, no
- * customer ou nos items) com 400 "property externalRef should not exist",
- * apesar da documentação listá-lo como aceito. Confirmado em teste real —
- * nunca envie esse campo.
+ * Base:    https://api.invictuspayv2.com.br/api/v1
+ * Auth:    Header X-Api-Key
+ * Valores: em centavos (1000 = R$ 10,00)
+ * Fluxo:   POST /transactions e GET /transactions/:id
+ * Webhook: src/routes/api/public/invictuspay-webhook.ts
  */
 
-const BASE_URL = "https://api-gateway.umbrellapag.com/api";
-const USER_AGENT = "UMBRELLAB2B/1.0";
+const BASE_URL = "https://api.invictuspayv2.com.br/api/v1";
+const USER_AGENT = "ZapRadar/1.0";
 const APP_ORIGIN = process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://zapradarbrasil.com.br";
 const AMOUNT = 137.00;
 const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
@@ -110,7 +104,7 @@ function syntheticClient() {
   };
 }
 
-// Umbrella Pag exige um endereço completo do cliente. Como não coletamos
+// InvictusPay exige um endereço completo do cliente. Como não coletamos
 // endereço real no funil, usamos um endereço sintético plausível e válido
 // (testado com sucesso contra a API real).
 function syntheticAddress() {
@@ -131,9 +125,9 @@ function syntheticAddress() {
 /*  HTTP helper                                                                */
 /* -------------------------------------------------------------------------- */
 
-function getUmbrellaApiKey(): string {
-  const apiKey = process.env.UMBRELLAPAG_API_KEY?.trim();
-  if (!apiKey) throw new Error("Credencial Umbrella Pag não configurada.");
+function getInvictusApiKey(): string {
+  const apiKey = process.env.INVICTUSPAY_API_KEY?.trim();
+  if (!apiKey) throw new Error("Credencial InvictusPay não configurada.");
   return apiKey;
 }
 
@@ -147,11 +141,11 @@ function parseRetryAfterMs(res: Response): number | null {
   return null;
 }
 
-export async function umbrellapagFetch(
+export async function invictusPayFetch(
   path: string,
   init: RequestInit & { maxRetries?: number } = {},
 ): Promise<Response> {
-  const apiKey = getUmbrellaApiKey();
+  const apiKey = getInvictusApiKey();
   const { maxRetries = 4, headers, ...rest } = init;
   let lastErr: unknown = null;
 
@@ -162,7 +156,7 @@ export async function umbrellapagFetch(
         headers: {
           Accept: "application/json",
           "User-Agent": USER_AGENT,
-          "x-api-key": apiKey,
+          "X-Api-Key": apiKey,
           ...(headers || {}),
         },
       });
@@ -183,7 +177,7 @@ export async function umbrellapagFetch(
       await new Promise((r) => setTimeout(r, Math.min(1000 * 2 ** attempt, 8000) + jitter));
     }
   }
-  throw lastErr instanceof Error ? lastErr : new Error("Falha de rede na Umbrella Pag");
+  throw lastErr instanceof Error ? lastErr : new Error("Falha de rede na InvictusPay");
 }
 
 async function parseJson(res: Response): Promise<any> {
@@ -202,12 +196,12 @@ function extractError(json: any, status: number): string {
   if (typeof msg === "string" && msg.trim()) return msg;
   switch (status) {
     case 400: return "Dados inválidos para gerar o PIX.";
-    case 401: return "Credencial Umbrella Pag inválida.";
-    case 403: return "Chave Umbrella Pag sem permissão.";
+    case 401: return "Credencial InvictusPay inválida.";
+    case 403: return "Chave InvictusPay sem permissão.";
     case 404: return "Recurso não encontrado.";
     case 422: return "Dados de transação inválidos.";
     case 429: return "Muitas requisições. Aguarde um instante.";
-    default:  return `Falha na Umbrella Pag (HTTP ${status}).`;
+    default:  return `Falha na InvictusPay (HTTP ${status}).`;
   }
 }
 
@@ -283,7 +277,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
   .handler(async ({ data }): Promise<PixCharge> => {
     const req = getRequest();
 
-    const callbackUrl = `${APP_ORIGIN}/api/public/umbrellapag-webhook`;
+    const callbackUrl = `${APP_ORIGIN}/api/public/invictuspay-webhook`;
 
     const synth = syntheticClient();
     const address = syntheticAddress();
@@ -319,61 +313,55 @@ export const createPixCharge = createServerFn({ method: "POST" })
     // Bloqueia geração de PIX com valor fora da tabela de preços do funil
     // (proteção contra manipulação do valor enviado pelo cliente).
     if (!data.product || !isAllowedAmount(data.product, Number(data.amount))) {
-      console.error("[umbrellapag] valor de PIX rejeitado:", data.product, data.amount);
+      console.error("[invictuspay] valor de PIX rejeitado:", data.product, data.amount);
       throw new Error("Valor de pagamento inválido.");
     }
 
-    // Umbrella Pag exige valores em CENTAVOS (integer, mínimo 100)
     const amountCents = Math.max(100, Math.round(Number(data.amount) * 100));
 
-    // IMPORTANTE: nunca inclua "externalRef" em nenhum nível deste corpo —
-    // a API rejeita com 400 "property externalRef should not exist" mesmo a
-    // documentação listando o campo como válido (confirmado em teste real).
-    const txBody: Record<string, any> = {
+    const txBody = {
       amount: amountCents,
-      currency: "BRL",
-      paymentMethod: "PIX",
-      installments: 1,
+      paymentMethod: "pix",
       postbackUrl: callbackUrl,
-      metadata: JSON.stringify({ external_id: data.externalId, product: data.product, ...data.utms }),
-      traceable: true,
-      ip: clientIp || "177.1.1.1",
       customer: {
         name: clientName,
         email: synth.email,
+        document: clientDocument,
         phone: clientPhone,
-        document: { type: "CPF", number: clientDocument },
-        address,
-      },
-      items: [
-        {
-          title: data.description,
-          unitPrice: amountCents,
-          quantity: 1,
-          tangible: false,
+        address: {
+          zip: address.zipCode,
+          street: address.street,
+          number: address.streetNumber,
+          neighborhood: address.neighborhood,
+          city: address.city,
+          state: address.state,
+          country: address.country,
         },
-      ],
-      pix: { expiresInDays: 1 },
+      },
+      items: [{ description: data.description, quantity: 1, amount: amountCents }],
+      pix: { expirationInSeconds: 1800 },
     };
 
-    const payRes = await umbrellapagFetch("/user/transactions", {
+    const payRes = await invictusPayFetch("/transactions", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(txBody),
     });
     const payJson = await parseJson(payRes);
     if (!payRes.ok) {
-      console.error("[umbrellapag] create pix error", payRes.status, JSON.stringify(payJson).slice(0, 1200));
+      console.error("[invictuspay] create pix error", payRes.status, JSON.stringify(payJson).slice(0, 1200));
       throw new Error(extractError(payJson, payRes.status));
     }
 
     const body = payJson?.data ?? payJson;
-    const identifier: string = String(body?.id ?? data.externalId);
-    const pixCode: string = body?.qrCode || body?.pix?.qrcode || "";
-    const expiresAt: string | null = body?.pix?.expirationDate ?? null;
+    const identifier: string = String(body?.id ?? body?.transaction?.id ?? data.externalId);
+    const pixCode: string = String(
+      body?.pix?.copyPaste ?? body?.pix?.qrCode ?? body?.pix?.qrcode ?? body?.qrCode ?? body?.qr_code ?? "",
+    );
+    const expiresAt: string | null = body?.pix?.expiresAt ?? body?.pix?.expirationDate ?? body?.expiresAt ?? null;
 
     if (!pixCode) {
-      console.error("[umbrellapag] pix sem código:", JSON.stringify(body).slice(0, 1200));
+      console.error("[invictuspay] pix sem código:", JSON.stringify(body).slice(0, 1200));
       throw new Error("Gateway não retornou o código PIX.");
     }
 
@@ -402,7 +390,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
         { onConflict: "transaction_id", ignoreDuplicates: false },
       );
     } catch (err) {
-      console.error("[umbrellapag] purchase_logs pre-insert falhou", err);
+      console.error("[invictuspay] purchase_logs pre-insert falhou", err);
     }
 
     // Utmify: notifica PIX gerado (waiting_payment)
@@ -434,7 +422,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
         });
       }
     } catch (err) {
-      console.error("[umbrellapag] utmify waiting_payment falhou", err);
+      console.error("[invictuspay] utmify waiting_payment falhou", err);
     }
 
     return {
@@ -453,7 +441,7 @@ export const getPixStatus = createServerFn({ method: "POST" })
   .inputValidator((input: { id: string; light?: boolean }) => ({
     id: String(input?.id ?? "").trim(),
     // Modo leve: só consulta o Supabase (alimentado pelo webhook do gateway),
-    // sem tocar na Umbrella Pag. Usado pelo polling frequente para não saturar
+    // sem tocar na InvictusPay. Usado pelo polling frequente para não saturar
     // o rate limit e liberar capacidade para a geração de novos PIX.
     light: input?.light === true,
   }))
@@ -472,18 +460,18 @@ export const getPixStatus = createServerFn({ method: "POST" })
         return { id: data.id, status: "paid", paid: true, paidAt: null, expiresAt: null };
       }
     } catch (err) {
-      console.error("[umbrellapag status] purchase_logs lookup falhou", err);
+      console.error("[invictuspay status] purchase_logs lookup falhou", err);
     }
 
-    // Polling leve não consulta a Umbrella Pag: retorna pendente e deixa o
+    // Polling leve não consulta a InvictusPay: retorna pendente e deixa o
     // webhook confirmar o pagamento via Supabase. Isso reduz drasticamente as
-    // chamadas à Umbrella Pag e evita o 429 na geração de PIX.
+    // chamadas à InvictusPay e evita o 429 na geração de PIX.
     if (data.light) {
       return { id: data.id, status: "pending", paid: false, paidAt: null, expiresAt: null };
     }
 
-    const res = await umbrellapagFetch(
-      `/user/transactions/${encodeURIComponent(data.id)}`,
+    const res = await invictusPayFetch(
+      `/transactions/${encodeURIComponent(data.id)}`,
       { method: "GET" },
     );
     const json = await parseJson(res);
@@ -498,11 +486,11 @@ export const getPixStatus = createServerFn({ method: "POST" })
     const tx = json?.data ?? json;
     const rawStatus = tx?.status;
     const status = normalizeStatus(rawStatus);
-    console.log("[umbrellapag status]", { id: data.id, rawStatus, normalized: status });
+    console.log("[invictuspay status]", { id: data.id, rawStatus, normalized: status });
 
     if (status === "paid") {
       try {
-        // Umbrella Pag retorna amount em CENTAVOS -> converte para reais
+        // InvictusPay retorna amount em CENTAVOS -> converte para reais
         const amount = (Number(tx?.amount ?? 0) || 0) / 100;
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const { data: existing } = await supabaseAdmin
@@ -550,7 +538,7 @@ export const getPixStatus = createServerFn({ method: "POST" })
           },
           { onConflict: "transaction_id" },
         );
-        if (upErr) console.error("[umbrellapag status] purchase_logs upsert", upErr);
+        if (upErr) console.error("[invictuspay status] purchase_logs upsert", upErr);
 
         if (!alreadyPaid) {
           const { sendCapiEvent } = await import("@/lib/fb-capi.server");
@@ -581,7 +569,7 @@ export const getPixStatus = createServerFn({ method: "POST" })
           });
         }
       } catch (err) {
-        console.error("[umbrellapag status] erro registrando purchase", err);
+        console.error("[invictuspay status] erro registrando purchase", err);
       }
     }
 
