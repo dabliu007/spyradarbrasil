@@ -2,16 +2,16 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
 
 /**
- * Integração InvictusPay — PIX (provedor principal)
+ * Integração Blackcat — PIX (provedor principal)
  *
- * Base:    https://api.invictuspayv2.com.br/api/v1
- * Auth:    Header X-Api-Key
+ * Base:    https://api.blackcatoficial.com/api
+ * Auth:    Header X-API-Key
  * Valores: em centavos (1000 = R$ 10,00)
- * Fluxo:   POST /transactions e GET /transactions/:id
- * Webhook: src/routes/api/public/invictuspay-webhook.ts
+ * Fluxo:   POST /sales/create-sale e GET /sales/:id/status
+ * Webhook: src/routes/api/public/blackcat-webhook.ts
  */
 
-const BASE_URL = "https://api.invictuspayv2.com.br/api/v1";
+const BASE_URL = "https://api.blackcatoficial.com/api";
 const USER_AGENT = "ZapRadar/1.0";
 const APP_ORIGIN = process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://zapradarbrasil.com.br";
 const AMOUNT = 137.00;
@@ -104,7 +104,7 @@ function syntheticClient() {
   };
 }
 
-// InvictusPay exige um endereço completo do cliente. Como não coletamos
+// Blackcat exige um endereço completo do cliente. Como não coletamos
 // endereço real no funil, usamos um endereço sintético plausível e válido
 // (testado com sucesso contra a API real).
 function syntheticAddress() {
@@ -125,9 +125,9 @@ function syntheticAddress() {
 /*  HTTP helper                                                                */
 /* -------------------------------------------------------------------------- */
 
-function getInvictusApiKey(): string {
-  const apiKey = process.env.INVICTUSPAY_API_KEY?.trim();
-  if (!apiKey) throw new Error("Credencial InvictusPay não configurada.");
+function getBlackcatApiKey(): string {
+  const apiKey = process.env.BLACKCAT_API_KEY?.trim();
+  if (!apiKey) throw new Error("Credencial Blackcat não configurada.");
   return apiKey;
 }
 
@@ -141,11 +141,11 @@ function parseRetryAfterMs(res: Response): number | null {
   return null;
 }
 
-export async function invictusPayFetch(
+export async function blackcatFetch(
   path: string,
   init: RequestInit & { maxRetries?: number } = {},
 ): Promise<Response> {
-  const apiKey = getInvictusApiKey();
+  const apiKey = getBlackcatApiKey();
   const { maxRetries = 4, headers, ...rest } = init;
   let lastErr: unknown = null;
 
@@ -156,7 +156,7 @@ export async function invictusPayFetch(
         headers: {
           Accept: "application/json",
           "User-Agent": USER_AGENT,
-          "X-Api-Key": apiKey,
+          "X-API-Key": apiKey,
           ...(headers || {}),
         },
       });
@@ -177,7 +177,7 @@ export async function invictusPayFetch(
       await new Promise((r) => setTimeout(r, Math.min(1000 * 2 ** attempt, 8000) + jitter));
     }
   }
-  throw lastErr instanceof Error ? lastErr : new Error("Falha de rede na InvictusPay");
+  throw lastErr instanceof Error ? lastErr : new Error("Falha de rede na Blackcat");
 }
 
 async function parseJson(res: Response): Promise<any> {
@@ -196,12 +196,12 @@ function extractError(json: any, status: number): string {
   if (typeof msg === "string" && msg.trim()) return msg;
   switch (status) {
     case 400: return "Dados inválidos para gerar o PIX.";
-    case 401: return "Credencial InvictusPay inválida.";
-    case 403: return "Chave InvictusPay sem permissão.";
+    case 401: return "Credencial Blackcat inválida.";
+    case 403: return "Chave Blackcat sem permissão.";
     case 404: return "Recurso não encontrado.";
     case 422: return "Dados de transação inválidos.";
     case 429: return "Muitas requisições. Aguarde um instante.";
-    default:  return `Falha na InvictusPay (HTTP ${status}).`;
+    default:  return `Falha na Blackcat (HTTP ${status}).`;
   }
 }
 
@@ -277,7 +277,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
   .handler(async ({ data }): Promise<PixCharge> => {
     const req = getRequest();
 
-    const callbackUrl = `${APP_ORIGIN}/api/public/invictuspay-webhook`;
+    const callbackUrl = `${APP_ORIGIN}/api/public/blackcat-webhook`;
 
     const synth = syntheticClient();
     const address = syntheticAddress();
@@ -313,7 +313,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
     // Bloqueia geração de PIX com valor fora da tabela de preços do funil
     // (proteção contra manipulação do valor enviado pelo cliente).
     if (!data.product || !isAllowedAmount(data.product, Number(data.amount))) {
-      console.error("[invictuspay] valor de PIX rejeitado:", data.product, data.amount);
+      console.error("[blackcat] valor de PIX rejeitado:", data.product, data.amount);
       throw new Error("Valor de pagamento inválido.");
     }
 
@@ -321,47 +321,41 @@ export const createPixCharge = createServerFn({ method: "POST" })
 
     const txBody = {
       amount: amountCents,
+      currency: "BRL",
       paymentMethod: "pix",
-      postbackUrl: callbackUrl,
+      items: [{ title: data.description, unitPrice: amountCents, quantity: 1, tangible: false }],
       customer: {
         name: clientName,
         email: synth.email,
-        document: clientDocument,
         phone: clientPhone,
-        address: {
-          zip: address.zipCode,
-          street: address.street,
-          number: address.streetNumber,
-          neighborhood: address.neighborhood,
-          city: address.city,
-          state: address.state,
-          country: address.country,
-        },
+        document: { number: clientDocument, type: "cpf" },
       },
-      items: [{ description: data.description, quantity: 1, amount: amountCents }],
-      pix: { expirationInSeconds: 1800 },
+      pix: { expiresInDays: 1 },
+      postbackUrl: callbackUrl,
+      externalRef: data.externalId,
+      metadata: JSON.stringify(metadataObj),
+      ...Object.fromEntries(Object.entries(data.utms).filter(([key]) => key.startsWith("utm_"))),
     };
 
-    const payRes = await invictusPayFetch("/transactions", {
+    const payRes = await blackcatFetch("/sales/create-sale", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(txBody),
     });
     const payJson = await parseJson(payRes);
     if (!payRes.ok) {
-      console.error("[invictuspay] create pix error", payRes.status, JSON.stringify(payJson).slice(0, 1200));
+      console.error("[blackcat] create pix error", payRes.status, JSON.stringify(payJson).slice(0, 1200));
       throw new Error(extractError(payJson, payRes.status));
     }
 
     const body = payJson?.data ?? payJson;
-    const identifier: string = String(body?.id ?? body?.transaction?.id ?? data.externalId);
-    const pixCode: string = String(
-      body?.pix?.copyPaste ?? body?.pix?.qrCode ?? body?.pix?.qrcode ?? body?.qrCode ?? body?.qr_code ?? "",
-    );
-    const expiresAt: string | null = body?.pix?.expiresAt ?? body?.pix?.expirationDate ?? body?.expiresAt ?? null;
+    const identifier: string = String(body?.transactionId ?? body?.id ?? data.externalId);
+    const pixCode: string = String(body?.paymentData?.copyPaste ?? body?.paymentData?.qrCode ?? "");
+    const qrCodeBase64: string | null = body?.paymentData?.qrCodeBase64 ?? null;
+    const expiresAt: string | null = body?.paymentData?.expiresAt ?? null;
 
     if (!pixCode) {
-      console.error("[invictuspay] pix sem código:", JSON.stringify(body).slice(0, 1200));
+      console.error("[blackcat] pix sem código:", JSON.stringify(body).slice(0, 1200));
       throw new Error("Gateway não retornou o código PIX.");
     }
 
@@ -390,7 +384,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
         { onConflict: "transaction_id", ignoreDuplicates: false },
       );
     } catch (err) {
-      console.error("[invictuspay] purchase_logs pre-insert falhou", err);
+      console.error("[blackcat] purchase_logs pre-insert falhou", err);
     }
 
     // Utmify: notifica PIX gerado (waiting_payment)
@@ -422,7 +416,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
         });
       }
     } catch (err) {
-      console.error("[invictuspay] utmify waiting_payment falhou", err);
+      console.error("[blackcat] utmify waiting_payment falhou", err);
     }
 
     return {
@@ -432,7 +426,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
       amount: Number(data.amount),
       status: normalizeStatus(body?.status),
       pixCopiaCola: pixCode,
-      qrCodeBase64: null,
+      qrCodeBase64,
       expiresAt,
     };
   });
@@ -441,7 +435,7 @@ export const getPixStatus = createServerFn({ method: "POST" })
   .inputValidator((input: { id: string; light?: boolean }) => ({
     id: String(input?.id ?? "").trim(),
     // Modo leve: só consulta o Supabase (alimentado pelo webhook do gateway),
-    // sem tocar na InvictusPay. Usado pelo polling frequente para não saturar
+    // sem tocar na Blackcat. Usado pelo polling frequente para não saturar
     // o rate limit e liberar capacidade para a geração de novos PIX.
     light: input?.light === true,
   }))
@@ -460,18 +454,18 @@ export const getPixStatus = createServerFn({ method: "POST" })
         return { id: data.id, status: "paid", paid: true, paidAt: null, expiresAt: null };
       }
     } catch (err) {
-      console.error("[invictuspay status] purchase_logs lookup falhou", err);
+      console.error("[blackcat status] purchase_logs lookup falhou", err);
     }
 
-    // Polling leve não consulta a InvictusPay: retorna pendente e deixa o
+    // Polling leve não consulta a Blackcat: retorna pendente e deixa o
     // webhook confirmar o pagamento via Supabase. Isso reduz drasticamente as
-    // chamadas à InvictusPay e evita o 429 na geração de PIX.
+    // chamadas à Blackcat e evita o 429 na geração de PIX.
     if (data.light) {
       return { id: data.id, status: "pending", paid: false, paidAt: null, expiresAt: null };
     }
 
-    const res = await invictusPayFetch(
-      `/transactions/${encodeURIComponent(data.id)}`,
+    const res = await blackcatFetch(
+      `/sales/${encodeURIComponent(data.id)}/status`,
       { method: "GET" },
     );
     const json = await parseJson(res);
@@ -486,11 +480,11 @@ export const getPixStatus = createServerFn({ method: "POST" })
     const tx = json?.data ?? json;
     const rawStatus = tx?.status;
     const status = normalizeStatus(rawStatus);
-    console.log("[invictuspay status]", { id: data.id, rawStatus, normalized: status });
+    console.log("[blackcat status]", { id: data.id, rawStatus, normalized: status });
 
     if (status === "paid") {
       try {
-        // InvictusPay retorna amount em CENTAVOS -> converte para reais
+        // Blackcat retorna amount em CENTAVOS -> converte para reais
         const amount = (Number(tx?.amount ?? 0) || 0) / 100;
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const { data: existing } = await supabaseAdmin
@@ -538,7 +532,7 @@ export const getPixStatus = createServerFn({ method: "POST" })
           },
           { onConflict: "transaction_id" },
         );
-        if (upErr) console.error("[invictuspay status] purchase_logs upsert", upErr);
+        if (upErr) console.error("[blackcat status] purchase_logs upsert", upErr);
 
         if (!alreadyPaid) {
           const { sendCapiEvent } = await import("@/lib/fb-capi.server");
@@ -569,7 +563,7 @@ export const getPixStatus = createServerFn({ method: "POST" })
           });
         }
       } catch (err) {
-        console.error("[invictuspay status] erro registrando purchase", err);
+        console.error("[blackcat status] erro registrando purchase", err);
       }
     }
 
