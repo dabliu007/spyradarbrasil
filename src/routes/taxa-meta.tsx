@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { createPixCharge, getPixStatus, type PixCharge } from "@/lib/pix.functions";
+import { getBlackCatOriginToken } from "@/lib/blackcat-origin";
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
 const META_AMOUNT = 63.41;
@@ -71,7 +72,7 @@ function TaxaMetaPage() {
         const { fbc, fbp } = getMetaCookies();
         const utms = getPersistedUtms();
         const c = await createPix({
-          data: { product: "taxa_meta", amount: META_AMOUNT, description: META_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
+          data: { product: "taxa_meta", amount: META_AMOUNT, description: META_DESCRIPTION, fbc, fbp, utms, phone, gender: sex, originToken: await getBlackCatOriginToken() },
         });
         setCharge(c);
         (window as any).dataLayer = (window as any).dataLayer || [];

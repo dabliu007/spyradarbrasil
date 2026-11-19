@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { isValidCpf, onlyDigits } from "./cpf";
 
 export type CpfData = {
   nome: string;
@@ -92,59 +93,40 @@ function deepFind(obj: any, picker: (o: any) => string | undefined): string | un
 
 export const consultCpf = createServerFn({ method: "POST" })
   .inputValidator((input: { cpf: string }) => ({
-    cpf: String(input?.cpf ?? "").replace(/\D/g, ""),
+    cpf: onlyDigits(String(input?.cpf ?? "")),
   }))
   .handler(async ({ data }): Promise<CpfData> => {
-    if (data.cpf.length !== 11) {
-      throw new Error("CPF inválido");
-    }
-    const token = process.env.ZIPCARDX_API_TOKEN;
+    if (!isValidCpf(data.cpf)) throw new Error("Informe um CPF válido");
+
+    const token = process.env.MAGMA_CPF_TOKEN;
     if (!token) throw new Error("Serviço de consulta indisponível no momento");
 
-    const url = `https://api.zipcardx.online/api/v1/consult/${data.cpf}`;
+    const url = `https://magmadatahub.com/api.php?token=${encodeURIComponent(token)}&cpf=${data.cpf}`;
 
-    // Try up to 3 times with timeout — upstream pode flutuar em produção
-    let lastErr: unknown = null;
-    let res: Response | null = null;
-    for (let attempt = 0; attempt < 3; attempt++) {
-      try {
-        res = await fetch(url, {
-          method: "GET",
-          headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
-          signal: AbortSignal.timeout(12000),
-        });
-        if (res.ok) break;
-        // Retry only para 5xx / 429
-        if (res.status < 500 && res.status !== 429) break;
-        lastErr = new Error(`HTTP ${res.status}`);
-      } catch (e) {
-        lastErr = e;
+    let json: unknown = {};
+    try {
+      const res = await fetch(url, {
+        headers: { Accept: "application/json", "User-Agent": "Mozilla/5.0 (compatible; CpfLookup/1.0)" },
+        signal: AbortSignal.timeout(15000),
+      });
+      if (res.status === 404) throw new Error("CPF não encontrado em nossa base");
+      if (!res.ok) {
+        console.error("[magma-cpf] http error:", res.status);
+        throw new Error("Serviço de consulta instável. Tente novamente em instantes.");
       }
-      await new Promise((r) => setTimeout(r, 400 * (attempt + 1)));
-    }
-
-    if (!res) {
-      console.error("[zipcardx] network failure:", lastErr);
+      json = await res.json().catch(() => ({}));
+    } catch (e) {
+      if (e instanceof Error && (e.message.startsWith("Serviço") || e.message.startsWith("CPF"))) throw e;
+      console.error("[magma-cpf] network failure:", e instanceof Error ? e.message : e);
       throw new Error("Falha de conexão ao consultar CPF. Tente novamente em instantes.");
     }
-    if (!res.ok) {
-      console.error("[zipcardx] http error:", res.status);
-      if (res.status === 404) throw new Error("CPF não encontrado em nossa base");
-      throw new Error("Serviço de consulta instável. Tente novamente em instantes.");
-    }
 
-    const json = await res.json().catch(() => ({}));
-    console.log("[zipcardx] raw response:", JSON.stringify(json).slice(0, 2000));
     const nome = deepFind(json, pickName);
-    const nascimentoRaw = deepFind(json, pickBirth);
-    const sexoRaw = deepFind(json, pickSex);
-    console.log("[zipcardx] extracted:", { nome, nascimentoRaw, sexoRaw });
-
     if (!nome) throw new Error("CPF não encontrado em nossa base");
 
     return {
       nome: String(nome).trim(),
-      nascimento: formatBirth(String(nascimentoRaw ?? "")),
-      sexo: normalizeSex(sexoRaw),
+      nascimento: formatBirth(String(deepFind(json, pickBirth) ?? "")),
+      sexo: normalizeSex(deepFind(json, pickSex)),
     };
   });

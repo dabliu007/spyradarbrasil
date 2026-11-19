@@ -2,14 +2,15 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
 
 /**
- * Integração Mangofy Checkout API v1 — PIX (provedor principal)
- * Valores monetários enviados em centavos. A autenticação é server-side.
+ * Gateway PIX principal: BlackCat (src/lib/blackcat.server.ts).
+ * A CodeFy permanece apenas para consultar transações antigas (IDs sem o
+ * prefixo "bc_") que ainda estavam pendentes na troca de gateway.
  */
 
-const BASE_URL = (process.env.MANGOFY_BASE_URL || "https://checkout.mangofy.com.br").replace(/\/+$/, "");
-const MANGOFY_WEBHOOK_PATH = "/api/public/mangofy-webhook";
+const BASE_URL = (process.env.CODEFY_BASE_URL || "https://usecodefy.com/api/v1/gateway").replace(/\/+$/, "");
+const BLACKCAT_WEBHOOK_PATH = "/api/public/blackcat-webhook";
 const APP_ORIGIN = process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://zapradarbrasil.com.br";
-const AMOUNT = 137.00;
+const AMOUNT = 97.00;
 const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 
 // Lista de valores legítimos do funil (checkout, downsells e upsells).
@@ -19,7 +20,7 @@ const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 // Cada produto só aceita os próprios preços, para impedir que o PIX de um
 // produto seja gerado com o preço mais barato de outro.
 const PRODUCT_PRICES = {
-  checkout: [137.00],
+  checkout: [97.00],
   licenca_zapradar: [97],
   sigilo: [89.82],
   nota_fiscal: [59.12],
@@ -103,22 +104,22 @@ function syntheticClient() {
 /*  HTTP helper                                                                */
 /* -------------------------------------------------------------------------- */
 
-function getMangofyCredentials() {
-  const apiKey = process.env.MANGOFY_API_KEY?.trim();
-  const storeCode = process.env.MANGOFY_STORE_CODE?.trim();
-  if (!apiKey || !storeCode) throw new Error("Credenciais Mangofy não configuradas.");
-  return { apiKey, storeCode };
+function getCodefyCredentials() {
+  const publicKey = process.env.CODEFY_PUBLIC_KEY?.trim();
+  const secretKey = process.env.CODEFY_SECRET_KEY?.trim();
+  if (!publicKey || !secretKey) throw new Error("Credenciais CodeFy não configuradas.");
+  return { publicKey, secretKey };
 }
 
-export async function mangofyFetch(path: string, init: RequestInit = {}): Promise<Response> {
-  const { apiKey, storeCode } = getMangofyCredentials();
+export async function codefyFetch(path: string, init: RequestInit = {}): Promise<Response> {
+  const { publicKey, secretKey } = getCodefyCredentials();
   return fetch(`${BASE_URL}${path}`, {
     ...init,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: apiKey,
-      "Store-Code": storeCode,
+      "x-public-key": publicKey,
+      "x-secret-key": secretKey,
       ...(init.headers || {}),
     },
     signal: AbortSignal.timeout(15_000),
@@ -131,7 +132,7 @@ async function parseJson(res: Response): Promise<any> {
   try { return JSON.parse(text); } catch { return { _raw: text }; }
 }
 
-function normalizeMangofyDate(value: unknown): string | null {
+function normalizeDate(value: unknown): string | null {
   if (typeof value !== "string" || !value) return null;
   const match = /^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}:\d{2})$/.exec(value);
   const normalized = match ? `${match[1]}T${match[2]}-03:00` : value;
@@ -149,12 +150,12 @@ function extractError(json: any, status: number): string {
   if (typeof msg === "string" && msg.trim()) return msg;
   switch (status) {
     case 400: return "Dados inválidos para gerar o PIX.";
-    case 401: return "Credencial Mangofy inválida.";
-    case 403: return "Credenciais Mangofy sem permissão.";
+    case 401: return "Credencial CodeFy inválida.";
+    case 403: return "Credenciais CodeFy sem permissão.";
     case 404: return "Recurso não encontrado.";
     case 422: return "Dados de transação inválidos.";
     case 429: return "Muitas requisições. Aguarde um instante.";
-    default:  return `Falha na Mangofy (HTTP ${status}).`;
+    default:  return `Falha na CodeFy (HTTP ${status}).`;
   }
 }
 
@@ -198,7 +199,12 @@ export const createPixCharge = createServerFn({ method: "POST" })
     phone?: string;
     gender?: string;
     humanToken?: string;
+    originToken?: string;
   }) => ({
+    originToken:
+      typeof input?.originToken === "string" && input.originToken.trim()
+        ? input.originToken.trim().slice(0, 4000)
+        : undefined,
     externalId:
       input?.externalId?.trim() ||
       `cs-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
@@ -230,7 +236,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
   .handler(async ({ data }): Promise<PixCharge> => {
     const req = getRequest();
 
-    const callbackUrl = `${APP_ORIGIN}${MANGOFY_WEBHOOK_PATH}`;
+    const callbackUrl = `${APP_ORIGIN}${BLACKCAT_WEBHOOK_PATH}`;
 
     const synth = syntheticClient();
     const clientName = data.customerName || synth.name;
@@ -265,60 +271,34 @@ export const createPixCharge = createServerFn({ method: "POST" })
     // Bloqueia geração de PIX com valor fora da tabela de preços do funil
     // (proteção contra manipulação do valor enviado pelo cliente).
     if (!data.product || !isAllowedAmount(data.product, Number(data.amount))) {
-      console.error("[mangofy] valor de PIX rejeitado:", data.product, data.amount);
+      console.error("[codefy] valor de PIX rejeitado:", data.product, data.amount);
       throw new Error("Valor de pagamento inválido.");
     }
 
-    if (!clientIp) throw new Error("Não foi possível identificar o IP do comprador para gerar o PIX.");
+    if (!data.originToken) {
+      console.warn("[blackcat] PIX solicitado sem originToken", data.externalId);
+    }
 
-    const amountCents = Math.round(Number(data.amount) * 100);
-    const txBody = {
-      external_code: data.externalId.slice(0, 100),
-      payment_method: "pix",
-      payment_format: "regular",
-      installments: 1,
-      payment_amount: amountCents,
-      shipping_amount: 0,
-      postback_url: callbackUrl,
-      items: [{
-        code: `${data.externalId}-1`,
-        name: data.description.slice(0, 200),
-        amount: amountCents,
-        total: amountCents,
-        quantity: 1,
-      }],
+    const { createBlackCatPix, BLACKCAT_ID_PREFIX } = await import("@/lib/blackcat.server");
+    const bc = await createBlackCatPix({
+      amountInCents: Math.round(Number(data.amount) * 100),
+      description: data.description.slice(0, 200),
       customer: {
         name: clientName,
         email: synth.email,
         document: clientDocument.replace(/\D/g, ""),
         phone: clientPhone.replace(/\D/g, ""),
-        ip: clientIp,
       },
-      pix: { expires_in_days: 1 },
-      extra: { metadata: { pedido_interno: data.externalId, ...metadataObj } },
-    };
-
-    const payRes = await mangofyFetch("/api/v1/payment", {
-      method: "POST",
-      body: JSON.stringify(txBody),
+      originToken: data.originToken,
+      externalId: data.externalId.slice(0, 100),
+      postbackUrl: callbackUrl,
     });
-    const payJson = await parseJson(payRes);
-    if (!payRes.ok) {
-      console.error("[mangofy] create pix error", payRes.status, JSON.stringify(payJson).slice(0, 1200));
-      throw new Error(extractError(payJson, payRes.status));
-    }
 
-    const body = payJson?.data ?? payJson;
-    const identifier: string = String(body?.payment_code ?? "");
-    const pixCode: string = String(body?.pix?.pix_qrcode_text ?? "");
-    if (!identifier) throw new Error("Mangofy não retornou o código da transação.");
-    const qrCodeBase64: string | null = body?.pix?.pix_qrcode_base64 ?? null;
-    const expiresAt: string | null = normalizeMangofyDate(body?.pix?.pix_expires_at ?? body?.expires_at);
-
-    if (!pixCode) {
-      console.error("[mangofy] PIX sem código:", JSON.stringify(body).slice(0, 1200));
-      throw new Error("Mangofy não retornou o código PIX.");
-    }
+    const body: Record<string, unknown> = { status: bc.status };
+    const identifier = `${BLACKCAT_ID_PREFIX}${bc.id}`;
+    const pixCode = bc.pixCode;
+    const qrCodeBase64 = bc.qrCodeImage;
+    const expiresAt = normalizeDate(bc.expiresAt);
 
     try {
       const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -345,7 +325,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
         { onConflict: "transaction_id", ignoreDuplicates: false },
       );
     } catch (err) {
-      console.error("[mangofy] purchase_logs pre-insert falhou", err);
+      console.error("[codefy] purchase_logs pre-insert falhou", err);
     }
 
     // Utmify: notifica PIX gerado (waiting_payment)
@@ -377,7 +357,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
         });
       }
     } catch (err) {
-      console.error("[mangofy] utmify waiting_payment falhou", err);
+      console.error("[codefy] utmify waiting_payment falhou", err);
     }
 
     return {
@@ -385,7 +365,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
       txid: identifier,
       externalId: data.externalId,
       amount: Number(data.amount),
-      status: normalizeStatus(body?.payment_status),
+      status: normalizeStatus(body?.status ?? body?.payment_status),
       pixCopiaCola: pixCode,
       qrCodeBase64,
       expiresAt,
@@ -414,7 +394,7 @@ export const getPixStatus = createServerFn({ method: "POST" })
         return { id: data.id, status: "paid", paid: true, paidAt: null, expiresAt: null };
       }
     } catch (err) {
-      console.error("[mangofy status] purchase_logs lookup falhou", err);
+      console.error("[codefy status] purchase_logs lookup falhou", err);
     }
 
     // Polling leve usa o webhook e o Supabase como fonte do estado atualizado.
@@ -422,28 +402,40 @@ export const getPixStatus = createServerFn({ method: "POST" })
       return { id: data.id, status: "pending", paid: false, paidAt: null, expiresAt: null };
     }
 
-    const res = await mangofyFetch(
-      `/api/v1/payment/${encodeURIComponent(data.id)}`,
-      { method: "GET" },
-    );
-    const json = await parseJson(res);
+    const { toBlackCatId, getBlackCatTransaction, isBlackCatPaid, blackCatAmountInReais } =
+      await import("@/lib/blackcat.server");
+    const blackcatId = toBlackCatId(data.id);
 
-    if (!res.ok) {
-      if (res.status === 404) {
+    let tx: any;
+    let status: PixCharge["status"];
+    let amount = 0;
+    if (blackcatId) {
+      const result = await getBlackCatTransaction(blackcatId);
+      if (!result.tx) {
         return { id: data.id, status: "pending", paid: false, paidAt: null, expiresAt: null };
       }
-      throw new Error(extractError(json, res.status));
+      tx = result.tx;
+      status = isBlackCatPaid(tx?.status) ? "paid" : normalizeStatus(tx?.status);
+      amount = blackCatAmountInReais(tx);
+    } else {
+      const res = await codefyFetch(
+        `/transactions/${encodeURIComponent(data.id)}`,
+        { method: "GET" },
+      );
+      const json = await parseJson(res);
+      if (!res.ok) {
+        if (res.status === 404) {
+          return { id: data.id, status: "pending", paid: false, paidAt: null, expiresAt: null };
+        }
+        throw new Error(extractError(json, res.status));
+      }
+      tx = json?.transaction ?? json?.data ?? json;
+      status = normalizeStatus(tx?.status);
+      amount = Number(tx?.amount ?? 0) || 0;
     }
-
-    const tx = json?.data ?? json;
-    const rawStatus = tx?.payment_status;
-    const status = normalizeStatus(rawStatus);
-    console.log("[mangofy status]", { id: data.id, rawStatus, normalized: status });
 
     if (status === "paid") {
       try {
-        // Mangofy retorna payment_amount em centavos, convertido para reais.
-        const amount = (Number(tx?.payment_amount ?? 0) || 0) / 100;
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const { data: existing } = await supabaseAdmin
           .from("purchase_logs")
@@ -490,7 +482,7 @@ export const getPixStatus = createServerFn({ method: "POST" })
           },
           { onConflict: "transaction_id" },
         );
-        if (upErr) console.error("[mangofy status] purchase_logs upsert", upErr);
+        if (upErr) console.error("[codefy status] purchase_logs upsert", upErr);
 
         if (!alreadyPaid) {
           const { sendCapiEvent } = await import("@/lib/fb-capi.server");
@@ -521,15 +513,15 @@ export const getPixStatus = createServerFn({ method: "POST" })
           });
         }
       } catch (err) {
-        console.error("[mangofy status] erro registrando purchase", err);
+        console.error("[codefy status] erro registrando purchase", err);
       }
     }
 
     return {
-      id: String(tx?.payment_code ?? data.id),
+      id: data.id,
       status,
       paid: status === "paid",
-      paidAt: status === "paid" ? normalizeMangofyDate(tx?.approved_at) : null,
-      expiresAt: normalizeMangofyDate(tx?.pix?.pix_expires_at ?? tx?.expires_at),
+      paidAt: status === "paid" ? normalizeDate(tx?.paidAt ?? tx?.paid_at) : null,
+      expiresAt: normalizeDate(tx?.pix?.expiresAt ?? tx?.expiresAt ?? tx?.expires_at),
     };
   });

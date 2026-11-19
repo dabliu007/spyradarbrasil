@@ -23,7 +23,7 @@ export const Route = createFileRoute("/dados-alvo")({
 
 // CPF em stand-by: mantém todo o código no projeto, apenas oculta a etapa de CPF.
 // Trocar para `true` reativa a pergunta/consulta de CPF sem nenhuma outra mudança.
-const CPF_ENABLED = false;
+const CPF_ENABLED = true;
 
 function DadosAlvoPage() {
   const { phone } = Route.useSearch();

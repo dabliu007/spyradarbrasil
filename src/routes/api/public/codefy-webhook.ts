@@ -17,6 +17,35 @@ export const Route = createFileRoute("/api/public/codefy-webhook")({
       POST: async ({ request }) => {
         const rawBody = await request.text();
         console.log("[codefy webhook] body", rawBody.slice(0, 2000));
+
+        // Validação HMAC V2 (timestamp.corpo) quando CODEFY_WEBHOOK_SECRET está
+        // configurado. Sem segredo, o status ainda é re-consultado na API abaixo.
+        const webhookSecret = process.env.CODEFY_WEBHOOK_SECRET?.trim();
+        if (webhookSecret) {
+          const { createHmac, timingSafeEqual } = await import("node:crypto");
+          const ts = request.headers.get("x-codefy-timestamp") || "";
+          const sigV2 = request.headers.get("x-codefy-signature-v2") || "";
+          const sigV1 = (request.headers.get("x-codefy-signature") || "").replace(/^sha256=/, "");
+          const safeEqual = (a: string, b: string) => {
+            const ba = Buffer.from(a);
+            const bb = Buffer.from(b);
+            return ba.length === bb.length && timingSafeEqual(ba, bb);
+          };
+          let valid = false;
+          if (ts && sigV2) {
+            const fresh = Math.abs(Date.now() / 1000 - Number(ts)) <= 300;
+            const expected =
+              "sha256=" + createHmac("sha256", webhookSecret).update(`${ts}.${rawBody}`).digest("hex");
+            valid = fresh && safeEqual(expected, sigV2);
+          } else if (sigV1) {
+            const expected = createHmac("sha256", webhookSecret).update(rawBody).digest("hex");
+            valid = safeEqual(expected, sigV1);
+          }
+          if (!valid) {
+            console.warn("[codefy webhook] assinatura inválida");
+            return new Response("invalid signature", { status: 401 });
+          }
+        }
         let payload: any = {};
         try {
           payload = rawBody ? JSON.parse(rawBody) : {};
