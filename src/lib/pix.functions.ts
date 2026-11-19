@@ -10,7 +10,7 @@ import { getRequest } from "@tanstack/react-start/server";
 const BASE_URL = (process.env.CODEFY_BASE_URL || "https://usecodefy.com/api/v1/gateway").replace(/\/+$/, "");
 const BLACKCAT_WEBHOOK_PATH = "/api/public/blackcat-webhook";
 const APP_ORIGIN = process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://zapradarbrasil.com.br";
-const AMOUNT = 97.00;
+const AMOUNT = 137.00;
 const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 
 // Lista de valores legítimos do funil (checkout, downsells e upsells).
@@ -20,7 +20,7 @@ const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 // Cada produto só aceita os próprios preços, para impedir que o PIX de um
 // produto seja gerado com o preço mais barato de outro.
 const PRODUCT_PRICES = {
-  checkout: [97.00],
+  checkout: [137.00],
   licenca_zapradar: [97],
   sigilo: [89.82],
   nota_fiscal: [59.12],

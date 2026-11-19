@@ -97,7 +97,7 @@ export const Route = createFileRoute("/")({
           description: DESCRIPTION,
           offers: {
             "@type": "Offer",
-            price: "97.00",
+            price: "137.00",
             priceCurrency: "BRL",
             availability: "https://schema.org/InStock",
             url: `${SITE_URL}/checkout`,
