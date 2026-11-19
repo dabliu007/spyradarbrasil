@@ -17,6 +17,7 @@ import appCss from "../styles.css?inline";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 import { capturePersistedUtms, fbqTrack, FB_PIXEL_IDS } from "../lib/tracking";
+import { BLACKCAT_ORIGIN_SCRIPT_SRC } from "../lib/blackcat-origin";
 
 const FONTS_HREF =
   "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap";
@@ -151,6 +152,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { children: FONTS_LOADER, defer: true },
       // Defer FB Pixel init until after `load` — não bloqueia a renderização inicial.
       { children: FB_PIXEL_INIT, defer: true },
+      // Script de origem da BlackCat — obrigatório para a venda via API ser aceita.
+      { src: BLACKCAT_ORIGIN_SCRIPT_SRC, async: true },
       {
         type: "application/ld+json",
         children: JSON.stringify({

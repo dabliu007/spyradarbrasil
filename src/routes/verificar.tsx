@@ -1104,7 +1104,7 @@ function InvestigatingStep({
   onUnlock: () => void;
 }) {
   const ready = progress >= 100;
-  const UNLOCK_AT_MS = 2 * 60 * 1000; // 2 minutos — tempo para assistir a VSL
+  const UNLOCK_AT_MS = 20 * 1000;
   const videoRef = useRef<HTMLVideoElement>(null);
   const targetName = useTargetName();
   const doAlvo = targetName ? `de ${targetName}` : "do alvo";
@@ -1183,7 +1183,7 @@ function InvestigatingStep({
           <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth={2.4} viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          Acesso total liberado em ~2 minutos
+          Acesso total liberado em ~20 segundos
         </div>
 
         {/* HEADLINE */}

@@ -1,24 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 /**
- * Webhook Blackcat — POST /api/public/blackcat-webhook
+ * Webhook BlackCat — POST /api/public/blackcat-webhook
  *
- * O formato exato do payload de notificação da Blackcat não está
- * documentado com confiança (a documentação divergiu da API real em outros
- * pontos já confirmados por teste). Por isso, este webhook NUNCA confia no
- * conteúdo do corpo para decidir se a transação foi paga: ele apenas extrai
- * o id da transação do payload (em qualquer formato razoável) e sempre
- * reconsulta GET /transactions/:id na própria Blackcat — essa é a
- * fonte de verdade autoritativa.
- *
- * Valores em CENTAVOS. Persistimos em REAIS.
+ * O corpo do aviso nunca é tratado como prova de pagamento: o status é sempre
+ * reconsultado na API da BlackCat antes de marcar o pedido como pago.
  */
 export const Route = createFileRoute("/api/public/blackcat-webhook")({
   server: {
     handlers: {
       POST: async ({ request }) => {
         const rawBody = await request.text();
-        console.log("[blackcat webhook] raw body completo:", rawBody);
+        console.log("[blackcat webhook] body", rawBody.slice(0, 2000));
+
         let payload: any = {};
         try {
           payload = rawBody ? JSON.parse(rawBody) : {};
@@ -26,60 +20,37 @@ export const Route = createFileRoute("/api/public/blackcat-webhook")({
           return new Response("invalid json", { status: 400 });
         }
 
-        const tx = payload?.data?.transaction ?? payload?.data ?? payload?.transaction ?? payload ?? {};
-        const txId: string | undefined =
-          tx?.id ||
-          tx?.transactionId ||
-          payload?.id ||
-          payload?.transactionId ||
-          payload?.objectId;
-
-        if (!txId) {
-          console.warn("[blackcat webhook] sem id de transação", JSON.stringify(payload).slice(0, 400));
+        const inner = payload?.data ?? payload?.transaction ?? payload ?? {};
+        const rawId = inner?.id ?? inner?.transactionId ?? payload?.objectId ?? payload?.id;
+        if (!rawId) {
+          console.warn("[blackcat webhook] sem transactionId", JSON.stringify(payload).slice(0, 400));
           return new Response(JSON.stringify({ received: true }), {
             status: 200,
             headers: { "content-type": "application/json" },
           });
         }
 
-        // Reconsulta autoritativa: nunca confia no status enviado pelo webhook.
-        let verifiedStatus: string = "pending";
-        let verifiedAmountCents = 0;
-        let paidAt: string | null = null;
+        const { BLACKCAT_ID_PREFIX, getBlackCatTransaction, isBlackCatPaid, blackCatAmountInReais } =
+          await import("@/lib/blackcat.server");
+        const bcId = String(rawId).replace(/^bc_/, "");
+        const txId = `${BLACKCAT_ID_PREFIX}${bcId}`;
+
+        let verifiedStatus = "pending";
+        let verifiedAmount = 0;
+        let tx: any = {};
         try {
-          const apiKey = process.env.BLACKCAT_API_KEY;
-          if (apiKey) {
-            const res = await fetch(
-              `https://api.blackcatoficial.com/api/sales/${encodeURIComponent(txId)}/status`,
-              {
-                method: "GET",
-                headers: {
-                  Accept: "application/json",
-                  "User-Agent": "ZapRadar/1.0",
-                  "X-API-Key": apiKey,
-                },
-              },
-            );
-            const json: any = await res.json().catch(() => ({}));
-            const inner = json?.data ?? json;
-            const { normalizeStatus } = await import("@/lib/pix.functions");
-            verifiedStatus = normalizeStatus(inner?.status);
-            verifiedAmountCents = Number(inner?.amount ?? 0) || 0;
-            paidAt = inner?.paidAt ?? null;
-            console.log("[blackcat webhook] reconsulta", {
-              id: txId,
-              rawStatus: inner?.status,
-              verifiedStatus,
-            });
-          } else {
-            console.error("[blackcat webhook] BLACKCAT_API_KEY ausente — não é possível confirmar pagamento");
-          }
+          const result = await getBlackCatTransaction(bcId);
+          tx = result.tx ?? {};
+          if (isBlackCatPaid(tx?.status)) verifiedStatus = "paid";
+          verifiedAmount = blackCatAmountInReais(tx);
         } catch (err) {
-          console.error("[blackcat webhook] reconsulta falhou", err);
+          console.error("[blackcat webhook] re-consulta falhou", err);
+          return new Response("lookup failed", { status: 502 });
         }
 
+        console.log("[blackcat webhook] verificado", { id: txId, status: tx?.status });
+
         const isPaid = verifiedStatus === "paid";
-        const verifiedAmount = verifiedAmountCents / 100; // reais
 
         if (isPaid) {
           try {
@@ -166,7 +137,7 @@ export const Route = createFileRoute("/api/public/blackcat-webhook")({
                 productId: utmifyOrderId,
                 productName: existingRaw?.product_name || "Recupera Relacionamento: Acesso Anual",
                 createdAt: existingRaw?.utmify_created_at || existing?.created_at || new Date(),
-                approvedDate: paidAt || new Date(),
+                approvedDate: tx?.paidAt || tx?.paid_at || new Date(),
                 customer: {
                   name: existingRaw?.customer_name,
                   email: existingRaw?.customer_email,
@@ -198,7 +169,7 @@ export const Route = createFileRoute("/api/public/blackcat-webhook")({
                   external_id: txId,
                 },
                 custom_data: {
-                  value: finalAmount || 87,
+                  value: finalAmount || 47,
                   currency: "BRL",
                   content_ids: [txId],
                   content_type: "product",

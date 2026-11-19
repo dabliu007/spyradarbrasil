@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { createPixCharge, getPixStatus, type PixCharge } from "@/lib/pix.functions";
+import { getBlackCatOriginToken } from "@/lib/blackcat-origin";
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
 const SIGILO_AMOUNT = 89.82;
@@ -59,7 +60,7 @@ function SigiloPage() {
       try {
         const { fbc, fbp } = getMetaCookies(); const utms = getPersistedUtms();
         const c = await createPix({
-          data: { product: "sigilo", amount: SIGILO_AMOUNT, description: SIGILO_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
+          data: { product: "sigilo", amount: SIGILO_AMOUNT, description: SIGILO_DESCRIPTION, fbc, fbp, utms, phone, gender: sex, originToken: await getBlackCatOriginToken() },
         });
         setCharge(c);
         (window as any).dataLayer = (window as any).dataLayer || [];

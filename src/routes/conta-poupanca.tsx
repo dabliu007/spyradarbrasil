@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { createPixCharge, getPixStatus, type PixCharge } from "@/lib/pix.functions";
+import { getBlackCatOriginToken } from "@/lib/blackcat-origin";
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
 const POUPANCA_AMOUNT = 297.00;
@@ -62,7 +63,7 @@ function ContaPoupancaPage() {
         const { fbc, fbp } = getMetaCookies();
         const utms = getPersistedUtms();
         const c = await createPix({
-          data: { product: "conta_poupanca", amount: POUPANCA_AMOUNT, description: POUPANCA_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
+          data: { product: "conta_poupanca", amount: POUPANCA_AMOUNT, description: POUPANCA_DESCRIPTION, fbc, fbp, utms, phone, gender: sex, originToken: await getBlackCatOriginToken() },
         });
         setCharge(c);
         (window as any).dataLayer = (window as any).dataLayer || [];

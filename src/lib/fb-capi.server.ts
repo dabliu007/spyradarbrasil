@@ -125,10 +125,14 @@ export async function sendCapiEvent(input: SendCapiEventInput): Promise<CapiResu
       pixelId: process.env.FB_PIXEL_ID_2 || "1298162017522804",
       accessToken: process.env.FB_CAPI_ACCESS_TOKEN_2,
     },
+    {
+      pixelId: process.env.FB_PIXEL_ID_4 || "4833457390311467",
+      accessToken: process.env.FB_CAPI_ACCESS_TOKEN_4,
+    },
   ];
   const results = await Promise.all(
     targets.map((t, i) =>
-      // O 2º pixel só recebe CAPI se tiver token próprio configurado.
+      // Pixels adicionais só recebem CAPI se tiverem token próprio configurado.
       i > 0 && !t.accessToken
         ? Promise.resolve<CapiResult>({ ok: false, status: 0 })
         : sendCapiEventToPixel(input, t.pixelId, t.accessToken),

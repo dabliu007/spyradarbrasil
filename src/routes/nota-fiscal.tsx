@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { z } from "zod";
 import { createPixCharge, getPixStatus, type PixCharge } from "@/lib/pix.functions";
+import { getBlackCatOriginToken } from "@/lib/blackcat-origin";
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
 const NF_AMOUNT = 59.12;
@@ -73,7 +74,7 @@ function NotaFiscalPage() {
         const { fbc, fbp } = getMetaCookies();
         const utms = getPersistedUtms();
         const c = await createPix({
-          data: { product: "nota_fiscal", amount: NF_AMOUNT, description: NF_DESCRIPTION, fbc, fbp, utms, phone, gender: sex },
+          data: { product: "nota_fiscal", amount: NF_AMOUNT, description: NF_DESCRIPTION, fbc, fbp, utms, phone, gender: sex, originToken: await getBlackCatOriginToken() },
         });
         setCharge(c);
         (window as any).dataLayer = (window as any).dataLayer || [];
