@@ -28,7 +28,7 @@ export async function blackcatFetch(path: string, init: RequestInit = {}) {
       "X-API-Key": getApiKey(),
       ...(init.headers ?? {}),
     },
-    signal: AbortSignal.timeout(15_000),
+    signal: AbortSignal.timeout(30_000),
   });
   const text = await res.text();
   let data: any = null;
@@ -77,15 +77,29 @@ export function extractBlackCatError(data: any, status: number): string {
 }
 
 export async function createBlackCatPix(input: BlackCatPixInput): Promise<BlackCatPixResult> {
-  const { ok, status, data, text } = await blackcatFetch("/v1/transactions", {
+  const docNumber = input.customer.document.replace(/\D/g, "");
+  const { ok, status, data, text } = await blackcatFetch("/sales/create-sale", {
     method: "POST",
+    headers: input.externalId ? { "Idempotency-Key": input.externalId.slice(0, 255) } : {},
     body: JSON.stringify({
-      paymentMethod: "pix",
       amount: input.amountInCents,
-      description: input.description,
-      customer: input.customer,
+      paymentMethod: "pix",
+      items: [
+        {
+          title: input.description,
+          unitPrice: input.amountInCents,
+          quantity: 1,
+          tangible: false,
+        },
+      ],
+      customer: {
+        name: input.customer.name,
+        email: input.customer.email,
+        phone: input.customer.phone,
+        document: { number: docNumber, type: docNumber.length > 11 ? "cnpj" : "cpf" },
+      },
       originToken: input.originToken,
-      externalId: input.externalId,
+      externalRef: input.externalId,
       postbackUrl: input.postbackUrl,
     }),
   });
@@ -96,33 +110,32 @@ export async function createBlackCatPix(input: BlackCatPixInput): Promise<BlackC
   }
 
   const d = unwrap(data);
-  const pixCode =
-    d?.pix?.qrcode ?? d?.pix?.qrCode ?? d?.pix?.code ?? d?.pix?.copyAndPaste ??
-    d?.qrCode ?? d?.qrcode ?? d?.pixCode;
-  const id = d?.id ?? d?.transactionId ?? d?.transaction_id;
+  const pixCode = d?.pix?.emv ?? d?.paymentData?.copyPaste ?? d?.paymentData?.qrCode;
+  const id = d?.transactionId ?? d?.id;
 
   if (!id || !pixCode) {
     console.error("[blackcat] resposta sem ID ou código:", text.slice(0, 1200));
     throw new Error("BlackCat não retornou o código PIX.");
   }
 
-  const rawImage = d?.pix?.qrCodeImage ?? d?.qrCodeImage ?? d?.pix?.qrCodeUrl ?? null;
-  const qrCodeImage =
-    typeof rawImage === "string" && /^(https?:\/\/|data:image\/)/i.test(rawImage.trim())
-      ? rawImage.trim()
-      : null;
+  const rawImage = d?.pix?.qrcode ?? d?.paymentData?.qrCodeBase64 ?? null;
+  let qrCodeImage: string | null = null;
+  if (typeof rawImage === "string" && rawImage.trim()) {
+    const img = rawImage.trim();
+    qrCodeImage = /^(https?:\/\/|data:image\/)/i.test(img) ? img : `data:image/png;base64,${img}`;
+  }
 
   return {
     id: String(id),
     pixCode: String(pixCode),
     qrCodeImage,
-    expiresAt: d?.pix?.expiresAt ?? d?.pix?.expirationDate ?? d?.expiresAt ?? null,
-    status: String(d?.status ?? "pending"),
+    expiresAt: d?.pix?.expiresAt ?? d?.paymentData?.expiresAt ?? null,
+    status: String(d?.status ?? "PENDING"),
   };
 }
 
 export async function getBlackCatTransaction(id: string): Promise<{ status: number; tx: any | null }> {
-  const { ok, status, data } = await blackcatFetch(`/v1/transactions/${encodeURIComponent(id)}`, {
+  const { ok, status, data } = await blackcatFetch(`/sales/${encodeURIComponent(id)}/status`, {
     method: "GET",
   });
   if (!ok) {
