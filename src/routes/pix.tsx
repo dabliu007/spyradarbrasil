@@ -235,6 +235,9 @@ function PixPage() {
             <div className="text-[12px] text-slate-500">
               Liberação <span className="text-[#25D366] font-semibold">imediata</span> após a confirmação
             </div>
+            <div className="text-[12px] text-slate-600">
+              Beneficiário do pagamento: <span className="font-semibold text-slate-800">BlackCat</span>
+            </div>
           </div>
 
           {!charge ? (
