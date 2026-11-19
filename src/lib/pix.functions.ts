@@ -196,6 +196,8 @@ export const createPixCharge = createServerFn({ method: "POST" })
     utms?: Record<string, string | undefined>;
     customerName?: string;
     customerDocument?: string;
+    customerEmail?: string;
+    customerPhone?: string;
     phone?: string;
     gender?: string;
     humanToken?: string;
@@ -214,7 +216,18 @@ export const createPixCharge = createServerFn({ method: "POST" })
     fbc: input?.fbc?.trim() || undefined,
     fbp: input?.fbp?.trim() || undefined,
     customerName: input?.customerName?.trim() || undefined,
-    customerDocument: input?.customerDocument?.replace(/\D/g, "") || undefined,
+    customerDocument: (() => {
+      const d = input?.customerDocument?.replace(/\D/g, "") || "";
+      return d.length === 11 ? d : undefined;
+    })(),
+    customerEmail: (() => {
+      const e = input?.customerEmail?.trim().toLowerCase().slice(0, 200) || "";
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) ? e : undefined;
+    })(),
+    customerPhone: (() => {
+      const p = input?.customerPhone?.replace(/\D/g, "") || "";
+      return p.length >= 10 && p.length <= 13 ? p : undefined;
+    })(),
     phone: input?.phone?.replace(/\D/g, "") || undefined,
     gender: (input?.gender || "").trim().toLowerCase().charAt(0) || undefined,
     humanToken: typeof input?.humanToken === "string" ? input.humanToken : undefined,
@@ -241,7 +254,8 @@ export const createPixCharge = createServerFn({ method: "POST" })
     const synth = syntheticClient();
     const clientName = data.customerName || synth.name;
     const clientDocument = data.customerDocument || synth.document;
-    const clientPhone = data.phone || synth.phone;
+    const clientPhone = data.customerPhone || data.phone || synth.phone;
+    const clientEmail = data.customerEmail || synth.email;
 
     let clientIp: string | undefined;
     let clientUa: string | undefined;
@@ -259,6 +273,8 @@ export const createPixCharge = createServerFn({ method: "POST" })
       ...(data.gender ? { ge: data.gender } : {}),
       ...(data.customerName ? { customer_name: data.customerName } : {}),
       ...(data.customerDocument ? { customer_document: data.customerDocument } : {}),
+      ...(data.customerEmail ? { customer_email: data.customerEmail } : {}),
+      ...(data.customerPhone ? { buyer_phone: data.customerPhone } : {}),
       ...(clientIp ? { client_ip: clientIp } : {}),
       ...(clientUa ? { client_user_agent: clientUa } : {}),
       country: "br",
@@ -285,7 +301,7 @@ export const createPixCharge = createServerFn({ method: "POST" })
       description: data.description.slice(0, 200),
       customer: {
         name: clientName,
-        email: synth.email,
+        email: clientEmail,
         document: clientDocument.replace(/\D/g, ""),
         phone: clientPhone.replace(/\D/g, ""),
       },
@@ -349,7 +365,8 @@ export const createPixCharge = createServerFn({ method: "POST" })
           createdAt: utmifyCreatedAt,
           customer: {
             name: data.customerName,
-            phone: data.phone,
+            email: data.customerEmail,
+            phone: data.customerPhone || data.phone,
             document: data.customerDocument,
             ip: clientIp,
           },
