@@ -14,6 +14,7 @@ const SALDO_OCULTO = "R$ 32.981,93";
 const searchSchema = z.object({
   phone: z.coerce.string().optional().default(""),
   sex: z.enum(["M", "F"]).optional().default("M"),
+  tx: z.coerce.string().optional().default(""),
 });
 
 export const Route = createFileRoute("/conta-poupanca")({
@@ -40,7 +41,7 @@ export const Route = createFileRoute("/conta-poupanca")({
 });
 
 function ContaPoupancaPage() {
-  const { phone, sex } = Route.useSearch();
+  const { phone, sex, tx: previousTx } = Route.useSearch();
   const navigate = useNavigate();
   const createPix = useServerFn(createPixCharge);
   const checkPix = useServerFn(getPixStatus);
@@ -107,8 +108,8 @@ function ContaPoupancaPage() {
             gender: sex,
             transaction_id: charge.id,
           });
-          const qs = new URLSearchParams({ phone: phone ?? "", sex: sex ?? "M" }).toString();
-          window.location.assign(`/acesso-liberado?${qs}`);
+          const qs = new URLSearchParams({ phone: phone ?? "", sex: sex ?? "M", tx: charge.id }).toString();
+          window.location.assign(`/entrega?${qs}`);
         } else {
           setStatusLabel("Aguardando confirmação…");
         }
@@ -144,6 +145,11 @@ function ContaPoupancaPage() {
       : "");
 
   const skip = () => {
+    if (previousTx) {
+      const qs = new URLSearchParams({ phone: phone ?? "", sex: sex ?? "M", tx: previousTx }).toString();
+      window.location.assign(`/entrega?${qs}`);
+      return;
+    }
     const qs = new URLSearchParams({ phone: phone ?? "", sex: sex ?? "M" }).toString();
     window.location.assign(`/acesso-liberado?${qs}`);
   };

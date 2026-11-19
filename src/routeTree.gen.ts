@@ -24,6 +24,7 @@ import { Route as CpfInputRouteImport } from './routes/cpf-input'
 import { Route as DadosAlvoRouteImport } from './routes/dados-alvo'
 import { Route as DetetivesRouteImport } from './routes/detetives'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
+import { Route as EntregaRouteImport } from './routes/entrega'
 import { Route as GarantiaRouteImport } from './routes/garantia'
 import { Route as InvestigarRouteImport } from './routes/investigar'
 import { Route as LicencaZapradarRouteImport } from './routes/licenca-zapradar'
@@ -132,6 +133,11 @@ const DetetivesRoute = DetetivesRouteImport.update({
 const DisclaimerRoute = DisclaimerRouteImport.update({
   id: '/disclaimer',
   path: '/disclaimer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EntregaRoute = EntregaRouteImport.update({
+  id: '/entrega',
+  path: '/entrega',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GarantiaRoute = GarantiaRouteImport.update({
@@ -328,6 +334,7 @@ export interface FileRoutesByFullPath {
   '/dados-alvo': typeof DadosAlvoRoute
   '/detetives': typeof DetetivesRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/entrega': typeof EntregaRoute
   '/garantia': typeof GarantiaRoute
   '/investigar': typeof InvestigarRoute
   '/licenca-zapradar': typeof LicencaZapradarRoute
@@ -379,6 +386,7 @@ export interface FileRoutesByTo {
   '/dados-alvo': typeof DadosAlvoRoute
   '/detetives': typeof DetetivesRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/entrega': typeof EntregaRoute
   '/garantia': typeof GarantiaRoute
   '/investigar': typeof InvestigarRoute
   '/licenca-zapradar': typeof LicencaZapradarRoute
@@ -431,6 +439,7 @@ export interface FileRoutesById {
   '/dados-alvo': typeof DadosAlvoRoute
   '/detetives': typeof DetetivesRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/entrega': typeof EntregaRoute
   '/garantia': typeof GarantiaRoute
   '/investigar': typeof InvestigarRoute
   '/licenca-zapradar': typeof LicencaZapradarRoute
@@ -484,6 +493,7 @@ export interface FileRouteTypes {
     | '/dados-alvo'
     | '/detetives'
     | '/disclaimer'
+    | '/entrega'
     | '/garantia'
     | '/investigar'
     | '/licenca-zapradar'
@@ -535,6 +545,7 @@ export interface FileRouteTypes {
     | '/dados-alvo'
     | '/detetives'
     | '/disclaimer'
+    | '/entrega'
     | '/garantia'
     | '/investigar'
     | '/licenca-zapradar'
@@ -586,6 +597,7 @@ export interface FileRouteTypes {
     | '/dados-alvo'
     | '/detetives'
     | '/disclaimer'
+    | '/entrega'
     | '/garantia'
     | '/investigar'
     | '/licenca-zapradar'
@@ -638,6 +650,7 @@ export interface RootRouteChildren {
   DadosAlvoRoute: typeof DadosAlvoRoute
   DetetivesRoute: typeof DetetivesRoute
   DisclaimerRoute: typeof DisclaimerRoute
+  EntregaRoute: typeof EntregaRoute
   GarantiaRoute: typeof GarantiaRoute
   InvestigarRoute: typeof InvestigarRoute
   LicencaZapradarRoute: typeof LicencaZapradarRoute
@@ -779,6 +792,13 @@ declare module '@tanstack/react-router' {
       path: '/disclaimer'
       fullPath: '/disclaimer'
       preLoaderRoute: typeof DisclaimerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/entrega': {
+      id: '/entrega'
+      path: '/entrega'
+      fullPath: '/entrega'
+      preLoaderRoute: typeof EntregaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/garantia': {
@@ -1038,6 +1058,7 @@ const rootRouteChildren: RootRouteChildren = {
   DadosAlvoRoute: DadosAlvoRoute,
   DetetivesRoute: DetetivesRoute,
   DisclaimerRoute: DisclaimerRoute,
+  EntregaRoute: EntregaRoute,
   GarantiaRoute: GarantiaRoute,
   InvestigarRoute: InvestigarRoute,
   LicencaZapradarRoute: LicencaZapradarRoute,
