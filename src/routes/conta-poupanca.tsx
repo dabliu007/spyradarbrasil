@@ -107,8 +107,8 @@ function ContaPoupancaPage() {
             gender: sex,
             transaction_id: charge.id,
           });
-          const qs = new URLSearchParams({ phone: phone ?? "", sex: sex ?? "M" }).toString();
-          window.location.assign(`/acesso-liberado?${qs}`);
+          const qs = new URLSearchParams({ phone: phone ?? "", sex: sex ?? "M", tx: charge.id }).toString();
+          window.location.assign(`/entrega?${qs}`);
         } else {
           setStatusLabel("Aguardando confirmação…");
         }
