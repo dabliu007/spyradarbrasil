@@ -100,7 +100,7 @@ function NotaFiscalPage() {
     let pollCount = 0;
     const tick = async (force = false) => {
       if (paidRef.current || cancelled) return;
-      const light = !force && pollCount++ % 6 !== 5;
+      const light = !force && pollCount++ % 3 !== 2;
       try {
         const s = await checkPix({ data: { id: charge.id, light } });
         if (cancelled) return;
