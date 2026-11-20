@@ -126,8 +126,8 @@ export async function sendCapiEvent(input: SendCapiEventInput): Promise<CapiResu
       accessToken: process.env.FB_CAPI_ACCESS_TOKEN_2,
     },
     {
-      pixelId: process.env.FB_PIXEL_ID_4 || "4833457390311467",
-      accessToken: process.env.FB_CAPI_ACCESS_TOKEN_4,
+      pixelId: "1497931568873907",
+      accessToken: process.env.FB_CAPI_ACCESS_TOKEN_5,
     },
   ];
   const results = await Promise.all(
