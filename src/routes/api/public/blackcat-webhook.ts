@@ -21,7 +21,13 @@ export const Route = createFileRoute("/api/public/blackcat-webhook")({
         }
 
         const inner = payload?.data ?? payload?.transaction ?? payload ?? {};
-        const rawId = inner?.id ?? inner?.transactionId ?? payload?.objectId ?? payload?.id;
+        const rawId =
+          inner?.transactionId ??
+          payload?.transactionId ??
+          inner?.transaction?.id ??
+          inner?.id ??
+          payload?.objectId ??
+          payload?.id;
         if (!rawId) {
           console.warn("[blackcat webhook] sem transactionId", JSON.stringify(payload).slice(0, 400));
           return new Response(JSON.stringify({ received: true }), {

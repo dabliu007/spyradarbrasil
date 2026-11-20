@@ -142,12 +142,26 @@ export async function getBlackCatTransaction(id: string): Promise<{ status: numb
     if (status === 404) return { status, tx: null };
     throw new Error(extractBlackCatError(data, status));
   }
-  return { status, tx: unwrap(data) };
+  const d = unwrap(data);
+  const tx = d?.transaction ?? d?.sale ?? d;
+  const resolvedStatus = extractBlackCatStatus(tx) ?? extractBlackCatStatus(d) ?? extractBlackCatStatus(data);
+  console.log("[blackcat] status", id, resolvedStatus, JSON.stringify(data).slice(0, 600));
+  return { status, tx: { ...tx, status: resolvedStatus ?? tx?.status } };
+}
+
+function extractBlackCatStatus(obj: any): string | null {
+  if (!obj || typeof obj !== "object") return null;
+  const candidates = [obj.status, obj.paymentStatus, obj.payment_status, obj.transactionStatus, obj.situation];
+  for (const c of candidates) {
+    if (typeof c === "string" && c.trim()) return c.trim();
+    if (c && typeof c === "object" && typeof c.name === "string") return c.name;
+  }
+  return null;
 }
 
 export function isBlackCatPaid(status: unknown): boolean {
-  const s = String(status ?? "").toLowerCase();
-  return s === "paid" || s === "approved" || s === "authorized";
+  const s = String(status ?? "").toLowerCase().trim();
+  return ["paid", "pago", "approved", "completed", "confirmed", "settled", "captured"].includes(s);
 }
 
 export function blackCatAmountInReais(tx: any): number {

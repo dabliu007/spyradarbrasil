@@ -95,7 +95,7 @@ function PixPage() {
       if (cancelled) return false;
       // A cada 6 ticks (~24s) faz uma consulta completa à Codefy como fallback,
       // caso o webhook não tenha chegado; os demais ticks são leves.
-      const light = !force && pollCount++ % 6 !== 5;
+      const light = !force && pollCount++ % 3 !== 2;
       try {
         const s = await checkPix({ data: { id, light } });
         if (cancelled) return false;
