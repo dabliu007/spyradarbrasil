@@ -5,6 +5,14 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { z } from "zod";
 import { getPixStatus, type PixCharge } from "@/lib/pix.functions";
 import { fbqTrackOnce } from "@/lib/tracking";
+import {
+  CHECKOUT_PRICE,
+  CheckIcon,
+  CheckoutShell,
+  CopyIcon,
+  PixPanelSkeleton,
+  formatBRL,
+} from "@/components/checkout/checkout-shell";
 
 const searchSchema = z.object({
   id: z.coerce.string().min(1),
@@ -34,6 +42,7 @@ function PixPage() {
   const { id, phone, sex } = Route.useSearch();
   const navigate = useNavigate();
   const checkPix = useServerFn(getPixStatus);
+  const targetName = useTargetName();
   const [charge, setCharge] = useState<PixCharge | null>(null);
   const [copied, setCopied] = useState(false);
   const [statusLabel, setStatusLabel] = useState("Aguardando pagamento…");
@@ -185,144 +194,84 @@ function PixPage() {
 
   const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
   const ss = String(seconds % 60).padStart(2, "0");
-  const amount = charge?.amount ?? 0;
+  const amount = charge?.amount ?? CHECKOUT_PRICE;
+  const title = `Acesso total ao celular ${targetName ? `de ${targetName}` : "do alvo"}`;
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-['Inter',sans-serif] relative overflow-hidden">
-      {/* fundo */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(217,169,40,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(217,169,40,0.06) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-yellow-500/[0.10] blur-[160px] rounded-full pointer-events-none" />
-
-      {/* faixa de urgência */}
-      <div className="relative z-10 bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-slate-900 text-center text-[12px] font-bold py-2 px-3 uppercase tracking-wider">
-        ⏳ PIX expira em <span className="font-mono text-base mx-1">{mm}:{ss}</span> — não feche essa página
-      </div>
-
-      <div className="relative z-10 max-w-md mx-auto px-4 py-6 space-y-5">
-        {/* banner principal */}
-        <div className="rounded-2xl overflow-hidden border border-yellow-300 shadow-[0_15px_40px_rgba(217,169,40,0.15)]">
-          <img
-            src="/images/pix-falta-pouco.webp"
-            alt="Falta pouco para seu acesso ser liberado — pague o seu PIX com segurança"
-            className="w-full h-auto block"
-            width={960}
-            height={541}
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-          />
-        </div>
-
-        {/* Card principal */}
-        <div className="bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-yellow-300 rounded-3xl p-5 space-y-4 shadow-[0_25px_70px_rgba(217,169,40,0.18)]">
-          <div className="text-center space-y-1">
-            <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
-              Pague para desbloquear
-            </div>
-            <div>
-              <span className="text-[#128C7E] text-5xl font-extrabold tracking-tight">R${Math.floor(amount)}</span>
-              <span className="text-[#128C7E] text-xl font-bold">
-                ,{String(Math.round((amount - Math.floor(amount)) * 100)).padStart(2, "0")}
-              </span>
-            </div>
-            <div className="text-[12px] text-slate-500">
-              Liberação <span className="text-[#25D366] font-semibold">imediata</span> após a confirmação
-            </div>
-            <div className="text-[12px] text-slate-600">
-              Beneficiário do pagamento: <span className="font-semibold text-slate-800">Masterfy</span>
-            </div>
-          </div>
-
-          {!charge ? (
-            <div className="py-10 text-center text-slate-500 text-sm">Carregando PIX…</div>
-          ) : (
-            <>
-              {/* QR */}
-              <div className="bg-white p-3 rounded-2xl mx-auto w-fit shadow-[0_0_40px_rgba(217,169,40,0.25)]">
-                {qrImgSrc ? (
-                  <img src={qrImgSrc} alt="QR Code PIX" className="w-56 h-56 block" />
-                ) : (
-                  <div className="w-56 h-56 grid place-items-center text-slate-500 text-xs">QR indisponível</div>
-                )}
-              </div>
-
-              <button
-                onClick={copy}
-                className="w-full h-14 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-slate-900 font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[15px] shadow-[0_10px_30px_-8px_rgba(217,169,40,0.6)]"
-              >
-                {copied ? "✅ Código copiado!" : "📋 Copiar código PIX"}
-              </button>
-
-              <div>
-                <label className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-['Geist_Mono',monospace]">
-                  PIX Copia e Cola
-                </label>
-                <div className="mt-1 bg-white border border-slate-200 rounded-xl p-3 text-[11px] font-['Geist_Mono',monospace] text-slate-700 break-all max-h-24 overflow-y-auto">
-                  {charge.pixCopiaCola}
-                </div>
-              </div>
-
-              <div className="flex items-center justify-center gap-2 text-[12px] text-slate-700 bg-yellow-50 border border-yellow-200 rounded-xl py-2">
-                <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
-                <span className="font-semibold">{statusLabel}</span>
-              </div>
-
-              <button
-                onClick={handleAlreadyPaid}
-                disabled={checking}
-                className="w-full h-12 bg-slate-100 border-2 border-yellow-500/60 hover:border-yellow-400 hover:bg-yellow-50 text-[#25D366] font-bold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[13px] disabled:opacity-60 disabled:cursor-wait"
-              >
-                {checking ? "🔎 Verificando…" : "✅ Já efetuei o pagamento"}
-              </button>
-              {checkMsg && (
-                <div className="text-center text-[11px] text-slate-500 -mt-2">{checkMsg}</div>
-              )}
-            </>
-          )}
-        </div>
-
-        {/* Como pagar o PIX */}
-        <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
-          <img
-            src="/images/pix-como-pagar.webp"
-            alt="Veja como pagar seu PIX: copie o código, abra o app do banco, cole o código e confirme o pagamento"
-            className="w-full h-auto block"
-            width={960}
-            height={405}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-
-        {/* Garantia 7 dias */}
-        <div className="bg-gradient-to-br from-yellow-500/15 to-slate-50/40 border border-yellow-300 rounded-2xl p-4 space-y-2">
-          <div className="flex items-center gap-2">
-            <span className="text-[#128C7E] text-lg">🛡️</span>
-            <h3 className="text-sm font-bold text-[#25D366] uppercase tracking-wider font-['Geist_Mono',monospace]">
-              Garantia incondicional de 7 dias
-            </h3>
-          </div>
-          <p className="text-[12px] text-slate-800 leading-relaxed">
-            Seu dinheiro fica <span className="text-[#25D366] font-semibold">protegido</span> e só é liberado para a empresa <span className="text-[#25D366] font-semibold">Spy Monitoramento LTDA</span> após os 7 dias de uso da plataforma.
-          </p>
-        </div>
-
-        <Link
-          to="/checkout"
-          search={{ phone, sex }}
-          className="block w-full text-center text-[11px] font-['Geist_Mono',monospace] uppercase tracking-[0.2em] text-slate-500 hover:text-slate-500 transition-colors py-3"
+    <CheckoutShell title={title} amount={amount} timer={`${mm}:${ss}`}>
+      {!charge ? (
+        <PixPanelSkeleton label="Carregando seu Pix…" />
+      ) : (
+        <section
+          aria-label="Pague com Pix"
+          className="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col gap-4"
         >
-          ← gerar novo PIX
-        </Link>
-      </div>
-    </div>
+          <div className="flex flex-col items-center gap-1 text-center">
+            <h2 className="text-[17px] font-bold">Seu Pix de {formatBRL(amount)} está pronto</h2>
+            <p className="text-[13px] text-slate-500">Escaneie o QR Code ou copie o código abaixo</p>
+          </div>
+
+          <div className="mx-auto p-2 rounded-xl border border-slate-200">
+            {qrImgSrc ? (
+              <img src={qrImgSrc} alt="QR Code do Pix" width={208} height={208} className="w-52 h-52 block" />
+            ) : (
+              <div className="w-52 h-52 grid place-items-center text-slate-500 text-xs">QR indisponível</div>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="pix-code" className="text-[12px] font-semibold text-slate-600">
+              Pix Copia e Cola
+            </label>
+            <input
+              id="pix-code"
+              readOnly
+              value={charge.pixCopiaCola}
+              onFocus={(e) => e.currentTarget.select()}
+              className="w-full h-11 rounded-xl border border-slate-200 bg-slate-50 px-3 text-[12px] font-['Geist_Mono',monospace] text-slate-600 truncate"
+            />
+            <button
+              type="button"
+              onClick={copy}
+              className="w-full h-14 rounded-xl bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold text-[16px] flex items-center justify-center gap-2 transition-colors active:scale-[0.98]"
+            >
+              {copied ? <CheckIcon className="w-5 h-5" /> : <CopyIcon className="w-5 h-5" />}
+              {copied ? "Código copiado" : "Copiar código Pix"}
+            </button>
+            <span className="sr-only" aria-live="polite">
+              {copied ? "Código Pix copiado" : ""}
+            </span>
+          </div>
+
+          <div
+            role="status"
+            className="flex items-center justify-center gap-2 text-[13px] text-slate-600 rounded-xl bg-slate-50 py-2.5"
+          >
+            <span className="relative flex w-2.5 h-2.5">
+              <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-60 animate-ping" />
+              <span className="relative w-2.5 h-2.5 rounded-full bg-[#25D366]" />
+            </span>
+            {statusLabel}
+          </div>
+
+          <button
+            type="button"
+            onClick={handleAlreadyPaid}
+            disabled={checking}
+            className="w-full h-12 rounded-xl border border-[#128C7E] text-[#128C7E] hover:bg-[#E7F6EF] font-bold text-[14px] transition-colors disabled:opacity-60 disabled:cursor-wait"
+          >
+            {checking ? "Verificando…" : "Já fiz o pagamento"}
+          </button>
+          {checkMsg && <p className="text-center text-[12px] text-slate-500 -mt-2">{checkMsg}</p>}
+
+          <p className="text-center text-[11px] text-slate-400">
+            Beneficiário: Masterfy ·{" "}
+            <Link to="/checkout" search={{ phone, sex }} className="underline hover:text-slate-600">
+              gerar novo Pix
+            </Link>
+          </p>
+        </section>
+      )}
+    </CheckoutShell>
   );
 }
-
