@@ -52,6 +52,7 @@ import { Route as ApiPublicFbTrackRouteImport } from './routes/api/public/fb-tra
 import { Route as ApiPublicImperiumWebhookRouteImport } from './routes/api/public/imperium-webhook'
 import { Route as ApiPublicInvictuspayWebhookRouteImport } from './routes/api/public/invictuspay-webhook'
 import { Route as ApiPublicMangofyWebhookRouteImport } from './routes/api/public/mangofy-webhook'
+import { Route as ApiPublicMasterfyWebhookRouteImport } from './routes/api/public/masterfy-webhook'
 import { Route as ApiPublicMillionsWebhookRouteImport } from './routes/api/public/millions-webhook'
 import { Route as ApiPublicNexuspagWebhookRouteImport } from './routes/api/public/nexuspag-webhook'
 import { Route as ApiPublicOmegaWebhookRouteImport } from './routes/api/public/omega-webhook'
@@ -278,6 +279,12 @@ const ApiPublicMangofyWebhookRoute = ApiPublicMangofyWebhookRouteImport.update({
   path: '/api/public/mangofy-webhook',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicMasterfyWebhookRoute =
+  ApiPublicMasterfyWebhookRouteImport.update({
+    id: '/api/public/masterfy-webhook',
+    path: '/api/public/masterfy-webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicMillionsWebhookRoute =
   ApiPublicMillionsWebhookRouteImport.update({
     id: '/api/public/millions-webhook',
@@ -362,6 +369,7 @@ export interface FileRoutesByFullPath {
   '/api/public/imperium-webhook': typeof ApiPublicImperiumWebhookRoute
   '/api/public/invictuspay-webhook': typeof ApiPublicInvictuspayWebhookRoute
   '/api/public/mangofy-webhook': typeof ApiPublicMangofyWebhookRoute
+  '/api/public/masterfy-webhook': typeof ApiPublicMasterfyWebhookRoute
   '/api/public/millions-webhook': typeof ApiPublicMillionsWebhookRoute
   '/api/public/nexuspag-webhook': typeof ApiPublicNexuspagWebhookRoute
   '/api/public/omega-webhook': typeof ApiPublicOmegaWebhookRoute
@@ -414,6 +422,7 @@ export interface FileRoutesByTo {
   '/api/public/imperium-webhook': typeof ApiPublicImperiumWebhookRoute
   '/api/public/invictuspay-webhook': typeof ApiPublicInvictuspayWebhookRoute
   '/api/public/mangofy-webhook': typeof ApiPublicMangofyWebhookRoute
+  '/api/public/masterfy-webhook': typeof ApiPublicMasterfyWebhookRoute
   '/api/public/millions-webhook': typeof ApiPublicMillionsWebhookRoute
   '/api/public/nexuspag-webhook': typeof ApiPublicNexuspagWebhookRoute
   '/api/public/omega-webhook': typeof ApiPublicOmegaWebhookRoute
@@ -467,6 +476,7 @@ export interface FileRoutesById {
   '/api/public/imperium-webhook': typeof ApiPublicImperiumWebhookRoute
   '/api/public/invictuspay-webhook': typeof ApiPublicInvictuspayWebhookRoute
   '/api/public/mangofy-webhook': typeof ApiPublicMangofyWebhookRoute
+  '/api/public/masterfy-webhook': typeof ApiPublicMasterfyWebhookRoute
   '/api/public/millions-webhook': typeof ApiPublicMillionsWebhookRoute
   '/api/public/nexuspag-webhook': typeof ApiPublicNexuspagWebhookRoute
   '/api/public/omega-webhook': typeof ApiPublicOmegaWebhookRoute
@@ -521,6 +531,7 @@ export interface FileRouteTypes {
     | '/api/public/imperium-webhook'
     | '/api/public/invictuspay-webhook'
     | '/api/public/mangofy-webhook'
+    | '/api/public/masterfy-webhook'
     | '/api/public/millions-webhook'
     | '/api/public/nexuspag-webhook'
     | '/api/public/omega-webhook'
@@ -573,6 +584,7 @@ export interface FileRouteTypes {
     | '/api/public/imperium-webhook'
     | '/api/public/invictuspay-webhook'
     | '/api/public/mangofy-webhook'
+    | '/api/public/masterfy-webhook'
     | '/api/public/millions-webhook'
     | '/api/public/nexuspag-webhook'
     | '/api/public/omega-webhook'
@@ -625,6 +637,7 @@ export interface FileRouteTypes {
     | '/api/public/imperium-webhook'
     | '/api/public/invictuspay-webhook'
     | '/api/public/mangofy-webhook'
+    | '/api/public/masterfy-webhook'
     | '/api/public/millions-webhook'
     | '/api/public/nexuspag-webhook'
     | '/api/public/omega-webhook'
@@ -678,6 +691,7 @@ export interface RootRouteChildren {
   ApiPublicImperiumWebhookRoute: typeof ApiPublicImperiumWebhookRoute
   ApiPublicInvictuspayWebhookRoute: typeof ApiPublicInvictuspayWebhookRoute
   ApiPublicMangofyWebhookRoute: typeof ApiPublicMangofyWebhookRoute
+  ApiPublicMasterfyWebhookRoute: typeof ApiPublicMasterfyWebhookRoute
   ApiPublicMillionsWebhookRoute: typeof ApiPublicMillionsWebhookRoute
   ApiPublicNexuspagWebhookRoute: typeof ApiPublicNexuspagWebhookRoute
   ApiPublicOmegaWebhookRoute: typeof ApiPublicOmegaWebhookRoute
@@ -990,6 +1004,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicMangofyWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/masterfy-webhook': {
+      id: '/api/public/masterfy-webhook'
+      path: '/api/public/masterfy-webhook'
+      fullPath: '/api/public/masterfy-webhook'
+      preLoaderRoute: typeof ApiPublicMasterfyWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/millions-webhook': {
       id: '/api/public/millions-webhook'
       path: '/api/public/millions-webhook'
@@ -1086,6 +1107,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicImperiumWebhookRoute: ApiPublicImperiumWebhookRoute,
   ApiPublicInvictuspayWebhookRoute: ApiPublicInvictuspayWebhookRoute,
   ApiPublicMangofyWebhookRoute: ApiPublicMangofyWebhookRoute,
+  ApiPublicMasterfyWebhookRoute: ApiPublicMasterfyWebhookRoute,
   ApiPublicMillionsWebhookRoute: ApiPublicMillionsWebhookRoute,
   ApiPublicNexuspagWebhookRoute: ApiPublicNexuspagWebhookRoute,
   ApiPublicOmegaWebhookRoute: ApiPublicOmegaWebhookRoute,
