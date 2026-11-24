@@ -2,15 +2,17 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
 
 /**
- * Gateway PIX principal: BlackCat (src/lib/blackcat.server.ts).
+ * Gateway PIX principal: Masterfy (src/lib/masterfy.server.ts); valores acima
+ * de R$ 250 seguem na BlackCat (src/lib/blackcat.server.ts).
  * A CodeFy permanece apenas para consultar transações antigas (IDs sem o
  * prefixo "bc_") que ainda estavam pendentes na troca de gateway.
  */
 
 const BASE_URL = (process.env.CODEFY_BASE_URL || "https://usecodefy.com/api/v1/gateway").replace(/\/+$/, "");
 const BLACKCAT_WEBHOOK_PATH = "/api/public/blackcat-webhook";
+const MASTERFY_WEBHOOK_PATH = "/api/public/masterfy-webhook";
 const APP_ORIGIN = process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://zapradarbrasil.com.br";
-const AMOUNT = 137.00;
+const AMOUNT = 67.00;
 const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 
 // Lista de valores legítimos do funil (checkout, downsells e upsells).
@@ -20,7 +22,7 @@ const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
 // Cada produto só aceita os próprios preços, para impedir que o PIX de um
 // produto seja gerado com o preço mais barato de outro.
 const PRODUCT_PRICES = {
-  checkout: [137.00],
+  checkout: [67.00],
   licenca_zapradar: [97],
   sigilo: [89.82],
   nota_fiscal: [59.12],
@@ -291,30 +293,52 @@ export const createPixCharge = createServerFn({ method: "POST" })
       throw new Error("Valor de pagamento inválido.");
     }
 
-    if (!data.originToken) {
-      console.warn("[blackcat] PIX solicitado sem originToken", data.externalId);
+    const amountInCents = Math.round(Number(data.amount) * 100);
+    const { createMasterfyPix, MASTERFY_ID_PREFIX, MASTERFY_MAX_CENTS } = await import("@/lib/masterfy.server");
+
+    let identifier: string;
+    let pixCode: string;
+    let qrCodeBase64: string | null = null;
+    let expiresAt: string | null = null;
+    let gatewayStatus: string;
+
+    // Masterfy aceita no máximo R$ 250 por Pix; valores maiores seguem na BlackCat.
+    if (amountInCents <= MASTERFY_MAX_CENTS) {
+      const mf = await createMasterfyPix({
+        amountInCents,
+        description: data.description,
+        payer: { name: clientName, email: clientEmail, taxId: clientDocument, phone: clientPhone },
+        externalRef: data.externalId.slice(0, 100),
+        notificationUrl: `${APP_ORIGIN}${MASTERFY_WEBHOOK_PATH}`,
+        ip: clientIp,
+        utms: data.utms,
+      });
+      identifier = `${MASTERFY_ID_PREFIX}${mf.id}`;
+      pixCode = mf.pixCode;
+      gatewayStatus = mf.status;
+    } else {
+      const { createBlackCatPix, BLACKCAT_ID_PREFIX } = await import("@/lib/blackcat.server");
+      const bc = await createBlackCatPix({
+        amountInCents,
+        description: data.description.slice(0, 200),
+        customer: {
+          name: clientName,
+          email: clientEmail,
+          document: clientDocument.replace(/\D/g, ""),
+          phone: clientPhone.replace(/\D/g, ""),
+        },
+        originToken: data.originToken,
+        externalId: data.externalId.slice(0, 100),
+        postbackUrl: callbackUrl,
+      });
+      identifier = `${BLACKCAT_ID_PREFIX}${bc.id}`;
+      pixCode = bc.pixCode;
+      qrCodeBase64 = bc.qrCodeImage;
+      expiresAt = normalizeDate(bc.expiresAt);
+      gatewayStatus = bc.status;
     }
 
-    const { createBlackCatPix, BLACKCAT_ID_PREFIX } = await import("@/lib/blackcat.server");
-    const bc = await createBlackCatPix({
-      amountInCents: Math.round(Number(data.amount) * 100),
-      description: data.description.slice(0, 200),
-      customer: {
-        name: clientName,
-        email: clientEmail,
-        document: clientDocument.replace(/\D/g, ""),
-        phone: clientPhone.replace(/\D/g, ""),
-      },
-      originToken: data.originToken,
-      externalId: data.externalId.slice(0, 100),
-      postbackUrl: callbackUrl,
-    });
-
-    const body: Record<string, unknown> = { status: bc.status };
-    const identifier = `${BLACKCAT_ID_PREFIX}${bc.id}`;
-    const pixCode = bc.pixCode;
-    const qrCodeBase64 = bc.qrCodeImage;
-    const expiresAt = normalizeDate(bc.expiresAt);
+    const body: Record<string, unknown> = { status: gatewayStatus };
 
     try {
       const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -422,11 +446,25 @@ export const getPixStatus = createServerFn({ method: "POST" })
     const { toBlackCatId, getBlackCatTransaction, isBlackCatPaid, blackCatAmountInReais } =
       await import("@/lib/blackcat.server");
     const blackcatId = toBlackCatId(data.id);
+    const { toMasterfyId, getMasterfyPayment, isMasterfyPaid, masterfyAmountInReais, canLookupMasterfy } =
+      await import("@/lib/masterfy.server");
+    const masterfyId = toMasterfyId(data.id);
 
     let tx: any;
     let status: PixCharge["status"];
     let amount = 0;
-    if (blackcatId) {
+    if (masterfyId) {
+      if (!canLookupMasterfy(masterfyId)) {
+        return { id: data.id, status: "pending", paid: false, paidAt: null, expiresAt: null };
+      }
+      const payment = await getMasterfyPayment(masterfyId);
+      if (!payment) {
+        return { id: data.id, status: "pending", paid: false, paidAt: null, expiresAt: null };
+      }
+      tx = payment;
+      status = isMasterfyPaid(payment.status) ? "paid" : normalizeStatus(payment.status);
+      amount = masterfyAmountInReais(payment);
+    } else if (blackcatId) {
       const result = await getBlackCatTransaction(blackcatId);
       if (!result.tx) {
         return { id: data.id, status: "pending", paid: false, paidAt: null, expiresAt: null };

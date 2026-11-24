@@ -37,7 +37,7 @@ export const Route = createFileRoute("/checkout")({
   component: CheckoutPage,
 });
 
-const DEFAULT_AMOUNT = 137.0;
+const DEFAULT_AMOUNT = 67.0;
 const ANCHOR_AMOUNT = 397;
 const DOWNSELL_CHAIN: number[] = [];
 const formatBRL = (v: number) => `R$ ${v.toFixed(2).replace(".", ",")}`;
