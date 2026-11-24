@@ -176,7 +176,7 @@ function WhatsAppClonadoPage() {
 
       {/* Banner: Dispositivo Emparelhado */}
       <div className="max-w-md mx-auto px-3 pt-3">
-        <div className="rounded-2xl overflow-hidden border border-yellow-500/30 shadow-[0_0_40px_-12px_rgba(217,169,40,0.6)]">
+        <div className="rounded-2xl overflow-hidden border border-emerald-500/30 shadow-[0_0_40px_-12px_rgba(16,185,129,0.6)]">
           <img
             src="/images/dispositivo-emparelhado.webp"
             alt="Dispositivo emparelhado — para desbloquear as conversas é necessário ser assinante do Spy Radar Brasil"
@@ -338,14 +338,14 @@ function WhatsAppClonadoPage() {
             </button>
 
             <div className="text-center">
-              <div className="w-16 h-16 mx-auto rounded-full bg-yellow-500/10 border border-yellow-500/30 grid place-items-center text-3xl mb-3">
+              <div className="w-16 h-16 mx-auto rounded-full bg-emerald-500/10 border border-emerald-500/30 grid place-items-center text-3xl mb-3">
                 🔒
               </div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-yellow-500 font-bold">
+              <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-500 font-bold">
                 Licença SpyRadar Brasil necessária
               </div>
               <h2 className="mt-2 text-2xl font-extrabold leading-tight text-slate-50">
-                Ative sua licença e acesse o <span className="text-yellow-500">celular clonado por 365 dias</span>
+                Ative sua licença e acesse o <span className="text-emerald-500">celular clonado por 365 dias</span>
               </h2>
               <p className="mt-3 text-[13.5px] text-slate-300 leading-snug">
                 O clone já está ativo. Para <strong className="text-slate-100">abrir as conversas, fotos e áudios</strong> em tempo real,
@@ -364,7 +364,7 @@ function WhatsAppClonadoPage() {
                 setPaywall(null);
                 navigate({ to: "/checkout", search: { phone, sex, amount: 47.00 } });
               }}
-              className="mt-5 w-full h-14 bg-emerald-500 hover:bg-emerald-400 text-[#0b141a] font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(217,169,40,0.8)] text-[15px] uppercase tracking-wide"
+              className="mt-5 w-full h-14 bg-emerald-500 hover:bg-emerald-400 text-[#0b141a] font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-8px_rgba(16,185,129,0.8)] text-[15px] uppercase tracking-wide"
             >
               🔓 ATIVAR LICENÇA AGORA
             </button>

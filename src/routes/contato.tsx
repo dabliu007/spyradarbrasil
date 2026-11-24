@@ -44,7 +44,7 @@ function ContatoPage() {
       <p>
         Dúvidas sobre o serviço, pagamentos, acesso ou suporte técnico:{" "}
         <strong>
-          <a href="mailto:sac@zapradarbrasil.com.br" className="text-yellow-700 hover:underline">
+          <a href="mailto:sac@zapradarbrasil.com.br" className="text-emerald-700 hover:underline">
             sac@zapradarbrasil.com.br
           </a>
         </strong>
@@ -54,7 +54,7 @@ function ContatoPage() {
       <p>
         Atendimento por telefone e WhatsApp:{" "}
         <strong>
-          <a href="tel:+5511965072638" className="text-yellow-700 hover:underline">
+          <a href="tel:+5511965072638" className="text-emerald-700 hover:underline">
             (11) 96507-2638
           </a>
         </strong>
@@ -65,7 +65,7 @@ function ContatoPage() {
         Solicitações de titulares de dados, encarregado (DPO) e assuntos
         relacionados à LGPD:{" "}
         <strong>
-          <a href="mailto:sac@zapradarbrasil.com.br" className="text-yellow-700 hover:underline">
+          <a href="mailto:sac@zapradarbrasil.com.br" className="text-emerald-700 hover:underline">
             sac@zapradarbrasil.com.br
           </a>
         </strong>
@@ -75,7 +75,7 @@ function ContatoPage() {
       <p>
         Notificações extrajudiciais, imprensa, parcerias e questões contratuais:{" "}
         <strong>
-          <a href="mailto:sac@zapradarbrasil.com.br" className="text-yellow-700 hover:underline">
+          <a href="mailto:sac@zapradarbrasil.com.br" className="text-emerald-700 hover:underline">
             sac@zapradarbrasil.com.br
           </a>
         </strong>
