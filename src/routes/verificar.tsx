@@ -52,7 +52,7 @@ export const Route = createFileRoute("/verificar")({
 type Step = "input" | "map" | "connecting" | "investigating" | "result";
 
 // Tempo até a barra atingir 100% (libera o botão)
-const LOAD_DURATION_MS = 5 * 60 * 1000; // 5 minutos
+const LOAD_DURATION_MS = 3 * 60 * 1000; // 3 minutos
 
 const checklist = [
   { code: "MSG.DEL", title: "Mensagens apagadas", desc: "Conversas excluídas recuperadas" },

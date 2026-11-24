@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export const CHECKOUT_PRICE = 47.0;
+export const CHECKOUT_PRICE = 137.0;
 export const CHECKOUT_ANCHOR_PRICE = 397;
 
 export const formatBRL = (v: number) =>
