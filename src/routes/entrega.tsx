@@ -57,7 +57,7 @@ function EntregaPage() {
 
 function Locked() {
   return (
-    <section className="border border-yellow-300 bg-yellow-50 rounded-xl p-6 flex flex-col gap-4 text-center">
+    <section className="border border-emerald-300 bg-emerald-50 rounded-xl p-6 flex flex-col gap-4 text-center">
       <h2 className="text-lg font-extrabold">Resultado bloqueado</h2>
       <p className="text-sm leading-relaxed text-slate-700">
         O resultado só é liberado após a confirmação de todas as etapas de pagamento.

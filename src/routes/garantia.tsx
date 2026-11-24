@@ -58,7 +58,7 @@ function GarantiaPage() {
       <p>
         Basta enviar um e-mail para{" "}
         <strong>
-          <a href="mailto:sac@zapradarbrasil.com.br" className="text-yellow-700 hover:underline">
+          <a href="mailto:sac@zapradarbrasil.com.br" className="text-emerald-700 hover:underline">
             sac@zapradarbrasil.com.br
           </a>
         </strong>{" "}

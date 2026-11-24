@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useTargetName } from "@/lib/use-target-name";
 import { useServerFn } from "@tanstack/react-start";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { z } from "zod";
 import { createPixCharge } from "@/lib/pix.functions";
 import { getBlackCatOriginToken } from "@/lib/blackcat-origin";
@@ -9,7 +9,8 @@ import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 import {
   CHECKOUT_PRICE,
   CheckoutShell,
-  PixPanelSkeleton,
+  LockIcon,
+  formatBRL,
 } from "@/components/checkout/checkout-shell";
 
 const searchSchema = z.object({
@@ -49,6 +50,7 @@ function CheckoutPage() {
   const title = `Acesso total ao celular ${targetName ? `de ${targetName}` : "do alvo"}`;
 
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const inFlightRef = useRef(false);
 
   // Links antigos ainda podem trazer ?amount=67; o checkout sempre cobra o preço atual.
@@ -90,38 +92,56 @@ function CheckoutPage() {
         phone,
         gender: sex,
       });
-      navigate({ to: "/pix", search: { id: c.id, phone, sex }, replace: true });
+      navigate({ to: "/pix", search: { id: c.id, phone, sex } });
     } catch (e: any) {
       setError(e?.message || "Falha ao gerar o Pix. Tente novamente.");
       inFlightRef.current = false;
     }
   }, [amount, createPix, navigate, phone, sex]);
 
-  const autoStartedRef = useRef(false);
-  useEffect(() => {
-    if (autoStartedRef.current) return;
-    autoStartedRef.current = true;
-    generate();
-  }, [generate]);
+  const handleGenerate = async () => {
+    setLoading(true);
+    await generate();
+    setLoading(false);
+  };
 
   return (
     <CheckoutShell title={title} amount={amount}>
-      {error ? (
-        <section className="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col gap-3">
-          <p role="alert" className="text-[14px] text-red-700 text-center">
+      <section className="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col gap-3">
+        <div className="flex items-center justify-between text-[14px]">
+          <span className="text-slate-600">Total a pagar</span>
+          <span className="font-extrabold text-[18px] text-[#128C7E] tabular-nums">
+            {formatBRL(amount)}
+          </span>
+        </div>
+        {error ? (
+          <p role="alert" className="text-[13px] text-red-700 text-center">
             {error}
           </p>
-          <button
-            type="button"
-            onClick={generate}
-            className="w-full h-12 rounded-xl bg-[#25D366] hover:bg-[#1eb959] text-white font-bold text-[15px] transition-colors active:scale-[0.98]"
-          >
-            Tentar novamente
-          </button>
-        </section>
-      ) : (
-        <PixPanelSkeleton label="Gerando seu Pix…" />
-      )}
+        ) : null}
+        <button
+          type="button"
+          onClick={handleGenerate}
+          disabled={loading}
+          aria-busy={loading}
+          className="w-full h-14 rounded-xl bg-[#25D366] hover:bg-[#1eb959] disabled:opacity-80 text-white font-bold text-[16px] transition-colors active:scale-[0.98] flex items-center justify-center gap-2"
+        >
+          {loading ? (
+            <>
+              <span className="w-5 h-5 rounded-full border-2 border-white border-t-transparent animate-spin" />
+              Gerando seu Pix…
+            </>
+          ) : (
+            <>
+              <LockIcon className="w-5 h-5" />
+              {error ? "Tentar novamente" : "Gerar Pix"}
+            </>
+          )}
+        </button>
+        <p className="text-[12px] text-slate-500 text-center">
+          Pagamento instantâneo · liberação automática após a confirmação
+        </p>
+      </section>
     </CheckoutShell>
   );
 }
