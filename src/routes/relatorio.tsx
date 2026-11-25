@@ -839,7 +839,7 @@ function RelatorioPage() {
               🔓 ATIVAR LICENÇA SPY RADAR
             </button>
             <p className="text-center text-[11px] text-zinc-500 mt-2">
-              🔒 PIX R$ 137,00 · ativação em segundos · válido por 365 dias
+              🔒 PIX R$ 37,90 · ativação em segundos · válido por 365 dias
             </p>
           </div>
         </div>
